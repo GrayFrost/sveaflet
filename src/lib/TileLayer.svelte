@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
 	import { TileLayer, type TileLayerOptions } from 'leaflet';
-	import { useConsumeMap } from './context.ts';
+	import { useConsumeMap } from './Map.svelte';
 
 	export let urlTemplate: string;
 	export let options: TileLayerOptions;
