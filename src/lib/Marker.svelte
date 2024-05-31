@@ -1,30 +1,21 @@
 <script lang="ts">
-	import { type LatLngExpression, type MarkerOptions, Marker } from 'leaflet';
 	import { onMount, onDestroy, setContext, getContext } from 'svelte';
-	import { useConsumeMap } from './Map.svelte';
-	import { useConsumePopup } from './Popup.svelte';
+	import { writable } from 'svelte/store';
+	import { type LatLngExpression, type MarkerOptions, Marker } from 'leaflet';
+	import { useConsumeMap, useProvideMarker } from './context.ts';
 
 	export let latlng: LatLngExpression;
 	export let options: MarkerOptions = {};
 
-	let map = useConsumeMap()();
-	let popupStore = useConsumePopup()(); // TODO 处理组件不挂载在其中的错误
+	let mapStore = useConsumeMap();
+	let markerStore = writable<Marker | undefined>();
 
-	let marker: Marker | undefined;
+	useProvideMarker(markerStore);
 
-	onMount(() => {
-		if (map) {
-			marker = new Marker(latlng, options);
-			marker.addTo(map);
-		}
-	});
-
-	onDestroy(() => {});
-
-	$: if ($popupStore && marker) {
-		let popupContent = $popupStore.options.content || '';
-		marker.bindPopup(popupContent).openPopup();
+	if ($mapStore) {
+		$markerStore = new Marker(latlng, options);
+		$markerStore.addTo($mapStore);
 	}
-
-  $: console.log('zzh popup', $popupStore, marker, map);
 </script>
+
+<slot />

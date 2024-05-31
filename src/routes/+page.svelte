@@ -56,5 +56,8 @@
 		]}
 		options={{ color: '#ff7800', weight: 1 }}
 	/>
-	<Popup {latlng} options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }} />
+	<!-- <Popup {latlng} options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }} /> -->
+		<Marker {latlng} >
+			<Popup options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }}/>
+		</Marker>
 </Map>
