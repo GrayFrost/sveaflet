@@ -1,17 +1,17 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { useConsumeMap } from './Map.svelte';
-  import { Polygon, type LatLngExpression, type PolylineOptions } from 'leaflet';
+  import { Rectangle, type LatLngBoundsExpression, type PolylineOptions } from 'leaflet';
 
   let map = useConsumeMap()();
 
-  export let latlngs: LatLngExpression[];
+  export let latLngBounds: LatLngBoundsExpression;
   export let options: PolylineOptions = {};
 
   onMount(() => {
     if (map) {
-      let polygon = new Polygon(latlngs, options);
-      polygon.addTo(map);
+      let rectangle = new Rectangle(latLngBounds, options);
+      rectangle.addTo(map);
     }
   })
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { type LatLngExpression, type MarkerOptions, Marker } from 'leaflet';
   import { onMount, onDestroy, setContext, getContext } from 'svelte';
-  import { useConsumeMap } from './context.ts';
+  import { useConsumeMap } from './Map.svelte';
 
   export let latlng: LatLngExpression;
   export let options: MarkerOptions = {};

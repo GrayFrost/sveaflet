@@ -15,12 +15,12 @@
 			integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 			crossorigin=""
 		></script>
-    <style>
-      #map {
-        width: 100vw;
-        height: 500px;
-      }
-    </style>
+		<style>
+			#map {
+				width: 100vw;
+				height: 500px;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="map"></div>
@@ -36,6 +36,12 @@
 				.addTo(map)
 				.bindPopup('A pretty CSS popup.<br> Easily customizable.')
 				.openPopup();
+
+			L.control.scale().addTo(map);
+			L.control.zoom().addTo(map);
+			L.control.attribution({
+				position: 'topright'
+			})
 		</script>
 	</body>
 </html>

@@ -5,6 +5,8 @@
 	import TileLayer from '$lib/TileLayer.svelte';
 	import Circle from '$lib/Circle.svelte';
 	import Polygon from '$lib/Polygon.svelte';
+	import Polyline from '$lib/Polyline.svelte';
+	import Rectangle from '$lib/Rectangle.svelte';
 
 	let latlng: LatLngExpression = [51.5, -0.09];
 	let circleLatlng: LatLngExpression = [51.508, -0.11];
@@ -28,5 +30,26 @@
 			radius: 500
 		}}
 	/>
-	<Polygon latlngs={[[51.509, -0.08], [51.503, -0.06], [51.51, -0.047]]} />
+	<Polygon
+		latlngs={[
+			[51.509, -0.08],
+			[51.503, -0.06],
+			[51.51, -0.047]
+		]}
+	/>
+	<Polyline
+		latlngs={[
+			[45.51, -122.68],
+			[37.77, -122.43],
+			[34.04, -118.2]
+		]}
+		options={{ color: 'yellow' }}
+	/>
+	<Rectangle
+		latLngBounds={[
+			[54.559322, -5.767822],
+			[56.1210604, -3.02124]
+		]}
+		options={{ color: '#ff7800', weight: 1 }}
+	/>
 </Map>
