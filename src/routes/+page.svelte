@@ -7,6 +7,7 @@
 	import Polygon from '$lib/Polygon.svelte';
 	import Polyline from '$lib/Polyline.svelte';
 	import Rectangle from '$lib/Rectangle.svelte';
+	import Popup from '$lib/Popup.svelte';
 
 	let latlng: LatLngExpression = [51.5, -0.09];
 	let circleLatlng: LatLngExpression = [51.508, -0.11];
@@ -21,6 +22,9 @@
 		}}
 	/>
 	<Marker {latlng} />
+	<!-- <Popup options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }}>
+		<Marker {latlng} />
+	</Popup> -->
 	<Circle
 		latlng={circleLatlng}
 		options={{
@@ -52,4 +56,5 @@
 		]}
 		options={{ color: '#ff7800', weight: 1 }}
 	/>
+	<Popup {latlng} options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }} />
 </Map>
