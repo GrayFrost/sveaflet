@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { type MapOptions, Map } from 'leaflet';
 	import 'leaflet/dist/leaflet.css';
@@ -8,6 +8,7 @@
 
 	let mapStore = writable<Map | undefined>();
 	let mapContainer: HTMLElement;
+	let dispatch = createEventDispatcher();
 
 	export let options: MapOptions = {};
 
@@ -16,6 +17,10 @@
 	onMount(() => {
 		$mapStore = new Map(mapContainer, options);
 		$mapStore.setView([51.505, -0.09], 13); // todo
+
+		$mapStore.on('click',(e) => {
+			dispatch('click', e);
+		})
 	});
 
 	onDestroy(() => {
