@@ -15,10 +15,6 @@
 		map = new Map(mapContainer, options);
 		map.setView([51.505, -0.09], 13);
 
-		return () => {
-			map.remove();
-		};
-
 		// L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 		// 	attribution:
 		// 		'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -29,6 +25,11 @@
 		// 	.bindPopup('A pretty CSS popup.<br> Easily customizable.')
 		// 	.openPopup();
 	});
+
+	onDestroy(() => {
+		map?.remove();
+		map = undefined;
+	})
 </script>
 
 <div id="sveaflet-map" bind:this={mapContainer}>
