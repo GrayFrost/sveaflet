@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { useConsumeMap } from './context.ts';
 	import { Polyline, type LatLngExpression, type PolylineOptions } from 'leaflet';
 

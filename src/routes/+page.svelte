@@ -11,6 +11,7 @@
 	import ControlZoom from '$lib/ControlZoom.svelte';
 	import ControlAttribution from '$lib/ControlAttribution.svelte';
 	import ControlScale from '$lib/ControlScale.svelte';
+	import CircleMarker from '$lib/CircleMarker.svelte';
 
 	let latlng: LatLngExpression = [51.5, -0.09];
 	let circleLatlng: LatLngExpression = [51.508, -0.11];
@@ -78,4 +79,5 @@
 		prefix: 'test attribution'
 	}}/>
 	<ControlScale />
+	<CircleMarker latlng={circleLatlng} options={{radius: 5}}/>
 </Map>
