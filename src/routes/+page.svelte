@@ -12,6 +12,7 @@
 	import ControlAttribution from '$lib/ControlAttribution.svelte';
 	import ControlScale from '$lib/ControlScale.svelte';
 	import CircleMarker from '$lib/CircleMarker.svelte';
+	import Tooltip from '$lib/Tooltip.svelte';
 
 	let latlng: LatLngExpression = [51.5, -0.09];
 	let circleLatlng: LatLngExpression = [51.508, -0.11];
@@ -72,7 +73,8 @@
 	</Marker>
 
 	<Marker latlng={[51.509, -0.08]}>
-		<Popup options={{ content: '234' }} />
+		<!-- <Popup options={{ content: '234' }} /> -->
+		<Tooltip options={{ content: 'tooltip 234' }} />
 	</Marker>
 	<ControlZoom />
 	<ControlAttribution options={{
