@@ -29,15 +29,9 @@
 	});
 </script>
 
-<div id="sveaflet-map" bind:this={mapContainer}>
+<div class="w-full h-full" bind:this={mapContainer}>
 	{#if $mapStore}
 		<slot />
 	{/if}
 </div>
 
-<style>
-	#sveaflet-map {
-		width: 100vw;
-		height: 500px;
-	}
-</style>
