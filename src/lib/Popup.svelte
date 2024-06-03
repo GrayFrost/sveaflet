@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { type LatLngExpression, type PopupOptions, type Layer, Popup } from 'leaflet';
 	import { useConsumeMarker, useConsumeMap } from './context.ts';
 
@@ -24,7 +22,7 @@
 		popup?.openOn($mapStore);
 	} else if ($markerStore) {
 		let popupContent = popup?.options.content || '';
-		$markerStore.bindPopup(popupContent).openPopup();
+		$markerStore.bindPopup(popupContent).openPopup(); // todo open
 	}
 </script>
 
