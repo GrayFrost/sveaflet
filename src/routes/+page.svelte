@@ -13,6 +13,7 @@
 	import ControlScale from '$lib/ControlScale.svelte';
 	import CircleMarker from '$lib/CircleMarker.svelte';
 	import Tooltip from '$lib/Tooltip.svelte';
+	import TileLayerWMS from '$lib/TileLayerWMS.svelte';
 
 	let latlng: LatLngExpression = [51.5, -0.09];
 	let circleLatlng: LatLngExpression = [51.508, -0.11];
@@ -22,14 +23,23 @@
 	};
 </script>
 
-<Map on:click={onMapClick} options={{
-	attributionControl: false
-}}>
-	<TileLayer
+<Map
+	on:click={onMapClick}
+	options={{
+		attributionControl: false
+	}}
+>
+	<!-- <TileLayer
 		urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 		options={{
 			attribution:
 				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		}}
+	/> -->
+	<TileLayerWMS
+		baseUrl="http://ows.mundialis.de/services/service?"
+		options={{
+			layers: 'TOPO-OSM-WMS'
 		}}
 	/>
 	<Marker {latlng} />
@@ -77,9 +87,11 @@
 		<Tooltip options={{ content: 'tooltip 234' }} />
 	</Marker>
 	<ControlZoom />
-	<ControlAttribution options={{
-		prefix: 'test attribution'
-	}}/>
+	<ControlAttribution
+		options={{
+			prefix: 'test attribution'
+		}}
+	/>
 	<ControlScale />
-	<CircleMarker latlng={circleLatlng} options={{radius: 5}}/>
+	<CircleMarker latlng={circleLatlng} options={{ radius: 5 }} />
 </Map>
