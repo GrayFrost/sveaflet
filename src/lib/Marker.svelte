@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { onMount, onDestroy, setContext, getContext } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { type LatLngExpression, type MarkerOptions, Marker } from 'leaflet';
 	import { useConsumeMap, useProvideMarker } from './context.ts';
