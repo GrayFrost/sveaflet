@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { type MapOptions, Map } from 'leaflet';
+	import { type MapOptions, Map } from 'leaflet?client';
 	import 'leaflet/dist/leaflet.css';
 
 	import { useProvideMap } from './context.ts';

@@ -33,19 +33,19 @@
 				attributionControl: false
 			}}
 		>
-			<!-- <TileLayer
-		urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
-		options={{
-			attribution:
-				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-		}}
-	/> -->
-			<TileLayerWMS
+			<TileLayer
+				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+				options={{
+					attribution:
+						'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}}
+			/>
+			<!-- <TileLayerWMS
 				baseUrl="http://ows.mundialis.de/services/service?"
 				options={{
 					layers: 'TOPO-OSM-WMS'
 				}}
-			/>
+			/> -->
 			<Marker {latlng} />
 			<!-- <Popup options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }}>
 		<Marker {latlng} />
