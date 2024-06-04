@@ -35,6 +35,7 @@
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "^8.56.7",
 		"@types/leaflet": "^1.9.12",
+		"@types/node": "^20.14.1",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -55,9 +56,13 @@
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0-alpha.20",
 		"vite": "^5.0.11",
+		"vite-plugin-iso-import": "^1.1.0",
 		"vitest": "^1.2.0"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"mdsvexamples": "^0.4.1"
+	}
 }

@@ -10,4 +10,12 @@ declare global {
 	}
 }
 
+declare module 'leaflet?client' {
+	import all from 'leaflet'
+	export = all
+}
+
+declare module '*?client'
+declare module '*?server'
+
 export {};

@@ -12,5 +12,6 @@
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"allowImportingTsExtensions": true,
+		"plugins": [{ "name": "vite-plugin-iso-import" }],
 	}
 }
