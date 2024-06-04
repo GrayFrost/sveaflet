@@ -7,8 +7,12 @@ const sortByList = (order: string[]) => (a: [string, any], b: [string, any]) => 
 export const fetchMarkdownPosts = async () => {
 
   const pageFiles = import.meta.glob<any>('/src/routes/docs/pages/*.md'); // todo typescript
+  const componentFiles = import.meta.glob<any>('/src/routes/docs/components/*.md');
+
   const iterablePageFiles = Object.entries(pageFiles);
-  const pageOrder: string[] = ['introduction', 'quickstart', 'colors', 'customization', 'typescript', 'compiler-speed', 'how-to-contribute', 'license'];
+  const iterableComponentFiles = Object.entries(componentFiles);
+
+  const pageOrder: string[] = ['introduction', 'quickstart', 'colors', 'customization', 'typescript', 'compiler-speed', 'how-to-contribute', 'license']; // todo
   const allPages = await Promise.all(
     iterablePageFiles.sort(sortByList(pageOrder)).map(async ([path, resolver]) => {
       const { metadata } = await resolver();
@@ -18,8 +22,18 @@ export const fetchMarkdownPosts = async () => {
       };
     })
   );
+  const allComponents = await Promise.all(
+    iterableComponentFiles.map(async ([path, resolver]) => {
+      const { metadata } = await resolver();
+      return {
+        meta: metadata,
+        path: filePath(path)
+      }
+    })
+  )
 
   return {
-    pages: allPages
+    pages: allPages,
+    components: allComponents
   }
 }

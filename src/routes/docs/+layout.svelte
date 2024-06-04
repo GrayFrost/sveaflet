@@ -43,6 +43,8 @@
 		'relative flex items-center flex-wrap font-medium cursor-default text-primary-700 dark:text-primary-700';
 
 	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
+
+  $: console.log('zzh dropdowns', dropdowns);
 </script>
 
 <Sidebar
