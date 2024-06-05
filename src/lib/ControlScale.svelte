@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { control, type Control } from 'leaflet';
+  import { control, type Control } from 'leaflet?client';
 	import { useConsumeMap } from './context.ts';
 
   export let options: Control.ScaleOptions = {};

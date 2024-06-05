@@ -12,7 +12,7 @@ export const fetchMarkdownPosts = async () => {
   const iterablePageFiles = Object.entries(pageFiles);
   const iterableComponentFiles = Object.entries(componentFiles);
 
-  const pageOrder: string[] = ['introduction', 'quickstart', 'colors', 'customization', 'typescript', 'compiler-speed', 'how-to-contribute', 'license']; // todo
+  const pageOrder: string[] = ['introduction', 'quickstart']; // todo
   const allPages = await Promise.all(
     iterablePageFiles.sort(sortByList(pageOrder)).map(async ([path, resolver]) => {
       const { metadata } = await resolver();
@@ -25,6 +25,7 @@ export const fetchMarkdownPosts = async () => {
   const allComponents = await Promise.all(
     iterableComponentFiles.map(async ([path, resolver]) => {
       const { metadata } = await resolver();
+      console.log('zzh path', path);
       return {
         meta: metadata,
         path: filePath(path)
