@@ -5,6 +5,7 @@ import Map from './Map.svelte';
 // import Polyline from './Polyline.svelte';
 // import Rectangle from './Rectangle.svelte';
 import TileLayer from './TileLayer.svelte';
+import ImageOverlay from './ImageOverlay.svelte';
 import ControlAttribution from './ControlAttribution.svelte';
 import ControlScale from './ControlScale.svelte';
 import ControlZoom from './ControlZoom.svelte';
@@ -17,6 +18,7 @@ export {
   // Polyline,
   // Rectangle,
   TileLayer,
+  ImageOverlay,
   ControlAttribution,
   ControlScale,
   ControlZoom,
