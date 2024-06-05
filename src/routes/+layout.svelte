@@ -8,9 +8,9 @@
 </script>
 
 <header
-	class="sticky top-0 z-40 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
+	class="sticky top-0 z-9999 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
 >
-	<Navbar>
+	<Navbar fluid class="py-1.5">
 		<NavBrand href="/" />
 		<NavUl
 			{divClass}

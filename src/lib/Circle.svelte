@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
 	import { useConsumeMap } from './context.ts';
-	import { Circle, type LatLngExpression, type CircleOptions } from 'leaflet';
+	import { Circle, type LatLngExpression, type CircleOptions } from 'leaflet?client';
 
 	let mapStore = useConsumeMap();
 

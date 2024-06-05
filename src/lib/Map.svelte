@@ -16,7 +16,6 @@
 
 	onMount(() => {
 		$mapStore = new Map(mapContainer, options);
-		$mapStore.setView([51.505, -0.09], 13); // todo
 
 		$mapStore.on('click',(e) => {
 			dispatch('click', e);
