@@ -2,7 +2,7 @@
 	import { type LatLngExpression, type Layer, Tooltip, type TooltipOptions } from 'leaflet';
 	import { useConsumeMarker, useConsumeMap } from './context.ts';
 
-	let mapStore = useConsumeMap();
+	let { map: mapStore } = useConsumeMap();
 	let markerStore = useConsumeMarker();
 
 	export let latlng: LatLngExpression | undefined = undefined;

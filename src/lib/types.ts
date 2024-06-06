@@ -1,6 +1,9 @@
 import { type Writable } from 'svelte/store';
 import { Map, Marker } from 'leaflet';
 
-export type MapContext = Writable<Map | undefined>
+export interface MapContext {
+  map: Writable<Map | undefined>;
+  removeDefaultLayer: () => void;
+}
 
 export type MarkerContext = Writable<Marker | undefined>;

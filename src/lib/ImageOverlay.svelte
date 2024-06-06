@@ -6,7 +6,7 @@
 		type ImageOverlayOptions
 	} from 'leaflet?client';
 
-	let mapStore = useConsumeMap();
+	let { map: mapStore } = useConsumeMap();
 
 	export let imageUrl: string;
 	export let bounds: LatLngBoundsExpression;

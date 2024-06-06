@@ -2,7 +2,7 @@
 	import { type LatLngExpression, type PopupOptions, type Layer, Popup } from 'leaflet';
 	import { useConsumeMarker, useConsumeMap } from './context.ts';
 
-	let mapStore = useConsumeMap();
+	let { map: mapStore } = useConsumeMap();
 	let markerStore = useConsumeMarker();
 
 	export let latlng: LatLngExpression | undefined = undefined;

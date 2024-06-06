@@ -2,7 +2,7 @@
   import { useConsumeMap } from './context.ts';
 	import { SVGOverlay, type LatLngBoundsExpression, type ImageOverlayOptions } from 'leaflet?client';
 
-  let mapStore = useConsumeMap();
+  let { map: mapStore } = useConsumeMap();
 
   export let svgImage: string | SVGElement;
   export let bounds: LatLngBoundsExpression;
