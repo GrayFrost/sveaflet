@@ -29,6 +29,7 @@ window is not defined
 - [] CircleMarker
 
 ## Other Layers
+- [] LayerGroup
 - [] GeoJSON
 
 ## Controls
