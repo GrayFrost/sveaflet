@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { useConsumeMap } from './context.ts';
-	import { Polyline, type LatLngExpression, type PolylineOptions } from 'leaflet';
-
-	let mapStore = useConsumeMap();
+	import { Polyline, type LatLngExpression, type PolylineOptions } from 'leaflet?client';
+	
+	let { map: mapStore } = useConsumeMap();
 
 	export let latlngs: LatLngExpression[];
 	export let options: PolylineOptions = {};

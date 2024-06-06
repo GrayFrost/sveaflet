@@ -5,9 +5,10 @@
 	export let urlTemplate: string;
 	export let options: TileLayerOptions;
 
-	let mapStore = useConsumeMap();
+	let { map: mapStore, removeDefaultLayer } = useConsumeMap();
 
 	if ($mapStore) {
+		removeDefaultLayer();
 		let tileLayer = new TileLayer(urlTemplate, options);
 		tileLayer.addTo($mapStore);
 	}

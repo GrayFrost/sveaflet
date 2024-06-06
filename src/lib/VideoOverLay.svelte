@@ -6,7 +6,7 @@
 		type VideoOverlayOptions
 	} from 'leaflet?client';
 
-	let mapStore = useConsumeMap();
+	let { map: mapStore } = useConsumeMap();
 
 	export let video: string | string[]; // todoHTMLVideoElement,
   export let bounds: LatLngBoundsExpression;

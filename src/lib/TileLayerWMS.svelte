@@ -5,9 +5,10 @@
 	export let baseUrl: string;
 	export let options: WMSOptions = {};
 	
-  let mapStore = useConsumeMap();
+	let { map: mapStore, removeDefaultLayer } = useConsumeMap();
 
 	if ($mapStore) {
+		removeDefaultLayer();
 		let tailLayerWMS = new TileLayer.WMS(baseUrl, options);
 		tailLayerWMS.addTo($mapStore);
 	}
