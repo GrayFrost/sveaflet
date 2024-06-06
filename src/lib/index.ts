@@ -11,12 +11,12 @@ import ControlAttribution from './ControlAttribution.svelte';
 import ControlScale from './ControlScale.svelte';
 import ControlZoom from './ControlZoom.svelte';
 import Circle from './Circle.svelte';
+import Polyline from './Polyline.svelte';
+import Polygon from './Polygon.svelte';
 
 export {
   Map,
   // Marker,
-  // Polygon,
-  // Polyline,
   // Rectangle,
   TileLayer,
   ImageOverlay,
@@ -25,4 +25,6 @@ export {
   ControlScale,
   ControlZoom,
   Circle,
+  Polyline,
+  Polygon,
 }

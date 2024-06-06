@@ -8,7 +8,7 @@ description: Controls.Attribution
 
 ```svelte example
 <script>
-	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
+	import { Map, ControlAttribution } from 'sveaflet';
 </script>
 
 <div style="width:500px;height:500px">
@@ -19,7 +19,6 @@ description: Controls.Attribution
 			attributionControl: false
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
 				prefix: 'sveaflet'

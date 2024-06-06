@@ -1,9 +1,28 @@
 ---
-breadcrumb_title: Sveaflet
-title: Sveaflet
-component_title: polyline
+breadcrumb_title: Polyline
+title: Polyline
+component_title: Polyline
 dir: Components
-description: TODO TODO
+description: Polyline
 ---
 
-# polyline
+# Polyline
+
+```svelte example
+<script>
+	import { Map, Polyline } from 'sveaflet';
+</script>
+
+<div style="width: 500px;height: 500px;">
+	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
+		<Polyline
+			latlngs={[
+				[45.51, -122.68],
+				[37.77, -122.43],
+				[34.04, -118.2]
+			]}
+			options={{ color: 'yellow' }}
+		/>
+	</Map>
+</div>
+```

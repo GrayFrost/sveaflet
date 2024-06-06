@@ -10,24 +10,26 @@ description: VideoOverlay
 
 ```svelte example
 <script>
-import { Map, TileLayer, VideoOverlay } from 'sveaflet'; 
+	import { Map, VideoOverlay } from 'sveaflet';
 </script>
 
 <div style="width: 500px; height: 500px; ">
-
-	<Map options={{ center:[37.8, -96], zoom: 4 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+	<Map options={{ center: [40.799311, -74.33], zoom: 10 }}>
 		<VideoOverlay
 			video={[
-        'https://www.mapbox.com/bites/00188/patricia_nasa.webm',
-        'https://www.mapbox.com/bites/00188/patricia_nasa.mp4'
-      ]}
-      bounds={[[32, -130], [13, -100]]}
+				'https://www.mapbox.com/bites/00188/patricia_nasa.webm',
+				'https://www.mapbox.com/bites/00188/patricia_nasa.mp4'
+			]}
+			bounds={[
+				[40.799311, -74.118464],
+				[40.68202047785919, -74.33]
+			]}
       options={{
-        className: 'max-w-none w-16'
+        muted: true,
+        autoplay: true,
+        loop: true,
       }}
 		/>
 	</Map>
-
 </div>
 ```
