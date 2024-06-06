@@ -25,7 +25,6 @@ export const fetchMarkdownPosts = async () => {
   const allComponents = await Promise.all(
     iterableComponentFiles.map(async ([path, resolver]) => {
       const { metadata } = await resolver();
-      console.log('zzh path', path);
       return {
         meta: metadata,
         path: filePath(path)
