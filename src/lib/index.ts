@@ -13,6 +13,8 @@ import ControlZoom from './ControlZoom.svelte';
 import Circle from './Circle.svelte';
 import Polyline from './Polyline.svelte';
 import Polygon from './Polygon.svelte';
+import Icon from './Icon.svelte';
+import Marker from './Marker.svelte';
 
 export {
   Map,
@@ -27,4 +29,6 @@ export {
   Circle,
   Polyline,
   Polygon,
+  Icon,
+  Marker,
 }

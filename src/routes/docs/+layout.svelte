@@ -34,8 +34,6 @@
 		dropdowns[key] = true;
 	});
 
-	$: console.log('zzh activemain', activeMainSidebar);
-
 	let spanClass = '';
 	let nonActiveClass =
 		'transition-colors duration-200 relative flex items-center flex-wrap font-medium hover:text-gray-900 hover:cursor-pointer text-gray-500 dark:text-gray-400 dark:hover:text-white';
@@ -44,7 +42,6 @@
 
 	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
 
-  $: console.log('zzh dropdowns', dropdowns);
 </script>
 
 <Sidebar
