@@ -2,8 +2,6 @@
 	import { type LatLngExpression, type LeafletMouseEvent } from 'leaflet';
 	import Map from '$lib/Map.svelte';
 	import Marker from '$lib/Marker.svelte';
-	import Polygon from '$lib/Polygon.svelte';
-	import Rectangle from '$lib/Rectangle.svelte';
 	import Popup from '$lib/Popup.svelte';
 	import CircleMarker from '$lib/CircleMarker.svelte';
 	import Tooltip from '$lib/Tooltip.svelte';
@@ -39,13 +37,7 @@
 			<!-- <Popup options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }}>
 		<Marker {latlng} />
 	</Popup> -->
-			<Rectangle
-				latLngBounds={[
-					[54.559322, -5.767822],
-					[56.1210604, -3.02124]
-				]}
-				options={{ color: '#ff7800', weight: 1 }}
-			/>
+
 			<!-- <Popup {latlng} options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }} /> -->
 			<Marker {latlng}>
 				<Popup options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }} />

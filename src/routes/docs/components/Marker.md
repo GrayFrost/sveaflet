@@ -1,9 +1,21 @@
 ---
-breadcrumb_title: Sveaflet
-title: Sveaflet
-component_title: marker
+breadcrumb_title: Marker
+title: Marker
+component_title: Marker
 dir: Components
-description: TODO TODO
+description: Marker
 ---
 
-# marker
+# Marker
+
+```svelte example
+<script>
+	import { Map, Marker } from 'sveaflet';
+</script>
+
+<div style="width: 500px;height: 500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<Marker latlng={[51.505, -0.09]} />
+	</Map>
+</div>
+```

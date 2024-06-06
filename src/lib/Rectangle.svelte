@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { useConsumeMap } from './context.ts';
-	import { Rectangle, type LatLngBoundsExpression, type PolylineOptions } from 'leaflet';
+	import { Rectangle, type LatLngBoundsExpression, type PolylineOptions } from 'leaflet?client';
 
 	let { map: mapStore } = useConsumeMap();
 
