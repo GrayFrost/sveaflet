@@ -13,6 +13,8 @@ import Rectangle from './Rectangle.svelte';
 import Icon from './Icon.svelte';
 import Marker from './Marker.svelte';
 import LayerGroup from './LayerGroup.svelte';
+import Popup from './Popup.svelte';
+import CircleMarker from './CircleMarker.svelte';
 
 export {
   Map,
@@ -29,4 +31,6 @@ export {
   Icon,
   Marker,
   LayerGroup,
+  Popup,
+  CircleMarker,
 }

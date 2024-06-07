@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { type LatLngExpression, type PopupOptions, type Layer, Popup } from 'leaflet';
-	import { useConsumeMarker, useConsumeMap } from './context.ts';
+	import { type LatLngExpression, type PopupOptions, type Layer, Popup } from 'leaflet?client';
+	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();
-	let markerStore = useConsumeMarker();
+	let layerStore = useConsumeLayer();
 
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {}; // todo 有两种类型
@@ -16,13 +16,13 @@
 		} else {
 			popup = new Popup(options, source);
 		}
-	}
 
-	if (!$markerStore && $mapStore) {
-		popup?.openOn($mapStore);
-	} else if ($markerStore) {
-		let popupContent = popup?.options.content || '';
-		$markerStore.bindPopup(popupContent).openPopup(); // todo open
+		if (!$layerStore) {
+			popup.openOn($mapStore);
+		} else {
+			let popupContent = popup?.options.content || '';
+			$layerStore.bindPopup(popupContent).openPopup(); // todo open
+		}
 	}
 </script>
 
