@@ -3,12 +3,10 @@
 	import Map from '$lib/Map.svelte';
 	import Marker from '$lib/Marker.svelte';
 	import Popup from '$lib/Popup.svelte';
-	import CircleMarker from '$lib/CircleMarker.svelte';
 	import Tooltip from '$lib/Tooltip.svelte';
 	import TileLayerWMS from '$lib/TileLayerWMS.svelte';
 
 	let latlng: LatLngExpression = [51.5, -0.09];
-	let circleLatlng: LatLngExpression = [51.508, -0.11];
 
 	const onMapClick = (e: CustomEvent<LeafletMouseEvent>) => {
 		console.log('on map click', e.detail);
@@ -47,7 +45,6 @@
 				<!-- <Popup options={{ content: '234' }} /> -->
 				<Tooltip options={{ content: 'tooltip 234' }} />
 			</Marker>
-			<CircleMarker latlng={circleLatlng} options={{ radius: 5 }} />
 		</Map>
 	</div>
 </main>
