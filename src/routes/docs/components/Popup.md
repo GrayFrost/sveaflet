@@ -6,8 +6,22 @@ dir: Components
 description: Popup
 ---
 
-# circle
+# Popup
 
+## Default
+```svelte example csr
+<script>
+	import { Map, Marker, Circle, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 500px;height: 500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<Popup latlng={[51.5, -0.09]} options={{ content: 'Pop content.' }} />
+	</Map>
+</div>
+```
+
+## Layer bind popup
 ```svelte example csr
 <script>
 	import { Map, Marker, Circle, Popup } from 'sveaflet';
@@ -16,7 +30,7 @@ description: Popup
 <div style="width: 500px;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Marker latlng={[51.5, -0.09]}>
-			<Popup options={{ content: '<p>Hello world!<br />This is a nice popup.</p>' }} />
+			<Popup options={{ content: 'Popup in Marker.' }} />
 		</Marker>
 		<Circle
 			latlng={[51.508, -0.11]}
