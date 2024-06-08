@@ -8,7 +8,7 @@ description: Popup
 
 # circle
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Marker, Circle, Popup } from 'sveaflet';
 </script>

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { type MapOptions, Map, TileLayer } from 'leaflet?client';
-	import 'leaflet/dist/leaflet.css';
-
+	import { Map, TileLayer } from 'leaflet';
+	import type { MapOptions } from 'leaflet';
 	import { useProvideMap } from './context.ts';
+	import 'leaflet/dist/leaflet.css';
 
 	let mapStore = writable<Map | undefined>();
 	let mapContainer: HTMLElement;
@@ -13,28 +13,28 @@
 
 	export let options: MapOptions = {};
 
-	const removeDefaultLayer = () => {
-		if (tileLayer) {
-			$mapStore.removeLayer(tileLayer);
-			tileLayer = undefined;
-		}
-	}
-
 	onMount(() => {
 		$mapStore = new Map(mapContainer, options);
 		tileLayer = new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {});
 
 		tileLayer.addTo($mapStore);
 
-		$mapStore.on('click',(e) => {
+		$mapStore.on('click', (e) => {
 			dispatch('click', e);
-		})
+		});
 	});
 
 	onDestroy(() => {
 		$mapStore?.remove();
 		$mapStore = undefined;
 	});
+
+	const removeDefaultLayer = () => {
+		if (tileLayer) {
+			$mapStore?.removeLayer(tileLayer);
+			tileLayer = undefined;
+		}
+	};
 
 	useProvideMap({
 		map: mapStore,
@@ -47,4 +47,3 @@
 		<slot />
 	{/if}
 </div>
-

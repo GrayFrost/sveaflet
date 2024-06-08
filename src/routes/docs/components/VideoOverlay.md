@@ -8,7 +8,7 @@ description: VideoOverlay
 
 # VideoOverlay
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, VideoOverlay } from 'sveaflet';
 </script>

@@ -8,7 +8,7 @@ description: CircleMarker
 
 # circleMarker
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, CircleMarker } from 'sveaflet';
 </script>

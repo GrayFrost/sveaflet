@@ -6,7 +6,7 @@ dir: Components
 description: TODO TODO
 ---
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map } from 'sveaflet';
 </script>

@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { control, type Control } from 'leaflet?client';
+	import { control } from 'leaflet';
+	import type { Control } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 
-  export let options: Control.ZoomOptions = {};
+	export let options: Control.ZoomOptions = {};
 
-  let { map: mapStore } = useConsumeMap();
-  let zoom: Control.Zoom | undefined;
+	let { map: mapStore } = useConsumeMap();
+	let zoom: Control.Zoom | undefined;
 
-  if ($mapStore) {
-    zoom = control.zoom(options);
-    zoom.addTo($mapStore);
-  }
+	if ($mapStore) {
+		zoom = control.zoom(options);
+		zoom.addTo($mapStore);
+	}
 </script>

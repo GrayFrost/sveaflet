@@ -1,10 +1,7 @@
 <script lang="ts">
+	import { ImageOverlay } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
-	import {
-		ImageOverlay,
-		type LatLngBoundsExpression,
-		type ImageOverlayOptions
-	} from 'leaflet?client';
+	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 
 	let { map: mapStore } = useConsumeMap();
 

@@ -8,7 +8,7 @@ description: Circle
 
 # circle
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Circle } from 'sveaflet';
 </script>

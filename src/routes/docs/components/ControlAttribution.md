@@ -6,7 +6,7 @@ dir: Components
 description: Controls.Attribution
 ---
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, ControlAttribution } from 'sveaflet';
 </script>

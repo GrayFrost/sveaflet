@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { type LatLngExpression, type PopupOptions, type Layer, Popup } from 'leaflet?client';
+	import { Popup } from 'leaflet';
+	import type { LatLngExpression, PopupOptions, Layer } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();
@@ -10,6 +11,7 @@
 	export let source: Layer | undefined = undefined;
 
 	let popup: Popup | undefined;
+
 	if ($mapStore) {
 		if (latlng) {
 			popup = new Popup(latlng, options);

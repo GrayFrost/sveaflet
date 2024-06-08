@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { TileLayer, type TileLayerOptions } from 'leaflet?client';
+	import { TileLayer } from 'leaflet';
+	import type { TileLayerOptions } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 
 	export let urlTemplate: string;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
-	import { type LatLngExpression, type MarkerOptions, Marker } from 'leaflet?client';
+	import { Marker } from 'leaflet';
+	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import {
 		useConsumeMap,
 		useConsumeLayerGroup,
@@ -15,9 +16,6 @@
 	let layerGroupStore = useConsumeLayerGroup();
 	let markerStore = writable<Marker | undefined>();
 
-	useProvideLayer(markerStore);
-	useProvideMarker(markerStore);
-
 	if ($mapStore) {
 		$markerStore = new Marker(latlng, options);
 		if ($layerGroupStore) {
@@ -26,6 +24,9 @@
 			$markerStore.addTo($mapStore);
 		}
 	}
+
+	useProvideLayer(markerStore);
+	useProvideMarker(markerStore);
 </script>
 
 <slot />

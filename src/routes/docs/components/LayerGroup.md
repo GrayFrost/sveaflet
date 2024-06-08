@@ -8,7 +8,7 @@ description: LayerGroup
 
 # LayerGroup
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Marker, LayerGroup } from 'sveaflet';
 </script>

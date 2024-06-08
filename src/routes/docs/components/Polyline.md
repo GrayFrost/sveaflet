@@ -8,7 +8,7 @@ description: Polyline
 
 # Polyline
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Polyline } from 'sveaflet';
 </script>
