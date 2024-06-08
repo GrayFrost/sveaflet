@@ -17,6 +17,7 @@ import LayerGroup from './LayerGroup.svelte';
 import Popup from './Popup.svelte';
 import CircleMarker from './CircleMarker.svelte';
 import GeoJSON from './GeoJSON.svelte';
+import Tooltip from './Tooltip.svelte';
 
 export {
   Map,
@@ -37,4 +38,5 @@ export {
   Popup,
   CircleMarker,
   GeoJSON,
+  Tooltip,
 }
