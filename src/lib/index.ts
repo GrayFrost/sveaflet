@@ -3,6 +3,7 @@ import Map from './Map.svelte';
 import TileLayer from './TileLayer.svelte';
 import ImageOverlay from './ImageOverlay.svelte';
 import VideoOverlay from './VideoOverlay.svelte';
+import SVGOverlay from './SVGOverlay.svelte';
 import ControlAttribution from './ControlAttribution.svelte';
 import ControlScale from './ControlScale.svelte';
 import ControlZoom from './ControlZoom.svelte';
@@ -22,6 +23,7 @@ export {
   TileLayer,
   ImageOverlay,
   VideoOverlay,
+  SVGOverlay,
   ControlAttribution,
   ControlScale,
   ControlZoom,
