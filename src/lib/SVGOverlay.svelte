@@ -1,17 +1,17 @@
 <script lang="ts">
-  import { useConsumeMap } from './context.ts';
-	import { SVGOverlay, type LatLngBoundsExpression, type ImageOverlayOptions } from 'leaflet?client';
+	import { SVGOverlay } from 'leaflet';
+	import { useConsumeMap } from './context.ts';
+	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 
-  let { map: mapStore } = useConsumeMap();
+	let { map: mapStore } = useConsumeMap();
 
-  export let svgImage: string | SVGElement;
-  export let bounds: LatLngBoundsExpression;
-  export let options: ImageOverlayOptions = {}
+	export let svgImage: string | SVGElement;
+	export let bounds: LatLngBoundsExpression;
+	export let options: ImageOverlayOptions = {};
 
-  if ($mapStore) {
-    let svgOverlay = new SVGOverlay(svgImage, bounds, options);
-  }
-
+	if ($mapStore) {
+		let svgOverlay = new SVGOverlay(svgImage, bounds, options);
+	}
 </script>
 
 <slot />

@@ -8,7 +8,7 @@ description: TileLayer
 
 # tilelayer
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, TileLayer } from 'sveaflet';
 </script>

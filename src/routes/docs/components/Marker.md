@@ -8,7 +8,7 @@ description: Marker
 
 # Marker
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Marker } from 'sveaflet';
 </script>

@@ -6,7 +6,7 @@ dir: Components
 description: Controls.Zoom
 ---
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, ControlZoom } from 'sveaflet';
 </script>

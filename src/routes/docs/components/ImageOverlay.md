@@ -8,7 +8,7 @@ description: ImageOverlay
 
 # ImageOverlay
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, ImageOverlay } from 'sveaflet';
 </script>

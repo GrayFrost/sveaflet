@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { type LatLngExpression, type Layer, Tooltip, type TooltipOptions } from 'leaflet';
+	import { Tooltip } from 'leaflet';
+	import type { LatLngExpression, Layer, TooltipOptions } from 'leaflet';
 	import { useConsumeMarker, useConsumeMap } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();

@@ -8,7 +8,7 @@ description: Rectangle
 
 # Rectangle
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Rectangle } from 'sveaflet';
 </script>

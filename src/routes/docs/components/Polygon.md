@@ -8,7 +8,7 @@ description: Polygon
 
 # Polygon
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Polygon } from 'sveaflet';
 </script>

@@ -8,7 +8,7 @@ description: Icon
 
 # Icon
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, Marker, Icon } from 'sveaflet';
 </script>

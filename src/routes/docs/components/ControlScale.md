@@ -6,7 +6,7 @@ dir: Components
 description: Controls.Scale
 ---
 
-```svelte example
+```svelte example csr
 <script>
 	import { Map, ControlScale } from 'sveaflet';
 </script>

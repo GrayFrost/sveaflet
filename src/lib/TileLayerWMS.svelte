@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { TileLayer, type WMSOptions } from 'leaflet';
-  import { useConsumeMap } from './context.ts';
+	import { TileLayer } from 'leaflet';
+	import type { WMSOptions } from 'leaflet';
+	import { useConsumeMap } from './context.ts';
 
 	export let baseUrl: string;
 	export let options: WMSOptions = {};
-	
+
 	let { map: mapStore, removeDefaultLayer } = useConsumeMap();
 
 	if ($mapStore) {
