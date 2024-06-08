@@ -8,19 +8,16 @@
 
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {}; // todo 有两种类型
-	export let source: Layer | undefined = undefined;
 
 	let popup: Popup | undefined;
 
 	if ($mapStore) {
 		if (latlng) {
 			popup = new Popup(latlng, options);
-		} else {
-			popup = new Popup(options, source);
 		}
 
 		if (!$layerStore) {
-			popup.openOn($mapStore);
+			popup?.openOn($mapStore); // todo open
 		} else {
 			let popupContent = popup?.options.content || '';
 			$layerStore.bindPopup(popupContent).openPopup(); // todo open

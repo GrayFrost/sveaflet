@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Tooltip } from 'leaflet';
 	import type { LatLngExpression, Layer, TooltipOptions } from 'leaflet';
-	import { useConsumeMarker, useConsumeMap } from './context.ts';
+	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();
-	let markerStore = useConsumeMarker();
+	let layerStore = useConsumeLayer();
 
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: TooltipOptions = {};
@@ -18,12 +18,12 @@
 		} else {
 			tooltip = new Tooltip(options, source);
 		}
-	}
 
-	if (!$markerStore && $mapStore) {
-		tooltip?.openOn($mapStore);
-	} else if ($markerStore) {
-		let tooltipContent = tooltip?.options.content || '';
-		$markerStore.bindTooltip(tooltipContent).openTooltip(); // todo open
+		if (!$layerStore) {
+			tooltip?.openOn($mapStore); // todo open
+		} else {
+			let tooltipContent = tooltip?.options.content || '';
+			$layerStore.bindTooltip(tooltipContent).openTooltip(); // todo open
+		}
 	}
 </script>

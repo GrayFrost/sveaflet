@@ -5,38 +5,39 @@ window is not defined
 
 ## Base
 
-- [] Map
+- [x] Map
 
 ## UI Layers
 
-- [] Marker
-- [] Popup
-- [] Tooltip
+- [x] Marker
+- [x] Popup
+- [x] Tooltip
 
 ## Raster Layers
 
-- [] TileLayer
-- [] TileLayerWMS
-- [] ImageOverlay
-- [] VideoOverlay
+- [x] TileLayer
+- [ ] TileLayerWMS
+- [x] ImageOverlay
+- [x] VideoOverlay
+- [x] SVGOverlay
 
 ## Veector Layers
 
-- [] Polyline
-- [] Polygon
-- [] Rectangle
-- [] Circle
-- [] CircleMarker
+- [x] Polyline
+- [x] Polygon
+- [x] Rectangle
+- [x] Circle
+- [x] CircleMarker
 
 ## Other Layers
-- [] LayerGroup
-- [] GeoJSON
+- [x] LayerGroup
+- [x] GeoJSON
 
 ## Controls
-- [] ControlAttribution
-- [] ControlLayers
-- [] ControlScale
-- [] ControlZoom
+- [x] ControlAttribution
+- [ ] ControlLayers
+- [x] ControlScale
+- [x] ControlZoom
 
 
 
