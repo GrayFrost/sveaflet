@@ -62,6 +62,7 @@
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
+		"geojson": "^0.5.0",
 		"mdsvexamples": "^0.4.1"
 	}
 }
