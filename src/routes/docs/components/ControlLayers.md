@@ -19,8 +19,9 @@ description: Controls.Layers
 			attributionControl: false
 		}}
 	>
-		<ControlLayers
-		/>
+		<ControlLayers>
+			<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} layerName="test" />
+		</ControlLayers>
 	</Map>
 </div>
 ```

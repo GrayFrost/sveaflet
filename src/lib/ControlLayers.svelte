@@ -16,5 +16,7 @@
 		$layers.addTo($mapStore);
 	}
 
-  useProvideControl($layers);
+  useProvideControl(layers);
 </script>
+
+<slot />
