@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { LatLngBoundsExpression, VideoOverlayOptions } from 'leaflet';
+	import { onDestroy } from 'svelte';
 	import { VideoOverlay } from 'leaflet';
+	import type { LatLngBoundsExpression, VideoOverlayOptions } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();
@@ -9,10 +10,17 @@
 	export let bounds: LatLngBoundsExpression;
 	export let options: VideoOverlayOptions = {};
 
+	let videoOverlay: VideoOverlay | undefined;
+
 	if ($mapStore) {
-		let videoOverlay = new VideoOverlay(video, bounds, options);
+		videoOverlay = new VideoOverlay(video, bounds, options);
 		videoOverlay.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		videoOverlay?.remove();
+		videoOverlay = undefined;
+	});
 </script>
 
 <slot />

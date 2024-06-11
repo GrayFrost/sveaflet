@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { control } from 'leaflet';
 	import type { Control } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
@@ -12,4 +13,9 @@
 		zoom = control.zoom(options);
 		zoom.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		zoom?.remove();
+		zoom = undefined;
+	})
 </script>

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { Polygon } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 	import type { LatLngExpression, PolylineOptions } from 'leaflet';
@@ -8,8 +9,15 @@
 	export let latlngs: LatLngExpression[];
 	export let options: PolylineOptions = {};
 
+	let polygon: Polygon | undefined
+
 	if ($mapStore) {
-		let polygon = new Polygon(latlngs, options);
+		polygon = new Polygon(latlngs, options);
 		polygon.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		polygon?.remove();
+		polygon = undefined;
+	})
 </script>

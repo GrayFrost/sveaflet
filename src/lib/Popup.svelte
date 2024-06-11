@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions, Layer } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
@@ -14,6 +15,8 @@
 	if ($mapStore) {
 		if (latlng) {
 			popup = new Popup(latlng, options);
+		} else {
+			popup = new Popup(options);
 		}
 
 		if (!$layerStore) {
@@ -23,6 +26,11 @@
 			$layerStore.bindPopup(popupContent).openPopup(); // todo open
 		}
 	}
+
+	onDestroy(() => {
+		popup?.remove();
+		popup = undefined;
+	})
 </script>
 
 <slot />
