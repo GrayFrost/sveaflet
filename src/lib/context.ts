@@ -1,8 +1,8 @@
 import { getContext, setContext } from 'svelte';
-import type { MapContext, LayerGroupContext, LayerContext, MarkerContext } from './types.ts';
+import type { MapContext, LayerGroupContext, LayerContext, MarkerContext, ControlContext } from './types.ts';
 
 // Map
-export const MapContextKey = Symbol('MapContext');
+export const MapContextKey = Symbol();
 export const useProvideMap = (state: MapContext) => {
 	setContext<MapContext>(MapContextKey, state);
 };
@@ -10,8 +10,17 @@ export const useConsumeMap = (): MapContext => {
 	return getContext<MapContext>(MapContextKey);
 };
 
+// Control
+export const ControlContextKey = Symbol();
+export const useProvideControl = (state: ControlContext) => {
+	setContext<ControlContext>(ControlContextKey, state);
+}
+export const useConsumeControl = (): ControlContext => {
+	return getContext<ControlContext>(ControlContextKey);
+}
+
 // LayerGroup
-export const LayerGroupContextKey = Symbol('LayerGroupContext');
+export const LayerGroupContextKey = Symbol();
 export const useProvideLayerGroup = (state: LayerGroupContext) => {
 	setContext<LayerGroupContext>(LayerGroupContextKey, state);
 };
@@ -20,7 +29,7 @@ export const useConsumeLayerGroup = (): LayerGroupContext => {
 };
 
 // Layer
-export const LayerContextKey = Symbol('LayerContext');
+export const LayerContextKey = Symbol();
 export const useProvideLayer = (state: LayerContext) => {
 	setContext<LayerContext>(LayerContextKey, state);
 };
@@ -29,7 +38,7 @@ export const useConsumeLayer = (): LayerContext => {
 };
 
 // Marker
-export const MarkerContextKey = Symbol('MarkerContext');
+export const MarkerContextKey = Symbol();
 export const useProvideMarker = (state: MarkerContext) => {
 	setContext<MarkerContext>(MarkerContextKey, state);
 };
