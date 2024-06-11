@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 	import type { LatLngExpression, CircleMarkerOptions, Layer } from 'leaflet';
@@ -15,6 +16,11 @@
 		$circleMarker = new CircleMarker(latlng, options);
 		$circleMarker.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		$circleMarker?.remove();
+		$circleMarker = undefined;
+	})
 
 	useProvideLayer(circleMarker);
 </script>

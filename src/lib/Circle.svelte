@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 	import type { LatLngExpression, CircleOptions } from 'leaflet';
@@ -17,6 +18,11 @@
 		$circleStore = new Circle(latlng, options);
 		$circleStore.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		$circleStore?.remove();
+		$circleStore = undefined;
+	})
 </script>
 
 <slot />
