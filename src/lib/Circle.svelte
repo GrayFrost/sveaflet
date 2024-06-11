@@ -12,8 +12,6 @@
 
 	let circleStore = writable<Circle | undefined>();
 
-	useProvideLayer(circleStore);
-
 	if ($mapStore) {
 		$circleStore = new Circle(latlng, options);
 		$circleStore.addTo($mapStore);
@@ -22,7 +20,9 @@
 	onDestroy(() => {
 		$circleStore?.remove();
 		$circleStore = undefined;
-	})
+	});
+
+	useProvideLayer(circleStore);
 </script>
 
 <slot />

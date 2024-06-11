@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Marker } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
@@ -24,6 +25,11 @@
 			$markerStore.addTo($mapStore);
 		}
 	}
+
+	onDestroy(() => {
+		$mapStore?.remove();
+		$mapStore = undefined;
+	});
 
 	useProvideLayer(markerStore);
 	useProvideMarker(markerStore);

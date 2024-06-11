@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { LayerGroup } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 	import { writable } from 'svelte/store';
@@ -16,6 +17,11 @@
 		$layerGroupStore = new LayerGroup([], options);
 		$layerGroupStore.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		$layerGroupStore?.remove();
+		$layerGroupStore = undefined;
+	})
 </script>
 
 <slot />

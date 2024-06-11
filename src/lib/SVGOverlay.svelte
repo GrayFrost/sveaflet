@@ -1,14 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { SVGOverlay } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 
-	let { map: mapStore } = useConsumeMap();
-
-	let svgImage: string | SVGElement;
 	export let bounds: LatLngBoundsExpression;
 	export let options: ImageOverlayOptions = {};
+
+	let { map: mapStore } = useConsumeMap();
+	let svgImage: string | SVGElement;
+	let svgOverlay: SVGOverlay | undefined;
 
 	onMount(() => {
 		if ($mapStore) {
@@ -16,9 +17,14 @@
 				console.warn('SVG Elements Required!');
 				return;
 			}
-			let svgOverlay = new SVGOverlay(svgImage, bounds, options);
+			svgOverlay = new SVGOverlay(svgImage, bounds, options);
 			svgOverlay.addTo($mapStore);
 		}
+	});
+
+	onDestroy(() => {
+		svgOverlay?.remove();
+		svgOverlay = undefined;
 	});
 </script>
 

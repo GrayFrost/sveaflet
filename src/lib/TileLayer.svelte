@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
@@ -8,9 +9,16 @@
 
 	let { map: mapStore, removeDefaultLayer } = useConsumeMap();
 
+	let tileLayer: TileLayer | undefined;
+
 	if ($mapStore) {
 		removeDefaultLayer();
-		let tileLayer = new TileLayer(urlTemplate, options);
+		tileLayer = new TileLayer(urlTemplate, options);
 		tileLayer.addTo($mapStore);
 	}
+
+	onDestroy(() => {
+		tileLayer?.remove();
+		tileLayer = undefined;
+	})
 </script>

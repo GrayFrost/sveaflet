@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { Tooltip } from 'leaflet';
 	import type { LatLngExpression, Layer, TooltipOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
@@ -8,7 +9,6 @@
 
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: TooltipOptions = {};
-	export let source: Layer | undefined = undefined;
 
 	let tooltip: Tooltip | undefined;
 
@@ -16,7 +16,7 @@
 		if (latlng) {
 			tooltip = new Tooltip(latlng, options);
 		} else {
-			tooltip = new Tooltip(options, source);
+			tooltip = new Tooltip(options);
 		}
 
 		if (!$layerStore) {
@@ -26,4 +26,9 @@
 			$layerStore.bindTooltip(tooltipContent).openTooltip(); // todo open
 		}
 	}
+
+	onDestroy(() => {
+		tooltip?.remove();
+		tooltip = undefined;
+	})
 </script>

@@ -21,6 +21,7 @@
 			<NavLi class="lg:px-2 lg:mb-0" href="/">Home</NavLi>
 			<NavLi class="lg:px-2 lg:mb-0" href="/docs/pages/introduction">Docs</NavLi>
 			<NavLi class="lg:px-2 lg:mb-0" href="/docs/components/map">Components</NavLi>
+			<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/todotodo">Examples</NavLi>
 		</NavUl>
 	</Navbar>
 </header>
