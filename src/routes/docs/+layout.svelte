@@ -42,8 +42,6 @@
 
 	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
 
-	console.log('zzh post', posts);
-
 </script>
 
 <Sidebar

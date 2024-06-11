@@ -7,6 +7,7 @@ import SVGOverlay from './SVGOverlay.svelte';
 import ControlAttribution from './ControlAttribution.svelte';
 import ControlScale from './ControlScale.svelte';
 import ControlZoom from './ControlZoom.svelte';
+import ControlLayers from './ControlLayers.svelte';
 import Circle from './Circle.svelte';
 import Polyline from './Polyline.svelte';
 import Polygon from './Polygon.svelte';
@@ -28,6 +29,7 @@ export {
   ControlAttribution,
   ControlScale,
   ControlZoom,
+  ControlLayers,
   Circle,
   Polyline,
   Polygon,
