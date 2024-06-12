@@ -6,7 +6,7 @@ export interface MapContext {
   removeDefaultLayer: () => void;
 }
 
-export type ControlContext = Writable<Control | undefined>;
+export type ControlLayersContext = Writable<Control.Layers | undefined>;
 
 export type LayerGroupContext = Writable<LayerGroup | undefined>;
 

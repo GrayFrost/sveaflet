@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
 	import type { Control } from 'leaflet';
 	import { control } from 'leaflet';
-	import { useConsumeMap, useProvideControl } from './context.ts';
+	import { useConsumeMap, useProvideControlLayer } from './context.ts';
 
 	export let options: Control.LayersOptions = {};
 
@@ -16,7 +15,7 @@
 		$layers.addTo($mapStore);
 	}
 
-  useProvideControl(layers);
+  useProvideControlLayer(layers);
 </script>
 
 <slot />

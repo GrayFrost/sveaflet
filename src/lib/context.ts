@@ -1,5 +1,11 @@
 import { getContext, setContext } from 'svelte';
-import type { MapContext, LayerGroupContext, LayerContext, MarkerContext, ControlContext } from './types.ts';
+import type {
+	MapContext,
+	LayerGroupContext,
+	LayerContext,
+	MarkerContext,
+	ControlLayersContext
+} from './types.ts';
 
 // Map
 export const MapContextKey = Symbol();
@@ -10,14 +16,14 @@ export const useConsumeMap = (): MapContext => {
 	return getContext<MapContext>(MapContextKey);
 };
 
-// Control
-export const ControlContextKey = Symbol();
-export const useProvideControl = (state: ControlContext) => {
-	setContext<ControlContext>(ControlContextKey, state);
-}
-export const useConsumeControl = (): ControlContext => {
-	return getContext<ControlContext>(ControlContextKey);
-}
+// ControlLayer
+export const ControlLayerContextKey = Symbol();
+export const useProvideControlLayer = (state: ControlLayersContext) => {
+	setContext<ControlLayersContext>(ControlLayerContextKey, state);
+};
+export const useConsumeControlLayer = (): ControlLayersContext => {
+	return getContext<ControlLayersContext>(ControlLayerContextKey);
+};
 
 // LayerGroup
 export const LayerGroupContextKey = Symbol();

@@ -2,29 +2,36 @@
 	import { onDestroy } from 'svelte';
 	import { TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeControl } from './context.ts';
+	import { useConsumeMap, useConsumeControlLayer } from './context.ts';
 
 	export let urlTemplate: string;
 	export let options: TileLayerOptions = {};
 	export let layerName: string = '';
+	export let checked: boolean = false;
 
 	let { map: mapStore, removeDefaultLayer } = useConsumeMap();
-	let controlStore = useConsumeControl();
+	let controlLayerStore = useConsumeControlLayer();
 
 	let tileLayer: TileLayer | undefined;
 
 	if ($mapStore) {
 		removeDefaultLayer();
 		tileLayer = new TileLayer(urlTemplate, options);
-		tileLayer.addTo($mapStore);
 
-		if ($controlStore) {
+		if ($controlLayerStore) {
 			if (!layerName) {
 				console.warn('Layer Name is required in ControlLayers');
-			} else {
-				$controlStore.addBaseLayer(tileLayer, layerName);
 			}
-		}
+
+			if (checked) {
+				$mapStore.addLayer(tileLayer);
+			}
+			
+			$controlLayerStore.addBaseLayer(tileLayer, layerName || 'Layer Name');
+			$controlLayerStore.addTo($mapStore);
+		} else {
+			tileLayer.addTo($mapStore);
+		}		
 	}
 
 	onDestroy(() => {
