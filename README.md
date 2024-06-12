@@ -7,6 +7,10 @@ window is not defined
 
 - [x] Map
 
+## Basic Types
+- [x] Icon
+- [ ] DivIcon
+
 ## UI Layers
 
 - [x] Marker
@@ -35,7 +39,7 @@ window is not defined
 
 ## Controls
 - [x] ControlAttribution
-- [ ] ControlLayers
+- [x] ControlLayers
 - [x] ControlScale
 - [x] ControlZoom
 
