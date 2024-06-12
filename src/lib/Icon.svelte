@@ -17,7 +17,7 @@
 	}
 
 	onDestroy(() => {
-		icon?.remove();
+		icon?.remove?.();
 		icon = undefined;
 	})
 </script>

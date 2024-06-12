@@ -13,6 +13,7 @@ import Polyline from './Polyline.svelte';
 import Polygon from './Polygon.svelte';
 import Rectangle from './Rectangle.svelte';
 import Icon from './Icon.svelte';
+import DivIcon from './DivIcon.svelte';
 import Marker from './Marker.svelte';
 import LayerGroup from './LayerGroup.svelte';
 import Popup from './Popup.svelte';
@@ -35,6 +36,7 @@ export {
   Polygon,
   Rectangle,
   Icon,
+  DivIcon,
   Marker,
   LayerGroup,
   Popup,
