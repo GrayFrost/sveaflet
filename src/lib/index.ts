@@ -1,6 +1,7 @@
 // Reexport your entry components here
 import Map from './Map.svelte';
 import TileLayer from './TileLayer.svelte';
+import TileLayerWMS from './TileLayerWMS.svelte';
 import ImageOverlay from './ImageOverlay.svelte';
 import VideoOverlay from './VideoOverlay.svelte';
 import SVGOverlay from './SVGOverlay.svelte';
@@ -24,6 +25,7 @@ import Tooltip from './Tooltip.svelte';
 export {
   Map,
   TileLayer,
+  TileLayerWMS,
   ImageOverlay,
   VideoOverlay,
   SVGOverlay,
