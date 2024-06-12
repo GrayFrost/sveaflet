@@ -8,7 +8,7 @@ description: Controls.Layers
 
 ```svelte example csr
 <script>
-	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
+	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup, TileLayerWMS } from 'sveaflet';
 </script>
 
 <div style="width:500px;height:500px">
@@ -19,7 +19,7 @@ description: Controls.Layers
 			attributionControl: false
 		}}
 	>
-		<ControlLayers options={{collapsed: false}}>
+		<ControlLayers options={{ collapsed: false }}>
 			<TileLayer
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
@@ -34,6 +34,12 @@ description: Controls.Layers
 					maxZoom: 19,
 					attribution:
 						'© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
+				}}
+			/>
+			<TileLayerWMS
+				baseUrl="http://ows.mundialis.de/services/service?"
+				options={{
+					layers: 'TOPO-OSM-WMS'
 				}}
 			/>
 
@@ -55,7 +61,7 @@ description: Controls.Layers
 				<Marker latlng={[39.75, -105.09]}>
 					<Popup options={{ content: 'This is Crown Hill Park.' }} />
 				</Marker>
-				<Marker latlng={[39.68, -105.00]}>
+				<Marker latlng={[39.68, -105.0]}>
 					<Popup options={{ content: 'This is Ruby Hill Park.' }} />
 				</Marker>
 			</LayerGroup>

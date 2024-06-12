@@ -9,7 +9,7 @@ window is not defined
 
 ## Basic Types
 - [x] Icon
-- [ ] DivIcon
+- [x] DivIcon
 
 ## UI Layers
 
@@ -20,7 +20,7 @@ window is not defined
 ## Raster Layers
 
 - [x] TileLayer
-- [ ] TileLayerWMS
+- [x] TileLayerWMS
 - [x] ImageOverlay
 - [x] VideoOverlay
 - [x] SVGOverlay
