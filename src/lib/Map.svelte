@@ -42,7 +42,7 @@
 	});
 </script>
 
-<div id="sveaflet-map" style="width:100%;height:100%;" bind:this={mapContainer}>
+<div id="sveaflet-map" style="width:100%;height:100%" bind:this={mapContainer}>
 	{#if $mapStore}
 		<slot />
 	{/if}
