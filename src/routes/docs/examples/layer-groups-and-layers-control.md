@@ -1,9 +1,9 @@
 ---
-breadcrumb_title: layer groups
-title: layer groups
-component_title: layer groups
+breadcrumb_title: Layer Groups and Layers Control
+title: Layer Groups and Layers Control
+component_title: Layer Groups and Layers Control
 dir: Examples
-description: layer groups
+description: Layer Groups and Layers Control
 ---
 
 # Layer Groups and Layers Control
