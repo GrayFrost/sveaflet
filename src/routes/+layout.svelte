@@ -39,7 +39,7 @@
 				<NavLi class="lg:px-2 lg:mb-0" href="/">Home</NavLi>
 				<NavLi class="lg:px-2 lg:mb-0" href="/docs/pages/introduction">Docs</NavLi>
 				<NavLi class="lg:px-2 lg:mb-0" href="/docs/components/Circle">Components</NavLi>
-				<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/todotodo">Examples</NavLi>
+				<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/sveaflet-quick-start-guide">Examples</NavLi>
 			</NavUl>
 
 			<div class="flex items-center ms-auto">
