@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: TileLayer
 title: TileLayer
 component_title: TileLayer
@@ -13,7 +14,7 @@ description: TileLayer
 	import { Map, TileLayer } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 	</Map>

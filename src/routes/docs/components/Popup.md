@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Popup
 title: Popup
 component_title: Popup
@@ -14,7 +15,7 @@ description: Popup
 	import { Map, Marker, Circle, Popup } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Popup latlng={[51.5, -0.09]} options={{ content: 'Pop content.' }} />
 	</Map>
@@ -27,7 +28,7 @@ description: Popup
 	import { Map, Marker, Circle, Popup } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Marker latlng={[51.5, -0.09]}>
 			<Popup options={{ content: 'Popup in Marker.' }} />

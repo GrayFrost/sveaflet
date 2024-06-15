@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Circle
 title: Circle
 component_title: Circle
@@ -6,14 +7,21 @@ dir: Components
 description: Circle
 ---
 
+test test test testeserwt
+
+testewetwet wetwetwetwe
+
+
 # circle
+
+## default circle
 
 ```svelte example csr
 <script>
 	import { Map, Circle } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Circle
 			latlng={[51.508, -0.11]}
@@ -27,3 +35,5 @@ description: Circle
 	</Map>
 </div>
 ```
+
+## test toc

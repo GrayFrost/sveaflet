@@ -2,6 +2,9 @@ import { defineMDSveXConfig as defineConfig } from 'mdsvex';
 import examples from 'mdsvexamples';
 
 const config = defineConfig({
+	layout: {
+		componentLayout: './src/routes/layouts/component/+page.svelte',
+	},
 	extensions: ['.svelte.md', '.md', '.svx'],
 
 	smartypants: {

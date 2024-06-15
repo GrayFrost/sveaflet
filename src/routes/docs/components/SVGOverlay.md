@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: SVGOverlay
 title: SVGOverlay
 component_title: SVGOverlay
@@ -14,7 +15,7 @@ description: SVGOverlay
 	import { Map, SVGOverlay } from 'sveaflet';
 </script>
 
-<div style="width: 500px; height: 500px; ">
+<div style="width: 100%; height: 500px; ">
 	<Map options={{ center: [32, -130], zoom: 4 }}>
 		<SVGOverlay
 			bounds={[

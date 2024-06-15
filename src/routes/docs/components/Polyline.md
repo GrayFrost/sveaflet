@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Polyline
 title: Polyline
 component_title: Polyline
@@ -13,7 +14,7 @@ description: Polyline
 	import { Map, Polyline } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
 		<Polyline
 			latlngs={[

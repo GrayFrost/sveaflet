@@ -18,7 +18,7 @@ This step-by-step guide will quickly get you started on Sveaflet basics, includi
 	import { Map } from 'sveaflet';
 </script>
 
-<div style="width:500px;height:500px;">
+<div style="width: 100%;height:500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}></Map>
 </div>
 ```
@@ -28,7 +28,7 @@ This step-by-step guide will quickly get you started on Sveaflet basics, includi
 	import { Map } from 'sveaflet';
 </script>
 
-<div style="width:500px;height:500px;">
+<div style="width: 100%;height:500px;">
 	<map options="{{center:[51.505," -0.09], zoom:13}}></map>
 </div>
 ```
@@ -38,7 +38,7 @@ This step-by-step guide will quickly get you started on Sveaflet basics, includi
 	import { Map, TileLayer } from 'sveaflet';
 </script>
 
-<div style="width:500px;height:500px;">
+<div style="width: 100%;height:500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer
 			urlTemplate="https://tile.openstreetmap.org/{z}/{x}/{y}.png"

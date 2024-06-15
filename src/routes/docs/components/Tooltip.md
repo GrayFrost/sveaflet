@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Tooltip
 title: Tooltip
 component_title: Tooltip
@@ -14,7 +15,7 @@ description: Tooltip
 	import { Map, Tooltip } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Tooltip latlng={[51.505, -0.09]} options={{ content: 'Tooltip content.' }} />
 	</Map>
@@ -28,7 +29,7 @@ description: Tooltip
 	import { Map, Marker, Circle, Tooltip } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Marker latlng={[51.5, -0.09]}>
 			<Tooltip options={{ content: 'Tooltip in Marker.' }} />

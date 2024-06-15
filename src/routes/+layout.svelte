@@ -1,4 +1,7 @@
 <script lang="ts">
+	/**
+	 * Inspired by Leaflet, Flowbite-Svelte
+	*/
 	import {
 		DarkMode,
 		Navbar,
@@ -20,7 +23,7 @@
 <header
 	class="sticky top-0 z-9999 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
 >
-	<Navbar fluid class="py-1.5">
+	<Navbar fluid class="h-15 py-0 flex items-center">
 		<NavBrand href="/">
 			<!-- <img src={logo} class="me-3 h-8" alt="Flowbite Svelte Logo" /> -->
 			<span

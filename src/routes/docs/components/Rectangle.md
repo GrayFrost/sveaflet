@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Rectangle
 title: Rectangle
 component_title: Rectangle
@@ -13,7 +14,7 @@ description: Rectangle
 	import { Map, Rectangle } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
 		<Rectangle
       latLngBounds={[

@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: VideoOverlay
 title: VideoOverlay
 component_title: VideoOverlay
@@ -13,7 +14,7 @@ description: VideoOverlay
 	import { Map, VideoOverlay } from 'sveaflet';
 </script>
 
-<div style="width: 500px; height: 500px; ">
+<div style="width: 100%; height: 500px; ">
 	<Map options={{ center: [40.799311, -74.33], zoom: 10 }}>
 		<VideoOverlay
 			video={[
