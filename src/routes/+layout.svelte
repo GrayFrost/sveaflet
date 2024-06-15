@@ -27,7 +27,7 @@
 		<NavBrand href="/">
 			<!-- <img src={logo} class="me-3 h-8" alt="Flowbite Svelte Logo" /> -->
 			<span
-				class="self-center whitespace-nowrap text-2xl font-semibold text-gray-900 dark:text-white"
+				class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white sveaflet-text"
 			>
 				Sveaflet
 			</span>
