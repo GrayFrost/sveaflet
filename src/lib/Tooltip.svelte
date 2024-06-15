@@ -30,5 +30,5 @@
 	onDestroy(() => {
 		tooltip?.remove();
 		tooltip = undefined;
-	})
+	});
 </script>
