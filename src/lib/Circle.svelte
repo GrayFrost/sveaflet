@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
 	import type { LatLngExpression, CircleOptions } from 'leaflet';
 	import { Circle } from 'leaflet';
+	import { useConsumeMap, useProvideLayer } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();
 

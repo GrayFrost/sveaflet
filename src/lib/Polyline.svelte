@@ -1,23 +1,26 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
+	import { writable } from 'svelte/store';
 	import { Polyline } from 'leaflet';
-	import { useConsumeMap } from './context.ts';
 	import type { LatLngExpression, PolylineOptions } from 'leaflet';
+	import { useConsumeMap, useProvideLayer } from './context.ts';
 
 	let { map: mapStore } = useConsumeMap();
 
 	export let latlngs: LatLngExpression[];
 	export let options: PolylineOptions = {};
 
-	let polyline: Polyline | undefined;
+	let polylineStore = writable<Polyline | undefined>();
 
 	if ($mapStore) {
-		polyline = new Polyline(latlngs, options);
-		polyline.addTo($mapStore);
+		$polylineStore = new Polyline(latlngs, options);
+		$polylineStore.addTo($mapStore);
 	}
 
 	onDestroy(() => {
-		polyline?.remove();
-		polyline = undefined;
-	})
+		$polylineStore?.remove();
+		$polylineStore = undefined;
+	});
+
+	useProvideLayer(polylineStore);
 </script>
