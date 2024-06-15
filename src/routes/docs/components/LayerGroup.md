@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: LayerGroup
 title: LayerGroup
 component_title: LayerGroup
@@ -13,7 +14,7 @@ description: LayerGroup
 	import { Map, Marker, LayerGroup } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
 		<LayerGroup>
       <Marker latlng={[39.61, -105.02]} />

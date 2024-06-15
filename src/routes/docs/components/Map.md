@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Sveaflet
 title: Sveaflet
 component_title: Map
@@ -11,7 +12,7 @@ description: TODO TODO
 	import { Map } from 'sveaflet';
 </script>
 
-<div style="width:500px;height:500px">
+<div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }} />
 </div>
 ```

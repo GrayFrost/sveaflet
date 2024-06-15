@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Attribution
 title: Controls.Attribution
 component_title: ControlAttribution
@@ -11,7 +12,7 @@ description: Controls.Attribution
 	import { Map, ControlAttribution } from 'sveaflet';
 </script>
 
-<div style="width:500px;height:500px">
+<div style="width: 100%;height:500px">
 	<Map
 		options={{
 			center: [51.505, -0.09],

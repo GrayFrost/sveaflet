@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Layers
 title: Controls.Layer
 component_title: ControlLayers
@@ -11,7 +12,7 @@ description: Controls.Layers
 	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup, TileLayerWMS } from 'sveaflet';
 </script>
 
-<div style="width:500px;height:500px">
+<div style="width: 100%;height:500px">
 	<Map
 		options={{
 			center: [39.73, -104.99],

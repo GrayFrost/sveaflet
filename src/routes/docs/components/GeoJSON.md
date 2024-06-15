@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: Sveaflet
 title: Sveaflet
 component_title: GeoJSON
@@ -26,7 +27,7 @@ description: GeoJSON
 	};
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
 		<GeoJSON json={geojsonFeature} />
 	</Map>

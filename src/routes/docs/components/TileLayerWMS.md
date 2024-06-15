@@ -1,4 +1,5 @@
 ---
+layout: componentLayout
 breadcrumb_title: TileLayerWMS
 title: TileLayerWMS
 component_title: TileLayerWMS
@@ -13,7 +14,7 @@ description: TileLayerWMS
 	import { Map, TileLayerWMS } from 'sveaflet';
 </script>
 
-<div style="width: 500px;height: 500px;">
+<div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayerWMS
 			baseUrl="http://ows.mundialis.de/services/service?"
