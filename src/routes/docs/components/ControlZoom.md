@@ -25,6 +25,34 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 </script>
 
 <div style="width: 100%;height:500px">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<ControlZoom />
+	</Map>
+</div>
+```
+
+## ControlZoom with Options
+
+```svelte example csr
+<script>
+	import { Map, ControlZoom } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<ControlZoom options={{ zoomInText: 'S', zoomOutText: 'L' }} />
+	</Map>
+</div>
+```
+
+## Hide default Zoom
+
+```svelte example csr
+<script>
+	import { Map, ControlZoom } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13, zoomControl: false }}>
 		<ControlZoom />
 	</Map>
@@ -35,4 +63,4 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| options   |  | [Control.ZoomOptions](https://leafletjs.com/reference.html#control-zoom-option) | `{}` |
+| options   | **Optional** | [Control.ZoomOptions](https://leafletjs.com/reference.html#control-zoom-option) | `{}` |

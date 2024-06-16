@@ -21,19 +21,40 @@ The layers control gives users the ability to switch between different base laye
 
 ```svelte example csr
 <script>
-	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup, TileLayerWMS } from 'sveaflet';
+	import { Map, ControlLayers } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map
 		options={{
 			center: [39.73, -104.99],
-			zoom: 10,
-			attributionControl: false
+			zoom: 10
 		}}
 	>
-		<ControlLayers options={{ collapsed: false }}>
+		<ControlLayers />
+	</Map>
+</div>
+```
+
+## ControlLayers with slot content
+
+Any TileLayers would be added to base layer, and LayerGroup would be added to overlay layer.
+
+```svelte example csr
+<script>
+	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
+	<Map
+		options={{
+			center: [39.73, -104.99],
+			zoom: 10
+		}}
+	>
+		<ControlLayers>
 			<TileLayer
+				layerName="OpenStreetMap"
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
@@ -42,6 +63,7 @@ The layers control gives users the ability to switch between different base laye
 				checked={true}
 			/>
 			<TileLayer
+				layerName="OpenStreetMap.HOT"
 				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
@@ -49,14 +71,17 @@ The layers control gives users the ability to switch between different base laye
 						'© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
 				}}
 			/>
-			<TileLayerWMS
-				baseUrl="http://ows.mundialis.de/services/service?"
+			<TileLayer
+				layerName="OpenTopoMap"
+				urlTemplate={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
 				options={{
-					layers: 'TOPO-OSM-WMS'
+					maxZoom: 19,
+					attribution:
+						'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
 				}}
 			/>
 
-			<LayerGroup checked={true}>
+			<LayerGroup checked={true} overlayName="Cities">
 				<Marker latlng={[39.61, -105.02]}>
 					<Popup options={{ content: 'This is Littleton, CO.' }} />
 				</Marker>
@@ -70,7 +95,7 @@ The layers control gives users the ability to switch between different base laye
 					<Popup options={{ content: 'This is Golden, CO.' }} />
 				</Marker>
 			</LayerGroup>
-			<LayerGroup>
+			<LayerGroup overlayName="Parks">
 				<Marker latlng={[39.75, -105.09]}>
 					<Popup options={{ content: 'This is Crown Hill Park.' }} />
 				</Marker>
@@ -83,8 +108,46 @@ The layers control gives users the ability to switch between different base laye
 </div>
 ```
 
+## ControlLayers with Options
+
+```svelte example csr
+<script>
+	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
+	<Map
+		options={{
+			center: [39.73, -104.99],
+			zoom: 10
+		}}
+	>
+		<ControlLayers options={{ collapsed: false }}>
+			<TileLayer
+				layerName="OpenStreetMap"
+				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+				options={{
+					maxZoom: 19,
+					attribution: '© OpenStreetMap'
+				}}
+				checked={true}
+			/>
+			<TileLayer
+				layerName="OpenStreetMap.HOT"
+				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
+				options={{
+					maxZoom: 19,
+					attribution:
+						'© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
+				}}
+			/>
+		</ControlLayers>
+	</Map>
+</div>
+```
+
 ## Props
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| options   |  | [Control.LayersOptions](https://leafletjs.com/reference.html#control-layers-option) | `{}` |
+| options | **Optional** | [Control.LayersOptions](https://leafletjs.com/reference.html#control-layers-option) | `{}` |

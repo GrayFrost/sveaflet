@@ -37,9 +37,31 @@ Used to load and display a single image over specific bounds of the map. Extends
 </div>
 ```
 
+## ImageOverlay with Options
+
+```svelte example csr
+<script>
+	import { Map, ImageOverlay } from 'sveaflet';
+</script>
+
+<div style="width: 100%; height: 500px;">
+	<Map options={{ center: [40.799311, -74.33], zoom: 10 }}>
+		<ImageOverlay
+			imageUrl="https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+			bounds={[
+				[40.799311, -74.118464],
+				[40.68202047785919, -74.33]
+			]}
+			options={{ opacity: 0.5 }}
+		/>
+	</Map>
+</div>
+```
+
 ## Props
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| imageUrl |  | String |  |
-| bounds |  | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds) |  |
-| options |  | [ImageOverlayOptions](https://leafletjs.com/reference.html#imageoverlay-option) | `{}` |
+
+| Prop name | Description  | Type                                                                            | Default |
+| --------- | ------------ | ------------------------------------------------------------------------------- | ------- |
+| imageUrl  | **Required** | String                                                                          |         |
+| bounds    | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds)               |         |
+| options   | **Optional** | [ImageOverlayOptions](https://leafletjs.com/reference.html#imageoverlay-option) | `{}`    |

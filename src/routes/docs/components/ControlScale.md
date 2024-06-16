@@ -31,8 +31,22 @@ A simple scale control that shows the scale of the current center of screen in m
 </div>
 ```
 
+## ControlScale with options
+
+```svelte example csr
+<script>
+	import { Map, ControlScale } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<ControlScale options={{ maxWidth: 200 }}/>
+	</Map>
+</div>
+```
+
 ## Props
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| options   |  | [Control.ScaleOptions](https://leafletjs.com/reference.html#control-scale-option) | `{}` |
+| options   | **Optional** | [Control.ScaleOptions](https://leafletjs.com/reference.html#control-scale-option) | `{}` |

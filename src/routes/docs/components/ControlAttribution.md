@@ -28,6 +28,48 @@ The attribution control allows you to display attribution data in a small text b
 		options={{
 			center: [51.505, -0.09],
 			zoom: 13,
+		}}
+	>
+		<ControlAttribution />
+	</Map>
+</div>
+```
+
+## ControlAttribution with Options
+
+```svelte example csr
+<script>
+	import { Map, ControlAttribution } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
+	<Map
+		options={{
+			center: [51.505, -0.09],
+			zoom: 13,
+		}}
+	>
+		<ControlAttribution
+			options={{
+				prefix: 'sveaflet'
+			}}
+		/>
+	</Map>
+</div>
+```
+
+## Hide default Attribution
+
+```svelte example csr
+<script>
+	import { Map, ControlAttribution } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height:500px">
+	<Map
+		options={{
+			center: [51.505, -0.09],
+			zoom: 13,
 			attributionControl: false
 		}}
 	>
@@ -44,4 +86,4 @@ The attribution control allows you to display attribution data in a small text b
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| options   |  | [Control.AttributionOptions](https://leafletjs.com/reference.html#control-attribution-option) | `{}` |
+| options | **Optional** | [Control.AttributionOptions](https://leafletjs.com/reference.html#control-attribution-option) | `{}` |

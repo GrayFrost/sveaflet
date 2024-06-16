@@ -11,21 +11,27 @@
 
 	// @ts-ignore
 	delete Icon.Default.prototype._getIconUrl;
-  Icon.Default.mergeOptions({
-    iconRetinaUrl: markerIcon2x,
-    iconUrl: markerIcon,
-    shadowUrl: markerShadow,
-  });
+	Icon.Default.mergeOptions({
+		iconRetinaUrl: markerIcon2x,
+		iconUrl: markerIcon,
+		shadowUrl: markerShadow
+	});
 
 	let mapStore = writable<Map | undefined>();
 	let mapContainer: HTMLElement;
 	let tileLayer: TileLayer | undefined;
 	let dispatch = createEventDispatcher();
 
+	export let id: string = '';
 	export let options: MapOptions = {};
 
 	onMount(() => {
-		$mapStore = new Map(mapContainer, options);
+		if (id) {
+			$mapStore = new Map(id, options);
+		} else {
+			$mapStore = new Map(mapContainer, options);
+		}
+
 		tileLayer = new TileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {});
 
 		tileLayer.addTo($mapStore);
@@ -53,8 +59,10 @@
 	});
 </script>
 
-<div id="sveaflet-map" style="width:100%;height:100%" bind:this={mapContainer}>
-	{#if $mapStore}
-		<slot />
-	{/if}
-</div>
+{#if !id}
+	<div id="sveaflet-map" style="width:100%;height:100%" bind:this={mapContainer}>
+		{#if $mapStore}
+			<slot />
+		{/if}
+	</div>
+{/if}

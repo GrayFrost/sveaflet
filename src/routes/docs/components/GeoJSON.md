@@ -22,6 +22,20 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 ```svelte example csr
 <script>
 	import { Map, GeoJSON } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
+		<GeoJSON />
+	</Map>
+</div>
+```
+
+## GeoJSON with Options
+
+```svelte example csr
+<script>
+	import { Map, GeoJSON } from 'sveaflet';
 
 	let geojsonFeature = {
 		type: 'Feature',
@@ -48,5 +62,5 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| json | an object in [GeoJSON format](https://datatracker.ietf.org/doc/html/rfc7946) | Object | null |
-| options   |  | [GeoJSONOptions](https://leafletjs.com/reference.html#geojson-option) | null |
+| json | **Optional**. An object in [GeoJSON format](https://datatracker.ietf.org/doc/html/rfc7946). | Object | null |
+| options | **Optional** | [GeoJSONOptions](https://leafletjs.com/reference.html#geojson-option) | null |
