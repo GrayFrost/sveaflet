@@ -8,7 +8,7 @@
 	let { map: mapStore } = useConsumeMap();
 
 	export let latlng: LatLngExpression;
-	export let options: CircleMarkerOptions = { radius: 1 };
+	export let options: CircleMarkerOptions = { radius: 10 };
 
 	let circleMarker = writable<Layer | undefined>();
 
