@@ -12,7 +12,7 @@
 
 	let tooltip: Tooltip | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		if (latlng) {
 			tooltip = new Tooltip(latlng, options);
 		} else {

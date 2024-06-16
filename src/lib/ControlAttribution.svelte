@@ -8,7 +8,7 @@
 	let { map: mapStore } = useConsumeMap();
 	let attribution: Control.Attribution | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		attribution = control.attribution(options);
 		attribution.addTo($mapStore);
 	}

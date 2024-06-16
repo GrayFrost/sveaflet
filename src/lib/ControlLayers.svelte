@@ -10,7 +10,7 @@
 
 	let layers = writable<Control.Layers | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$layers = control.layers(undefined, undefined, options);
 		$layers.addTo($mapStore);
 	}

@@ -11,7 +11,7 @@
 
 	let icon: Icon | undefined;
 
-	if ($mapStore && $markerStore) {
+	$: if ($mapStore && $markerStore) {
 		icon = new Icon(options);
 		$markerStore.setIcon(icon);
 	}

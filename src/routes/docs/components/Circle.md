@@ -4,7 +4,7 @@ breadcrumb_title: Circle
 title: Circle - Sveaflet
 component_title: Circle
 dir: Components
-description: Circle
+description: Vectors Layers - Circle
 ---
 
 A component for drawing circle overlays on a map. Extends [CircleMarker](https://leafletjs.com/reference.html#circlemarker).
@@ -66,6 +66,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 ```
 
 ## Props
+
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
 | latlng    |  | [LatLng](https://leafletjs.com/reference.html#latlng) | |

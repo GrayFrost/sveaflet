@@ -23,17 +23,26 @@
 			video {
 				max-width: 100%;
 			}
+			.my-div-icon {
+				width: 50px;
+				height: 50px;
+				background: red;
+			}
 		</style>
 	</head>
 	<body>
 		<div id="map"></div>
 		<script>
+			var myIcon = L.divIcon({ className: 'my-div-icon' });
 			const cities = L.layerGroup();
 			const mLittleton = L.marker([39.61, -105.02])
 				.bindPopup('This is Littleton, CO.')
 				.addTo(cities);
 			const mDenver = L.marker([39.74, -104.99]).bindPopup('This is Denver, CO.').addTo(cities);
-			const mAurora = L.marker([39.73, -104.8]).bindPopup('This is Aurora, CO.').addTo(cities);
+			const mAurora = L.marker([39.73, -104.8], { icon: myIcon })
+				.bindPopup('This is Aurora, CO.')
+				.addTo(cities);
+
 			const mGolden = L.marker([39.77, -105.23]).bindPopup('This is Golden, CO.').addTo(cities);
 			const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 				maxZoom: 19,
@@ -61,7 +70,7 @@
 				Cities: cities
 			};
 
-			const layerControl = L.control.layers(baseLayers, overlays, {collapsed: false}).addTo(map);
+			const layerControl = L.control.layers(baseLayers, overlays, { collapsed: false }).addTo(map);
 
 			const crownHill = L.marker([39.75, -105.09]).bindPopup('This is Crown Hill Park.');
 			const rubyHill = L.marker([39.68, -105.0]).bindPopup('This is Ruby Hill Park.');

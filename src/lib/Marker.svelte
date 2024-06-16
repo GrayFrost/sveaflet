@@ -19,7 +19,7 @@
 	let layerGroupStore = useConsumeLayerGroup();
 	let markerStore = writable<Marker | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$markerStore = new Marker(latlng, options);
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($markerStore);

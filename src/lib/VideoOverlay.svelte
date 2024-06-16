@@ -12,7 +12,7 @@
 
 	let videoOverlay: VideoOverlay | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		videoOverlay = new VideoOverlay(video, bounds, options);
 		videoOverlay.addTo($mapStore);
 	}

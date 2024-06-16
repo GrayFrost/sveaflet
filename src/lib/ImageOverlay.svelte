@@ -12,7 +12,7 @@
 
 	let imageOverlay: ImageOverlay | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
 		imageOverlay.addTo($mapStore);
 	}

@@ -4,7 +4,7 @@ breadcrumb_title: CircleMarker
 title: CircleMarker - Sveaflet
 component_title: CircleMarker
 dir: Components
-description: CircleMarker
+description: Vectors Layers - CircleMarker
 ---
 
 A circle of a fixed size with radius specified in pixels. Extends [Path](https://leafletjs.com/reference.html#path).
@@ -48,6 +48,7 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 ```
 
 ## Props
+
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
 | latlng    |  | [LatLng](https://leafletjs.com/reference.html#latlng) | |

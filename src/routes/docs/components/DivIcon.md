@@ -1,13 +1,23 @@
 ---
 layout: componentLayout
 breadcrumb_title: DivIcon
-title: DivIcon
+title: DivIcon - Sveaflet
 component_title: DivIcon
 dir: Components
-description: DivIcon
+description: Basic Types - DivIcon
 ---
 
-# Icon
+Represents a lightweight icon for markers that uses a simple `<div>` element instead of an image. Inherits from [Icon](https://leafletjs.com/reference.html#icon) but ignores the iconUrl and shadow options.
+
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { DivIcon } from 'sveaflet';
+</script>
+```
+
+## Default DivIcon
 
 ```svelte example csr
 <script>
@@ -22,8 +32,7 @@ description: DivIcon
 					className: 'my-div-icon'
 				}}
 			>
-        <div>DivIcon</div>
-      </DivIcon>
+			</DivIcon>
 		</Marker>
 	</Map>
 </div>
@@ -36,3 +45,28 @@ description: DivIcon
   }
 </style>
 ```
+
+## DivIcon with HTMLElement slot
+```svelte example csr
+<script>
+	import { Map, Marker, DivIcon } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<Marker latlng={[51.5, -0.09]}>
+			<DivIcon
+
+			>
+        <div style="font-size:20px;font-weight:bold;color: red;">DivIcon</div>
+      </DivIcon>
+		</Marker>
+	</Map>
+</div>
+```
+
+## Props
+
+| Prop name | Description | Type | Default |
+| --- | --- | --- | --- |
+| options   |  | [DivIconOptions](https://leafletjs.com/reference.html#divicon-option) | `{}` |

@@ -14,7 +14,7 @@
 
 	let tileLayerWMS: TileLayer | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		removeDefaultLayer();
 		tileLayerWMS = new TileLayer.WMS(baseUrl, options);
 

@@ -12,7 +12,7 @@
 
 	let polygonStore = writable<Polygon | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$polygonStore = new Polygon(latlngs, options);
 		$polygonStore.addTo($mapStore);
 	}

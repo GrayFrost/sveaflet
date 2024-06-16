@@ -11,16 +11,14 @@
 	let svgImage: string | SVGElement;
 	let svgOverlay: SVGOverlay | undefined;
 
-	onMount(() => {
-		if ($mapStore) {
-			if (!svgImage) {
-				console.warn('SVG Elements Required!');
-				return;
-			}
+	$: if ($mapStore) {
+		if (!svgImage) {
+			console.warn('SVG Elements Required!');
+		} else {
 			svgOverlay = new SVGOverlay(svgImage, bounds, options);
 			svgOverlay.addTo($mapStore);
 		}
-	});
+	}
 
 	onDestroy(() => {
 		svgOverlay?.remove();
