@@ -1,18 +1,57 @@
 ---
 layout: componentLayout
 breadcrumb_title: Popup
-title: Popup
+title: Popup - Sveaflet
 component_title: Popup
 dir: Components
-description: Popup
+description: UI Layers - Popup
 ---
 
-# Popup
+Used to open popups in certain places of the map.
 
-## Default
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { Popup } from 'sveaflet';
+</script>
+```
+
+## Default Popup
+
 ```svelte example csr
 <script>
-	import { Map, Marker, Circle, Popup } from 'sveaflet';
+	import { Map, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<Popup latlng={[51.5, -0.09]} />
+	</Map>
+</div>
+```
+
+## Popup with slot content
+
+```svelte example csr
+<script>
+	import { Map, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<Popup latlng={[51.5, -0.09]}>
+			<div style="color:red;">Popup Content.</div>
+		</Popup>
+	</Map>
+</div>
+```
+
+## Popup with Options
+
+```svelte example csr
+<script>
+	import { Map, Popup } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -22,10 +61,11 @@ description: Popup
 </div>
 ```
 
-## Layer bind popup
+## Popup in Layers
+
 ```svelte example csr
 <script>
-	import { Map, Marker, Circle, Popup } from 'sveaflet';
+	import { Map, Marker, Circle, Polygon, Popup } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -44,6 +84,15 @@ description: Popup
 		>
 			<Popup options={{ content: 'Popup in Circle.' }} />
 		</Circle>
+		<Polygon
+			latlngs={[
+				[51.509, -0.08],
+				[51.503, -0.06],
+				[51.51, -0.047]
+			]}
+		>
+			<Popup options={{ content: 'Popup in Polygon.' }} />
+		</Polygon>
 	</Map>
 </div>
 ```

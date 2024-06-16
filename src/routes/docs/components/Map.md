@@ -48,4 +48,4 @@ In Sveaflet, Map component contains a default TileLayer Component, so you don't 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
 | id | **Optional**. DOM ID of a `<div>` element. | String |  |
-| options | At lease provide center and zoom value. | [MapOptions](https://leafletjs.com/reference.html#map-option) | `{}` |
+| options | **Required**. At least provide center and zoom value. | [MapOptions](https://leafletjs.com/reference.html#map-option) | `{}` |

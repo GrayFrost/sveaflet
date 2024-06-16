@@ -24,3 +24,5 @@
 
 	useProvideLayer(polygonStore);
 </script>
+
+<slot />

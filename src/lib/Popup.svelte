@@ -11,26 +11,43 @@
 	export let options: PopupOptions = {}; // todo 有两种类型
 
 	let popup: Popup | undefined;
+	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore) {
+		let mergeOptions = {
+			...options
+		};
+
+		if (htmlElement) {
+			// slot priority greater than string
+			mergeOptions = {
+				...mergeOptions,
+				content: htmlElement
+			};
+		}
+
 		if (latlng) {
-			popup = new Popup(latlng, options);
+			popup = new Popup(latlng, mergeOptions);
 		} else {
-			popup = new Popup(options);
+			popup = new Popup(mergeOptions);
 		}
 
 		if (!$layerStore) {
-			popup?.openOn($mapStore); // todo open
+			popup?.openOn($mapStore);
 		} else {
 			let popupContent = popup?.options.content || '';
-			$layerStore.bindPopup(popupContent).openPopup(); // todo open
+			$layerStore.bindPopup(popupContent);
 		}
 	}
 
 	onDestroy(() => {
 		popup?.remove();
 		popup = undefined;
-	})
+	});
 </script>
 
-<slot />
+{#if $$slots.default}
+	<div bind:this={htmlElement}>
+		<slot />
+	</div>
+{/if}
