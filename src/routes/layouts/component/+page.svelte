@@ -1,8 +1,13 @@
 <script context="module">
-	import h1 from './h1.svelte';
 	import h2 from './h2.svelte';
 	import h3 from './h3.svelte';
-	export { h1, h2, h3 };
+	import table from './table.svelte';
+	import thead from './thead.svelte';
+	import th from './th.svelte';
+	import td from './td.svelte';
+	import a from './a.svelte';
+
+	export { h2, h3, table, thead, th, td, a };
 </script>
 
 <script>
