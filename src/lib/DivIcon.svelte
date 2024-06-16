@@ -13,16 +13,17 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore && $markerStore) {
-    let mergeOptions = {
-      ...options,
-    }
+		let mergeOptions = {
+			...options
+		};
 
-    if (htmlElement) { // slot priority greater than string
-      mergeOptions = {
-        ...mergeOptions,
-        html: htmlElement
-      }
-    }
+		if (htmlElement) {
+			// slot priority greater than string
+			mergeOptions = {
+				...mergeOptions,
+				html: htmlElement
+			};
+		}
 		divIcon = new DivIcon(mergeOptions);
 		$markerStore.setIcon(divIcon);
 	}
@@ -31,11 +32,10 @@
 		divIcon?.remove?.();
 		divIcon = undefined;
 	});
-
 </script>
 
 {#if $$slots.default}
 	<div bind:this={htmlElement}>
 		<slot />
-  </div>
+	</div>
 {/if}
