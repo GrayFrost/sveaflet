@@ -1,25 +1,41 @@
 <script lang="ts">
-import { onDestroy } from 'svelte';
-import { DivIcon } from 'leaflet';
-import { useConsumeMap, useConsumeMarker } from './context.ts';
-import type { DivIconOptions } from 'leaflet';
+	import { onDestroy } from 'svelte';
+	import { DivIcon } from 'leaflet';
+	import { useConsumeMap, useConsumeMarker } from './context.ts';
+	import type { DivIconOptions } from 'leaflet';
 
-let { map: mapStore } = useConsumeMap();
-let markerStore = useConsumeMarker();
+	let { map: mapStore } = useConsumeMap();
+	let markerStore = useConsumeMarker();
 
-export let options: DivIconOptions = {}
+	export let options: DivIconOptions = {};
 
-let divIcon: DivIcon | undefined;
+	let divIcon: DivIcon | undefined;
+	let htmlElement: HTMLElement | undefined;
 
-if ($mapStore && $markerStore) {
-  divIcon = new DivIcon(options);
-  $markerStore.setIcon(divIcon);
-}
+	$: if ($mapStore && $markerStore) {
+    let mergeOptions = {
+      ...options,
+    }
 
-onDestroy(() => {
-  divIcon?.remove?.();
-  divIcon = undefined;
-})
+    if (htmlElement) { // slot priority greater than string
+      mergeOptions = {
+        ...mergeOptions,
+        html: htmlElement
+      }
+    }
+		divIcon = new DivIcon(mergeOptions);
+		$markerStore.setIcon(divIcon);
+	}
+
+	onDestroy(() => {
+		divIcon?.remove?.();
+		divIcon = undefined;
+	});
+
 </script>
 
-<slot />
+{#if $$slots.default}
+	<div bind:this={htmlElement}>
+		<slot />
+  </div>
+{/if}

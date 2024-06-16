@@ -4,7 +4,7 @@ breadcrumb_title: Zoom
 title: ControlZoom - Sveaflet
 component_title: ControlZoom
 dir: Components
-description: Controls.Zoom
+description: Controls - Zoom
 ---
 
 A basic zoom control with two buttons (zoom in and zoom out). It is put on the map by default unless you set its [zoomControl option](https://leafletjs.com/reference.html#map-zoomcontrol) to false. Extends [Control](https://leafletjs.com/reference.html#control).
@@ -32,6 +32,7 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 ```
 
 ## Props
+
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
 | options   |  | [Control.ZoomOptions](https://leafletjs.com/reference.html#control-zoom-option) | `{}` |

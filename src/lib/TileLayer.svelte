@@ -14,7 +14,7 @@
 
 	let tileLayer: TileLayer | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		removeDefaultLayer();
 		tileLayer = new TileLayer(urlTemplate, options);
 

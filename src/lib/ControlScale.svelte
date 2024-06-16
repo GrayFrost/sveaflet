@@ -9,7 +9,7 @@
 	let { map: mapStore } = useConsumeMap();
 	let scale: Control.Scale | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		scale = control.scale(options);
 		scale.addTo($mapStore);
 	}

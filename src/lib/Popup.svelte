@@ -12,7 +12,7 @@
 
 	let popup: Popup | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		if (latlng) {
 			popup = new Popup(latlng, options);
 		} else {

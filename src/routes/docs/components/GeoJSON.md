@@ -1,13 +1,23 @@
 ---
 layout: componentLayout
-breadcrumb_title: Sveaflet
-title: Sveaflet
+breadcrumb_title: GeoJSON
+title: GeoJSON - Sveaflet
 component_title: GeoJSON
 dir: Components
-description: GeoJSON
+description: Other Layers - GeoJSON
 ---
 
-# geojson
+Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse GeoJSON data and display it on the map. Extends [FeatureGroup](https://leafletjs.com/reference.html#featuregroup).
+
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { GeoJSON } from 'sveaflet';
+</script>
+```
+
+## Default GeoJSON
 
 ```svelte example csr
 <script>
@@ -33,3 +43,10 @@ description: GeoJSON
 	</Map>
 </div>
 ```
+
+## Props
+
+| Prop name | Description | Type | Default |
+| --- | --- | --- | --- |
+| json | an object in [GeoJSON format](https://datatracker.ietf.org/doc/html/rfc7946) | Object | null |
+| options   |  | [GeoJSONOptions](https://leafletjs.com/reference.html#geojson-option) | null |

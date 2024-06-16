@@ -14,7 +14,7 @@
 	export let overlayName: string = '';
 	export let checked: boolean = false;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$layerGroupStore = new LayerGroup([], options);
 
 		if ($controlLayerStore) {

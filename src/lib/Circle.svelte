@@ -12,7 +12,7 @@
 
 	let circleStore = writable<Circle | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$circleStore = new Circle(latlng, options);
 		$circleStore.addTo($mapStore);
 	}

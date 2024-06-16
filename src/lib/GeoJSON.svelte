@@ -11,7 +11,7 @@
 
 	let geoJSONStore = writable<GeoJSON | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$geoJSONStore = new GeoJSON(json, options);
     $geoJSONStore.addTo($mapStore);
 	}

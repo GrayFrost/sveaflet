@@ -1,13 +1,23 @@
 ---
 layout: componentLayout
 breadcrumb_title: Icon
-title: Icon
+title: Icon - Sveaflet
 component_title: Icon
 dir: Components
-description: Icon
+description: Basic Types - Icon
 ---
 
-# Icon
+Represents an icon to provide when creating a marker.
+
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { Icon } from 'sveaflet';
+</script>
+```
+
+## Default Icon
 
 ```svelte example csr
 <script>
@@ -31,3 +41,9 @@ description: Icon
 	</Map>
 </div>
 ```
+
+## Props
+
+| Prop name | Description | Type | Default |
+| --- | --- | --- | --- |
+| options   |  | [IconOptions](https://leafletjs.com/reference.html#icon-option) | `{ iconUrl: '' }` |

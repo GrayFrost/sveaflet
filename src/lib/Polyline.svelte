@@ -12,7 +12,7 @@
 
 	let polylineStore = writable<Polyline | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$polylineStore = new Polyline(latlngs, options);
 		$polylineStore.addTo($mapStore);
 	}

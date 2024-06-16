@@ -4,7 +4,7 @@ breadcrumb_title: Scale
 title: ControlScale - Sveaflet
 component_title: ControlScale
 dir: Components
-description: Controls.Scale
+description: Controls - Scale
 ---
 
 A simple scale control that shows the scale of the current center of screen in metric (m/km) and imperial (mi/ft) systems. Extends [Control](https://leafletjs.com/reference.html#control).
@@ -32,6 +32,7 @@ A simple scale control that shows the scale of the current center of screen in m
 ```
 
 ## Props
+
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
 | options   |  | [Control.ScaleOptions](https://leafletjs.com/reference.html#control-scale-option) | `{}` |

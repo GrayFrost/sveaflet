@@ -9,7 +9,7 @@
 	let { map: mapStore } = useConsumeMap();
 	let zoom: Control.Zoom | undefined;
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		zoom = control.zoom(options);
 		zoom.addTo($mapStore);
 	}

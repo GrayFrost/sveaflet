@@ -12,7 +12,7 @@
 
 	let circleMarker = writable<Layer | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$circleMarker = new CircleMarker(latlng, options);
 		$circleMarker.addTo($mapStore);
 	}

@@ -12,7 +12,7 @@
 
 	let rectangleStore = writable<Rectangle | undefined>();
 
-	if ($mapStore) {
+	$: if ($mapStore) {
 		$rectangleStore = new Rectangle(latLngBounds, options);
 		$rectangleStore.addTo($mapStore);
 	}
