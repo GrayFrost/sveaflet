@@ -1,0 +1,1 @@
+<a class="text-primary-700" {...$$props}><slot /></a>
