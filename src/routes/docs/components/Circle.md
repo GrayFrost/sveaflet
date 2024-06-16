@@ -1,15 +1,15 @@
 ---
 layout: componentLayout
 breadcrumb_title: Circle
-title: Circle
+title: Circle - Sveaflet
 component_title: Circle
 dir: Components
 description: Circle
 ---
 
-test test test testeserwt
+A component for drawing circle overlays on a map. Extends [CircleMarker](https://leafletjs.com/reference.html#circlemarker).
 
-testewetwet wetwetwetwe
+It's an approximation and starts to diverge from a real circle closer to poles (due to projection distortion).
 
 ## Setup
 

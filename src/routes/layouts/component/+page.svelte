@@ -25,6 +25,7 @@
 
 	// calm down `unused export property` warrning
 	layout;
+	breadcrumb_title;
 	component_title;
 </script>
 
@@ -32,7 +33,7 @@
 	<div
 		class="flex flex-col max-w-4xl mx-auto px-4 min-w-0 pt-6 lg:px-8 lg:pt-8 pb:12 xl:pb-24 lg:pb-16 divide-y divide-gray-200 dark:divide-gray-800"
 	>
-		<PageHeadSection {dir} {breadcrumb_title} {title} {description} />
+		<PageHeadSection {dir} {title} {description} />
 		<div id="mainContent" class="py-8">
 			<slot />
 		</div>
