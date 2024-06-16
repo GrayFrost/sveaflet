@@ -45,7 +45,7 @@ Used to group several layers and handle them as one. If you add it to the map, a
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
-		<LayerGroup options={}>
+		<LayerGroup options={{ attribution: 'LayerGroup' }}>
 			<Marker latlng={[39.61, -105.02]} />
 			<Marker latlng={[39.74, -104.99]} />
 			<Marker latlng={[39.73, -104.8]} />
