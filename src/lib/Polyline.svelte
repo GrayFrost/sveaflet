@@ -24,3 +24,5 @@
 
 	useProvideLayer(polylineStore);
 </script>
+
+<slot />

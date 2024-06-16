@@ -24,3 +24,5 @@
 
 	useProvideLayer(rectangleStore);
 </script>
+
+<slot />
