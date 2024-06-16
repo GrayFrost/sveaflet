@@ -24,3 +24,5 @@
 
 	useProvideLayer(circleMarker);
 </script>
+
+<slot />

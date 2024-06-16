@@ -65,7 +65,7 @@ Used to open popups in certain places of the map.
 
 ```svelte example csr
 <script>
-	import { Map, Marker, Circle, Polygon, Popup } from 'sveaflet';
+	import { Map, Popup, Marker, Circle, CircleMarker, Polygon, Polyline, Rectangle } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -84,6 +84,9 @@ Used to open popups in certain places of the map.
 		>
 			<Popup options={{ content: 'Popup in Circle.' }} />
 		</Circle>
+		<CircleMarker latlng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
+			<Popup options={{ content: 'Popup in CircleMarker.' }} />
+		</CircleMarker>
 		<Polygon
 			latlngs={[
 				[51.509, -0.08],
@@ -93,6 +96,28 @@ Used to open popups in certain places of the map.
 		>
 			<Popup options={{ content: 'Popup in Polygon.' }} />
 		</Polygon>
+		<Polyline
+			latlngs={[
+				[51.512, -0.09],
+				[51.515, -0.1],
+				[51.52, -0.11]
+			]}
+			options={{ color: 'purple' }}><Popup options={{ content: 'Popup in Polyline.' }} /></Polyline
+		>
+		<Rectangle
+			latLngBounds={[
+				[51.49, -0.08],
+				[51.5, -0.06]
+			]}
+			options={{ color: 'green' }}><Popup options={{ content: 'Popup in Rectangle.' }} /></Rectangle
+		>
 	</Map>
 </div>
 ```
+
+## Props
+
+| Prop name | Description | Type | Default |
+| --- | --- | --- | --- |
+| latlng | **Required** when used directly in Map. **Optional** when used in any Layer Component | [LatLng](https://leafletjs.com/reference.html#latlng) | |
+| options | **Optional** | [PopupOptions](https://leafletjs.com/reference.html#popup-option) | `{}` |
