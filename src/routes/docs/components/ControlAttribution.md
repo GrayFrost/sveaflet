@@ -1,12 +1,23 @@
 ---
 layout: componentLayout
 breadcrumb_title: Attribution
-title: Controls.Attribution
+title: ControlAttribution - Sveaflet
 component_title: ControlAttribution
 dir: Components
 description: Controls.Attribution
 ---
 
+The attribution control allows you to display attribution data in a small text box on a map. It is put on the map by default unless you set its [attributionControl option](https://leafletjs.com/reference.html#map-attributioncontrol) to false, and it fetches attribution texts from layers with the [getAttribution method](https://leafletjs.com/reference.html#layer-getattribution) automatically. Extends [Control](https://leafletjs.com/reference.html#control).
+
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { ControlAttribution } from 'sveaflet';
+</script>
+```
+
+## Default ControlAttribution
 ```svelte example csr
 <script>
 	import { Map, ControlAttribution } from 'sveaflet';
@@ -28,3 +39,8 @@ description: Controls.Attribution
 	</Map>
 </div>
 ```
+
+## Props
+| Prop name | Description | Type | Default |
+| --- | --- | --- | --- |
+| options   |  | [Control.AttributionOptions](https://leafletjs.com/reference.html#control-attribution-option) | `{}` |
