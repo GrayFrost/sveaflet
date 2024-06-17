@@ -5,8 +5,10 @@
 	import { useConsumeMap } from './context.ts';
 
 	export let options: ControlOptions = {};
+	export let instance: Control | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	
 	let control: Control | undefined;
 	let htmlElement: HTMLElement;
 
@@ -25,6 +27,8 @@
 		control = new CustonControl(options);
 		control.addTo($mapStore);
 	}
+
+	$: instance = control;
 
 	onDestroy(() => {
 		control?.remove();

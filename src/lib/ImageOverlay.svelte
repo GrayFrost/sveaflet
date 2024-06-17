@@ -4,11 +4,12 @@
 	import { useConsumeMap } from './context.ts';
 	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 
-	let mapStore = useConsumeMap();
-
 	export let imageUrl: string;
 	export let bounds: LatLngBoundsExpression;
 	export let options: ImageOverlayOptions = {};
+	export let instance: ImageOverlay | undefined = undefined;
+
+	let mapStore = useConsumeMap();
 
 	let imageOverlay: ImageOverlay | undefined;
 
@@ -17,8 +18,10 @@
 		imageOverlay.addTo($mapStore);
 	}
 
+	$: instance = imageOverlay;
+
 	onDestroy(() => {
 		imageOverlay?.remove();
 		imageOverlay = undefined;
-	})
+	});
 </script>

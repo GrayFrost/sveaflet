@@ -4,10 +4,11 @@
 	import { useConsumeMap, useConsumeMarker } from './context.ts';
 	import type { DivIconOptions } from 'leaflet';
 
+	export let options: DivIconOptions = {};
+	export let instance: DivIcon | undefined = undefined;
+
 	let mapStore = useConsumeMap();
 	let markerStore = useConsumeMarker();
-
-	export let options: DivIconOptions = {};
 
 	let divIcon: DivIcon | undefined;
 	let htmlElement: HTMLElement | undefined;
@@ -27,6 +28,8 @@
 		divIcon = new DivIcon(mergeOptions);
 		$markerStore.setIcon(divIcon);
 	}
+
+	$: instance = divIcon;
 
 	onDestroy(() => {
 		divIcon?.remove?.();
