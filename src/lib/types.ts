@@ -2,8 +2,8 @@ import { type Writable } from 'svelte/store';
 import { Map, LayerGroup, Layer, Marker, Control } from 'leaflet';
 
 export interface MapContext {
-  map: Writable<Map | undefined>;
-  removeDefaultLayer: () => void;
+	map: Writable<Map | undefined>;
+	removeDefaultLayer: () => void;
 }
 
 export type ControlLayersContext = Writable<Control.Layers | undefined>;
