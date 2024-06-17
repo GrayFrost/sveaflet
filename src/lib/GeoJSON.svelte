@@ -8,6 +8,7 @@
 
 	export let json: GeoJsonObject | null = null;
 	export let options: GeoJSONOptions | null = null;
+	export let instance: GeoJSON | undefined;
 
 	let geoJSONStore = writable<GeoJSON | undefined>();
 
@@ -15,6 +16,8 @@
 		$geoJSONStore = new GeoJSON(json, options);
     $geoJSONStore.addTo($mapStore);
 	}
+
+	$: instance = $geoJSONStore;
 
 	useProvideLayer(geoJSONStore);
 </script>

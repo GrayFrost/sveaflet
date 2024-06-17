@@ -24,6 +24,7 @@
 
 	export let id: string = '';
 	export let options: MapOptions = {};
+	export let instance: Map | undefined;
 
 	onMount(() => {
 		if (id) {
@@ -40,6 +41,8 @@
 			dispatch('click', e);
 		});
 	});
+
+	$: instance = $mapStore;
 
 	onDestroy(() => {
 		$mapStore?.remove();
