@@ -5,7 +5,8 @@
 	import { useConsumeMap } from './context.ts';
 
 	export let options: Control.AttributionOptions = {};
-	
+	export let instance: Control.Attribution | undefined;
+
 	let { map: mapStore } = useConsumeMap();
 	let attribution: Control.Attribution | undefined;
 
@@ -13,6 +14,8 @@
 		attribution = control.attribution(options);
 		attribution.addTo($mapStore);
 	}
+
+	$: instance = attribution;
 
 	onDestroy(() => {
 		attribution?.remove();

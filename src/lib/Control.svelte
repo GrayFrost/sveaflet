@@ -8,13 +8,14 @@
 
 	let { map: mapStore } = useConsumeMap();
 	let control: Control | undefined;
-	let htmlElement: HTMLElement | undefined;
+	let htmlElement: HTMLElement;
 
-	let CustonControl;
+	let CustonControl: { new (...args: any[]): { onAdd(): HTMLElement } } & typeof Control;
 
 	onMount(() => {
+		// @ts-ignore
 		CustonControl = Control.extend({
-			onAdd(map) {
+			onAdd() {
 				return htmlElement;
 			}
 		});
@@ -31,6 +32,6 @@
 	});
 </script>
 
-<div bind:this={htmlElement}>
+<div bind:this={htmlElement} {...$$restProps} class={`leaflet-control ${$$restProps.class}`}>
 	<slot />
 </div>
