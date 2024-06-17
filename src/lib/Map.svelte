@@ -24,7 +24,7 @@
 
 	export let id: string = '';
 	export let options: MapOptions = {};
-	export let instance: Map | undefined;
+	export let instance: Map | undefined = undefined;
 
 	onMount(() => {
 		if (id) {

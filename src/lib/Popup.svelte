@@ -35,7 +35,7 @@
 		if (!$layerStore) {
 			popup?.openOn($mapStore);
 		} else {
-			let popupContent = popup?.options.content || '';
+			let popupContent = popup?.options.content || ''; // TODO: popup slot content
 			$layerStore.bindPopup(popupContent);
 		}
 	}
