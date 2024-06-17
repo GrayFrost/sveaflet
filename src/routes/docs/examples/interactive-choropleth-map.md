@@ -14,7 +14,7 @@ The tutorial was inspired by the Texas Tribune US Senate Runoff Results map (als
 ```svelte example csr
 <script>
 	import { Map, TileLayer, GeoJSON, ControlAttribution, Control } from 'sveaflet';
-	import { statesData } from '/us-state.js?url';
+	import { statesData } from '../assets/us-state.js';
 
 	let featureProperties = {};
 	let geojson;
