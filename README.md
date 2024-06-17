@@ -38,6 +38,7 @@ window is not defined
 - [x] GeoJSON
 
 ## Controls
+- [x] Control
 - [x] ControlAttribution
 - [x] ControlLayers
 - [x] ControlScale
