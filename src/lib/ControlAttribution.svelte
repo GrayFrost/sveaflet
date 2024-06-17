@@ -7,7 +7,7 @@
 	export let options: Control.AttributionOptions = {};
 	export let instance: Control.Attribution | undefined;
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let attribution: Control.Attribution | undefined;
 
 	$: if ($mapStore) {

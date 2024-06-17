@@ -6,7 +6,7 @@
 
 	export let options: Control.ZoomOptions = {};
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let zoom: Control.Zoom | undefined;
 
 	$: if ($mapStore) {

@@ -4,7 +4,7 @@
 	import { useConsumeMap } from './context.ts';
 	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 
 	export let imageUrl: string;
 	export let bounds: LatLngBoundsExpression;

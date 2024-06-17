@@ -7,7 +7,7 @@
 	export let bounds: LatLngBoundsExpression;
 	export let options: ImageOverlayOptions = {};
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let svgImage: string | SVGElement;
 	let svgOverlay: SVGOverlay | undefined;
 

@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { Tooltip } from 'leaflet';
-	import type { LatLngExpression, Layer, TooltipOptions } from 'leaflet';
+	import type { LatLngExpression, TooltipOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let layerStore = useConsumeLayer();
 
 	export let latlng: LatLngExpression | undefined = undefined;

@@ -21,11 +21,12 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 ```svelte example csr
 <script>
-	import { Map, Marker, DivIcon } from 'sveaflet';
+	import { Map, TileLayer, Marker, DivIcon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon />
 		</Marker>
@@ -37,43 +38,44 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 ```svelte example csr
 <script>
-	import { Map, Marker, DivIcon } from 'sveaflet';
+	import { Map, TileLayer, Marker, DivIcon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon
 				options={{
 					className: 'my-div-icon'
 				}}
-			>
-			</DivIcon>
+			></DivIcon>
 		</Marker>
 	</Map>
 </div>
 
 <style>
-  :global(.my-div-icon) {
-    width: 50px !important;
-    height: 50px !important;
-    background: red;
-  }
+	:global(.my-div-icon) {
+		width: 50px !important;
+		height: 50px !important;
+		background: red;
+	}
 </style>
 ```
 
 ## DivIcon with slot content
+
 ```svelte example csr
 <script>
-	import { Map, Marker, DivIcon } from 'sveaflet';
+	import { Map, TileLayer, Marker, DivIcon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon>
-        <div style="font-size:20px;font-weight:bold;color: red;">DivIcon</div>
-      </DivIcon>
+				<div style="font-size:20px;font-weight:bold;color: red;">DivIcon</div>
+			</DivIcon>
 		</Marker>
 	</Map>
 </div>
@@ -81,6 +83,6 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| options   | **Optional** | [DivIconOptions](https://leafletjs.com/reference.html#divicon-option) | `{}` |
+| Prop name | Description  | Type                                                                  | Default |
+| --------- | ------------ | --------------------------------------------------------------------- | ------- |
+| options   | **Optional** | [DivIconOptions](https://leafletjs.com/reference.html#divicon-option) | `{}`    |

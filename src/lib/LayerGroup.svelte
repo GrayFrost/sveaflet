@@ -6,7 +6,7 @@
 	import type { LayerOptions } from 'leaflet';
 	import { useProvideLayerGroup } from './context.ts';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let controlLayerStore = useConsumeControlLayer();
 
 	let layerGroupStore = writable<LayerGroup | undefined>();

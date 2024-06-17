@@ -13,7 +13,7 @@ description: GeoJSON is a very popular data format among many GIS technologies a
 <script>
 	import { Map, GeoJSON } from 'sveaflet';
 
-  let geojsonFeature = {
+	let geojsonFeature = {
 		type: 'Feature',
 		properties: {
 			name: 'Coors Field',
@@ -29,7 +29,7 @@ description: GeoJSON is a very popular data format among many GIS technologies a
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
-		<GeoJSON json={geojsonFeature}/>
+		<GeoJSON json={geojsonFeature} />
 	</Map>
 </div>
 ```

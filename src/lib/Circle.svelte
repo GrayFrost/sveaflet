@@ -5,7 +5,7 @@
 	import { Circle } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 
 	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };

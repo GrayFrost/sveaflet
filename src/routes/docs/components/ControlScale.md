@@ -21,11 +21,12 @@ A simple scale control that shows the scale of the current center of screen in m
 
 ```svelte example csr
 <script>
-	import { Map, ControlScale } from 'sveaflet';
+	import { Map, TileLayer, ControlScale } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlScale />
 	</Map>
 </div>
@@ -35,18 +36,19 @@ A simple scale control that shows the scale of the current center of screen in m
 
 ```svelte example csr
 <script>
-	import { Map, ControlScale } from 'sveaflet';
+	import { Map, TileLayer, ControlScale } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<ControlScale options={{ maxWidth: 200 }}/>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<ControlScale options={{ maxWidth: 200 }} />
 	</Map>
 </div>
 ```
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| options   | **Optional** | [Control.ScaleOptions](https://leafletjs.com/reference.html#control-scale-option) | `{}` |
+| Prop name | Description  | Type                                                                              | Default |
+| --------- | ------------ | --------------------------------------------------------------------------------- | ------- |
+| options   | **Optional** | [Control.ScaleOptions](https://leafletjs.com/reference.html#control-scale-option) | `{}`    |

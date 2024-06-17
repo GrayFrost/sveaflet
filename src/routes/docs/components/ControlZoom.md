@@ -21,11 +21,12 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 
 ```svelte example csr
 <script>
-	import { Map, ControlZoom } from 'sveaflet';
+	import { Map, TileLayer, ControlZoom } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlZoom />
 	</Map>
 </div>
@@ -35,11 +36,12 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 
 ```svelte example csr
 <script>
-	import { Map, ControlZoom } from 'sveaflet';
+	import { Map, TileLayer, ControlZoom } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlZoom options={{ zoomInText: 'S', zoomOutText: 'L' }} />
 	</Map>
 </div>
@@ -49,7 +51,7 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 
 ```svelte example csr
 <script>
-	import { Map, ControlZoom } from 'sveaflet';
+	import { Map, TileLayer, ControlZoom } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
@@ -61,6 +63,6 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| options   | **Optional** | [Control.ZoomOptions](https://leafletjs.com/reference.html#control-zoom-option) | `{}` |
+| Prop name | Description  | Type                                                                            | Default |
+| --------- | ------------ | ------------------------------------------------------------------------------- | ------- |
+| options   | **Optional** | [Control.ZoomOptions](https://leafletjs.com/reference.html#control-zoom-option) | `{}`    |

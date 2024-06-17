@@ -11,11 +11,12 @@ description: Polyline
 
 ```svelte example csr
 <script>
-	import { Map, Polyline } from 'sveaflet';
+	import { Map, TileLayer, Polyline } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
 			latlngs={[
 				[45.51, -122.68],
@@ -27,3 +28,5 @@ description: Polyline
 	</Map>
 </div>
 ```
+
+// todo doc

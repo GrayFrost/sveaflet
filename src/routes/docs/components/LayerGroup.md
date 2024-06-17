@@ -21,11 +21,12 @@ Used to group several layers and handle them as one. If you add it to the map, a
 
 ```svelte example csr
 <script>
-	import { Map, LayerGroup, Marker } from 'sveaflet';
+	import { Map, TileLayer, LayerGroup, Marker } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup>
 			<Marker latlng={[39.61, -105.02]} />
 			<Marker latlng={[39.74, -104.99]} />
@@ -40,11 +41,12 @@ Used to group several layers and handle them as one. If you add it to the map, a
 
 ```svelte example csr
 <script>
-	import { Map, LayerGroup, Marker } from 'sveaflet';
+	import { Map, TileLayer, LayerGroup, Marker } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup options={{ attribution: 'LayerGroup' }}>
 			<Marker latlng={[39.61, -105.02]} />
 			<Marker latlng={[39.74, -104.99]} />

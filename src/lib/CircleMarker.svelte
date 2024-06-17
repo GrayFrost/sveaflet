@@ -5,7 +5,7 @@
 	import type { LatLngExpression, CircleMarkerOptions, Layer } from 'leaflet';
 	import { CircleMarker } from 'leaflet';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 
 	export let latlng: LatLngExpression;
 	export let options: CircleMarkerOptions = { radius: 10 };

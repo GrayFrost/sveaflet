@@ -10,13 +10,15 @@ description: Tooltip
 # Tooltip
 
 ## Default
+
 ```svelte example csr
 <script>
-	import { Map, Tooltip } from 'sveaflet';
+	import { Map, TileLayer, Tooltip } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Tooltip latlng={[51.505, -0.09]} options={{ content: 'Tooltip content.' }} />
 	</Map>
 </div>
@@ -26,11 +28,12 @@ description: Tooltip
 
 ```svelte example csr
 <script>
-	import { Map, Marker, Circle, Tooltip } from 'sveaflet';
+	import { Map, TileLayer, Marker, Circle, Tooltip } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<Tooltip options={{ content: 'Tooltip in Marker.' }} />
 		</Marker>
@@ -48,3 +51,5 @@ description: Tooltip
 	</Map>
 </div>
 ```
+
+//todo doc
