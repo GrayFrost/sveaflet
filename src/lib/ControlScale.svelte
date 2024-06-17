@@ -5,8 +5,10 @@
 	import { useConsumeMap } from './context.ts';
 
 	export let options: Control.ScaleOptions = {};
+	export let instance: Control.Scale | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	
 	let scale: Control.Scale | undefined;
 
 	$: if ($mapStore) {
@@ -14,8 +16,10 @@
 		scale.addTo($mapStore);
 	}
 
+	$: instance = scale;
+
 	onDestroy(() => {
 		scale?.remove();
 		scale = undefined;
-	})
+	});
 </script>

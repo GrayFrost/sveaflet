@@ -5,8 +5,10 @@
 	import { useConsumeMap } from './context.ts';
 
 	export let options: Control.ZoomOptions = {};
+	export let instance: Control.Zoom | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	
 	let zoom: Control.Zoom | undefined;
 
 	$: if ($mapStore) {
@@ -14,8 +16,10 @@
 		zoom.addTo($mapStore);
 	}
 
+	$: instance = zoom;
+
 	onDestroy(() => {
 		zoom?.remove();
 		zoom = undefined;
-	})
+	});
 </script>

@@ -4,12 +4,11 @@
 	import type { GeoJsonObject } from 'geojson';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
-	let mapStore = useConsumeMap();
-
 	export let json: GeoJsonObject | null = null;
 	export let options: GeoJSONOptions | null = null;
 	export let instance: GeoJSON | undefined;
 
+	let mapStore = useConsumeMap();
 	let geoJSONStore = writable<GeoJSON | undefined>();
 
 	$: if ($mapStore) {

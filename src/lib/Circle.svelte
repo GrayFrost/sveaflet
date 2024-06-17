@@ -5,17 +5,19 @@
 	import { Circle } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
-	let mapStore = useConsumeMap();
-
 	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };
+	export let instance: Circle | undefined = undefined;
 
+	let mapStore = useConsumeMap();
 	let circleStore = writable<Circle | undefined>();
 
 	$: if ($mapStore) {
 		$circleStore = new Circle(latlng, options);
 		$circleStore.addTo($mapStore);
 	}
+
+	$: instance = $circleStore;
 
 	onDestroy(() => {
 		$circleStore?.remove();

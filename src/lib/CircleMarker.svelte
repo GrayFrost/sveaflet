@@ -5,24 +5,26 @@
 	import type { LatLngExpression, CircleMarkerOptions, Layer } from 'leaflet';
 	import { CircleMarker } from 'leaflet';
 
-	let mapStore = useConsumeMap();
-
 	export let latlng: LatLngExpression;
 	export let options: CircleMarkerOptions = { radius: 10 };
+	export let instance: CircleMarker | undefined = undefined;
 
-	let circleMarker = writable<Layer | undefined>();
+	let mapStore = useConsumeMap();
+	let circleMarkerStore = writable<Layer | undefined>();
 
 	$: if ($mapStore) {
-		$circleMarker = new CircleMarker(latlng, options);
-		$circleMarker.addTo($mapStore);
+		$circleMarkerStore = new CircleMarker(latlng, options);
+		$circleMarkerStore.addTo($mapStore);
 	}
 
+	$: instance = $circleMarkerStore as CircleMarker;
+
 	onDestroy(() => {
-		$circleMarker?.remove();
-		$circleMarker = undefined;
+		$circleMarkerStore?.remove();
+		$circleMarkerStore = undefined;
 	})
 
-	useProvideLayer(circleMarker);
+	useProvideLayer(circleMarkerStore);
 </script>
 
 <slot />

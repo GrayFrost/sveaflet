@@ -5,9 +5,10 @@
 	import { useConsumeMap } from './context.ts';
 
 	export let options: Control.AttributionOptions = {};
-	export let instance: Control.Attribution | undefined;
+	export let instance: Control.Attribution | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	
 	let attribution: Control.Attribution | undefined;
 
 	$: if ($mapStore) {

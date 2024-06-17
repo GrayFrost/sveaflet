@@ -4,10 +4,11 @@
 	import { useConsumeMap, useConsumeMarker } from './context.ts';
 	import type { IconOptions } from 'leaflet';
 
+	export let options: IconOptions = { iconUrl: '' };
+	export let instance: Icon | undefined = undefined;
+
 	let mapStore = useConsumeMap();
 	let markerStore = useConsumeMarker();
-
-	export let options: IconOptions = { iconUrl: '' };
 
 	let icon: Icon | undefined;
 
@@ -16,8 +17,10 @@
 		$markerStore.setIcon(icon);
 	}
 
+	$: instance = icon;
+
 	onDestroy(() => {
 		icon?.remove?.();
 		icon = undefined;
-	})
+	});
 </script>

@@ -5,17 +5,19 @@
 	import { useConsumeMap, useProvideControlLayer } from './context.ts';
 
 	export let options: Control.LayersOptions = {};
+	export let instance: Control.Layers | undefined = undefined;
 
 	let mapStore = useConsumeMap();
-
-	let layers = writable<Control.Layers | undefined>();
+	let layersStore = writable<Control.Layers | undefined>();
 
 	$: if ($mapStore) {
-		$layers = control.layers(undefined, undefined, options);
-		$layers.addTo($mapStore);
+		$layersStore = control.layers(undefined, undefined, options);
+		$layersStore.addTo($mapStore);
 	}
 
-  useProvideControlLayer(layers);
+	$: instance = $layersStore;
+
+  useProvideControlLayer(layersStore);
 </script>
 
 <slot />
