@@ -6,7 +6,7 @@
 
 	export let options: ControlOptions = {};
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let control: Control | undefined;
 	let htmlElement: HTMLElement;
 

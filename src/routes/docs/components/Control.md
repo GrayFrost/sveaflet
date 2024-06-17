@@ -11,7 +11,7 @@ description: Vectors Layers - Control
 
 ```svelte example csr
 <script>
-	import { Map, Control } from 'sveaflet';
+	import { Map, TileLayer, Control } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -23,6 +23,7 @@ description: Vectors Layers - Control
 			attributionControl: false
 		}}
 	>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Control options={{ position: 'topright' }}>
 			<div style="border:2px solid black;background:white;padding:8px;">Control content</div>
 		</Control>

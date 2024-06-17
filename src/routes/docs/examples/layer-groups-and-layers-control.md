@@ -10,7 +10,7 @@ description: Layer Groups and Layers Control
 
 ```svelte example csr
 <script>
-	import { Map, LayerGroup, Marker, Popup } from 'sveaflet';
+	import { Map, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
 </script>
 
 <div style="width:700px;height:500px">
@@ -20,6 +20,7 @@ description: Layer Groups and Layers Control
 			zoom: 10
 		}}
 	>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup>
 			<Marker latlng={[39.61, -105.02]}>
 				<Popup options={{ content: 'This is Littleton, CO.' }} />

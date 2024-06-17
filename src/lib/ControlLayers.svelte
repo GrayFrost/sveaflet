@@ -6,7 +6,7 @@
 
 	export let options: Control.LayersOptions = {};
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 
 	let layers = writable<Control.Layers | undefined>();
 

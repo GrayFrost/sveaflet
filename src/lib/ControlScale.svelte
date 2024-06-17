@@ -6,7 +6,7 @@
 
 	export let options: Control.ScaleOptions = {};
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let scale: Control.Scale | undefined;
 
 	$: if ($mapStore) {

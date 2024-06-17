@@ -15,7 +15,7 @@
 		icon: new Icon.Default(),
 	};
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let layerGroupStore = useConsumeLayerGroup();
 	let markerStore = writable<Marker | undefined>();
 

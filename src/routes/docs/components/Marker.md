@@ -13,7 +13,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 ```svelte example csr hideOutput
 <script>
-	import { Map, Marker } from 'sveaflet';
+	import { Marker } from 'sveaflet';
 </script>
 ```
 
@@ -21,11 +21,12 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 ```svelte example csr
 <script>
-	import { Map, Marker } from 'sveaflet';
+	import { Map, TileLayer, Marker } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]} />
 	</Map>
 </div>
@@ -35,11 +36,12 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 ```svelte example csr
 <script>
-	import { Map, Marker } from 'sveaflet';
+	import { Map, TileLayer, Marker } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]} options={{ title: 'Marker Title', draggable: true }} />
 	</Map>
 </div>
@@ -49,11 +51,12 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 ```svelte example csr
 <script>
-	import { Map, Marker, Popup } from 'sveaflet';
+	import { Map, TileLayer, Marker, Popup } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]}>
 			<Popup options={{ content: 'Popup in Marker.' }} />
 		</Marker>
@@ -63,7 +66,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| latlng | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng) | |
-| options | **Optional** | [MarkerOptions](https://leafletjs.com/reference.html#marker-option) | `{ icon: new Icon.Default() }` |
+| Prop name | Description  | Type                                                                | Default                        |
+| --------- | ------------ | ------------------------------------------------------------------- | ------------------------------ |
+| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)               |                                |
+| options   | **Optional** | [MarkerOptions](https://leafletjs.com/reference.html#marker-option) | `{ icon: new Icon.Default() }` |

@@ -23,11 +23,12 @@ Represents an icon to provide when creating a marker.
 
 ```svelte example csr
 <script>
-	import { Map, Marker, Icon } from 'sveaflet';
+	import { Map, TileLayer, Marker, Icon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<Icon
 				options={{
@@ -43,11 +44,12 @@ Represents an icon to provide when creating a marker.
 
 ```svelte example csr
 <script>
-	import { Map, Marker, Icon } from 'sveaflet';
+	import { Map, TileLayer, Marker, Icon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<Icon
 				options={{

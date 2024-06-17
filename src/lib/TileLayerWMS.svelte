@@ -9,13 +9,12 @@
 	export let layerName: string = '';
 	export let checked: boolean = false;
 
-	let { map: mapStore, removeDefaultLayer } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let controlLayerStore = useConsumeControlLayer();
 
 	let tileLayerWMS: TileLayer | undefined;
 
 	$: if ($mapStore) {
-		removeDefaultLayer();
 		tileLayerWMS = new TileLayer.WMS(baseUrl, options);
 
 		if ($controlLayerStore) {

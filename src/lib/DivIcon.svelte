@@ -4,7 +4,7 @@
 	import { useConsumeMap, useConsumeMarker } from './context.ts';
 	import type { DivIconOptions } from 'leaflet';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 	let markerStore = useConsumeMarker();
 
 	export let options: DivIconOptions = {};

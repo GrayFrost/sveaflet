@@ -5,7 +5,7 @@
 	import { type LatLngBoundsExpression, type PolylineOptions } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
-	let { map: mapStore } = useConsumeMap();
+	let mapStore = useConsumeMap();
 
 	export let latLngBounds: LatLngBoundsExpression;
 	export let options: PolylineOptions = {};

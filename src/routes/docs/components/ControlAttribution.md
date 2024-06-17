@@ -18,18 +18,20 @@ The attribution control allows you to display attribution data in a small text b
 ```
 
 ## Default ControlAttribution
+
 ```svelte example csr
 <script>
-	import { Map, ControlAttribution } from 'sveaflet';
+	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map
 		options={{
 			center: [51.505, -0.09],
-			zoom: 13,
+			zoom: 13
 		}}
 	>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution />
 	</Map>
 </div>
@@ -39,16 +41,17 @@ The attribution control allows you to display attribution data in a small text b
 
 ```svelte example csr
 <script>
-	import { Map, ControlAttribution } from 'sveaflet';
+	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map
 		options={{
 			center: [51.505, -0.09],
-			zoom: 13,
+			zoom: 13
 		}}
 	>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
 				prefix: 'sveaflet'
@@ -62,7 +65,7 @@ The attribution control allows you to display attribution data in a small text b
 
 ```svelte example csr
 <script>
-	import { Map, ControlAttribution } from 'sveaflet';
+	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
@@ -73,6 +76,7 @@ The attribution control allows you to display attribution data in a small text b
 			attributionControl: false
 		}}
 	>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
 				prefix: 'sveaflet'
@@ -84,6 +88,6 @@ The attribution control allows you to display attribution data in a small text b
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| options | **Optional** | [Control.AttributionOptions](https://leafletjs.com/reference.html#control-attribution-option) | `{}` |
+| Prop name | Description  | Type                                                                                          | Default |
+| --------- | ------------ | --------------------------------------------------------------------------------------------- | ------- |
+| options   | **Optional** | [Control.AttributionOptions](https://leafletjs.com/reference.html#control-attribution-option) | `{}`    |

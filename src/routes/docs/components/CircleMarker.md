@@ -21,11 +21,12 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 ```svelte example csr
 <script>
-	import { Map, CircleMarker } from 'sveaflet';
+	import { Map, TileLayer, CircleMarker } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<CircleMarker latlng={[51.508, -0.11]} />
 	</Map>
 </div>
@@ -35,11 +36,12 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 ```svelte example csr
 <script>
-	import { Map, CircleMarker } from 'sveaflet';
+	import { Map, TileLayer, CircleMarker } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<CircleMarker latlng={[51.508, -0.11]} options={{ radius: 20, color: 'purple' }} />
 	</Map>
 </div>
@@ -49,11 +51,12 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 ```svelte example csr
 <script>
-	import { Map, CircleMarker, Popup } from 'sveaflet';
+	import { Map, TileLayer, CircleMarker, Popup } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<CircleMarker latlng={[51.508, -0.11]} options={{ radius: 20 }}>
 			<Popup options={{ content: 'Popup in CircleMarker.' }} />
 		</CircleMarker>
@@ -63,9 +66,9 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| latlng | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng) | |
-| options | **Optional** | [CircleMarkerOptions](https://leafletjs.com/reference.html#circlemarker-option) | `{ radius: 10 }` |
+| Prop name | Description  | Type                                                                            | Default          |
+| --------- | ------------ | ------------------------------------------------------------------------------- | ---------------- |
+| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)                           |                  |
+| options   | **Optional** | [CircleMarkerOptions](https://leafletjs.com/reference.html#circlemarker-option) | `{ radius: 10 }` |
 
 ## Events

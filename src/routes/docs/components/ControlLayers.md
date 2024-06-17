@@ -21,7 +21,7 @@ The layers control gives users the ability to switch between different base laye
 
 ```svelte example csr
 <script>
-	import { Map, ControlLayers } from 'sveaflet';
+	import { Map, TileLayer, ControlLayers } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height:500px">
@@ -31,12 +31,15 @@ The layers control gives users the ability to switch between different base laye
 			zoom: 10
 		}}
 	>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlLayers />
 	</Map>
 </div>
 ```
 
 ## ControlLayers with slot content
+
+If your ControlLayers includes any slot layer content, remove default TileLayer Component.
 
 Any TileLayers would be added to base layer, and LayerGroup would be added to overlay layer.
 
@@ -148,6 +151,6 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| options | **Optional** | [Control.LayersOptions](https://leafletjs.com/reference.html#control-layers-option) | `{}` |
+| Prop name | Description  | Type                                                                                | Default |
+| --------- | ------------ | ----------------------------------------------------------------------------------- | ------- |
+| options   | **Optional** | [Control.LayersOptions](https://leafletjs.com/reference.html#control-layers-option) | `{}`    |

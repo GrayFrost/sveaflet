@@ -21,11 +21,12 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 ```svelte example csr
 <script>
-	import { Map, GeoJSON } from 'sveaflet';
+	import { Map, TileLayer, GeoJSON } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<GeoJSON />
 	</Map>
 </div>
@@ -35,7 +36,7 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 ```svelte example csr
 <script>
-	import { Map, GeoJSON } from 'sveaflet';
+	import { Map, TileLayer, GeoJSON } from 'sveaflet';
 
 	let geojsonFeature = {
 		type: 'Feature',
@@ -53,6 +54,7 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<GeoJSON json={geojsonFeature} />
 	</Map>
 </div>
@@ -60,7 +62,7 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| json | **Optional**. An object in [GeoJSON format](https://datatracker.ietf.org/doc/html/rfc7946). | Object | null |
-| options | **Optional** | [GeoJSONOptions](https://leafletjs.com/reference.html#geojson-option) | null |
+| Prop name | Description                                                                                 | Type                                                                  | Default |
+| --------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- | ------- |
+| json      | **Optional**. An object in [GeoJSON format](https://datatracker.ietf.org/doc/html/rfc7946). | Object                                                                | null    |
+| options   | **Optional**                                                                                | [GeoJSONOptions](https://leafletjs.com/reference.html#geojson-option) | null    |

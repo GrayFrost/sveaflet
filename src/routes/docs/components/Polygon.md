@@ -23,11 +23,12 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 ```svelte example csr
 <script>
-	import { Map, Polygon } from 'sveaflet';
+	import { Map, TileLayer, Polygon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
 			latlngs={[
 				[51.509, -0.08],
@@ -43,11 +44,12 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 ```svelte example csr
 <script>
-	import { Map, Polygon } from 'sveaflet';
+	import { Map, TileLayer, Polygon } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
 			latlngs={[
 				[51.509, -0.08],
@@ -66,11 +68,12 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 ```svelte example csr
 <script>
-	import { Map, Polygon, Popup } from 'sveaflet';
+	import { Map, TileLayer, Polygon, Popup } from 'sveaflet';
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
 			latlngs={[
 				[51.509, -0.08],
@@ -78,7 +81,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 				[51.51, -0.047]
 			]}
 		>
-			<Popup options={{ content: 'Popup in Polygon.' }}/>
+			<Popup options={{ content: 'Popup in Polygon.' }} />
 		</Polygon>
 	</Map>
 </div>
@@ -86,7 +89,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 ## Props
 
-| Prop name | Description | Type | Default |
-| --- | --- | --- | --- |
-| latlngs | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[] | |
-| options | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}` |
+| Prop name | Description  | Type                                                                    | Default |
+| --------- | ------------ | ----------------------------------------------------------------------- | ------- |
+| latlngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[]                 |         |
+| options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |

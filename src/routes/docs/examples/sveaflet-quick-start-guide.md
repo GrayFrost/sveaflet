@@ -7,7 +7,6 @@ dir: Examples
 description: This step-by-step guide will quickly get you started on Leaflet basics, including setting up a Leaflet map, working with markers, polylines and popups, and dealing with events.
 ---
 
-
 ## Demo
 
 ```svelte example csr

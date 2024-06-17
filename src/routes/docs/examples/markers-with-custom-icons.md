@@ -11,7 +11,7 @@ description: In this tutorial, you’ll learn how to easily define your own icon
 
 ```svelte example csr
 <script>
-	import { Map, Marker, Icon, Popup } from 'sveaflet';
+	import { Map, TileLayer, Marker, Icon, Popup } from 'sveaflet';
 
 	const commonIconOptions = {
 		shadowUrl: '/images/leaf-shadow.png',
@@ -41,6 +41,7 @@ description: In this tutorial, you’ll learn how to easily define your own icon
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<Icon options={greenIconOptions} />
 			<Popup options={{ content: 'I am a green leaf.' }} />
