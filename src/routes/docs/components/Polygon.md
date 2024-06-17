@@ -1,13 +1,25 @@
 ---
 layout: componentLayout
 breadcrumb_title: Polygon
-title: Polygon
+title: Polygon - Sveaflet
 component_title: Polygon
 dir: Components
-description: Polygon
+description: Vector Layers - Polygon
 ---
 
-# Polygon
+A component for drawing polygon overlays on a map. Extends [Polyline](https://leafletjs.com/reference.html#polyline).
+
+Note that points you pass when creating a polygon shouldn't have an additional last point equal to the first one — it's better to filter out such points.
+
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { Polygon } from 'sveaflet';
+</script>
+```
+
+## Default Polygon
 
 ```svelte example csr
 <script>
@@ -26,3 +38,55 @@ description: Polygon
 	</Map>
 </div>
 ```
+
+## Polygon with Options
+
+```svelte example csr
+<script>
+	import { Map, Polygon } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
+		<Polygon
+			latlngs={[
+				[51.509, -0.08],
+				[51.503, -0.06],
+				[51.51, -0.047]
+			]}
+			options={{
+				color: 'black'
+			}}
+		/>
+	</Map>
+</div>
+```
+
+## Polygon with Popup
+
+```svelte example csr
+<script>
+	import { Map, Polygon, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
+		<Polygon
+			latlngs={[
+				[51.509, -0.08],
+				[51.503, -0.06],
+				[51.51, -0.047]
+			]}
+		>
+			<Popup options={{ content: 'Popup in Polygon.' }}/>
+		</Polygon>
+	</Map>
+</div>
+```
+
+## Props
+
+| Prop name | Description | Type | Default |
+| --- | --- | --- | --- |
+| latlngs | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[] | |
+| options | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}` |

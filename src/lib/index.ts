@@ -5,6 +5,7 @@ import TileLayerWMS from './TileLayerWMS.svelte';
 import ImageOverlay from './ImageOverlay.svelte';
 import VideoOverlay from './VideoOverlay.svelte';
 import SVGOverlay from './SVGOverlay.svelte';
+import Control from './Control.svelte';
 import ControlAttribution from './ControlAttribution.svelte';
 import ControlScale from './ControlScale.svelte';
 import ControlZoom from './ControlZoom.svelte';
@@ -29,6 +30,7 @@ export {
   ImageOverlay,
   VideoOverlay,
   SVGOverlay,
+  Control,
   ControlAttribution,
   ControlScale,
   ControlZoom,

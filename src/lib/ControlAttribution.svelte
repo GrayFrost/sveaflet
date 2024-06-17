@@ -5,6 +5,7 @@
 	import { useConsumeMap } from './context.ts';
 
 	export let options: Control.AttributionOptions = {};
+	
 	let { map: mapStore } = useConsumeMap();
 	let attribution: Control.Attribution | undefined;
 
