@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { LatLngExpression, CircleOptions } from 'leaflet';
 	import { Circle } from 'leaflet';
-	import { useConsumeMap, useProvideLayer } from '$lib/context';
+	import type { LatLngExpression, CircleOptions } from 'leaflet';
+	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };
 	export let instance: Circle | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	let layerGroupStore = useConsumeLayerGroup();
 	let circleStore = writable<Circle | undefined>();
 
 	$: if ($mapStore) {
@@ -17,7 +18,12 @@
 			$circleStore = new Circle(latlng, options);
 		}
 		$circleStore.setLatLng(latlng);
-		$circleStore.addTo($mapStore);
+
+		if ($layerGroupStore) {
+			$layerGroupStore.addLayer($circleStore);
+		} else {
+			$circleStore.addTo($mapStore);
+		}
 	}
 
 	$: instance = $circleStore;

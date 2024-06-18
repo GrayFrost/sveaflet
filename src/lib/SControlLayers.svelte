@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import type { Control } from 'leaflet';
 	import { control } from 'leaflet';
+	import type { Control } from 'leaflet';
 	import { useConsumeMap, useProvideControlLayer } from '$lib/context';
 
 	export let options: Control.LayersOptions = {};

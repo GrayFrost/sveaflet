@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { ImageOverlay } from 'leaflet';
-	import { useConsumeMap } from '$lib/context';
-	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
+	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
+	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
 
 	export let imageUrl: string;
-	export let bounds: LatLngBoundsExpression;
+	export let bounds: LatLngBounds;
 	export let options: ImageOverlayOptions = {};
 	export let instance: ImageOverlay | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	let layerGroupStore = useConsumeLayerGroup();
 
 	let imageOverlay: ImageOverlay | undefined;
 
@@ -17,7 +18,15 @@
 		if (!imageOverlay) {
 			imageOverlay = new ImageOverlay(imageUrl, bounds, options);
 		}
-		imageOverlay.addTo($mapStore);
+
+		imageUrl && imageOverlay.setUrl(imageUrl);
+		imageOverlay.setBounds(bounds);
+
+		if ($layerGroupStore) {
+			$layerGroupStore.addLayer(imageOverlay);
+		} else {
+			imageOverlay.addTo($mapStore);
+		}
 	}
 
 	$: instance = imageOverlay;

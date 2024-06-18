@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { VideoOverlay } from 'leaflet';
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
-	import { useConsumeMap } from '$lib/context';
+	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
 
 	export let video: string | string[]; // todoHTMLVideoElement,
 	export let bounds: LatLngBounds;
@@ -10,6 +10,7 @@
 	export let instance: VideoOverlay | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	let layerGroupStore = useConsumeLayerGroup();
 
 	let videoOverlay: VideoOverlay | undefined;
 
@@ -19,15 +20,19 @@
 		}
 
 		if (Array.isArray(video)) {
-			video.forEach(url => {
+			video.forEach((url) => {
 				videoOverlay?.setUrl(url);
-			})
+			});
 		} else {
 			videoOverlay.setUrl(video);
 		}
 		videoOverlay.setBounds(bounds);
-		
-		videoOverlay.addTo($mapStore);
+
+		if ($layerGroupStore) {
+			$layerGroupStore.addLayer(videoOverlay);
+		} else {
+			videoOverlay.addTo($mapStore);
+		}
 	}
 
 	$: instance = videoOverlay;

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { type GeoJSONOptions, GeoJSON } from 'leaflet';
+	import { GeoJSON } from 'leaflet';
+	import type { GeoJSONOptions } from 'leaflet';
 	import type { GeoJsonObject } from 'geojson';
 	import { useConsumeMap, useProvideLayer } from '$lib/context';
 

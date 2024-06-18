@@ -2,14 +2,15 @@
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Polygon } from 'leaflet';
-	import { useConsumeMap, useProvideLayer } from '$lib/context';
 	import type { LatLngExpression, PolylineOptions } from 'leaflet';
+	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	export let latlngs: LatLngExpression[];
 	export let options: PolylineOptions = {};
 	export let instance: Polygon | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	let layerGroupStore = useConsumeLayerGroup();
 	let polygonStore = writable<Polygon | undefined>();
 
 	$: if ($mapStore) {
@@ -17,7 +18,12 @@
 			$polygonStore = new Polygon(latlngs, options);
 		}
 		$polygonStore.setLatLngs(latlngs);
-		$polygonStore.addTo($mapStore);
+
+		if ($layerGroupStore) {
+			$layerGroupStore.addLayer($polygonStore);
+		} else {
+			$polygonStore.addTo($mapStore);
+		}
 	}
 
 	$: instance = $polygonStore;
