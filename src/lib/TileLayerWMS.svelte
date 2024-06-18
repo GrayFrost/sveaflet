@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { TileLayer } from 'leaflet';
 	import type { WMSOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeControlLayer } from './context.ts';
+	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
 
 	export let baseUrl: string;
 	export let options: WMSOptions = {};

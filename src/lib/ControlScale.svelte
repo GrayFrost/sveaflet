@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { control } from 'leaflet';
 	import type { Control } from 'leaflet';
-	import { useConsumeMap } from './context.ts';
+	import { useConsumeMap } from '$lib/context';
 
 	export let options: Control.ScaleOptions = {};
 	export let instance: Control.Scale | undefined = undefined;

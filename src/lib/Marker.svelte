@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Marker, Icon, Util } from 'leaflet';
+	import { Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import {
 		useConsumeMap,
 		useConsumeLayerGroup,
 		useProvideLayer,
 		useProvideMarker
-	} from './context.ts';
+	} from '$lib/context';
 
 	export let latlng: LatLngExpression;
 	export let options: MarkerOptions = {

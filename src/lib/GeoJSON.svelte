@@ -3,7 +3,7 @@
 	import { writable } from 'svelte/store';
 	import { type GeoJSONOptions, GeoJSON } from 'leaflet';
 	import type { GeoJsonObject } from 'geojson';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
+	import { useConsumeMap, useProvideLayer } from '$lib/context';
 
 	export let json: GeoJsonObject | null = null;
 	export let options: GeoJSONOptions | null = null;

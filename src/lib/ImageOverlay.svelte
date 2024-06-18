@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { ImageOverlay } from 'leaflet';
-	import { useConsumeMap } from './context.ts';
+	import { useConsumeMap } from '$lib/context';
 	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
 
 	export let imageUrl: string;

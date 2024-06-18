@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Polygon } from 'leaflet';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
+	import { useConsumeMap, useProvideLayer } from '$lib/context';
 	import type { LatLngExpression, PolylineOptions } from 'leaflet';
 
 	export let latlngs: LatLngExpression[];

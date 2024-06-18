@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { VideoOverlay } from 'leaflet';
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
-	import { useConsumeMap } from './context.ts';
+	import { useConsumeMap } from '$lib/context';
 
 	export let video: string | string[]; // todoHTMLVideoElement,
 	export let bounds: LatLngBounds;
