@@ -4,10 +4,11 @@
 	import TileLayer from '$lib/TileLayer.svelte';
 	import Marker from '$lib/Marker.svelte';
 	import Popup from '$lib/Popup.svelte';
+	import Footer from './utils/Footer.svelte';
 </script>
 
 <main class="flex-auto min-w-0 lg:static lg:max-h-full lg:overflow-visible">
-	<div class="flex justify-center items-center mx-auto my-16 relative w-[256px] h-[256px]">
+	<div class="flex justify-center items-center mx-auto my-8 relative w-[256px] h-[256px]">
 		<div class="logo-bg w-[240px] h-[240px]"></div>
 	</div>
 	<p class="flex justify-center my-8">Svelte components for Leaflet maps</p>
@@ -16,7 +17,7 @@
 		<Button href="/docs/pages/introduction">Get Started</Button>
 	</div>
 
-	<div class="h-[500px] m-8">
+	<div class="h-[500px] my-8 lg:px-20">
 		<Map
 			options={{
 				center: [51.505, -0.09],
@@ -33,4 +34,5 @@
 			</Marker>
 		</Map>
 	</div>
+	<Footer />
 </main>
