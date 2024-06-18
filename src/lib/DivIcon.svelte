@@ -14,6 +14,7 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore && $markerStore) {
+		// reset();
 		let mergeOptions = {
 			...options
 		};
@@ -31,9 +32,13 @@
 
 	$: instance = divIcon;
 
-	onDestroy(() => {
+	function reset() {
 		divIcon?.remove?.();
 		divIcon = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

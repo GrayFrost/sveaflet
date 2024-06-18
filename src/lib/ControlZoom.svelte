@@ -8,18 +8,23 @@
 	export let instance: Control.Zoom | undefined = undefined;
 
 	let mapStore = useConsumeMap();
-	
+
 	let zoom: Control.Zoom | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		zoom = control.zoom(options);
 		zoom.addTo($mapStore);
 	}
 
 	$: instance = zoom;
 
-	onDestroy(() => {
+	function reset() {
 		zoom?.remove();
 		zoom = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

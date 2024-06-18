@@ -4,15 +4,17 @@
 	import type { LatLngExpression, TooltipOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
-	let mapStore = useConsumeMap();
-	let layerStore = useConsumeLayer();
-
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: TooltipOptions = {};
+	export let instance: Tooltip | undefined = undefined;
+
+	let mapStore = useConsumeMap();
+	let layerStore = useConsumeLayer();
 
 	let tooltip: Tooltip | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		if (latlng) {
 			tooltip = new Tooltip(latlng, options);
 		} else {
@@ -27,8 +29,14 @@
 		}
 	}
 
-	onDestroy(() => {
+	$: instance = tooltip;
+
+	function reset() {
 		tooltip?.remove();
 		tooltip = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

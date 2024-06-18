@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { type GeoJSONOptions, GeoJSON } from 'leaflet';
 	import type { GeoJsonObject } from 'geojson';
@@ -12,11 +13,21 @@
 	let geoJSONStore = writable<GeoJSON | undefined>();
 
 	$: if ($mapStore) {
+		reset();
 		$geoJSONStore = new GeoJSON(json, options);
-    $geoJSONStore.addTo($mapStore);
+		$geoJSONStore.addTo($mapStore);
 	}
 
 	$: instance = $geoJSONStore;
+
+	function reset() {
+		$geoJSONStore?.remove();
+		$geoJSONStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
+	});
 
 	useProvideLayer(geoJSONStore);
 </script>

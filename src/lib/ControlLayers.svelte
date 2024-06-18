@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { writable } from 'svelte/store';
+	import { onDestroy } from 'svelte';
+	import { writable } from 'svelte/store';
 	import type { Control } from 'leaflet';
 	import { control } from 'leaflet';
 	import { useConsumeMap, useProvideControlLayer } from './context.ts';
@@ -11,13 +12,23 @@
 	let layersStore = writable<Control.Layers | undefined>();
 
 	$: if ($mapStore) {
+		reset();
 		$layersStore = control.layers(undefined, undefined, options);
 		$layersStore.addTo($mapStore);
 	}
 
 	$: instance = $layersStore;
 
-  useProvideControlLayer(layersStore);
+	function reset() {
+		$layersStore?.remove();
+		$layersStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
+	});
+
+	useProvideControlLayer(layersStore);
 </script>
 
 <slot />

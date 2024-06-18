@@ -13,16 +13,21 @@
 	let circleMarkerStore = writable<Layer | undefined>();
 
 	$: if ($mapStore) {
+		reset();
 		$circleMarkerStore = new CircleMarker(latlng, options);
 		$circleMarkerStore.addTo($mapStore);
 	}
 
 	$: instance = $circleMarkerStore as CircleMarker;
 
-	onDestroy(() => {
+	function reset() {
 		$circleMarkerStore?.remove();
 		$circleMarkerStore = undefined;
-	})
+	}
+
+	onDestroy(() => {
+		reset();
+	});
 
 	useProvideLayer(circleMarkerStore);
 </script>

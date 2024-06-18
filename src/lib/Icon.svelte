@@ -13,14 +13,19 @@
 	let icon: Icon | undefined;
 
 	$: if ($mapStore && $markerStore) {
+		reset();
 		icon = new Icon(options);
 		$markerStore.setIcon(icon);
 	}
 
 	$: instance = icon;
 
-	onDestroy(() => {
+	function reset() {
 		icon?.remove?.();
 		icon = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
