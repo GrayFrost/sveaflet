@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Marker, Icon } from 'leaflet';
+	import { Marker, Icon, Util } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import {
 		useConsumeMap,
@@ -21,15 +21,15 @@
 	let markerStore = writable<Marker | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$markerStore = new Marker(latlng, options);
+		if (!$markerStore) {
+			$markerStore = new Marker(latlng, options);
+		}
+		$markerStore.setLatLng(latlng);
+		Util.setOptions($markerStore, options); // todo 其他是否也用 ?
 
-		console.log('zzh markerstore', $markerStore, $layerGroupStore);
 		if ($layerGroupStore) {
-			console.log('zzh ididiididiidi-----');
 			$layerGroupStore.addLayer($markerStore); // todo 其他layer也要加
 		} else {
-			console.log('zzh elselselesl ----');
 			$markerStore.addTo($mapStore);
 		}
 	}

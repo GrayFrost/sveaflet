@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { Icon } from 'leaflet';
+	import { Icon, Util } from 'leaflet';
 	import { useConsumeMap, useConsumeMarker } from './context.ts';
 	import type { IconOptions } from 'leaflet';
 
@@ -13,8 +13,10 @@
 	let icon: Icon | undefined;
 
 	$: if ($mapStore && $markerStore) {
-		reset();
-		icon = new Icon(options);
+		if (!icon) {
+			icon = new Icon(options);
+		}
+		Util.setOptions(icon, options);
 		$markerStore.setIcon(icon);
 	}
 

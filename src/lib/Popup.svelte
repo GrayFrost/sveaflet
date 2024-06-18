@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { Popup } from 'leaflet';
+	import { Popup, Util } from 'leaflet';
 	import type { LatLngExpression, PopupOptions, Layer } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
@@ -15,7 +15,6 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore) {
-		reset();
 		let mergeOptions = {
 			...options
 		};
@@ -28,11 +27,12 @@
 			};
 		}
 
-		if (latlng) {
-			popup = new Popup(latlng, mergeOptions);
-		} else {
-			popup = new Popup(mergeOptions);
+		if (!popup) {
+			popup = latlng ?new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
 		}
+
+		latlng && popup.setLatLng(latlng);
+		Util.setOptions(popup, mergeOptions);
 
 		if (!$layerStore) {
 			popup?.openOn($mapStore);

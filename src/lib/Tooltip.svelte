@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { Tooltip } from 'leaflet';
+	import { Tooltip, Util } from 'leaflet';
 	import type { LatLngExpression, TooltipOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
@@ -14,18 +14,19 @@
 	let tooltip: Tooltip | undefined;
 
 	$: if ($mapStore) {
-		reset();
-		if (latlng) {
-			tooltip = new Tooltip(latlng, options);
-		} else {
-			tooltip = new Tooltip(options);
+		// todo slot content
+		if (!tooltip) {
+			tooltip = latlng ? new Tooltip(latlng, options) : new Tooltip(options);
 		}
 
+		latlng && tooltip.setLatLng(latlng);
+		Util.setOptions(tooltip, options);
+
 		if (!$layerStore) {
-			tooltip?.openOn($mapStore); // todo open
+			tooltip?.openOn($mapStore);
 		} else {
 			let tooltipContent = tooltip?.options.content || '';
-			$layerStore.bindTooltip(tooltipContent).openTooltip(); // todo open
+			$layerStore.bindTooltip(tooltipContent);
 		}
 	}
 
