@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { SVGOverlay } from 'leaflet';
 	import { useConsumeMap } from '$lib/context';
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';

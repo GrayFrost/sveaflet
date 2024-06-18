@@ -14,18 +14,15 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore && $markerStore) {
-		let mergeOptions = {
-			...options
-		};
+		if (!divIcon) {
+			divIcon = new DivIcon(options);
+		}
 
 		if (htmlElement) {
-			// slot priority greater than string
-			mergeOptions = {
-				...mergeOptions,
-				html: htmlElement
-			};
-		}
-		if (!divIcon) {
+			const mergeOptions = {
+				...options,
+				html: htmlElement, // override options
+			}
 			divIcon = new DivIcon(mergeOptions);
 		}
 		$markerStore.setIcon(divIcon);

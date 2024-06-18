@@ -5,7 +5,7 @@
 	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
 	export let latlng: LatLngExpression | undefined = undefined;
-	export let options: PopupOptions = {}; // todo 有两种类型
+	export let options: PopupOptions = {};
 	export let instance: Popup | undefined = undefined;
 
 	let mapStore = useConsumeMap();
@@ -15,37 +15,37 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore) {
-		let mergeOptions = {
-			...options
-		};
+		if (!popup) {
+			popup = latlng ? new Popup(latlng, options) : new Popup(options);
+		}
 
 		if (htmlElement) {
-			// slot priority greater than string
-			mergeOptions = {
-				...mergeOptions,
+			reset();
+			const mergeOptions = {
+				...options,
 				content: htmlElement
 			};
+			popup = latlng ? new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
 		}
-
-		if (!popup) {
-			popup = latlng ?new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
-		}
-
 		latlng && popup.setLatLng(latlng);
 
 		if (!$layerStore) {
 			popup?.openOn($mapStore);
 		} else {
-			let popupContent = popup?.options.content || ''; // TODO: popup slot content
+			let popupContent = popup?.options.content || '';
 			$layerStore.bindPopup(popupContent);
 		}
 	}
 
 	$: instance = popup;
 
-	onDestroy(() => {
+	function reset() {
 		popup?.remove();
 		popup = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

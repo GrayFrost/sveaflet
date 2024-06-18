@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Rectangle } from 'leaflet';
-	import { type LatLngBoundsExpression, type PolylineOptions } from 'leaflet';
+	import type { LatLngBoundsExpression, PolylineOptions } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from '$lib/context';
 
 	export let latLngBounds: LatLngBoundsExpression;

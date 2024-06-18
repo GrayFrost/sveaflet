@@ -1,13 +1,44 @@
 ---
 layout: componentLayout
 breadcrumb_title: Polyline
-title: Polyline
+title: Polyline - Sveaflet
 component_title: Polyline
 dir: Components
-description: Polyline
+description: Vector Layers - Polyline
 ---
 
-# Polyline
+A component for drawing polyline overlays on a map. Extends [Path](https://leafletjs.com/reference.html#path).
+
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { Polyline } from 'sveaflet';
+</script>
+```
+
+## Default Polyline
+
+```svelte example csr
+<script>
+	import { Map, TileLayer, Polyline } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<Polyline
+			latlngs={[
+				[45.51, -122.68],
+				[37.77, -122.43],
+				[34.04, -118.2]
+			]}
+		/>
+	</Map>
+</div>
+```
+
+## Polyline with Options
 
 ```svelte example csr
 <script>
@@ -29,4 +60,33 @@ description: Polyline
 </div>
 ```
 
-// todo doc
+## Polyline with Popup
+
+```svelte example csr
+<script>
+	import { Map, TileLayer, Polyline, Popup } from 'sveaflet';
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<Polyline
+			latlngs={[
+				[45.51, -122.68],
+				[37.77, -122.43],
+				[34.04, -118.2]
+			]}
+			options={{ color: 'yellow' }}
+		>
+			<Popup options={{ content: 'Popup in Polyline.' }} />
+		</Polyline>
+	</Map>
+</div>
+```
+
+## Props
+
+| Prop name | Description  | Type                                                                    | Default |
+| --------- | ------------ | ----------------------------------------------------------------------- | ------- |
+| latlngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[]                 |         |
+| options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |
