@@ -20,7 +20,6 @@
 		}
 
 		latlng && tooltip.setLatLng(latlng);
-		Util.setOptions(tooltip, options);
 
 		if (!$layerStore) {
 			tooltip?.openOn($mapStore);
@@ -32,12 +31,8 @@
 
 	$: instance = tooltip;
 
-	function reset() {
+	onDestroy(() => {
 		tooltip?.remove();
 		tooltip = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>

@@ -17,19 +17,14 @@
 			$rectangleStore = new Rectangle(latLngBounds, options);
 		}
 		$rectangleStore.setBounds(latLngBounds);
-		Util.setOptions($rectangleStore, options);
 		$rectangleStore.addTo($mapStore);
 	}
 
 	$: instance = $rectangleStore;
 
-	function reset() {
+	onDestroy(() => {
 		$rectangleStore?.remove();
 		$rectangleStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayer(rectangleStore);

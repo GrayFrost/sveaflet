@@ -16,8 +16,10 @@
 	let tileLayer: TileLayer | undefined;
 
 	$: if ($mapStore) {
-		reset();
-		tileLayer = new TileLayer(urlTemplate, options);
+		if (!tileLayer) {
+			tileLayer = new TileLayer(urlTemplate, options);
+		}
+		tileLayer.setUrl(urlTemplate);
 
 		if ($controlLayerStore) {
 			if (!layerName) {
@@ -37,12 +39,8 @@
 
 	$: instance = tileLayer;
 
-	function reset() {
+	onDestroy(() => {
 		tileLayer?.remove();
 		tileLayer = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>

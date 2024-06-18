@@ -12,20 +12,17 @@
 	let layersStore = writable<Control.Layers | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$layersStore = control.layers(undefined, undefined, options);
+		if (!$layersStore) {
+			$layersStore = control.layers(undefined, undefined, options);
+		}
 		$layersStore.addTo($mapStore);
 	}
 
 	$: instance = $layersStore;
 
-	function reset() {
+	onDestroy(() => {
 		$layersStore?.remove();
 		$layersStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideControlLayer(layersStore);

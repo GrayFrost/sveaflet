@@ -13,20 +13,18 @@
 	let polygonStore = writable<Polygon | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$polygonStore = new Polygon(latlngs, options);
+		if (!$polygonStore) {
+			$polygonStore = new Polygon(latlngs, options);
+		}
+		$polygonStore.setLatLngs(latlngs);
 		$polygonStore.addTo($mapStore);
 	}
 
 	$: instance = $polygonStore;
 
-	function reset() {
+	onDestroy(() => {
 		$polygonStore?.remove();
 		$polygonStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayer(polygonStore);

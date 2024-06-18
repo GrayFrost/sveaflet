@@ -1,32 +1,30 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
 	import type { LatLngExpression, CircleMarkerOptions, Layer } from 'leaflet';
 	import { CircleMarker } from 'leaflet';
+	import { useConsumeMap, useProvideLayer } from './context.ts';
 
 	export let latlng: LatLngExpression;
 	export let options: CircleMarkerOptions = { radius: 10 };
 	export let instance: CircleMarker | undefined = undefined;
 
 	let mapStore = useConsumeMap();
-	let circleMarkerStore = writable<Layer | undefined>();
+	let circleMarkerStore = writable<CircleMarker | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$circleMarkerStore = new CircleMarker(latlng, options);
+		if (!$circleMarkerStore) {
+			$circleMarkerStore = new CircleMarker(latlng, options);
+		}
+		$circleMarkerStore.setLatLng(latlng);
 		$circleMarkerStore.addTo($mapStore);
 	}
 
-	$: instance = $circleMarkerStore as CircleMarker;
-
-	function reset() {
-		$circleMarkerStore?.remove();
-		$circleMarkerStore = undefined;
-	}
+	$: instance = $circleMarkerStore;
 
 	onDestroy(() => {
-		reset();
+		$circleMarkerStore?.remove();
+		$circleMarkerStore = undefined;
 	});
 
 	useProvideLayer(circleMarkerStore);

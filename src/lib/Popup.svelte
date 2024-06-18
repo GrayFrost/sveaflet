@@ -32,7 +32,6 @@
 		}
 
 		latlng && popup.setLatLng(latlng);
-		Util.setOptions(popup, mergeOptions);
 
 		if (!$layerStore) {
 			popup?.openOn($mapStore);
@@ -44,13 +43,9 @@
 
 	$: instance = popup;
 
-	function reset() {
+	onDestroy(() => {
 		popup?.remove();
 		popup = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>
 

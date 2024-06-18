@@ -2,9 +2,9 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { SVGOverlay } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
-	import type { LatLngBoundsExpression, ImageOverlayOptions } from 'leaflet';
+	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
 
-	export let bounds: LatLngBoundsExpression;
+	export let bounds: LatLngBounds;
 	export let options: ImageOverlayOptions = {};
 	export let instance: SVGOverlay | undefined = undefined;
 
@@ -13,24 +13,22 @@
 	let svgOverlay: SVGOverlay | undefined;
 
 	$: if ($mapStore) {
-		reset();
 		if (!svgImage) {
 			console.warn('SVG Elements Required!');
 		} else {
-			svgOverlay = new SVGOverlay(svgImage, bounds, options);
+			if (!svgOverlay) {
+				svgOverlay = new SVGOverlay(svgImage, bounds, options);
+			}
+			svgOverlay.setBounds(bounds);
 			svgOverlay.addTo($mapStore);
 		}
 	}
 
 	$: instance = svgOverlay;
 
-	function reset() {
+	onDestroy(() => {
 		svgOverlay?.remove();
 		svgOverlay = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>
 
