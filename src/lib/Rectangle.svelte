@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Rectangle } from 'leaflet';
+	import { Rectangle, Util } from 'leaflet';
 	import { type LatLngBoundsExpression, type PolylineOptions } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
@@ -13,8 +13,11 @@
 	let rectangleStore = writable<Rectangle | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$rectangleStore = new Rectangle(latLngBounds, options);
+		if (!$rectangleStore) {
+			$rectangleStore = new Rectangle(latLngBounds, options);
+		}
+		$rectangleStore.setBounds(latLngBounds);
+		Util.setOptions($rectangleStore, options);
 		$rectangleStore.addTo($mapStore);
 	}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { DivIcon } from 'leaflet';
+	import { DivIcon, Util } from 'leaflet';
 	import { useConsumeMap, useConsumeMarker } from './context.ts';
 	import type { DivIconOptions } from 'leaflet';
 
@@ -14,7 +14,6 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore && $markerStore) {
-		// reset();
 		let mergeOptions = {
 			...options
 		};
@@ -26,7 +25,11 @@
 				html: htmlElement
 			};
 		}
-		divIcon = new DivIcon(mergeOptions);
+		if (!divIcon) {
+			divIcon = new DivIcon(mergeOptions);
+		}
+		Util.setOptions(divIcon, mergeOptions);
+		
 		$markerStore.setIcon(divIcon);
 	}
 
