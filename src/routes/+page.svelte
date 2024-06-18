@@ -1,12 +1,15 @@
 <script lang="ts">
 	import { Button } from 'flowbite-svelte';
 	import Map from '$lib/Map.svelte';
+	import TileLayer from '$lib/TileLayer.svelte';
 	import Marker from '$lib/Marker.svelte';
 	import Popup from '$lib/Popup.svelte';
 </script>
 
 <main class="flex-auto min-w-0 lg:static lg:max-h-full lg:overflow-visible">
-	<p class="flex justify-center my-16">Sveaflet</p>
+	<div class="flex justify-center items-center mx-auto my-16 relative w-[256px] h-[256px]">
+		<div class="logo-bg w-[240px] h-[240px]"></div>
+	</div>
 	<p class="flex justify-center my-8">Svelte components for Leaflet maps</p>
 
 	<div class="flex justify-center my-8">
@@ -20,6 +23,7 @@
 				zoom: 13
 			}}
 		>
+			<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 			<Marker latlng={[51.505, -0.09]}>
 				<Popup
 					options={{
