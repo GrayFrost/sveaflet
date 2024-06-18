@@ -8,6 +8,7 @@
 	export let options: WMSOptions = {};
 	export let layerName: string = '';
 	export let checked: boolean = false;
+	export let instance: TileLayer | undefined = undefined;
 
 	let mapStore = useConsumeMap();
 	let controlLayerStore = useConsumeControlLayer();
@@ -15,6 +16,7 @@
 	let tileLayerWMS: TileLayer | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		tileLayerWMS = new TileLayer.WMS(baseUrl, options);
 
 		if ($controlLayerStore) {
@@ -32,8 +34,14 @@
 		}
 	}
 
-	onDestroy(() => {
+	$: instance = tileLayerWMS;
+
+	function reset() {
 		tileLayerWMS?.remove();
 		tileLayerWMS = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

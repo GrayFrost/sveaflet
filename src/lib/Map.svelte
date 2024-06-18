@@ -17,26 +17,40 @@
 		shadowUrl: markerShadow
 	});
 
-	let mapStore = writable<Map | undefined>();
-	let mapContainer: HTMLElement;
-	let dispatch = createEventDispatcher();
-
 	export let options: MapOptions = {};
 	export let instance: Map | undefined = undefined;
 
+	let dispatch = createEventDispatcher();
+
+	let mapStore = writable<Map | undefined>();
+
+	let mapContainer: HTMLElement;
+	
 	onMount(() => {
+		reset(); // todo needed?
 		$mapStore = new Map(mapContainer, options);
 
+		// todo events
 		$mapStore.on('click', (e) => {
 			dispatch('click', e);
+		});
+		$mapStore.on('move', (e) => {
+			dispatch('move', e);
+		});
+		$mapStore.on('zoom', (e) => {
+			dispatch('zoom', e);
 		});
 	});
 
 	$: instance = $mapStore;
 
-	onDestroy(() => {
+	function reset() {
 		$mapStore?.remove();
 		$mapStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideMap(mapStore);

@@ -14,14 +14,19 @@
 	let imageOverlay: ImageOverlay | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
 		imageOverlay.addTo($mapStore);
 	}
 
 	$: instance = imageOverlay;
 
-	onDestroy(() => {
+	function reset() {
 		imageOverlay?.remove();
 		imageOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

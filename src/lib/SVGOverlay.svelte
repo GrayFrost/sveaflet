@@ -6,12 +6,14 @@
 
 	export let bounds: LatLngBoundsExpression;
 	export let options: ImageOverlayOptions = {};
+	export let instance: SVGOverlay | undefined = undefined;
 
 	let mapStore = useConsumeMap();
 	let svgImage: string | SVGElement;
 	let svgOverlay: SVGOverlay | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		if (!svgImage) {
 			console.warn('SVG Elements Required!');
 		} else {
@@ -20,9 +22,15 @@
 		}
 	}
 
-	onDestroy(() => {
+	$: instance = svgOverlay;
+
+	function reset() {
 		svgOverlay?.remove();
 		svgOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

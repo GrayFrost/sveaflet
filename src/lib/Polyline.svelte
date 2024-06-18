@@ -5,21 +5,28 @@
 	import type { LatLngExpression, PolylineOptions } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
-	let mapStore = useConsumeMap();
-
 	export let latlngs: LatLngExpression[];
 	export let options: PolylineOptions = {};
+	export let instance: Polyline | undefined = undefined;
 
+	let mapStore = useConsumeMap();
 	let polylineStore = writable<Polyline | undefined>();
 
 	$: if ($mapStore) {
+		reset();
 		$polylineStore = new Polyline(latlngs, options);
 		$polylineStore.addTo($mapStore);
 	}
 
-	onDestroy(() => {
+	$: instance = $polylineStore;
+
+	function reset() {
 		$polylineStore?.remove();
 		$polylineStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayer(polylineStore);

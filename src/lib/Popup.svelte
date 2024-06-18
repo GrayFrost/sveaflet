@@ -4,16 +4,18 @@
 	import type { LatLngExpression, PopupOptions, Layer } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from './context.ts';
 
-	let mapStore = useConsumeMap();
-	let layerStore = useConsumeLayer();
-
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {}; // todo 有两种类型
+	export let instance: Popup | undefined = undefined;
+
+	let mapStore = useConsumeMap();
+	let layerStore = useConsumeLayer();
 
 	let popup: Popup | undefined;
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		let mergeOptions = {
 			...options
 		};
@@ -40,9 +42,15 @@
 		}
 	}
 
-	onDestroy(() => {
+	$: instance = popup;
+
+	function reset() {
 		popup?.remove();
 		popup = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

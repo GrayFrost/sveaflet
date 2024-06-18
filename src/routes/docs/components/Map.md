@@ -27,7 +27,7 @@ A TileLayer is required. Options `{center, zoom}` are required.
 </script>
 
 <div style="width: 100%;height:500px">
-	<Map id="my-map" options={{ center: [51.505, -0.09], zoom: 13 }}>
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 	</Map>
 </div>

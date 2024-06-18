@@ -4,22 +4,30 @@
 	import type { LatLngBoundsExpression, VideoOverlayOptions } from 'leaflet';
 	import { useConsumeMap } from './context.ts';
 
-	let mapStore = useConsumeMap();
-
 	export let video: string | string[]; // todoHTMLVideoElement,
 	export let bounds: LatLngBoundsExpression;
 	export let options: VideoOverlayOptions = {};
+	export let instance: VideoOverlay | undefined = undefined;
+
+	let mapStore = useConsumeMap();
 
 	let videoOverlay: VideoOverlay | undefined;
 
 	$: if ($mapStore) {
+		reset();
 		videoOverlay = new VideoOverlay(video, bounds, options);
 		videoOverlay.addTo($mapStore);
 	}
 
-	onDestroy(() => {
+	$: instance = videoOverlay;
+
+	function reset() {
 		videoOverlay?.remove();
 		videoOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

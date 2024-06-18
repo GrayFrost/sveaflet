@@ -8,7 +8,7 @@
 	export let instance: Control | undefined = undefined;
 
 	let mapStore = useConsumeMap();
-	
+
 	let control: Control | undefined;
 	let htmlElement: HTMLElement;
 
@@ -24,18 +24,23 @@
 	});
 
 	$: if ($mapStore && CustonControl) {
+		reset();
 		control = new CustonControl(options);
 		control.addTo($mapStore);
 	}
 
 	$: instance = control;
 
-	onDestroy(() => {
+	function reset() {
 		control?.remove();
 		control = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 
-<div bind:this={htmlElement} {...$$restProps} class={`leaflet-control ${$$restProps.class}`}>
+<div bind:this={htmlElement} {...$$restProps} class={`leaflet-control ${$$restProps.class ?? ''}`}>
 	<slot />
 </div>

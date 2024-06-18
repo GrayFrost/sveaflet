@@ -8,19 +8,18 @@
 	export let options: TileLayerOptions = {};
 	export let layerName: string = '';
 	export let checked: boolean = false;
+	export let instance: TileLayer | undefined = undefined;
 
 	let mapStore = useConsumeMap();
 	let controlLayerStore = useConsumeControlLayer();
 
 	let tileLayer: TileLayer | undefined;
 
-	$: console.log('zzh tile mapstore', $mapStore);
-
 	$: if ($mapStore) {
+		reset();
 		tileLayer = new TileLayer(urlTemplate, options);
 
 		if ($controlLayerStore) {
-			console.log('zzh cccccc');
 			if (!layerName) {
 				console.warn('Layer Name is required in ControlLayers');
 			}
@@ -32,13 +31,18 @@
 			$controlLayerStore.addBaseLayer(tileLayer, layerName || 'Layer Name');
 			$controlLayerStore.addTo($mapStore);
 		} else {
-			console.log('zzh laisisisisi');
 			tileLayer.addTo($mapStore);
 		}		
 	}
 
-	onDestroy(() => {
+	$: instance = tileLayer;
+
+	function reset() {
 		tileLayer?.remove();
 		tileLayer = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

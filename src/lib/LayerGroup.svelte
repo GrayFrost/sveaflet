@@ -6,15 +6,17 @@
 	import type { LayerOptions } from 'leaflet';
 	import { useProvideLayerGroup } from './context.ts';
 
-	let mapStore = useConsumeMap();
-	let controlLayerStore = useConsumeControlLayer();
-
-	let layerGroupStore = writable<LayerGroup | undefined>();
 	export let options: LayerOptions = {};
 	export let overlayName: string = '';
 	export let checked: boolean = false;
+	export let instance: LayerGroup | undefined = undefined;
+
+	let mapStore = useConsumeMap();
+	let controlLayerStore = useConsumeControlLayer();
+	let layerGroupStore = writable<LayerGroup | undefined>();
 
 	$: if ($mapStore) {
+		reset();
 		$layerGroupStore = new LayerGroup([], options);
 
 		if ($controlLayerStore) {
@@ -31,9 +33,15 @@
 		}
 	}
 
-	onDestroy(() => {
+	$: instance = $layerGroupStore;
+
+	function reset() {
 		$layerGroupStore?.remove();
 		$layerGroupStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayerGroup(layerGroupStore);

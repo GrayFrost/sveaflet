@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { LatLngExpression, CircleOptions } from 'leaflet';
 	import { Circle } from 'leaflet';
@@ -13,15 +13,20 @@
 	let circleStore = writable<Circle | undefined>();
 
 	$: if ($mapStore) {
+		reset();
 		$circleStore = new Circle(latlng, options);
 		$circleStore.addTo($mapStore);
 	}
 
 	$: instance = $circleStore;
 
-	onDestroy(() => {
+	function reset() {
 		$circleStore?.remove();
 		$circleStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayer(circleStore);
