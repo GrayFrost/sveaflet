@@ -1,50 +1,62 @@
-// Reexport your entry components here
-import Map from './Map.svelte';
-import TileLayer from './TileLayer.svelte';
-import TileLayerWMS from './TileLayerWMS.svelte';
-import ImageOverlay from './ImageOverlay.svelte';
-import VideoOverlay from './VideoOverlay.svelte';
-import SVGOverlay from './SVGOverlay.svelte';
-import Control from './Control.svelte';
-import ControlAttribution from './ControlAttribution.svelte';
-import ControlScale from './ControlScale.svelte';
-import ControlZoom from './ControlZoom.svelte';
-import ControlLayers from './ControlLayers.svelte';
-import Circle from './Circle.svelte';
-import Polyline from './Polyline.svelte';
-import Polygon from './Polygon.svelte';
-import Rectangle from './Rectangle.svelte';
-import Icon from './Icon.svelte';
-import DivIcon from './DivIcon.svelte';
-import Marker from './Marker.svelte';
-import LayerGroup from './LayerGroup.svelte';
-import Popup from './Popup.svelte';
-import CircleMarker from './CircleMarker.svelte';
-import GeoJSON from './GeoJSON.svelte';
-import Tooltip from './Tooltip.svelte';
+// Base
+import Map from './SMap.svelte';
+
+// Basic Types
+import Icon from './SIcon.svelte';
+import DivIcon from './SDivIcon.svelte';
+
+// UI Layers
+import Marker from './SMarker.svelte';
+import Popup from './SPopup.svelte';
+import Tooltip from './STooltip.svelte';
+
+// Raster Layers
+import TileLayer from './STileLayer.svelte';
+import TileLayerWMS from './STileLayerWMS.svelte';
+import ImageOverlay from './SImageOverlay.svelte';
+import VideoOverlay from './SVideoOverlay.svelte';
+import SVGOverlay from './SSVGOverlay.svelte';
+
+// Vector Layers
+import Polyline from './SPolyline.svelte';
+import Polygon from './SPolygon.svelte';
+import Rectangle from './SRectangle.svelte';
+import Circle from './SCircle.svelte';
+import CircleMarker from './SCircleMarker.svelte';
+
+// Other Layers
+import LayerGroup from './SLayerGroup.svelte';
+import GeoJSON from './SGeoJSON.svelte';
+
+// Controls
+import Control from './SControl.svelte';
+import ControlAttribution from './SControlAttribution.svelte';
+import ControlScale from './SControlScale.svelte';
+import ControlZoom from './SControlZoom.svelte';
+import ControlLayers from './SControlLayers.svelte';
 
 export {
-  Map,
-  TileLayer,
-  TileLayerWMS,
-  ImageOverlay,
-  VideoOverlay,
-  SVGOverlay,
-  Control,
-  ControlAttribution,
-  ControlScale,
-  ControlZoom,
-  ControlLayers,
-  Circle,
-  Polyline,
-  Polygon,
-  Rectangle,
-  Icon,
-  DivIcon,
-  Marker,
-  LayerGroup,
-  Popup,
-  CircleMarker,
-  GeoJSON,
-  Tooltip,
-}
+	Map,
+	Icon,
+	DivIcon,
+	Marker,
+	Popup,
+	Tooltip,
+	TileLayer,
+	TileLayerWMS,
+	ImageOverlay,
+	VideoOverlay,
+	SVGOverlay,
+	Polyline,
+	Polygon,
+	Rectangle,
+	Circle,
+	CircleMarker,
+	LayerGroup,
+	GeoJSON,
+	Control,
+	ControlAttribution,
+	ControlLayers,
+	ControlScale,
+	ControlZoom
+};

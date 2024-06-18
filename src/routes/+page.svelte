@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Button } from 'flowbite-svelte';
-	import Map from '$lib/Map.svelte';
-	import TileLayer from '$lib/TileLayer.svelte';
-	import Marker from '$lib/Marker.svelte';
-	import Popup from '$lib/Popup.svelte';
+	import Map from '$lib/SMap.svelte';
+	import TileLayer from '$lib/STileLayer.svelte';
+	import Marker from '$lib/SMarker.svelte';
+	import Popup from '$lib/SPopup.svelte';
 	import Footer from './utils/Footer.svelte';
 </script>
 
