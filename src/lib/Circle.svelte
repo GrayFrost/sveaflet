@@ -2,8 +2,8 @@
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { LatLngExpression, CircleOptions } from 'leaflet';
-	import { Circle, Util } from 'leaflet';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
+	import { Circle } from 'leaflet';
+	import { useConsumeMap, useProvideLayer } from '$lib/context';
 
 	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };

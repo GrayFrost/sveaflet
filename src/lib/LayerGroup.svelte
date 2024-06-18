@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { LayerGroup } from 'leaflet';
-	import { useConsumeMap, useConsumeControlLayer } from './context.ts';
+	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
 	import { writable } from 'svelte/store';
 	import type { LayerOptions } from 'leaflet';
-	import { useProvideLayerGroup } from './context.ts';
+	import { useProvideLayerGroup } from '$lib/context';
 
 	export let options: LayerOptions = {};
 	export let overlayName: string = '';

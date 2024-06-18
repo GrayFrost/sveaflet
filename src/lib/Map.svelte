@@ -3,7 +3,7 @@
 	import { writable } from 'svelte/store';
 	import { Map, Icon } from 'leaflet';
 	import type { MapOptions } from 'leaflet';
-	import { useProvideMap } from './context.ts';
+	import { useProvideMap } from '$lib/context';
 	import 'leaflet/dist/leaflet.css';
 	import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 	import markerIcon from 'leaflet/dist/images/marker-icon.png';

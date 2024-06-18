@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { Popup, Util } from 'leaflet';
+	import { Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions, Layer } from 'leaflet';
-	import { useConsumeLayer, useConsumeMap } from './context.ts';
+	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {}; // todo 有两种类型

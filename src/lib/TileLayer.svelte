@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeControlLayer } from './context.ts';
+	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
 
 	export let urlTemplate: string;
 	export let options: TileLayerOptions = {};

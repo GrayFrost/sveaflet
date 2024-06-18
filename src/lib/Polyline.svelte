@@ -3,7 +3,7 @@
 	import { writable } from 'svelte/store';
 	import { Polyline } from 'leaflet';
 	import type { LatLngExpression, PolylineOptions } from 'leaflet';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
+	import { useConsumeMap, useProvideLayer } from '$lib/context';
 
 	export let latlngs: LatLngExpression[];
 	export let options: PolylineOptions = {};

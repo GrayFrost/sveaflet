@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { DivIcon, Util } from 'leaflet';
-	import { useConsumeMap, useConsumeMarker } from './context.ts';
+	import { DivIcon } from 'leaflet';
+	import { useConsumeMap, useConsumeMarker } from '$lib/context';
 	import type { DivIconOptions } from 'leaflet';
 
 	export let options: DivIconOptions = {};

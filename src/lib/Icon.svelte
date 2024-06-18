@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { Icon } from 'leaflet';
-	import { useConsumeMap, useConsumeMarker } from './context.ts';
+	import { useConsumeMap, useConsumeMarker } from '$lib/context';
 	import type { IconOptions } from 'leaflet';
 
 	export let options: IconOptions = { iconUrl: '' };

@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Rectangle, Util } from 'leaflet';
+	import { Rectangle } from 'leaflet';
 	import { type LatLngBoundsExpression, type PolylineOptions } from 'leaflet';
-	import { useConsumeMap, useProvideLayer } from './context.ts';
+	import { useConsumeMap, useProvideLayer } from '$lib/context';
 
 	export let latLngBounds: LatLngBoundsExpression;
 	export let options: PolylineOptions = {};

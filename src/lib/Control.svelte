@@ -2,7 +2,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import type { ControlOptions } from 'leaflet';
 	import { Control } from 'leaflet';
-	import { useConsumeMap } from './context.ts';
+	import { useConsumeMap } from '$lib/context';
 
 	export let options: ControlOptions = {};
 	export let instance: Control | undefined = undefined;

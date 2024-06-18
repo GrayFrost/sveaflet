@@ -3,7 +3,7 @@
 	import { writable } from 'svelte/store';
 	import type { Control } from 'leaflet';
 	import { control } from 'leaflet';
-	import { useConsumeMap, useProvideControlLayer } from './context.ts';
+	import { useConsumeMap, useProvideControlLayer } from '$lib/context';
 
 	export let options: Control.LayersOptions = {};
 	export let instance: Control.Layers | undefined = undefined;
