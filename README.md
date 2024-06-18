@@ -25,7 +25,7 @@ window is not defined
 - [x] VideoOverlay
 - [x] SVGOverlay
 
-## Veector Layers
+## Vector Layers
 
 - [x] Polyline
 - [x] Polygon
