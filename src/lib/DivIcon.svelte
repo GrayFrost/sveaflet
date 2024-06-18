@@ -28,20 +28,14 @@
 		if (!divIcon) {
 			divIcon = new DivIcon(mergeOptions);
 		}
-		Util.setOptions(divIcon, mergeOptions);
-		
 		$markerStore.setIcon(divIcon);
 	}
 
 	$: instance = divIcon;
 
-	function reset() {
+	onDestroy(() => {
 		divIcon?.remove?.();
 		divIcon = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>
 

@@ -16,8 +16,9 @@
 	let layerGroupStore = writable<LayerGroup | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$layerGroupStore = new LayerGroup([], options);
+		if (!$layerGroupStore) {
+			$layerGroupStore = new LayerGroup([], options);
+		}
 
 		if ($controlLayerStore) {
 			if (!overlayName) {
@@ -35,13 +36,9 @@
 
 	$: instance = $layerGroupStore;
 
-	function reset() {
+	onDestroy(() => {
 		$layerGroupStore?.remove();
 		$layerGroupStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayerGroup(layerGroupStore);

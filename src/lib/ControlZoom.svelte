@@ -12,19 +12,16 @@
 	let zoom: Control.Zoom | undefined;
 
 	$: if ($mapStore) {
-		reset();
-		zoom = control.zoom(options);
+		if (!zoom) {
+			zoom = control.zoom(options);
+		}
 		zoom.addTo($mapStore);
 	}
 
 	$: instance = zoom;
 
-	function reset() {
+	onDestroy(() => {
 		zoom?.remove();
 		zoom = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>

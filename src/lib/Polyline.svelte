@@ -13,20 +13,18 @@
 	let polylineStore = writable<Polyline | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$polylineStore = new Polyline(latlngs, options);
+		if (!$polylineStore) {
+			$polylineStore = new Polyline(latlngs, options);
+		}
+		$polylineStore.setLatLngs(latlngs);
 		$polylineStore.addTo($mapStore);
 	}
 
 	$: instance = $polylineStore;
 
-	function reset() {
+	onDestroy(() => {
 		$polylineStore?.remove();
 		$polylineStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayer(polylineStore);

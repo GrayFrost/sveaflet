@@ -12,19 +12,16 @@
 	let scale: Control.Scale | undefined;
 
 	$: if ($mapStore) {
-		reset();
-		scale = control.scale(options);
+		if (!scale) {
+			scale = control.scale(options);
+		}
 		scale.addTo($mapStore);
 	}
 
 	$: instance = scale;
 
-	function reset() {
+	onDestroy(() => {
 		scale?.remove();
 		scale = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>

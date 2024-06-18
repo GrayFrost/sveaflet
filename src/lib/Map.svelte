@@ -27,8 +27,9 @@
 	let mapContainer: HTMLElement;
 	
 	onMount(() => {
-		reset(); // todo needed?
-		$mapStore = new Map(mapContainer, options);
+		if (!$mapStore) {
+			$mapStore = new Map(mapContainer, options);
+		}
 
 		// todo events
 		$mapStore.on('click', (e) => {
@@ -44,13 +45,9 @@
 
 	$: instance = $mapStore;
 
-	function reset() {
+	onDestroy(() => {
 		$mapStore?.remove();
 		$mapStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideMap(mapStore);

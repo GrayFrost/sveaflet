@@ -24,20 +24,17 @@
 	});
 
 	$: if ($mapStore && CustonControl) {
-		reset();
-		control = new CustonControl(options);
+		if (!control) {
+			control = new CustonControl(options);
+		}
 		control.addTo($mapStore);
 	}
 
 	$: instance = control;
 
-	function reset() {
+	onDestroy(() => {
 		control?.remove();
 		control = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>
 

@@ -13,20 +13,17 @@
 	let geoJSONStore = writable<GeoJSON | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$geoJSONStore = new GeoJSON(json, options);
+		if (!$geoJSONStore) {
+			$geoJSONStore = new GeoJSON(json, options);
+		}
 		$geoJSONStore.addTo($mapStore);
 	}
 
 	$: instance = $geoJSONStore;
 
-	function reset() {
+	onDestroy(() => {
 		$geoJSONStore?.remove();
 		$geoJSONStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayer(geoJSONStore);

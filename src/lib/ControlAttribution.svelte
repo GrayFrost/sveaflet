@@ -12,19 +12,16 @@
 	let attribution: Control.Attribution | undefined;
 
 	$: if ($mapStore) {
-		reset();
-		attribution = control.attribution(options);
+		if (!attribution) {
+			attribution = control.attribution(options);
+		}
 		attribution.addTo($mapStore);
 	}
 
 	$: instance = attribution;
 
-	function reset() {
+	onDestroy(() => {
 		attribution?.remove();
 		attribution = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>

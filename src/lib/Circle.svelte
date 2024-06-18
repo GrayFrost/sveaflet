@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import type { LatLngExpression, CircleOptions } from 'leaflet';
-	import { Circle } from 'leaflet';
+	import { Circle, Util } from 'leaflet';
 	import { useConsumeMap, useProvideLayer } from './context.ts';
 
 	export let latlng: LatLngExpression;
@@ -13,20 +13,18 @@
 	let circleStore = writable<Circle | undefined>();
 
 	$: if ($mapStore) {
-		reset();
-		$circleStore = new Circle(latlng, options);
+		if (!$circleStore) {
+			$circleStore = new Circle(latlng, options);
+		}
+		$circleStore.setLatLng(latlng);
 		$circleStore.addTo($mapStore);
 	}
 
 	$: instance = $circleStore;
 
-	function reset() {
+	onDestroy(() => {
 		$circleStore?.remove();
 		$circleStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayer(circleStore);

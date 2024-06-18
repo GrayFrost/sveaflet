@@ -16,8 +16,10 @@
 	let tileLayerWMS: TileLayer | undefined;
 
 	$: if ($mapStore) {
-		reset();
-		tileLayerWMS = new TileLayer.WMS(baseUrl, options);
+		if (!tileLayerWMS) {
+			tileLayerWMS = new TileLayer.WMS(baseUrl, options);
+		}
+		tileLayerWMS.setUrl(baseUrl);
 
 		if ($controlLayerStore) {
 			if (!layerName) {
@@ -36,12 +38,8 @@
 
 	$: instance = tileLayerWMS;
 
-	function reset() {
+	onDestroy(() => {
 		tileLayerWMS?.remove();
 		tileLayerWMS = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 </script>

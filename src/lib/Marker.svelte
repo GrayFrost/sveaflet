@@ -25,7 +25,6 @@
 			$markerStore = new Marker(latlng, options);
 		}
 		$markerStore.setLatLng(latlng);
-		Util.setOptions($markerStore, options); // todo 其他是否也用 ?
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($markerStore); // todo 其他layer也要加
@@ -36,13 +35,9 @@
 
 	$: instance = $markerStore;
 
-	function reset() {
+	onDestroy(() => {
 		$mapStore?.remove();
 		$mapStore = undefined;
-	}
-
-	onDestroy(() => {
-		reset();
 	});
 
 	useProvideLayer(markerStore);
