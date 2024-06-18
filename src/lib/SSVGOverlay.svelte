@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { SVGOverlay } from 'leaflet';
-	import { useConsumeMap } from '$lib/context';
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
+	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
 
 	export let bounds: LatLngBounds;
 	export let options: ImageOverlayOptions = {};
 	export let instance: SVGOverlay | undefined = undefined;
 
 	let mapStore = useConsumeMap();
+	let layerGroupStore = useConsumeLayerGroup();
+
 	let svgImage: string | SVGElement;
 	let svgOverlay: SVGOverlay | undefined;
 
@@ -20,7 +22,12 @@
 				svgOverlay = new SVGOverlay(svgImage, bounds, options);
 			}
 			svgOverlay.setBounds(bounds);
-			svgOverlay.addTo($mapStore);
+
+			if ($layerGroupStore) {
+				$layerGroupStore.addLayer(svgOverlay);
+			} else {
+				svgOverlay.addTo($mapStore);
+			}
 		}
 	}
 

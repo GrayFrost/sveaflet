@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 	import { Popup } from 'leaflet';
-	import type { LatLngExpression, PopupOptions, Layer } from 'leaflet';
+	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
 	export let latlng: LatLngExpression | undefined = undefined;
