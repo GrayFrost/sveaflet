@@ -38,20 +38,16 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 <script>
 	import { onMount } from 'svelte';
 	import { Map, TileLayer, CircleMarker } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
 
-	let colors = ['purple', 'orange', 'brown'];
-	let index = 0;
-
-	onMount(() => {
-		let interval = window.setInterval(() => {
-			index++;
-		}, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	});
-	$: color = colors[index % colors.length];
+	let color = 'red';
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={color} value="red">Red</Radio>
+	<Radio bind:group={color} value="green">Green</Radio>
+	<Radio bind:group={color} value="blue">Blue</Radio>
+</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>

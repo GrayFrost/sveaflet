@@ -117,17 +117,15 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 <script>
 	import { onMount } from 'svelte';
 	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
 
 	let collapsed = false;
-	onMount(() => {
-		let interval = window.setInterval(() => {
-			collapsed = !collapsed;
-		}, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	});
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={collapsed} value={false}>Expanded</Radio>
+	<Radio bind:group={collapsed} value={true}>Collapsed</Radio>
+</div>
 
 <div style="width: 100%;height:500px">
 	<Map

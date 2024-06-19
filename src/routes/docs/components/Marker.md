@@ -37,12 +37,20 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Marker } from 'sveaflet';
+	import { Button } from 'flowbite-svelte';
+
+	let draggable = false;
+
+	function toggleDrag() {
+		draggable = !draggable;
+	}
 </script>
 
+<Button on:click={toggleDrag}>toggle drag</Button> {draggable}
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} options={{ title: 'Marker Title', draggable: true }} />
+		<Marker latlng={[51.505, -0.09]} options={{ title: 'Marker Title', draggable: draggable }} />
 	</Map>
 </div>
 ```

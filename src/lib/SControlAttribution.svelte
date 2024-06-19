@@ -12,12 +12,8 @@
 	let attribution: Control.Attribution | undefined;
 
 	$: if ($mapStore) {
-		if (!attribution) {
-			attribution = control.attribution(options);
-		} else {
-			reset();
-			attribution = control.attribution(options);
-		}
+		reset();
+		attribution = control.attribution(options);
 		attribution.addTo($mapStore);
 	}
 

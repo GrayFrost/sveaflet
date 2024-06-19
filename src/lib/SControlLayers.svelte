@@ -12,12 +12,8 @@
 	let layersStore = writable<Control.Layers | undefined>();
 
 	$: if ($mapStore) {
-		if (!$layersStore) {
-			$layersStore = control.layers(undefined, undefined, options);
-		} else {
-			reset();
-			$layersStore = control.layers(undefined, undefined, options);
-		}
+		reset();
+		$layersStore = control.layers(undefined, undefined, options);
 		$layersStore.addTo($mapStore);
 	}
 
