@@ -4,7 +4,7 @@
 	import type { ControlOptions } from 'leaflet';
 	import { useConsumeMap } from '$lib/context';
 
-	export let options: ControlOptions = {};
+	export let options: ControlOptions = { position: 'topright' };
 	export let instance: Control | undefined = undefined;
 
 	let mapStore = useConsumeMap();
@@ -12,24 +12,20 @@
 	let control: Control | undefined;
 	let htmlElement: HTMLElement;
 
-	let CustonControl: { new (...args: any[]): { onAdd(): HTMLElement } } & typeof Control;
+	let CustomControl: { new (...args: any[]): { onAdd(): HTMLElement } } & typeof Control;
 
 	onMount(() => {
 		// @ts-ignore
-		CustonControl = Control.extend({
+		CustomControl = Control.extend({
 			onAdd() {
 				return htmlElement;
 			}
 		});
 	});
 
-	$: if ($mapStore && CustonControl) {
-		if (!control) {
-			control = new CustonControl(options);
-		} else {
-			reset();
-			control = new CustonControl(options);
-		}
+	$: if ($mapStore && CustomControl) {
+		reset();
+		control = new CustomControl(options);
 		control.addTo($mapStore);
 	}
 

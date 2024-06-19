@@ -21,13 +21,11 @@
 	let markerStore = writable<Marker | undefined>();
 
 	$: if ($mapStore) {
-		if (!$markerStore) {
-			$markerStore = new Marker(latlng, options);
-		}
-		$markerStore.setLatLng(latlng);
+		reset();
+		$markerStore = new Marker(latlng, options);
 
 		if ($layerGroupStore) {
-			$layerGroupStore.addLayer($markerStore); // todo 其他layer也要加
+			$layerGroupStore.addLayer($markerStore);
 		} else {
 			$markerStore.addTo($mapStore);
 		}
@@ -35,9 +33,13 @@
 
 	$: instance = $markerStore;
 
+	function reset() {
+		$markerStore?.remove();
+		$markerStore = undefined;
+	}
+
 	onDestroy(() => {
-		$mapStore?.remove();
-		$mapStore = undefined;
+		reset();
 	});
 
 	useProvideLayer(markerStore);

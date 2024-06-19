@@ -32,24 +32,22 @@ A simple scale control that shows the scale of the current center of screen in m
 </div>
 ```
 
-## ControlScale with options
+## ControlScale with Options
 
 ```svelte example csr
 <script>
 	import { onMount } from 'svelte';
 	import { Map, TileLayer, ControlScale } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
 
 	let maxWidth = 100;
-
-	onMount(() => {
-		let interval = window.setInterval(() => {
-			maxWidth = maxWidth > 500 ? 100 : maxWidth + 100;
-		}, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	});
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={maxWidth} value={100}>100</Radio>
+	<Radio bind:group={maxWidth} value={300}>300</Radio>
+	<Radio bind:group={maxWidth} value={500}>500</Radio>
+</div>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>

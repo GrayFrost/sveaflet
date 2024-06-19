@@ -14,12 +14,8 @@
 	let circleStore = writable<Circle | undefined>();
 
 	$: if ($mapStore) {
-		if (!$circleStore) { // init
-			$circleStore = new Circle(latlng, options);
-		} else { // update when props change
-			reset();
-			$circleStore = new Circle(latlng, options);
-		}
+		reset();
+		$circleStore = new Circle(latlng, options);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($circleStore);

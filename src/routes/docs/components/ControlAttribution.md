@@ -43,20 +43,16 @@ The attribution control allows you to display attribution data in a small text b
 <script>
 	import { onMount } from 'svelte';
 	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
 
-	let products = ['sveaflet', 'svelte', 'leaflet'];
-	let index = 0;
-
-	onMount(() => {
-		let interval = window.setInterval(() => {
-			index++;
-		}, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	});
-	$: product = products[index % products.length];
+	let prefix = 'Sveaflet';
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={prefix} value="Sveaflet">Sveaflet</Radio>
+	<Radio bind:group={prefix} value="Svelte">Svelte</Radio>
+	<Radio bind:group={prefix} value="Leaflet">Leaflet</Radio>
+</div>
 
 <div style="width: 100%;height:500px">
 	<Map
@@ -68,7 +64,7 @@ The attribution control allows you to display attribution data in a small text b
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
-				prefix: product
+				prefix
 			}}
 		/>
 	</Map>

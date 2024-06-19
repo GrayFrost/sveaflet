@@ -12,12 +12,8 @@
 	let zoom: Control.Zoom | undefined;
 
 	$: if ($mapStore) {
-		if (!zoom) {
-			zoom = control.zoom(options);
-		} else {
-			reset();
-			zoom = control.zoom(options);
-		}
+		reset();
+		zoom = control.zoom(options);
 		zoom.addTo($mapStore);
 	}
 

@@ -14,12 +14,8 @@
 	let circleMarkerStore = writable<CircleMarker | undefined>();
 
 	$: if ($mapStore) {
-		if (!$circleMarkerStore) {
-			$circleMarkerStore = new CircleMarker(latlng, options);
-		} else {
-			reset();
-			$circleMarkerStore = new CircleMarker(latlng, options);
-		}
+		reset();
+		$circleMarkerStore = new CircleMarker(latlng, options);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($circleMarkerStore);
