@@ -17,6 +17,9 @@
 	$: if ($mapStore) {
 		if (!$layerGroupStore) {
 			$layerGroupStore = new LayerGroup([], options);
+		} else {
+			reset();
+			$layerGroupStore = new LayerGroup([], options);
 		}
 
 		if ($controlLayerStore) {
@@ -35,9 +38,13 @@
 
 	$: instance = $layerGroupStore;
 
-	onDestroy(() => {
+	function reset() {
 		$layerGroupStore?.remove();
 		$layerGroupStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayerGroup(layerGroupStore);

@@ -1,13 +1,15 @@
 ---
 layout: componentLayout
 breadcrumb_title: TileLayerWMS
-title: TileLayerWMS
+title: TileLayerWMS - Sveaflet
 component_title: TileLayerWMS
 dir: Components
 description: TileLayerWMS
 ---
 
-# tilelayer
+## Setup
+
+## Default TileLayerWMS
 
 ```svelte example csr
 <script>
@@ -25,5 +27,9 @@ description: TileLayerWMS
 	</Map>
 </div>
 ```
+
+## TileLayerWMS with Options
+
+## Props
 
 // todo doc

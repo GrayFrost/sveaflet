@@ -38,7 +38,21 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, Circle } from 'sveaflet';
+
+	let colors = ['red', 'green', 'blue'];
+	let index = 0;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			index++;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
+	$: color = colors[index % colors.length];
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -47,7 +61,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 		<Circle
 			latlng={[51.508, -0.11]}
 			options={{
-				color: 'red',
+				color: color,
 				fillColor: '#f03',
 				fillOpacity: 0.5,
 				radius: 500

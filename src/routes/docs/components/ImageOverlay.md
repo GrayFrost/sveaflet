@@ -39,7 +39,7 @@ Used to load and display a single image over specific bounds of the map. Extends
 ```
 
 ## ImageOverlay with Options
-
+// todo dynamic options
 ```svelte example csr
 <script>
 	import { Map, TileLayer, ImageOverlay } from 'sveaflet';

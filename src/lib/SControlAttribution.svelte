@@ -14,14 +14,21 @@
 	$: if ($mapStore) {
 		if (!attribution) {
 			attribution = control.attribution(options);
+		} else {
+			reset();
+			attribution = control.attribution(options);
 		}
 		attribution.addTo($mapStore);
 	}
 
 	$: instance = attribution;
 
-	onDestroy(() => {
+	function reset() {
 		attribution?.remove();
 		attribution = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

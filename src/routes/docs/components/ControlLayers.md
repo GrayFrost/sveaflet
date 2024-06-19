@@ -115,7 +115,18 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
+
+	let collapsed = false;
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			collapsed = !collapsed;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
 </script>
 
 <div style="width: 100%;height:500px">
@@ -125,7 +136,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			zoom: 10
 		}}
 	>
-		<ControlLayers options={{ collapsed: false }}>
+		<ControlLayers options={{ collapsed }}>
 			<TileLayer
 				layerName="OpenStreetMap"
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}

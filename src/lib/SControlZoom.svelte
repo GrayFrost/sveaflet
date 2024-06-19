@@ -14,14 +14,21 @@
 	$: if ($mapStore) {
 		if (!zoom) {
 			zoom = control.zoom(options);
+		} else {
+			reset();
+			zoom = control.zoom(options);
 		}
 		zoom.addTo($mapStore);
 	}
 
 	$: instance = zoom;
 
-	onDestroy(() => {
+	function reset() {
 		zoom?.remove();
 		zoom = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

@@ -1,13 +1,21 @@
 ---
 layout: componentLayout
 breadcrumb_title: TileLayer
-title: TileLayer
+title: TileLayer - Sveaflet
 component_title: TileLayer
 dir: Components
 description: TileLayer
 ---
 
-# tilelayer
+## Setup
+
+```svelte example csr hideOutput
+<script>
+	import { TileLayer } from 'sveaflet';
+</script>
+```
+
+## Default Tilelayer
 
 ```svelte example csr
 <script>
@@ -20,5 +28,9 @@ description: TileLayer
 	</Map>
 </div>
 ```
+
+## TileLayer with Options
+
+## Props
 
 // todo doc

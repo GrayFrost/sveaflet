@@ -16,8 +16,10 @@
 	$: if ($mapStore) {
 		if (!$circleMarkerStore) {
 			$circleMarkerStore = new CircleMarker(latlng, options);
+		} else {
+			reset();
+			$circleMarkerStore = new CircleMarker(latlng, options);
 		}
-		$circleMarkerStore.setLatLng(latlng);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($circleMarkerStore);
@@ -28,9 +30,13 @@
 
 	$: instance = $circleMarkerStore;
 
-	onDestroy(() => {
+	function reset() {
 		$circleMarkerStore?.remove();
 		$circleMarkerStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayer(circleMarkerStore);

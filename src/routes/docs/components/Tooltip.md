@@ -1,15 +1,15 @@
 ---
 layout: componentLayout
 breadcrumb_title: Tooltip
-title: Tooltip
+title: Tooltip - Sveaflet
 component_title: Tooltip
 dir: Components
 description: Tooltip
 ---
 
-# Tooltip
+## Setup
 
-## Default
+## Default Tooltip
 
 ```svelte example csr
 <script>
@@ -24,7 +24,11 @@ description: Tooltip
 </div>
 ```
 
-## Layer bind tooltip
+## Tooltip with slot content
+
+## Tooltip with Options
+
+## Tooltip in Layers
 
 ```svelte example csr
 <script>
@@ -51,5 +55,7 @@ description: Tooltip
 	</Map>
 </div>
 ```
+
+## Props
 
 //todo doc

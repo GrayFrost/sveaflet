@@ -41,7 +41,21 @@ The attribution control allows you to display attribution data in a small text b
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
+
+	let products = ['sveaflet', 'svelte', 'leaflet'];
+	let index = 0;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			index++;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
+	$: product = products[index % products.length];
 </script>
 
 <div style="width: 100%;height:500px">
@@ -54,7 +68,7 @@ The attribution control allows you to display attribution data in a small text b
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
-				prefix: 'sveaflet'
+				prefix: product
 			}}
 		/>
 	</Map>

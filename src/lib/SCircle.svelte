@@ -14,10 +14,12 @@
 	let circleStore = writable<Circle | undefined>();
 
 	$: if ($mapStore) {
-		if (!$circleStore) {
+		if (!$circleStore) { // init
+			$circleStore = new Circle(latlng, options);
+		} else { // update when props change
+			reset();
 			$circleStore = new Circle(latlng, options);
 		}
-		$circleStore.setLatLng(latlng);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($circleStore);
@@ -28,9 +30,13 @@
 
 	$: instance = $circleStore;
 
-	onDestroy(() => {
+	function reset() {
 		$circleStore?.remove();
 		$circleStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayer(circleStore);

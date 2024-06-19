@@ -17,10 +17,10 @@
 	$: if ($mapStore) {
 		if (!imageOverlay) {
 			imageOverlay = new ImageOverlay(imageUrl, bounds, options);
+		} else {
+			reset();
+			imageOverlay = new ImageOverlay(imageUrl, bounds, options);
 		}
-
-		imageUrl && imageOverlay.setUrl(imageUrl);
-		imageOverlay.setBounds(bounds);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer(imageOverlay);
@@ -31,8 +31,12 @@
 
 	$: instance = imageOverlay;
 
-	onDestroy(() => {
+	function reset() {
 		imageOverlay?.remove();
 		imageOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>

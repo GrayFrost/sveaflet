@@ -38,7 +38,7 @@ Used to group several layers and handle them as one. If you add it to the map, a
 ```
 
 ## LayerGroup with Options
-
+// todo
 ```svelte example csr
 <script>
 	import { Map, TileLayer, LayerGroup, Marker } from 'sveaflet';
@@ -56,6 +56,9 @@ Used to group several layers and handle them as one. If you add it to the map, a
 	</Map>
 </div>
 ```
+
+## Layers in LayerGroup
+// todo
 
 ## Props
 

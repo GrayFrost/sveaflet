@@ -14,14 +14,21 @@
 	$: if ($mapStore) {
 		if (!scale) {
 			scale = control.scale(options);
+		} else {
+			reset();
+			scale = control.scale(options);
 		}
 		scale.addTo($mapStore);
 	}
 
 	$: instance = scale;
 
-	onDestroy(() => {
+	function reset() {
 		scale?.remove();
 		scale = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
