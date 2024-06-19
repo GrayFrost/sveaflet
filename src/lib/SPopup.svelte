@@ -15,19 +15,17 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore) {
-		if (!popup) {
-			popup = latlng ? new Popup(latlng, options) : new Popup(options);
-		}
-
+		let mergeOptions = {
+			...options
+		};
 		if (htmlElement) {
-			reset();
-			const mergeOptions = {
-				...options,
+			mergeOptions = {
+				...mergeOptions,
 				content: htmlElement
 			};
-			popup = latlng ? new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
 		}
-		latlng && popup.setLatLng(latlng);
+		reset();
+		popup = latlng ? new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
 
 		if (!$layerStore) {
 			popup?.openOn($mapStore);
@@ -50,7 +48,7 @@
 </script>
 
 {#if $$slots.default}
-	<div bind:this={htmlElement}>
+	<div bind:this={htmlElement} {...$$restProps}>
 		<slot />
 	</div>
 {/if}

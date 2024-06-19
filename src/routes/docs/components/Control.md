@@ -77,6 +77,6 @@ L.Control is a base class for implementing map controls. Handles positioning. Al
 
 ## Props
 
-| Prop name | Description  | Type                    | Default                  |
-| --------- | ------------ | ----------------------- | ------------------------ |
-| options   | **Optional** | Only `options.position` | `{position: 'topright'}` |
+| Prop name | Description  | Type             | Default                  |
+| --------- | ------------ | ---------------- | ------------------------ |
+| options   | **Optional** | `{position: ''}` | `{position: 'topright'}` |

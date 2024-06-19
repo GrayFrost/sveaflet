@@ -12,14 +12,21 @@
 	let layerStore = useConsumeLayer();
 
 	let tooltip: Tooltip | undefined;
+	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore) {
-		// todo slot content
-		if (!tooltip) {
-			tooltip = latlng ? new Tooltip(latlng, options) : new Tooltip(options);
+		let mergeOptions = {
+			...options
+		};
+		console.log('zzh options', mergeOptions);
+		if (htmlElement) {
+			mergeOptions = {
+				...mergeOptions,
+				content: htmlElement
+			};
 		}
-
-		latlng && tooltip.setLatLng(latlng);
+		reset();
+		tooltip = latlng ? new Tooltip(latlng, mergeOptions) : new Tooltip(mergeOptions);
 
 		if (!$layerStore) {
 			tooltip?.openOn($mapStore);
@@ -31,8 +38,18 @@
 
 	$: instance = tooltip;
 
-	onDestroy(() => {
+	function reset() {
 		tooltip?.remove();
 		tooltip = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
+
+{#if $$slots.default}
+	<div bind:this={htmlElement} {...$$restProps}>
+		<slot />
+	</div>
+{/if}

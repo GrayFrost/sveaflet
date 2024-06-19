@@ -46,7 +46,7 @@
 </script>
 
 {#if $$slots.default}
-	<div bind:this={htmlElement}>
+	<div bind:this={htmlElement} {...$$restProps}>
 		<slot />
 	</div>
 {/if}

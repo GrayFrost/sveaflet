@@ -54,12 +54,31 @@ Used to open popups in certain places of the map.
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Popup } from 'sveaflet';
+	import { Input, Label } from 'flowbite-svelte';
+
+	let minWidth = 100;
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Label>MinWidth:</Label><Input
+		type="number"
+		bind:value={minWidth}
+		min={100}
+		max={200}
+		step={20}
+	/>
+</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Popup latlng={[51.5, -0.09]} options={{ content: 'Pop content.' }} />
+		<Popup
+			latlng={[51.5, -0.09]}
+			options={{
+				content: 'Popup Content.',
+				minWidth
+			}}
+		></Popup>
 	</Map>
 </div>
 ```

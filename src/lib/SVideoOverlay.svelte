@@ -4,7 +4,7 @@
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
 
-	export let video: string | string[]; // todoHTMLVideoElement,
+	export let video: string | string[] = [];
 	export let bounds: LatLngBounds;
 	export let options: VideoOverlayOptions = {};
 	export let instance: VideoOverlay | undefined = undefined;
@@ -13,20 +13,12 @@
 	let layerGroupStore = useConsumeLayerGroup();
 
 	let videoOverlay: VideoOverlay | undefined;
+	let htmlVideoElement: HTMLVideoElement | undefined;
 
 	$: if ($mapStore) {
-		if (!videoOverlay) {
-			videoOverlay = new VideoOverlay(video, bounds, options);
-		}
-
-		if (Array.isArray(video)) {
-			video.forEach((url) => {
-				videoOverlay?.setUrl(url);
-			});
-		} else {
-			videoOverlay.setUrl(video);
-		}
-		videoOverlay.setBounds(bounds);
+		let mergeVideo = htmlVideoElement || video;
+		reset();
+		videoOverlay = new VideoOverlay(mergeVideo, bounds, options);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer(videoOverlay);
@@ -37,10 +29,18 @@
 
 	$: instance = videoOverlay;
 
-	onDestroy(() => {
+	function reset() {
 		videoOverlay?.remove();
 		videoOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 
-<slot />
+{#if $$slots.default}
+	<video bind:this={htmlVideoElement} {...$$restProps}>
+		<slot />
+	</video>
+{/if}
