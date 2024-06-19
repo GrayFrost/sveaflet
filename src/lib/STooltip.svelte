@@ -18,7 +18,7 @@
 		let mergeOptions = {
 			...options
 		};
-		console.log('zzh options', mergeOptions);
+		
 		if (htmlElement) {
 			mergeOptions = {
 				...mergeOptions,
