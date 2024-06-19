@@ -38,7 +38,22 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, Marker, DivIcon } from 'sveaflet';
+
+	let classNames = ['red-icon', 'blue-icon'];
+	let index = 0;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			index++;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
+
+	$: className = classNames[index % classNames.length];
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -47,7 +62,7 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon
 				options={{
-					className: 'my-div-icon'
+					className
 				}}
 			></DivIcon>
 		</Marker>
@@ -55,10 +70,15 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 </div>
 
 <style>
-	:global(.my-div-icon) {
+	:global(.red-icon) {
 		width: 50px !important;
 		height: 50px !important;
 		background: red;
+	}
+	:global(.blue-icon) {
+		width: 50px !important;
+		height: 50px !important;
+		background: blue;
 	}
 </style>
 ```

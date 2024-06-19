@@ -16,15 +16,22 @@
 	$: if ($mapStore) {
 		if (!$geoJSONStore) {
 			$geoJSONStore = new GeoJSON(json, options);
+		} else {
+			reset();
+			$geoJSONStore = new GeoJSON(json, options);
 		}
 		$geoJSONStore.addTo($mapStore);
 	}
 
 	$: instance = $geoJSONStore;
 
-	onDestroy(() => {
+	function reset() {
 		$geoJSONStore?.remove();
 		$geoJSONStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayer(geoJSONStore);

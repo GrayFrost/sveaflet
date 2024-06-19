@@ -36,13 +36,27 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, CircleMarker } from 'sveaflet';
+
+	let colors = ['purple', 'orange', 'brown'];
+	let index = 0;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			index++;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
+	$: color = colors[index % colors.length];
 </script>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<CircleMarker latlng={[51.508, -0.11]} options={{ radius: 20, color: 'purple' }} />
+		<CircleMarker latlng={[51.508, -0.11]} options={{ radius: 20, color }} />
 	</Map>
 </div>
 ```

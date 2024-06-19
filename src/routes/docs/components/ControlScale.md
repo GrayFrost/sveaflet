@@ -36,13 +36,25 @@ A simple scale control that shows the scale of the current center of screen in m
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, ControlScale } from 'sveaflet';
+
+	let maxWidth = 100;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			maxWidth = maxWidth > 500 ? 100 : maxWidth + 100;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<ControlScale options={{ maxWidth: 200 }} />
+		<ControlScale options={{ maxWidth }} />
 	</Map>
 </div>
 ```

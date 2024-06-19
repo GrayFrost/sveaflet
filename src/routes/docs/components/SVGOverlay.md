@@ -1,13 +1,15 @@
 ---
 layout: componentLayout
 breadcrumb_title: SVGOverlay
-title: SVGOverlay
+title: SVGOverlay - Sveaflet
 component_title: SVGOverlay
 dir: Components
 description: SVGOverlay
 ---
 
-# SVGOverlay
+## Setup
+
+## Default SVGOverlay
 
 ```svelte example csr
 <script>
@@ -33,5 +35,9 @@ description: SVGOverlay
 	</Map>
 </div>
 ```
+
+## SVGOverlay with Options
+
+## Props
 
 // todo doc

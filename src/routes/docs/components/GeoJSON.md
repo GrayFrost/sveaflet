@@ -34,6 +34,7 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 ## GeoJSON with Options
 
+// todo optios
 ```svelte example csr
 <script>
 	import { Map, TileLayer, GeoJSON } from 'sveaflet';

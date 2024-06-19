@@ -1,13 +1,15 @@
 ---
 layout: componentLayout
 breadcrumb_title: VideoOverlay
-title: VideoOverlay
+title: VideoOverlay - Sveaflet
 component_title: VideoOverlay
 dir: Components
 description: VideoOverlay
 ---
 
-# VideoOverlay
+## Setup
+
+## Default VideoOverlay
 
 ```svelte example csr
 <script>
@@ -35,5 +37,9 @@ description: VideoOverlay
 	</Map>
 </div>
 ```
+
+## VideoOverlay with Options
+
+## Props
 
 // todo doc

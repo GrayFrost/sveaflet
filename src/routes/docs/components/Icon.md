@@ -44,7 +44,22 @@ Represents an icon to provide when creating a marker.
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, Marker, Icon } from 'sveaflet';
+
+	let iconUrls = ['/images/leaf-green.png', '/images/leaf-red.png', '/images/leaf-orange.png'];
+	let index = 0;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			index++;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
+
+	$: iconUrl = iconUrls[index % iconUrls.length];
 </script>
 
 <div style="width: 100%;height: 500px;">
@@ -53,7 +68,7 @@ Represents an icon to provide when creating a marker.
 		<Marker latlng={[51.5, -0.09]}>
 			<Icon
 				options={{
-					iconUrl: '/images/leaf-green.png',
+					iconUrl,
 					shadowUrl: '/images/leaf-shadow.png',
 					iconSize: [38, 95],
 					shadowSize: [50, 64],

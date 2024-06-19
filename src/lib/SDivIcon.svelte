@@ -14,25 +14,34 @@
 	let htmlElement: HTMLElement | undefined;
 
 	$: if ($mapStore && $markerStore) {
-		if (!divIcon) {
-			divIcon = new DivIcon(options);
-		}
-
+		let mergeOptions = {
+			...options
+		};
 		if (htmlElement) {
-			const mergeOptions = {
-				...options,
+			mergeOptions = {
+				...mergeOptions,
 				html: htmlElement // override options
 			};
+		}
+		if (!divIcon) {
+			divIcon = new DivIcon(mergeOptions);
+		} else {
+			reset();
 			divIcon = new DivIcon(mergeOptions);
 		}
+
 		$markerStore.setIcon(divIcon);
 	}
 
 	$: instance = divIcon;
 
-	onDestroy(() => {
+	function reset() {
 		divIcon?.remove?.();
 		divIcon = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

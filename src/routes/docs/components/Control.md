@@ -7,7 +7,7 @@ dir: Components
 description: Vectors Layers - Control
 ---
 
-## Demo
+## Default Control
 
 ```svelte example csr
 <script>

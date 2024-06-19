@@ -36,13 +36,30 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 
 ```svelte example csr
 <script>
+	import { onMount } from 'svelte';
 	import { Map, TileLayer, ControlZoom } from 'sveaflet';
+
+	const zoomInTexts = ['W', 'A'];
+	const zoomOutTexts = ['X', 'D'];
+	let index = 0;
+
+	onMount(() => {
+		let interval = window.setInterval(() => {
+			index++;
+		}, 1000);
+		return () => {
+			clearInterval(interval);
+		};
+	});
+
+	$: zoomInText = zoomInTexts[index % zoomInTexts.length];
+	$: zoomOutText = zoomOutTexts[index % zoomOutTexts.length];
 </script>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<ControlZoom options={{ zoomInText: 'S', zoomOutText: 'L' }} />
+		<ControlZoom options={{ zoomInText, zoomOutText }} />
 	</Map>
 </div>
 ```
