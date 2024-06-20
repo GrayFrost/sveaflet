@@ -39,11 +39,19 @@ Used to load and display a single image over specific bounds of the map. Extends
 ```
 
 ## ImageOverlay with Options
-// todo dynamic options
+
 ```svelte example csr
 <script>
 	import { Map, TileLayer, ImageOverlay } from 'sveaflet';
+	import { Label, Toggle } from 'flowbite-svelte';
+
+	let enabledOpacity = true;
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Label>Opacity:</Label>
+	<Toggle bind:checked={enabledOpacity} />
+</div>
 
 <div style="width: 100%; height: 500px;">
 	<Map options={{ center: [40.799311, -74.33], zoom: 10 }}>
@@ -54,7 +62,7 @@ Used to load and display a single image over specific bounds of the map. Extends
 				[40.799311, -74.118464],
 				[40.68202047785919, -74.33]
 			]}
-			options={{ opacity: 0.5 }}
+			options={{ opacity: enabledOpacity ? 0.5 : 1 }}
 		/>
 	</Map>
 </div>

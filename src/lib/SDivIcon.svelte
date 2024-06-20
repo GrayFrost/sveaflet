@@ -13,24 +13,24 @@
 	let divIcon: DivIcon | undefined;
 	let htmlElement: HTMLElement | undefined;
 
-	$: if ($mapStore && $markerStore) {
-		let mergeOptions = {
-			...options
-		};
-		if (htmlElement) {
-			mergeOptions = {
-				...mergeOptions,
-				html: htmlElement // override options
+	$: if ($mapStore) {
+		if ($markerStore) {
+			let mergeOptions = {
+				...options
 			};
-		}
-		if (!divIcon) {
-			divIcon = new DivIcon(mergeOptions);
-		} else {
+			if (htmlElement) {
+				mergeOptions = {
+					...mergeOptions,
+					html: htmlElement // override options
+				};
+			}
 			reset();
 			divIcon = new DivIcon(mergeOptions);
-		}
 
-		$markerStore.setIcon(divIcon);
+			$markerStore.setIcon(divIcon);
+		} else {
+			console.warn('DivIcon should bind Marker.');
+		}
 	}
 
 	$: instance = divIcon;

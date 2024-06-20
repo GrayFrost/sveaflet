@@ -12,15 +12,14 @@
 
 	let icon: Icon | undefined;
 
-	$: if ($mapStore && $markerStore) {
-		
-		if (!icon) {
-			icon = new Icon(options);
-		} else {
+	$: if ($mapStore) {
+		if ($markerStore) {
 			reset();
 			icon = new Icon(options);
+			$markerStore.setIcon(icon);
+		} else {
+			console.warn('Icon should bind Marker.');
 		}
-		$markerStore.setIcon(icon);
 	}
 
 	$: instance = icon;

@@ -15,12 +15,8 @@
 	let layerGroupStore = writable<LayerGroup | undefined>();
 
 	$: if ($mapStore) {
-		if (!$layerGroupStore) {
-			$layerGroupStore = new LayerGroup([], options);
-		} else {
-			reset();
-			$layerGroupStore = new LayerGroup([], options);
-		}
+		reset();
+		$layerGroupStore = new LayerGroup([], options);
 
 		if ($controlLayerStore) {
 			if (!overlayName) {
