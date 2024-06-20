@@ -37,6 +37,7 @@
 		"@types/eslint": "^8.56.7",
 		"@types/leaflet": "^1.9.12",
 		"@types/node": "^20.14.1",
+		"@types/nprogress": "^0.2.3",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -65,6 +66,7 @@
 	"type": "module",
 	"dependencies": {
 		"geojson": "^0.5.0",
-		"mdsvexamples": "^0.4.1"
+		"mdsvexamples": "^0.4.1",
+		"nprogress": "^0.2.0"
 	}
 }

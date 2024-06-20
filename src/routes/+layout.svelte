@@ -1,7 +1,7 @@
 <script lang="ts">
 	/**
-	 * Inspired by Leaflet, Flowbite-Svelte
-	*/
+	 * Inspired by Svelte, Leaflet, Flowbite-Svelte
+	 */
 	import {
 		DarkMode,
 		Navbar,
@@ -13,15 +13,32 @@
 		Tooltip
 	} from 'flowbite-svelte';
 	import GitHub from './utils/icons/GitHub.svelte';
+	import NProgress from 'nprogress';
+	import { navigating } from '$app/stores';
+	import 'nprogress/nprogress.css';
 	import '../app.css';
 
 	let divClass = 'w-full ms-auto lg:block lg:w-auto order-1 lg:order-none';
 	let ulClass =
 		'flex flex-col py-3 my-4 lg:flex-row lg:my-0 text-sm font-medium text-gray-900 dark:text-gray-300 gap-4';
+
+	NProgress.configure({
+		minimum: 0.16,
+		showSpinner: false,
+	});
+
+	$: {
+		if ($navigating) {
+			NProgress.start();
+		}
+		if (!$navigating) {
+			NProgress.done();
+		}
+	}
 </script>
 
 <header
-	class="sticky top-0 z-9999 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
+	class="sticky top-0 z-999 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
 >
 	<Navbar fluid class="h-15 py-0 flex items-center">
 		<NavBrand href="/">
@@ -42,7 +59,9 @@
 				<NavLi class="lg:px-2 lg:mb-0" href="/">Home</NavLi>
 				<NavLi class="lg:px-2 lg:mb-0" href="/docs/pages/introduction">Docs</NavLi>
 				<NavLi class="lg:px-2 lg:mb-0" href="/docs/components/Circle">Components</NavLi>
-				<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/sveaflet-quick-start-guide">Examples</NavLi>
+				<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/sveaflet-quick-start-guide"
+					>Examples</NavLi
+				>
 			</NavUl>
 
 			<div class="flex items-center ms-auto">
@@ -66,3 +85,12 @@
 <div class="lg:flex">
 	<slot />
 </div>
+
+<style>
+	:global(#nprogress .bar) {
+		background: #d43008;
+	}
+	:global(#nprogress .peg) {
+		box-shadow: 0 0 10px #d43008, 0 0 5px #d43008
+	}
+</style>
