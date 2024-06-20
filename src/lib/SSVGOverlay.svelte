@@ -15,27 +15,30 @@
 	let svgOverlay: SVGOverlay | undefined;
 
 	$: if ($mapStore) {
-		if (!svgImage) {
-			console.warn('SVG Elements Required!');
-		} else {
-			if (!svgOverlay) {
-				svgOverlay = new SVGOverlay(svgImage, bounds, options);
-			}
-			svgOverlay.setBounds(bounds);
+		console.log('zzh options', options);
+		if (svgImage) {
+			reset();
+			svgOverlay = new SVGOverlay(svgImage, bounds, options);
 
 			if ($layerGroupStore) {
 				$layerGroupStore.addLayer(svgOverlay);
 			} else {
 				svgOverlay.addTo($mapStore);
 			}
+		} else {
+			console.warn('SVG Elements Required!');
 		}
 	}
 
 	$: instance = svgOverlay;
 
-	onDestroy(() => {
+	function reset() {
 		svgOverlay?.remove();
 		svgOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
 

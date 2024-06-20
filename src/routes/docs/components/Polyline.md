@@ -43,7 +43,16 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Polyline } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
+
+	let color = 'red';
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={color} value="red">Red</Radio>
+	<Radio bind:group={color} value="green">Green</Radio>
+	<Radio bind:group={color} value="blue">Blue</Radio>
+</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
@@ -54,7 +63,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 				[37.77, -122.43],
 				[34.04, -118.2]
 			]}
-			options={{ color: 'yellow' }}
+			options={{ color }}
 		/>
 	</Map>
 </div>
