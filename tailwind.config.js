@@ -27,7 +27,7 @@ export default {
 				}
 			},
 			zIndex: {
-				9999: 9999
+				999: 999
 			}
 		}
 	}
