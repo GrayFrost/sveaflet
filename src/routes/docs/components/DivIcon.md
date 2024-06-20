@@ -40,21 +40,21 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 <script>
 	import { onMount } from 'svelte';
 	import { Map, TileLayer, Marker, DivIcon } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
 
-	let classNames = ['red-icon', 'blue-icon'];
-	let index = 0;
+	let classNames = {
+		red: 'red-icon',
+		blue: 'blue-icon'
+	};
+	let color = 'red';
 
-	onMount(() => {
-		let interval = window.setInterval(() => {
-			index++;
-		}, 1000);
-		return () => {
-			clearInterval(interval);
-		};
-	});
-
-	$: className = classNames[index % classNames.length];
+	$: className = classNames[color];
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={color} value="red">Red</Radio>
+	<Radio bind:group={color} value="blue">Blue</Radio>
+</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>

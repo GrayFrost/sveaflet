@@ -15,12 +15,8 @@
 	let imageOverlay: ImageOverlay | undefined;
 
 	$: if ($mapStore) {
-		if (!imageOverlay) {
-			imageOverlay = new ImageOverlay(imageUrl, bounds, options);
-		} else {
-			reset();
-			imageOverlay = new ImageOverlay(imageUrl, bounds, options);
-		}
+		reset();
+		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer(imageOverlay);
