@@ -45,12 +45,12 @@ Used to load and display a single image over specific bounds of the map. Extends
 	import { Map, TileLayer, ImageOverlay } from 'sveaflet';
 	import { Label, Toggle } from 'flowbite-svelte';
 
-	let enabledOpacity = true;
+	let enableOpacity = true;
 </script>
 
 <div class="flex items-center gap-4 mb-4">
 	<Label>Opacity:</Label>
-	<Toggle bind:checked={enabledOpacity} />
+	<Toggle bind:checked={enableOpacity} />
 </div>
 
 <div style="width: 100%; height: 500px;">
@@ -62,7 +62,7 @@ Used to load and display a single image over specific bounds of the map. Extends
 				[40.799311, -74.118464],
 				[40.68202047785919, -74.33]
 			]}
-			options={{ opacity: enabledOpacity ? 0.5 : 1 }}
+			options={{ opacity: enableOpacity ? 0.5 : 1 }}
 		/>
 	</Map>
 </div>

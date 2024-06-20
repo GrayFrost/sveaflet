@@ -45,7 +45,16 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Polygon } from 'sveaflet';
+	import { Radio } from 'flowbite-svelte';
+
+	let color = 'red';
 </script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Radio bind:group={color} value="red">Red</Radio>
+	<Radio bind:group={color} value="green">Green</Radio>
+	<Radio bind:group={color} value="blue">Blue</Radio>
+</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
@@ -57,7 +66,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 				[51.51, -0.047]
 			]}
 			options={{
-				color: 'black'
+				color
 			}}
 		/>
 	</Map>

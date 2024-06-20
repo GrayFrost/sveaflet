@@ -14,10 +14,8 @@
 	let rectangleStore = writable<Rectangle | undefined>();
 
 	$: if ($mapStore) {
-		if (!$rectangleStore) {
-			$rectangleStore = new Rectangle(latLngBounds, options);
-		}
-		$rectangleStore.setBounds(latLngBounds);
+		reset();
+		$rectangleStore = new Rectangle(latLngBounds, options);
 
 		if ($layerGroupStore) {
 			$layerGroupStore.addLayer($rectangleStore);
@@ -28,9 +26,13 @@
 
 	$: instance = $rectangleStore;
 
-	onDestroy(() => {
+	function reset() {
 		$rectangleStore?.remove();
 		$rectangleStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideLayer(rectangleStore);
