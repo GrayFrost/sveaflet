@@ -38,7 +38,7 @@
 </script>
 
 <header
-	class="sticky top-0 z-999 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
+	class="sticky top-0 z-1001 flex-none w-full mx-auto bg-white border-b border-gray-200 dark:border-gray-600 dark:bg-gray-800"
 >
 	<Navbar fluid class="h-15 py-0 flex items-center">
 		<NavBrand href="/">
