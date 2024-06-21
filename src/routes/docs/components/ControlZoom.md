@@ -40,23 +40,20 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 	import { Map, TileLayer, ControlZoom } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	const zoomInTexts = ['W', 'A'];
-	const zoomOutTexts = ['X', 'D'];
-	let option = 0;
-
-	$: zoomInText = zoomInTexts[option];
-	$: zoomOutText = zoomOutTexts[option];
+	let position = 'topright';
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Radio bind:group={option} value={0}>W + X</Radio>
-	<Radio bind:group={option} value={1}>A + D</Radio>
+	<Radio bind:group={position} value="topright">Top Right</Radio>
+	<Radio bind:group={position} value="bottomright">Bottom Right</Radio>
+	<Radio bind:group={position} value="bottomleft">Bottom Left</Radio>
+	<Radio bind:group={position} value="topleft">Top Left</Radio>
 </div>
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<ControlZoom options={{ zoomInText, zoomOutText }} />
+		<ControlZoom options={{ position }} />
 	</Map>
 </div>
 ```
