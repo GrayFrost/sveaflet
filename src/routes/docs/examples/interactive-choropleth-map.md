@@ -9,7 +9,7 @@ description: This is a case study of creating a colorful interactive choropleth 
 
 The tutorial was inspired by the Texas Tribune US Senate Runoff Results map (also powered by Leaflet), created by Ryan Murphy.
 
-## Demo
+## Example
 
 ```svelte example csr
 <script>
@@ -83,15 +83,15 @@ The tutorial was inspired by the Texas Tribune US Senate Runoff Results map (als
 		map.fitBounds(e.target.getBounds());
 	}
 
-	$: if (attributionControl) {
-		attributionControl.addAttribution(
+	$: if (map) {
+		map.attributionControl.addAttribution(
 			'Population data &copy; <a href="http://census.gov/">US Census Bureau</a>'
 		);
 	}
 </script>
 
 <div style="width: 100%;height: 500px;">
-	<Map options={{ center: [37.8, -96], zoom: 4, attributionControl: false }} bind:instance={map}>
+	<Map options={{ center: [37.8, -96], zoom: 4 }} bind:instance={map}>
 		<TileLayer
 			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
@@ -107,7 +107,6 @@ The tutorial was inspired by the Texas Tribune US Senate Runoff Results map (als
 				onEachFeature
 			}}
 		/>
-		<ControlAttribution bind:instance={attributionControl} />
 		<Control options={{ position: 'topright' }} class="info">
 			<h4>US Population Density</h4>
 			{#if Object.keys(featureProperties).length > 0}
