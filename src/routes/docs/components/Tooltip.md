@@ -54,21 +54,20 @@ Used to display small texts on top of map layers.
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Circle, Tooltip } from 'sveaflet';
-	import { Radio, Label } from 'flowbite-svelte';
+	import { Radio, Label, Input } from 'flowbite-svelte';
 
-	let direction = 'left';
+	let content = 'Tooltip content.';
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Label>Direction:</Label>
-	<Radio bind:group={direction} value="left">left</Radio>
-	<Radio bind:group={direction} value="right">right</Radio>
+	<Label>Content:</Label>
+	<Input type="text" bind:value={content} maxlength={20} />
 </div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Tooltip latlng={[51.508, -0.11]} options={{ content: 'Tooltip content.', direction }} />
+		<Tooltip latlng={[51.508, -0.11]} options={{ content }} />
 	</Map>
 </div>
 ```
