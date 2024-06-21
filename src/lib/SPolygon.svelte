@@ -6,7 +6,7 @@
 	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
-	export let latlngs: LatLngExpression[];
+	export let latLngs: LatLngExpression[];
 	export let options: PolylineOptions = {};
 	export let instance: Polygon | undefined = undefined;
 
@@ -16,20 +16,20 @@
 	let polygonStore = writable<Polygon | undefined>();
 
 	// data
-	let preLatlngs = latlngs;
+	let preLatLngs = latLngs;
 	let preOptions = options;
 
 	onMount(() => {
-		$polygonStore = new Polygon(latlngs, options);
+		$polygonStore = new Polygon(latLngs, options);
 		storeProps({
-			latlngs,
+			latLngs,
 			options
 		});
 	});
 
 	$: if ($mapStore) {
 		if ($polygonStore) {
-			updateLatLngs($polygonStore, preLatlngs, latlngs);
+			updateLatLngs($polygonStore, preLatLngs, latLngs);
 			updateStyle($polygonStore, preOptions, options);
 
 			if ($layerGroupStore) {
@@ -38,7 +38,7 @@
 				$polygonStore.addTo($mapStore);
 			}
 			storeProps({
-				latlngs,
+				latLngs,
 				options
 			});
 		}
@@ -48,11 +48,11 @@
 
 	function updateLatLngs(
 		obj: Polygon,
-		preLatlngs: LatLngExpression[],
-		latlngs: LatLngExpression[]
+		preLatLngs: LatLngExpression[],
+		latLngs: LatLngExpression[]
 	) {
-		if (preLatlngs !== latlngs && latlngs !== undefined) {
-			obj.setLatLngs(latlngs);
+		if (preLatLngs !== latLngs && latLngs !== undefined) {
+			obj.setLatLngs(latLngs);
 		}
 	}
 
@@ -83,9 +83,9 @@
 		obj.setStyle(styles);
 	}
 
-	function storeProps(props: { latlngs: LatLngExpression[]; options: PolylineOptions }) {
-		const { latlngs, options } = props;
-		preLatlngs = latlngs;
+	function storeProps(props: { latLngs: LatLngExpression[]; options: PolylineOptions }) {
+		const { latLngs, options } = props;
+		preLatLngs = latLngs;
 		preOptions = Object.create(options);
 	}
 

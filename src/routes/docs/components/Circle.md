@@ -29,7 +29,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Circle latlng={[51.508, -0.11]} />
+		<Circle latLng={[51.508, -0.11]} />
 	</Map>
 </div>
 ```
@@ -55,7 +55,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Circle
-			latlng={[51.508, -0.11]}
+			latLng={[51.508, -0.11]}
 			options={{
 				color: color,
 				fillColor: color,
@@ -78,7 +78,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Circle
-			latlng={[51.508, -0.11]}
+			latLng={[51.508, -0.11]}
 			options={{
 				color: 'red',
 				fillColor: '#f03',
@@ -96,7 +96,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 
 | Prop name | Description  | Type                                                                | Default           |
 | --------- | ------------ | ------------------------------------------------------------------- | ----------------- |
-| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)               |                   |
+| latLng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)               |                   |
 | options   | **Optional** | [CircleOptions](https://leafletjs.com/reference.html#circle-option) | `{ radius: 100 }` |
 
 ## Events

@@ -23,9 +23,9 @@ description: This step-by-step guide will quickly get you started on Leaflet bas
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			}}
 		/>
-		<Popup latlng={[51.513, -0.09]} options={{ content: 'I am a standalone popup.' }} />
+		<Popup latLng={[51.513, -0.09]} options={{ content: 'I am a standalone popup.' }} />
 		<Circle
-			latlng={[51.508, -0.11]}
+			latLng={[51.508, -0.11]}
 			options={{
 				color: 'red',
 				fillColor: '#f03',
@@ -35,11 +35,11 @@ description: This step-by-step guide will quickly get you started on Leaflet bas
 		>
 			<Popup options={{ content: 'I am a circle.' }} />
 		</Circle>
-		<Marker latlng={[51.5, -0.09]}>
+		<Marker latLng={[51.5, -0.09]}>
 			<Popup options={{ content: '<b>Hello world!</b><br>I am a popup.' }} />
 		</Marker>
 		<Polygon
-			latlngs={[
+			latLngs={[
 				[51.509, -0.08],
 				[51.503, -0.06],
 				[51.51, -0.047]

@@ -28,7 +28,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
-			latlngs={[
+			latLngs={[
 				[45.51, -122.68],
 				[37.77, -122.43],
 				[34.04, -118.2]
@@ -58,7 +58,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
-			latlngs={[
+			latLngs={[
 				[45.51, -122.68],
 				[37.77, -122.43],
 				[34.04, -118.2]
@@ -80,7 +80,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
-			latlngs={[
+			latLngs={[
 				[45.51, -122.68],
 				[37.77, -122.43],
 				[34.04, -118.2]
@@ -97,5 +97,5 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 
 | Prop name | Description  | Type                                                                    | Default |
 | --------- | ------------ | ----------------------------------------------------------------------- | ------- |
-| latlngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[]                 |         |
+| latLngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)[]                 |         |
 | options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |

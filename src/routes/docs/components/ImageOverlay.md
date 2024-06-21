@@ -73,5 +73,5 @@ Used to load and display a single image over specific bounds of the map. Extends
 | Prop name | Description  | Type                                                                            | Default |
 | --------- | ------------ | ------------------------------------------------------------------------------- | ------- |
 | imageUrl  | **Required** | String                                                                          |         |
-| bounds    | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds)               |         |
+| bounds    | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)               |         |
 | options   | **Optional** | [ImageOverlayOptions](https://leafletjs.com/reference.html#imageoverlay-option) | `{}`    |

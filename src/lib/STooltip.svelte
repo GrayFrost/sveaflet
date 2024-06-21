@@ -5,7 +5,7 @@
 	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
 	// props
-	export let latlng: LatLngExpression | undefined = undefined;
+	export let latLng: LatLngExpression | undefined = undefined;
 	export let options: TooltipOptions = {};
 	export let instance: Tooltip | undefined = undefined;
 
@@ -16,7 +16,7 @@
 	// data
 	let tooltip: Tooltip | undefined;
 	let htmlElement: HTMLElement | undefined;
-	let preLatlng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 
 	onMount(() => {
@@ -31,16 +31,16 @@
 			};
 		}
 
-		tooltip = latlng ? new Tooltip(latlng, mergeOptions) : new Tooltip(mergeOptions);
+		tooltip = latLng ? new Tooltip(latLng, mergeOptions) : new Tooltip(mergeOptions);
 		storeProps({
-			latlng,
+			latLng,
 			options: mergeOptions
 		});
 	});
 
 	$: if ($mapStore) {
 		if (tooltip) {
-			updateLatLng(tooltip, preLatlng, latlng);
+			updateLatLng(tooltip, preLatLng, latLng);
 			updateContent(tooltip, preOptions, options);
 			updateOpacity(tooltip, preOptions, options);
 
@@ -51,7 +51,7 @@
 				$layerStore.bindTooltip(tooltipContent);
 			}
 			storeProps({
-				latlng,
+				latLng,
 				options
 			});
 		}
@@ -61,11 +61,11 @@
 
 	function updateLatLng(
 		obj: Tooltip,
-		preLatlng: LatLngExpression | undefined,
-		latlng: LatLngExpression | undefined
+		preLatLng: LatLngExpression | undefined,
+		latLng: LatLngExpression | undefined
 	) {
-		if (latlng !== preLatlng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -81,9 +81,9 @@
 		}
 	}
 
-	function storeProps(props: { latlng: LatLngExpression | undefined; options: TooltipOptions }) {
-		const { latlng, options } = props;
-		preLatlng = latlng;
+	function storeProps(props: { latLng: LatLngExpression | undefined; options: TooltipOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 

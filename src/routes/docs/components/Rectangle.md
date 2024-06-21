@@ -94,5 +94,5 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 
 | Prop name    | Description  | Type                                                                    | Default |
 | ------------ | ------------ | ----------------------------------------------------------------------- | ------- |
-| latLngBounds | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds)       |         |
+| latLngBounds | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)       |         |
 | options      | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |
