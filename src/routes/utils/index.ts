@@ -39,7 +39,8 @@ export const fetchMarkdownPosts = async () => {
 		'sveaflet-quick-start-guide',
 		'markers-with-custom-icons',
 		'using-geojson-with-sveaflet',
-		'interactive-choropleth-map'
+		'interactive-choropleth-map',
+		'layer-groups-and-layers-control'
 	];
 	const allExamples = await Promise.all(
 		iterableExampleFiles.sort(sortByList(exampleOrder)).map(async ([path, resolver]) => {
