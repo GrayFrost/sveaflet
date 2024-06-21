@@ -14,7 +14,7 @@
 	let svgOverlay: SVGOverlay | undefined;
 	let svgElement: SVGElement | undefined;
 
-	let preOptions: ImageOverlayOptions = {};
+	let preOptions = options;
 
 	onMount(() => {
 		if (svgElement) {
@@ -35,6 +35,9 @@
 			if (options.opacity !== preOptions.opacity && options.opacity !== undefined) {
 				svgOverlay.setOpacity(options.opacity);
 			}
+
+			// todo setbounds
+			// todo setstyle
 
 			if ($layerGroupStore) {
 				$layerGroupStore.addLayer(svgOverlay);
