@@ -32,11 +32,15 @@
 		}
 
 		tooltip = latlng ? new Tooltip(latlng, mergeOptions) : new Tooltip(mergeOptions);
+		storeProps({
+			latlng,
+			options: mergeOptions
+		});
 	});
 
 	$: if ($mapStore) {
 		if (tooltip) {
-			updateLatlng(tooltip, preLatlng, latlng);
+			updateLatLng(tooltip, preLatlng, latlng);
 			updateContent(tooltip, preOptions, options);
 			updateOpacity(tooltip, preOptions, options);
 
@@ -55,7 +59,7 @@
 
 	$: instance = tooltip;
 
-	function updateLatlng(
+	function updateLatLng(
 		obj: Tooltip,
 		preLatlng: LatLngExpression | undefined,
 		latlng: LatLngExpression | undefined

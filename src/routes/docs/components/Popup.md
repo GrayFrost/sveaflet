@@ -56,23 +56,17 @@ Used to open popups in certain places of the map.
 
 ## Popup with Options
 
-// todo 重构
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Popup } from 'sveaflet';
-	import { Input, Label } from 'flowbite-svelte';
+	import { Radio, Label, Input } from 'flowbite-svelte';
 
-	let minWidth = 100;
+	let content = 'Popup content.';
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Label>MinWidth:</Label><Input
-		type="number"
-		bind:value={minWidth}
-		min={100}
-		max={200}
-		step={20}
-	/>
+	<Label>Content:</Label>
+	<Input type="text" bind:value={content} maxlength={20} />
 </div>
 
 <div style="width: 100%;height: 500px;">
@@ -81,9 +75,9 @@ Used to open popups in certain places of the map.
 		<Popup
 			latlng={[51.5, -0.09]}
 			options={{
-				minWidth
-			}}>Popup Content.</Popup
-		>
+				content
+			}}
+		/>
 	</Map>
 </div>
 ```
