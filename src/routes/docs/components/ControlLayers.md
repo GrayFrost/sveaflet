@@ -119,12 +119,14 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let collapsed = false;
+	let position = 'topright';
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Radio bind:group={collapsed} value={false}>Expanded</Radio>
-	<Radio bind:group={collapsed} value={true}>Collapsed</Radio>
+	<Radio bind:group={position} value="topright">Top Right</Radio>
+	<Radio bind:group={position} value="bottomright">Bottom Right</Radio>
+	<Radio bind:group={position} value="bottomleft">Bottom Left</Radio>
+	<Radio bind:group={position} value="topleft">Top Left</Radio>
 </div>
 
 <div style="width: 100%;height:500px">
@@ -134,7 +136,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			zoom: 10
 		}}
 	>
-		<ControlLayers options={{ collapsed }}>
+		<ControlLayers options={{ position }}>
 			<TileLayer
 				layerName="OpenStreetMap"
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}

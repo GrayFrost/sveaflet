@@ -1,23 +1,49 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { control } from 'leaflet';
 	import type { Control } from 'leaflet';
 	import { useConsumeMap, useProvideControlLayer } from '$lib/context';
 
+	// props
 	export let options: Control.LayersOptions = {};
 	export let instance: Control.Layers | undefined = undefined;
 
+	// store
 	let mapStore = useConsumeMap();
 	let layersStore = writable<Control.Layers | undefined>();
 
-	$: if ($mapStore) {
-		reset();
+	// data
+	let preOptions = options;
+
+	onMount(() => {
 		$layersStore = control.layers(undefined, undefined, options);
-		$layersStore.addTo($mapStore);
+		storeProps();
+	});
+
+	$: if ($mapStore) {
+		if ($layersStore) {
+			updatePosition($layersStore, preOptions, options);
+			$layersStore.addTo($mapStore);
+			storeProps();
+		}
 	}
 
 	$: instance = $layersStore;
+
+	function updatePosition(
+		obj: Control.Layers,
+		preOpt: Control.LayersOptions,
+		opt: Control.LayersOptions
+	) {
+		if (opt.position !== preOpt.position && opt.position !== undefined) {
+			obj.setPosition(opt.position);
+		}
+	}
+
+	function storeProps() {
+		preOptions = Object.create(options);
+	}
 
 	function reset() {
 		$layersStore?.remove();
