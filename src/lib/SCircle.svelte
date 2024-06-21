@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Circle } from 'leaflet';
 	import type { LatLngExpression, CircleOptions } from 'leaflet';

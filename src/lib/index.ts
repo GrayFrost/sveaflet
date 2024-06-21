@@ -15,7 +15,6 @@ import TileLayer from './STileLayer.svelte';
 import TileLayerWMS from './STileLayerWMS.svelte';
 import ImageOverlay from './SImageOverlay.svelte';
 import VideoOverlay from './SVideoOverlay.svelte';
-import SVGOverlay from './SSVGOverlay.svelte';
 
 // Vector Layers
 import Polyline from './SPolyline.svelte';
@@ -23,6 +22,7 @@ import Polygon from './SPolygon.svelte';
 import Rectangle from './SRectangle.svelte';
 import Circle from './SCircle.svelte';
 import CircleMarker from './SCircleMarker.svelte';
+import SVGOverlay from './SSVGOverlay.svelte';
 
 // Other Layers
 import LayerGroup from './SLayerGroup.svelte';
@@ -35,6 +35,9 @@ import ControlScale from './SControlScale.svelte';
 import ControlZoom from './SControlZoom.svelte';
 import ControlLayers from './SControlLayers.svelte';
 
+// Context
+import * as SveafletContext from './context';
+
 export {
 	Map,
 	Icon,
@@ -46,17 +49,18 @@ export {
 	TileLayerWMS,
 	ImageOverlay,
 	VideoOverlay,
-	SVGOverlay,
 	Polyline,
 	Polygon,
 	Rectangle,
 	Circle,
 	CircleMarker,
+	SVGOverlay,
 	LayerGroup,
 	GeoJSON,
 	Control,
 	ControlAttribution,
 	ControlLayers,
 	ControlScale,
-	ControlZoom
+	ControlZoom,
+	SveafletContext,
 };

@@ -4,10 +4,12 @@ breadcrumb_title: SVGOverlay
 title: SVGOverlay - Sveaflet
 component_title: SVGOverlay
 dir: Components
-description: Raster Layers - SVGOverlay
+description: Vector Layers - SVGOverlay
 ---
 
-// todo
+Used to load, display and provide DOM access to an SVG file over specific bounds of the map. Extends [ImageOverlay](https://leafletjs.com/reference.html#imageoverlay).
+
+An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Element/svg) element.
 
 ## Setup
 
@@ -43,8 +45,6 @@ description: Raster Layers - SVGOverlay
 
 ## SVGOverlay with Options
 
-// todo 不生效
-
 ```svelte example csr
 <script>
 	import { Map, TileLayer, SVGOverlay } from 'sveaflet';
@@ -57,6 +57,7 @@ description: Raster Layers - SVGOverlay
 	<Label>Opacity:</Label>
 	<Toggle bind:checked={enableOpacity} />
 </div>
+{enableOpacity}
 
 <div style="width: 100%; height: 500px; ">
 	<Map options={{ center: [32, -130], zoom: 4 }}>
@@ -80,4 +81,7 @@ description: Raster Layers - SVGOverlay
 
 ## Props
 
-// todo doc
+| Prop name    | Description  | Type                                                                    | Default |
+| ------------ | ------------ | ----------------------------------------------------------------------- | ------- |
+| bounds | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds)       |         |
+| options      | **Optional** | [ImageOverlayOptions](https://leafletjs.com/reference.html#imageoverlay-option) | `{}`    |

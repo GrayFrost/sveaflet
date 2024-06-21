@@ -23,7 +23,6 @@ window is not defined
 - [x] TileLayerWMS
 - [x] ImageOverlay
 - [x] VideoOverlay
-- [x] SVGOverlay
 
 ## Vector Layers
 
@@ -32,6 +31,7 @@ window is not defined
 - [x] Rectangle
 - [x] Circle
 - [x] CircleMarker
+- [x] SVGOverlay
 
 ## Other Layers
 - [x] LayerGroup
