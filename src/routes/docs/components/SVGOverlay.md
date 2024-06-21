@@ -57,7 +57,6 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 	<Label>Opacity:</Label>
 	<Toggle bind:checked={enableOpacity} />
 </div>
-{enableOpacity}
 
 <div style="width: 100%; height: 500px; ">
 	<Map options={{ center: [32, -130], zoom: 4 }}>
