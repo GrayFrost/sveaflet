@@ -54,7 +54,7 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Label>Opacity:</Label>
+	<Label>Enable Opacity:</Label>
 	<Toggle bind:checked={enableOpacity} />
 </div>
 

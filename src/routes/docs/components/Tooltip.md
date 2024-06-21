@@ -141,4 +141,7 @@ Used to display small texts on top of map layers.
 
 ## Props
 
-//todo doc
+| Prop name | Description  | Type                                                                  | Default |
+| --------- | ------------ | --------------------------------------------------------------------- | ------- |
+| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)                 |         |
+| options   | **Optional** | [TooltipOptions](https://leafletjs.com/reference.html#tooltip-option) | `{}`    |

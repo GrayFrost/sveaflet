@@ -42,7 +42,7 @@ sed to load and display tile layers on the map. Note that most tile servers requ
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Label>Opacity:</Label>
+	<Label>Enable Opacity:</Label>
 	<Toggle bind:checked={enableOpacity} />
 </div>
 
