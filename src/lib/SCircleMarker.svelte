@@ -21,7 +21,10 @@
 
 	onMount(() => {
 		$circleMarkerStore = new CircleMarker(latlng, options);
-		storeProps();
+		storeProps({
+			latlng,
+			options
+		});
 	});
 
 	$: if ($mapStore) {
@@ -37,7 +40,10 @@
 			} else {
 				$circleMarkerStore.addTo($mapStore);
 			}
-			storeProps();
+			storeProps({
+				latlng,
+				options
+			});
 		}
 	}
 
@@ -82,7 +88,8 @@
 		obj.setStyle(styles);
 	}
 
-	function storeProps() {
+	function storeProps(props: { latlng: LatLngExpression; options: CircleMarkerOptions }) {
+		const { latlng, options } = props;
 		preLatlng = latlng;
 		preOptions = Object.create(options);
 	}

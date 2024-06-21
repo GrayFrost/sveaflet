@@ -17,7 +17,7 @@
 
 	onMount(() => {
 		attribution = control.attribution(options);
-		storeProps();
+		storeProps({ options });
 	});
 
 	$: if ($mapStore) {
@@ -26,7 +26,7 @@
 			updatePosition(attribution, preOptions, options);
 			attribution.addTo($mapStore);
 
-			storeProps();
+			storeProps({ options });
 		}
 	}
 
@@ -52,7 +52,8 @@
 		}
 	}
 
-	function storeProps() {
+	function storeProps(props: { options: Control.AttributionOptions }) {
+		const { options } = props;
 		preOptions = Object.create(options);
 	}
 
