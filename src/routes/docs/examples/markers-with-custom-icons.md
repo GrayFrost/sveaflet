@@ -7,7 +7,7 @@ dir: Examples
 description: In this tutorial, you’ll learn how to easily define your own icons for use by the markers you put on the map.
 ---
 
-## Demo
+## Example
 
 ```svelte example csr
 <script>

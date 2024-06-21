@@ -35,8 +35,9 @@ export const fetchMarkdownPosts = async () => {
 			};
 		})
 	);
+	const exampleOrder: string[] = ['sveaflet-quick-start-guide', 'markers-with-custom-icons'];
 	const allExamples = await Promise.all(
-		iterableExampleFiles.map(async ([path, resolver]) => {
+		iterableExampleFiles.sort(sortByList(exampleOrder)).map(async ([path, resolver]) => {
 			const { metadata } = await resolver();
 			return {
 				meta: metadata,
