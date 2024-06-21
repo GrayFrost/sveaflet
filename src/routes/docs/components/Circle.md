@@ -58,7 +58,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 			latlng={[51.508, -0.11]}
 			options={{
 				color: color,
-				fillColor: '#f03',
+				fillColor: color,
 				fillOpacity: 0.5,
 				radius: 500
 			}}
