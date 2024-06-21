@@ -56,6 +56,7 @@ Used to open popups in certain places of the map.
 
 ## Popup with Options
 
+// todo 重构
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Popup } from 'sveaflet';

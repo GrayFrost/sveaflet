@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from '$lib/context';
@@ -14,8 +14,13 @@
 	let popup: Popup | undefined;
 	let htmlElement: HTMLElement | undefined;
 
-	$: if ($mapStore) {
-		let mergeOptions = {
+	let preLatlng = latlng;
+	let preOptions = options;
+
+	let mergeOptions = Object.create(options);
+
+	onMount(() => {
+		mergeOptions = {
 			...options
 		};
 		if (htmlElement) {
@@ -24,18 +29,31 @@
 				content: htmlElement
 			};
 		}
-		reset();
 		popup = latlng ? new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
+		storeProps();
+	});
 
-		if (!$layerStore) {
-			popup?.openOn($mapStore);
-		} else {
-			let popupContent = popup?.options.content || '';
-			$layerStore.bindPopup(popupContent);
+	$: if ($mapStore) {
+		if (popup) {
+			if (latlng !== preLatlng && latlng !== undefined) {
+				popup.setLatLng(latlng);
+			}
+			if (!$layerStore) {
+				popup.openOn($mapStore);
+			} else {
+				let popupContent = popup.options.content || '';
+				$layerStore.bindPopup(popupContent);
+			}
 		}
+		storeProps();
 	}
 
 	$: instance = popup;
+
+	function storeProps() {
+		preLatlng = latlng;
+		preOptions = Object.create(mergeOptions);
+	}
 
 	function reset() {
 		popup?.remove();

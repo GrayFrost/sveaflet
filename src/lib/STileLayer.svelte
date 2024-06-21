@@ -15,16 +15,20 @@
 
 	let tileLayer: TileLayer | undefined;
 
-	let preOptions: TileLayerOptions = {};
+	let preUrlTemplate = urlTemplate;
+	let preOptions = options;
 
 	onMount(() => {
 		tileLayer = new TileLayer(urlTemplate, options);
-		preOptions = Object.create(options);
+		storeProps();
 	});
 
 	$: if ($mapStore) {
 		if (tileLayer) {
 			// TODO: how to update all options?
+			if (urlTemplate !== preUrlTemplate && urlTemplate !== undefined) {
+				tileLayer.setUrl(urlTemplate);
+			}
 			if (options.zIndex !== preOptions.zIndex && options.zIndex !== undefined) {
 				tileLayer.setZIndex(options.zIndex);
 			}
@@ -48,15 +52,21 @@
 				tileLayer.addTo($mapStore);
 			}
 
-			preOptions = Object.create(options);
+			storeProps();
 		}
 	}
 
 	$: instance = tileLayer;
 
+	function storeProps() {
+		preUrlTemplate = urlTemplate;
+		preOptions = Object.create(options);
+	}
+
 	function reset() {
 		tileLayer?.remove();
 		tileLayer = undefined;
+		// todo other props
 	}
 
 	onDestroy(() => {
