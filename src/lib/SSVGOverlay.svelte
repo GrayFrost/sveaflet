@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { SVGOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
@@ -11,22 +11,38 @@
 	let mapStore = useConsumeMap();
 	let layerGroupStore = useConsumeLayerGroup();
 
-	let svgImage: string | SVGElement;
 	let svgOverlay: SVGOverlay | undefined;
+	let svgElement: SVGElement | undefined;
+
+	let preOptions: ImageOverlayOptions = {};
+
+	onMount(() => {
+		if (svgElement) {
+			svgOverlay = new SVGOverlay(svgElement, bounds, options);
+		} else {
+			console.warn('SVG Element Required!');
+		}
+		preOptions = Object.create(options);
+	});
 
 	$: if ($mapStore) {
-		console.log('zzh options', options);
-		if (svgImage) {
-			reset();
-			svgOverlay = new SVGOverlay(svgImage, bounds, options);
+		if (svgOverlay) {
+			// TODO: how to update all options?
+			if (options.zIndex !== preOptions.zIndex && options.zIndex !== undefined) {
+				svgOverlay.setZIndex(options.zIndex);
+			}
+
+			if (options.opacity !== preOptions.opacity && options.opacity !== undefined) {
+				svgOverlay.setOpacity(options.opacity);
+			}
 
 			if ($layerGroupStore) {
 				$layerGroupStore.addLayer(svgOverlay);
 			} else {
 				svgOverlay.addTo($mapStore);
 			}
-		} else {
-			console.warn('SVG Elements Required!');
+
+			preOptions = Object.create(options);
 		}
 	}
 
@@ -42,6 +58,6 @@
 	});
 </script>
 
-<svg bind:this={svgImage} xmlns="http://www.w3.org/2000/svg">
+<svg bind:this={svgElement} xmlns="http://www.w3.org/2000/svg" {...$$restProps}>
 	<slot />
 </svg>
