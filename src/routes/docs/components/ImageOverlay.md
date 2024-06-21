@@ -49,7 +49,7 @@ Used to load and display a single image over specific bounds of the map. Extends
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	<Label>Opacity:</Label>
+	<Label>Enable Opacity:</Label>
 	<Toggle bind:checked={enableOpacity} />
 </div>
 
