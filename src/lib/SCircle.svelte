@@ -2,43 +2,35 @@
 	import { onDestroy, onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Circle } from 'leaflet';
-	import type { LatLngExpression, CircleOptions } from 'leaflet';
+	import type { LatLngExpression, CircleOptions, PathOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
+	// props
 	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };
 	export let instance: Circle | undefined = undefined;
 
-	let preLatlng = latlng;
-	let preOptions = options;
-
-	onMount(() => {
-		console.log('zzh mount', latlng);
-		$circleStore = new Circle(latlng, options);
-		storeProps();
-	});
-
+	// store
 	let mapStore = useConsumeMap();
 	let layerGroupStore = useConsumeLayerGroup();
 	let circleStore = writable<Circle | undefined>();
 
+	// data
+	let preLatlng = latlng;
+	let preOptions = options;
+
+	onMount(() => {
+		$circleStore = new Circle(latlng, options);
+		storeProps();
+	});
+
 	$: if ($mapStore) {
 		if ($circleStore) {
+			updatetLatlng($circleStore, preLatlng, latlng);
 
-			if (latlng !== preLatlng && latlng !== undefined) {
-				console.log('zzh setlatlng', latlng);
-				$circleStore.setLatLng(latlng);
-			}
+			updateRadius($circleStore, preOptions, options);
 
-			if (options.radius !== preOptions.radius && options.radius !== undefined) {
-				$circleStore.setRadius(options.radius);
-			}
-
-			// todo latlng
-			// todo other style
-			if (options.color !== preOptions.color && options.color !== undefined) {
-				$circleStore.setStyle({ color: options.color });
-			}
+			updateStyle($circleStore, preOptions, options);
 
 			if ($layerGroupStore) {
 				$layerGroupStore.addLayer($circleStore);
@@ -50,6 +42,45 @@
 	}
 
 	$: instance = $circleStore;
+
+	function updatetLatlng(obj: Circle, preLatlng: LatLngExpression, latlng: LatLngExpression) {
+		if (latlng !== preLatlng && latlng !== undefined) {
+			obj.setLatLng(latlng);
+		}
+	}
+
+	function updateRadius(obj: Circle, preOpt: CircleOptions, opt: CircleOptions) {
+		if (opt.radius !== preOpt.radius && opt.radius !== undefined) {
+			obj.setRadius(opt.radius);
+		}
+	}
+
+	function updateStyle(obj: Circle, preOpt: CircleOptions, opt: CircleOptions) {
+		const keys: Array<keyof PathOptions> = [
+			'stroke',
+			'color',
+			'weight',
+			'opacity',
+			'lineCap',
+			'lineJoin',
+			'dashArray',
+			'dashOffset',
+			'fill',
+			'fillColor',
+			'fillOpacity',
+			'fillRule',
+			'renderer',
+			'className'
+		];
+
+		const styles: Partial<Record<keyof PathOptions, any>> = {};
+		keys.forEach((key) => {
+			if (opt[key] !== preOpt[key] && opt[key] !== undefined) {
+				styles[key] = opt[key];
+			}
+		});
+		obj.setStyle(styles);
+	}
 
 	function storeProps() {
 		preLatlng = latlng;
