@@ -35,7 +35,12 @@ export const fetchMarkdownPosts = async () => {
 			};
 		})
 	);
-	const exampleOrder: string[] = ['sveaflet-quick-start-guide', 'markers-with-custom-icons'];
+	const exampleOrder: string[] = [
+		'sveaflet-quick-start-guide',
+		'markers-with-custom-icons',
+		'using-geojson-with-sveaflet',
+		'interactive-choropleth-map'
+	];
 	const allExamples = await Promise.all(
 		iterableExampleFiles.sort(sortByList(exampleOrder)).map(async ([path, resolver]) => {
 			const { metadata } = await resolver();
@@ -49,6 +54,6 @@ export const fetchMarkdownPosts = async () => {
 	return {
 		pages: allPages,
 		components: allComponents,
-    examples: allExamples,
+		examples: allExamples
 	};
 };
