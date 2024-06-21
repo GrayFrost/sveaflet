@@ -48,15 +48,14 @@ A video overlay uses the [`<video>`](https://developer.mozilla.org/docs/Web/HTML
 ```svelte example csr
 <script>
 	import { Map, TileLayer, VideoOverlay } from 'sveaflet';
-	import { Radio } from 'flowbite-svelte';
+	import { Label, Toggle } from 'flowbite-svelte';
 
-	let autoplay = true;
+	let enableOpacity = true;
 </script>
 
 <div class="flex items-center gap-4 mb-4">
-	Autoplay:
-	<Radio bind:group={autoplay} value={true}>true</Radio>
-	<Radio bind:group={autoplay} value={false}>false</Radio>
+	<Label>Enable Opacity:</Label>
+	<Toggle bind:checked={enableOpacity} />
 </div>
 
 <div style="width: 100%; height: 500px; ">
@@ -73,8 +72,9 @@ A video overlay uses the [`<video>`](https://developer.mozilla.org/docs/Web/HTML
 			]}
 			options={{
 				muted: true,
-				autoplay,
-				loop: true
+				autoplay: true,
+				loop: true,
+				opacity: enableOpacity ? 0.5 : 1
 			}}
 		></VideoOverlay>
 	</Map>
