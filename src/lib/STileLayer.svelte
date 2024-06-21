@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
@@ -15,32 +15,51 @@
 
 	let tileLayer: TileLayer | undefined;
 
+	let preOptions: TileLayerOptions = {};
+
+	onMount(() => {
+		tileLayer = new TileLayer(urlTemplate, options);
+		preOptions = Object.create(options);
+	});
+
 	$: if ($mapStore) {
-		if (!tileLayer) {
-			tileLayer = new TileLayer(urlTemplate, options);
+		if (tileLayer) {
+			// TODO: how to update all options?
+			if (options.zIndex !== preOptions.zIndex && options.zIndex !== undefined) {
+				tileLayer.setZIndex(options.zIndex);
+			}
+
+			if (options.opacity !== preOptions.opacity && options.opacity !== undefined) {
+				tileLayer.setOpacity(options.opacity);
+			}
+
+			if ($controlLayerStore) {
+				if (!layerName) {
+					console.warn('Layer Name is required in ControlLayers');
+				}
+
+				if (checked) {
+					$mapStore.addLayer(tileLayer);
+				}
+
+				$controlLayerStore.addBaseLayer(tileLayer, layerName || 'Layer Name');
+				$controlLayerStore.addTo($mapStore);
+			} else {
+				tileLayer.addTo($mapStore);
+			}
+
+			preOptions = Object.create(options);
 		}
-		tileLayer.setUrl(urlTemplate);
-
-		if ($controlLayerStore) {
-			if (!layerName) {
-				console.warn('Layer Name is required in ControlLayers');
-			}
-
-			if (checked) {
-				$mapStore.addLayer(tileLayer);
-			}
-			
-			$controlLayerStore.addBaseLayer(tileLayer, layerName || 'Layer Name');
-			$controlLayerStore.addTo($mapStore);
-		} else {
-			tileLayer.addTo($mapStore);
-		}		
 	}
 
 	$: instance = tileLayer;
 
-	onDestroy(() => {
+	function reset() {
 		tileLayer?.remove();
 		tileLayer = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 </script>
