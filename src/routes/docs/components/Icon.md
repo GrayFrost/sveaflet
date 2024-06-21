@@ -46,24 +46,7 @@ Represents an icon to provide when creating a marker.
 <script>
 	import { onMount } from 'svelte';
 	import { Map, TileLayer, Marker, Icon } from 'sveaflet';
-	import { Radio } from 'flowbite-svelte';
-
-	let iconUrls =  {
-		green: '/images/leaf-green.png',
-		red: '/images/leaf-red.png',
-		orange: '/images/leaf-orange.png'
-	};
-
-	let color = 'green';
-
-	$: iconUrl = iconUrls[color];
 </script>
-
-<div class="flex items-center gap-4 mb-4">
-	<Radio bind:group={color} value="green">Green</Radio>
-	<Radio bind:group={color} value="red">Red</Radio>
-	<Radio bind:group={color} value="orange">Orange</Radio>
-</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
@@ -71,7 +54,7 @@ Represents an icon to provide when creating a marker.
 		<Marker latlng={[51.5, -0.09]}>
 			<Icon
 				options={{
-					iconUrl,
+					iconUrl: '/images/leaf-green.png',
 					shadowUrl: '/images/leaf-shadow.png',
 					iconSize: [38, 95],
 					shadowSize: [50, 64],
