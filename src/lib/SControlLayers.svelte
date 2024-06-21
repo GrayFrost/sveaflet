@@ -18,14 +18,18 @@
 
 	onMount(() => {
 		$layersStore = control.layers(undefined, undefined, options);
-		storeProps();
+		storeProps({
+			options
+		});
 	});
 
 	$: if ($mapStore) {
 		if ($layersStore) {
 			updatePosition($layersStore, preOptions, options);
 			$layersStore.addTo($mapStore);
-			storeProps();
+			storeProps({
+				options
+			});
 		}
 	}
 
@@ -41,7 +45,8 @@
 		}
 	}
 
-	function storeProps() {
+	function storeProps(props: { options: Control.LayersOptions }) {
+		const { options } = props;
 		preOptions = Object.create(options);
 	}
 

@@ -27,14 +27,16 @@
 			}
 		});
 		control = new CustomControl(options);
-		storeProps();
+		storeProps({
+			options
+		});
 	});
 
 	$: if ($mapStore) {
 		if (control) {
 			updatePosition(control, preOptions, options);
 			control.addTo($mapStore);
-			storeProps();
+			storeProps({ options });
 		}
 	}
 
@@ -46,7 +48,8 @@
 		}
 	}
 
-	function storeProps() {
+	function storeProps(props: { options: ControlOptions }) {
+		const { options } = props;
 		preOptions = Object.create(options);
 	}
 

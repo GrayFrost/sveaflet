@@ -17,14 +17,14 @@
 
 	onMount(() => {
 		zoom = control.zoom(options);
-		storeProps();
+		storeProps({ options });
 	});
 
 	$: if ($mapStore) {
 		if (zoom) {
 			updatePosition(zoom, preOptions, options);
 			zoom.addTo($mapStore);
-			storeProps();
+			storeProps({ options });
 		}
 	}
 
@@ -40,7 +40,8 @@
 		}
 	}
 
-	function storeProps() {
+	function storeProps(props: { options: Control.ZoomOptions }) {
+		const { options } = props;
 		preOptions = Object.create(options);
 	}
 

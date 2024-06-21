@@ -41,20 +41,7 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 	import { onMount } from 'svelte';
 	import { Map, TileLayer, Marker, DivIcon } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
-
-	let classNames = {
-		red: 'red-icon',
-		blue: 'blue-icon'
-	};
-	let color = 'red';
-
-	$: className = classNames[color];
 </script>
-
-<div class="flex items-center gap-4 mb-4">
-	<Radio bind:group={color} value="red">Red</Radio>
-	<Radio bind:group={color} value="blue">Blue</Radio>
-</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
@@ -62,7 +49,7 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon
 				options={{
-					className
+					className: 'red-icon'
 				}}
 			></DivIcon>
 		</Marker>
@@ -74,11 +61,6 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 		width: 50px !important;
 		height: 50px !important;
 		background: red;
-	}
-	:global(.blue-icon) {
-		width: 50px !important;
-		height: 50px !important;
-		background: blue;
 	}
 </style>
 ```

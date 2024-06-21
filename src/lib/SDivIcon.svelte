@@ -1,35 +1,41 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { DivIcon } from 'leaflet';
 	import type { DivIconOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeMarker } from '$lib/context';
 
+	// props
 	export let options: DivIconOptions = {};
 	export let instance: DivIcon | undefined = undefined;
 
+	// store
 	let mapStore = useConsumeMap();
 	let markerStore = useConsumeMarker();
 
+	// data
 	let divIcon: DivIcon | undefined;
 	let htmlElement: HTMLElement | undefined;
 
-	$: if ($mapStore) {
-		if ($markerStore) {
-			let mergeOptions = {
-				...options
+	onMount(() => {
+		let mergeOptions = {
+			...options
+		};
+		if (htmlElement) {
+			mergeOptions = {
+				...mergeOptions,
+				html: htmlElement // override options
 			};
-			if (htmlElement) {
-				mergeOptions = {
-					...mergeOptions,
-					html: htmlElement // override options
-				};
-			}
-			reset();
-			divIcon = new DivIcon(mergeOptions);
+		}
+		divIcon = new DivIcon(mergeOptions);
+	});
 
-			$markerStore.setIcon(divIcon);
-		} else {
-			console.warn('DivIcon should bind Marker.');
+	$: if ($mapStore) {
+		if (divIcon) {
+			if ($markerStore) {
+				$markerStore.setIcon(divIcon);
+			} else {
+				console.warn('DivIcon should bind Marker.');
+			}
 		}
 	}
 

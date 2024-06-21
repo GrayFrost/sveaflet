@@ -17,14 +17,14 @@
 
 	onMount(() => {
 		scale = control.scale(options);
-		storeProps();
+		storeProps({ options });
 	});
 
 	$: if ($mapStore) {
 		if (scale) {
 			updatePosition(scale, preOptions, options);
 			scale.addTo($mapStore);
-			storeProps();
+			storeProps({ options });
 		}
 	}
 
@@ -40,7 +40,8 @@
 		}
 	}
 
-	function storeProps() {
+	function storeProps(props: { options: Control.ScaleOptions }) {
+		const { options } = props;
 		preOptions = Object.create(options);
 	}
 
