@@ -84,7 +84,7 @@
 
 	function storeProps() {
 		preLatlng = latlng;
-		preOptions = options;
+		preOptions = Object.create(options);
 	}
 
 	function reset() {

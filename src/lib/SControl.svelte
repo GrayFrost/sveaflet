@@ -34,6 +34,7 @@
 		if (control) {
 			updatePosition(control, preOptions, options);
 			control.addTo($mapStore);
+			storeProps();
 		}
 	}
 
