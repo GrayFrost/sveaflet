@@ -1,43 +1,83 @@
 ---
+layout: componentLayout
 breadcrumb_title: Layer Groups and Layers Control
 title: Layer Groups and Layers Control
 component_title: Layer Groups and Layers Control
 dir: Examples
-description: Layer Groups and Layers Control
+description: This tutorial will show you how to group several layers into one, and how to use the layers control to allow users to easily switch different layers on your map.
 ---
 
-# Layer Groups and Layers Control
+## Example
 
 ```svelte example csr
 <script>
-	import { Map, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
+	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
 </script>
 
-<div style="width:700px;height:500px">
+<div style="width: 100%;height:500px">
 	<Map
 		options={{
-			center: [51.505, -0.09],
+			center: [39.73, -104.99],
 			zoom: 10
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<LayerGroup>
-			<Marker latlng={[39.61, -105.02]}>
-				<Popup options={{ content: 'This is Littleton, CO.' }} />
-			</Marker>
-			<Marker latlng={[39.74, -104.99]}>
-				<Popup options={{ content: 'This is Denver, CO.' }} />
-			</Marker>
-			<Marker latlng={[39.73, -104.8]}>
-				<Popup options={{ content: 'This is Aurora, CO.' }} />
-			</Marker>
-			<Marker latlng={[39.77, -105.23]}>
-				<Popup options={{ content: 'This is Golden, CO.' }} />
-			</Marker>
-		</LayerGroup>
+		<ControlLayers>
+			<TileLayer
+				layerName="OpenStreetMap"
+				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+				options={{
+					maxZoom: 19,
+					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+				}}
+				checked={true}
+			/>
+			<TileLayer
+				layerName="OpenStreetMap.HOT"
+				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
+				options={{
+					maxZoom: 19,
+					attribution:
+						'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>'
+				}}
+			/>
+			<TileLayer
+				layerName="OpenTopoMap"
+				urlTemplate={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
+				options={{
+					maxZoom: 19,
+					attribution:
+						'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+				}}
+			/>
+
+			<LayerGroup checked={true} overlayName="Cities">
+				<Marker latlng={[39.61, -105.02]}>
+					<Popup options={{ content: 'This is Littleton, CO.' }} />
+				</Marker>
+				<Marker latlng={[39.74, -104.99]}>
+					<Popup options={{ content: 'This is Denver, CO.' }} />
+				</Marker>
+				<Marker latlng={[39.73, -104.8]}>
+					<Popup options={{ content: 'This is Aurora, CO.' }} />
+				</Marker>
+				<Marker latlng={[39.77, -105.23]}>
+					<Popup options={{ content: 'This is Golden, CO.' }} />
+				</Marker>
+			</LayerGroup>
+			<LayerGroup overlayName="Parks">
+				<Marker latlng={[39.75, -105.09]}>
+					<Popup options={{ content: 'This is Crown Hill Park.' }} />
+				</Marker>
+				<Marker latlng={[39.68, -105.0]}>
+					<Popup options={{ content: 'This is Ruby Hill Park.' }} />
+				</Marker>
+			</LayerGroup>
+		</ControlLayers>
 	</Map>
 </div>
 ```
+
+## All layers in a LayerGroup
 
 ```svelte example csr
 <script>
@@ -53,6 +93,7 @@ description: Layer Groups and Layers Control
 		Polyline,
 		Rectangle
 	} from 'sveaflet';
+	import { Button, Label } from 'flowbite-svelte';
 
 	let layerGroup;
 
@@ -62,7 +103,7 @@ description: Layer Groups and Layers Control
 
 	$: if (layerGroup) {
 		layerGroup.eachLayer((layer) => {
-			layers.push(layer)
+			layers.push(layer);
 		});
 	}
 
@@ -74,7 +115,11 @@ description: Layer Groups and Layers Control
 	}
 </script>
 
-<button on:click={openPopup}>open popup</button>
+<div class="flex items-center mb-4 gap-4">
+	<Button on:click={openPopup}>Open Popup</Button>
+	<Label>one by one</Label>
+</div>
+
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
