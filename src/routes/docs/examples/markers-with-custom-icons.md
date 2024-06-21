@@ -42,15 +42,15 @@ description: In this tutorial, you’ll learn how to easily define your own icon
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={[51.5, -0.09]}>
+		<Marker latlng={[51.5, -0.09]}>
 			<Icon options={greenIconOptions} />
 			<Popup options={{ content: 'I am a green leaf.' }} />
 		</Marker>
-		<Marker latLng={[51.495, -0.083]}>
+		<Marker latlng={[51.495, -0.083]}>
 			<Icon options={redIconOptions} />
 			<Popup options={{ content: 'I am a red leaf.' }} />
 		</Marker>
-		<Marker latLng={[51.49, -0.1]}>
+		<Marker latlng={[51.49, -0.1]}>
 			<Icon options={orangeIconOptions} />
 			<Popup options={{ content: 'I am a orange leaf.' }} />
 		</Marker>

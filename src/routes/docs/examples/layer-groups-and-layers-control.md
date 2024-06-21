@@ -22,16 +22,16 @@ description: Layer Groups and Layers Control
 	>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup>
-			<Marker latLng={[39.61, -105.02]}>
+			<Marker latlng={[39.61, -105.02]}>
 				<Popup options={{ content: 'This is Littleton, CO.' }} />
 			</Marker>
-			<Marker latLng={[39.74, -104.99]}>
+			<Marker latlng={[39.74, -104.99]}>
 				<Popup options={{ content: 'This is Denver, CO.' }} />
 			</Marker>
-			<Marker latLng={[39.73, -104.8]}>
+			<Marker latlng={[39.73, -104.8]}>
 				<Popup options={{ content: 'This is Aurora, CO.' }} />
 			</Marker>
-			<Marker latLng={[39.77, -105.23]}>
+			<Marker latlng={[39.77, -105.23]}>
 				<Popup options={{ content: 'This is Golden, CO.' }} />
 			</Marker>
 		</LayerGroup>
@@ -79,11 +79,11 @@ description: Layer Groups and Layers Control
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup bind:instance={layerGroup}>
-			<Marker latLng={[51.5, -0.09]}>
+			<Marker latlng={[51.5, -0.09]}>
 				<Popup options={{ content: 'Popup in Marker.' }} />
 			</Marker>
 			<Circle
-				latLng={[51.508, -0.11]}
+				latlng={[51.508, -0.11]}
 				options={{
 					color: 'red',
 					fillColor: '#f03',
@@ -93,7 +93,7 @@ description: Layer Groups and Layers Control
 			>
 				<Popup options={{ content: 'Popup in Circle.' }} />
 			</Circle>
-			<CircleMarker latLng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
+			<CircleMarker latlng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
 				<Popup options={{ content: 'Popup in CircleMarker.' }} />
 			</CircleMarker>
 			<Polygon

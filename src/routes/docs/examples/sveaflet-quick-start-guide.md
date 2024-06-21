@@ -7,15 +7,32 @@ dir: Examples
 description: This step-by-step guide will quickly get you started on Leaflet basics, including setting up a Leaflet map, working with markers, polylines and popups, and dealing with events.
 ---
 
-## Demo
+## Example
 
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Marker, Circle, Polygon, Popup } from 'sveaflet';
+
+	let map;
+	let popup;
+	$: popupLatLng = [51.513, -0.09];
+	$: popupContent = 'I am a standalone popup.';
+
+	$: if (map) {
+		map.on('click', onMapClick);
+	}
+
+	function onMapClick(e) {
+		popupLatLng = e.latlng;
+		popupContent = 'You clicked the map at ' + e.latlng.toString();
+		if (popup) {
+			popup.openOn(map);
+		}
+	}
 </script>
 
 <div style="width: 100%;height:500px;">
-	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }} bind:instance={map}>
 		<TileLayer
 			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
@@ -23,9 +40,10 @@ description: This step-by-step guide will quickly get you started on Leaflet bas
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			}}
 		/>
-		<Popup latLng={[51.513, -0.09]} options={{ content: 'I am a standalone popup.' }} />
+		<Popup latlng={popupLatLng} options={{ content: popupContent }} />
+
 		<Circle
-			latLng={[51.508, -0.11]}
+			latlng={[51.508, -0.11]}
 			options={{
 				color: 'red',
 				fillColor: '#f03',
@@ -35,7 +53,7 @@ description: This step-by-step guide will quickly get you started on Leaflet bas
 		>
 			<Popup options={{ content: 'I am a circle.' }} />
 		</Circle>
-		<Marker latLng={[51.5, -0.09]}>
+		<Marker latlng={[51.5, -0.09]}>
 			<Popup options={{ content: '<b>Hello world!</b><br>I am a popup.' }} />
 		</Marker>
 		<Polygon
@@ -50,5 +68,3 @@ description: This step-by-step guide will quickly get you started on Leaflet bas
 	</Map>
 </div>
 ```
-
-// todo click events

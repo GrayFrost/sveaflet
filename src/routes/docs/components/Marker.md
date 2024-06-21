@@ -27,7 +27,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={[51.505, -0.09]} />
+		<Marker latlng={[51.505, -0.09]} />
 	</Map>
 </div>
 ```
@@ -50,7 +50,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={[51.505, -0.09]} options={{ opacity: enableOpacity ? 0.5 : 1 }} />
+		<Marker latlng={[51.505, -0.09]} options={{ opacity: enableOpacity ? 0.5 : 1 }} />
 	</Map>
 </div>
 ```
@@ -65,7 +65,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={[51.505, -0.09]}>
+		<Marker latlng={[51.505, -0.09]}>
 			<Popup options={{ content: 'Popup in Marker.' }} />
 		</Marker>
 	</Map>
@@ -76,5 +76,5 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 | Prop name | Description  | Type                                                                | Default                        |
 | --------- | ------------ | ------------------------------------------------------------------- | ------------------------------ |
-| latLng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)               |                                |
+| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)               |                                |
 | options   | **Optional** | [MarkerOptions](https://leafletjs.com/reference.html#marker-option) | `{ icon: new Icon.Default() }` |

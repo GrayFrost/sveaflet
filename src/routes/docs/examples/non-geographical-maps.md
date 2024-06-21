@@ -30,10 +30,10 @@ description: Sometimes, maps do not represent things on the surface of the earth
 <div style="width: 600px; height: 400px; ">
 	<Map options={{ crs: L.CRS.Simple, minZoom: -3, center: [70, 120], zoom: 1 }}>
 		<ImageOverlay {imageUrl} {bounds} />
-		<Marker latLng={sol}><Popup options={{ content: 'Sol' }} /></Marker>
-		<Marker latLng={mizar}><Popup options={{ content: 'Mizar' }} /></Marker>
-		<Marker latLng={kruegerZ}><Popup options={{ content: 'Krueger-Z' }} /></Marker>
-		<Marker latLng={deneb}><Popup options={{ content: 'Deneb' }} /></Marker>
+		<Marker latlng={sol}><Popup options={{ content: 'Sol' }} /></Marker>
+		<Marker latlng={mizar}><Popup options={{ content: 'Mizar' }} /></Marker>
+		<Marker latlng={kruegerZ}><Popup options={{ content: 'Krueger-Z' }} /></Marker>
+		<Marker latlng={deneb}><Popup options={{ content: 'Deneb' }} /></Marker>
 		<Polyline latLngs={[sol, deneb]} />
 	</Map>
 </div>
