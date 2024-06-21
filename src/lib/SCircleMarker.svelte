@@ -6,7 +6,7 @@
 	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
-	export let latlng: LatLngExpression;
+	export let latLng: LatLngExpression;
 	export let options: CircleMarkerOptions = { radius: 10 };
 	export let instance: CircleMarker | undefined = undefined;
 
@@ -16,20 +16,20 @@
 	let circleMarkerStore = writable<CircleMarker | undefined>();
 
 	// data
-	let preLatlng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 
 	onMount(() => {
-		$circleMarkerStore = new CircleMarker(latlng, options);
+		$circleMarkerStore = new CircleMarker(latLng, options);
 		storeProps({
-			latlng,
+			latLng,
 			options
 		});
 	});
 
 	$: if ($mapStore) {
 		if ($circleMarkerStore) {
-			updatetLatlng($circleMarkerStore, preLatlng, latlng);
+			updatetLatLng($circleMarkerStore, preLatLng, latLng);
 
 			updateRadius($circleMarkerStore, preOptions, options);
 
@@ -41,7 +41,7 @@
 				$circleMarkerStore.addTo($mapStore);
 			}
 			storeProps({
-				latlng,
+				latLng,
 				options
 			});
 		}
@@ -49,9 +49,9 @@
 
 	$: instance = $circleMarkerStore;
 
-	function updatetLatlng(obj: CircleMarker, preLatlng: LatLngExpression, latlng: LatLngExpression) {
-		if (latlng !== preLatlng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+	function updatetLatLng(obj: CircleMarker, preLatLng: LatLngExpression, latLng: LatLngExpression) {
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -88,9 +88,9 @@
 		obj.setStyle(styles);
 	}
 
-	function storeProps(props: { latlng: LatLngExpression; options: CircleMarkerOptions }) {
-		const { latlng, options } = props;
-		preLatlng = latlng;
+	function storeProps(props: { latLng: LatLngExpression; options: CircleMarkerOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 

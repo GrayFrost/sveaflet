@@ -5,7 +5,7 @@
 	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
 	// props
-	export let latlng: LatLngExpression | undefined = undefined;
+	export let latLng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {};
 	export let instance: Popup | undefined = undefined;
 
@@ -16,7 +16,7 @@
 	// data
 	let popup: Popup | undefined;
 	let htmlElement: HTMLElement | undefined;
-	let preLatlng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 
 	onMount(() => {
@@ -29,16 +29,16 @@
 				content: htmlElement
 			};
 		}
-		popup = latlng ? new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
+		popup = latLng ? new Popup(latLng, mergeOptions) : new Popup(mergeOptions);
 		storeProps({
-			latlng,
+			latLng,
 			options: mergeOptions
 		});
 	});
 
 	$: if ($mapStore) {
 		if (popup) {
-			updateLatLng(popup, preLatlng, latlng);
+			updateLatLng(popup, preLatLng, latLng);
 			updateContent(popup, preOptions, options);
 
 			if (!$layerStore) {
@@ -49,7 +49,7 @@
 			}
 		}
 		storeProps({
-			latlng,
+			latLng,
 			options
 		});
 	}
@@ -58,11 +58,11 @@
 
 	function updateLatLng(
 		obj: Popup,
-		preLatlng: LatLngExpression | undefined,
-		latlng: LatLngExpression | undefined
+		preLatLng: LatLngExpression | undefined,
+		latLng: LatLngExpression | undefined
 	) {
-		if (latlng !== preLatlng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -72,9 +72,9 @@
 		}
 	}
 
-	function storeProps(props: { latlng: LatLngExpression | undefined; options: PopupOptions }) {
-		const { latlng, options } = props;
-		preLatlng = latlng;
+	function storeProps(props: { latLng: LatLngExpression | undefined; options: PopupOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 

@@ -30,7 +30,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
-			latlngs={[
+			latLngs={[
 				[51.509, -0.08],
 				[51.503, -0.06],
 				[51.51, -0.047]
@@ -60,7 +60,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
-			latlngs={[
+			latLngs={[
 				[51.509, -0.08],
 				[51.503, -0.06],
 				[51.51, -0.047]
@@ -84,7 +84,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
-			latlngs={[
+			latLngs={[
 				[51.509, -0.08],
 				[51.503, -0.06],
 				[51.51, -0.047]
@@ -100,5 +100,5 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 | Prop name | Description  | Type                                                                    | Default |
 | --------- | ------------ | ----------------------------------------------------------------------- | ------- |
-| latlngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[]                 |         |
+| latLngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)[]                 |         |
 | options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |

@@ -117,5 +117,5 @@ A video overlay uses the [`<video>`](https://developer.mozilla.org/docs/Web/HTML
 | Prop name | Description                                                | Type                                                                                | Default |
 | --------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------- |
 | video     | **Required**. **Optional** when provide video element slot | string \| string[]                                                                  | `[]`    |
-| bounds    | **Required**                                               | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds)                   |         |
+| bounds    | **Required**                                               | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)                   |         |
 | options   | **Optional**                                               | [Control.LayersOptions](https://leafletjs.com/reference.html#control-layers-option) | `{}`    |

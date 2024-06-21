@@ -27,7 +27,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} />
+		<Marker latLng={[51.505, -0.09]} />
 	</Map>
 </div>
 ```
@@ -37,20 +37,20 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Marker } from 'sveaflet';
-	import { Button } from 'flowbite-svelte';
+	import { Label, Toggle } from 'flowbite-svelte';
 
-	let draggable = false;
-
-	function toggleDrag() {
-		draggable = !draggable;
-	}
+	let enableOpacity = true;
 </script>
 
-<Button on:click={toggleDrag}>toggle drag</Button> {draggable}
+<div class="flex items-center gap-4 mb-4">
+	<Label>Enable Opacity:</Label>
+	<Toggle bind:checked={enableOpacity} />
+</div>
+
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} options={{ title: 'Marker Title', draggable: draggable }} />
+		<Marker latLng={[51.505, -0.09]} options={{ opacity: enableOpacity ? 0.5 : 1 }} />
 	</Map>
 </div>
 ```
@@ -65,7 +65,7 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]}>
+		<Marker latLng={[51.505, -0.09]}>
 			<Popup options={{ content: 'Popup in Marker.' }} />
 		</Marker>
 	</Map>
@@ -76,5 +76,5 @@ Marker Component is used to display clickable/draggable icons on the map. Extend
 
 | Prop name | Description  | Type                                                                | Default                        |
 | --------- | ------------ | ------------------------------------------------------------------- | ------------------------------ |
-| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)               |                                |
+| latLng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)               |                                |
 | options   | **Optional** | [MarkerOptions](https://leafletjs.com/reference.html#marker-option) | `{ icon: new Icon.Default() }` |

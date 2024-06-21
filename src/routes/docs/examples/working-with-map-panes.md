@@ -19,7 +19,7 @@ description: TODO
 	$: miniMap?.on('click', onClickMiniMap);
 
 	function onClickMiniMap(e) {
-		parentMap.setView(e.latlng, parentMap.getZoom());
+		parentMap.setView(e.latLng, parentMap.getZoom());
 	}
 
 	function onChangeParentMap() {

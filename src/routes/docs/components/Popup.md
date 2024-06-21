@@ -28,7 +28,7 @@ Used to open popups in certain places of the map.
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup
-			latlng={[51.5, -0.09]}
+			latLng={[51.5, -0.09]}
 			options={{
 				content: 'Popup Content.'
 			}}
@@ -47,7 +47,7 @@ Used to open popups in certain places of the map.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Popup latlng={[51.5, -0.09]}>
+		<Popup latLng={[51.5, -0.09]}>
 			<div style="color:red;">Popup Content.</div>
 		</Popup>
 	</Map>
@@ -73,7 +73,7 @@ Used to open popups in certain places of the map.
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup
-			latlng={[51.5, -0.09]}
+			latLng={[51.5, -0.09]}
 			options={{
 				content
 			}}
@@ -102,11 +102,11 @@ Used to open popups in certain places of the map.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.5, -0.09]}>
+		<Marker latLng={[51.5, -0.09]}>
 			<Popup options={{ content: 'Popup in Marker.' }} />
 		</Marker>
 		<Circle
-			latlng={[51.508, -0.11]}
+			latLng={[51.508, -0.11]}
 			options={{
 				color: 'red',
 				fillColor: '#f03',
@@ -116,11 +116,11 @@ Used to open popups in certain places of the map.
 		>
 			<Popup options={{ content: 'Popup in Circle.' }} />
 		</Circle>
-		<CircleMarker latlng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
+		<CircleMarker latLng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
 			<Popup options={{ content: 'Popup in CircleMarker.' }} />
 		</CircleMarker>
 		<Polygon
-			latlngs={[
+			latLngs={[
 				[51.509, -0.08],
 				[51.503, -0.06],
 				[51.51, -0.047]
@@ -129,7 +129,7 @@ Used to open popups in certain places of the map.
 			<Popup options={{ content: 'Popup in Polygon.' }} />
 		</Polygon>
 		<Polyline
-			latlngs={[
+			latLngs={[
 				[51.512, -0.09],
 				[51.515, -0.1],
 				[51.52, -0.11]
@@ -151,5 +151,5 @@ Used to open popups in certain places of the map.
 
 | Prop name | Description                                                                           | Type                                                              | Default |
 | --------- | ------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ------- |
-| latlng    | **Required** when used directly in Map. **Optional** when used in any Layer Component | [LatLng](https://leafletjs.com/reference.html#latlng)             |         |
+| latLng    | **Required** when used directly in Map. **Optional** when used in any Layer Component | [LatLng](https://leafletjs.com/reference.html#latLng)             |         |
 | options   | **Optional**                                                                          | [PopupOptions](https://leafletjs.com/reference.html#popup-option) | `{}`    |

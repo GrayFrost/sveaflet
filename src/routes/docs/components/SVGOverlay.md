@@ -82,5 +82,5 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 
 | Prop name    | Description  | Type                                                                    | Default |
 | ------------ | ------------ | ----------------------------------------------------------------------- | ------- |
-| bounds | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latlngbounds)       |         |
+| bounds | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)       |         |
 | options      | **Optional** | [ImageOverlayOptions](https://leafletjs.com/reference.html#imageoverlay-option) | `{}`    |

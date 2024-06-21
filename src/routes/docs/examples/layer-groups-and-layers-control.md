@@ -22,16 +22,16 @@ description: Layer Groups and Layers Control
 	>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup>
-			<Marker latlng={[39.61, -105.02]}>
+			<Marker latLng={[39.61, -105.02]}>
 				<Popup options={{ content: 'This is Littleton, CO.' }} />
 			</Marker>
-			<Marker latlng={[39.74, -104.99]}>
+			<Marker latLng={[39.74, -104.99]}>
 				<Popup options={{ content: 'This is Denver, CO.' }} />
 			</Marker>
-			<Marker latlng={[39.73, -104.8]}>
+			<Marker latLng={[39.73, -104.8]}>
 				<Popup options={{ content: 'This is Aurora, CO.' }} />
 			</Marker>
-			<Marker latlng={[39.77, -105.23]}>
+			<Marker latLng={[39.77, -105.23]}>
 				<Popup options={{ content: 'This is Golden, CO.' }} />
 			</Marker>
 		</LayerGroup>
@@ -79,11 +79,11 @@ description: Layer Groups and Layers Control
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup bind:instance={layerGroup}>
-			<Marker latlng={[51.5, -0.09]}>
+			<Marker latLng={[51.5, -0.09]}>
 				<Popup options={{ content: 'Popup in Marker.' }} />
 			</Marker>
 			<Circle
-				latlng={[51.508, -0.11]}
+				latLng={[51.508, -0.11]}
 				options={{
 					color: 'red',
 					fillColor: '#f03',
@@ -93,11 +93,11 @@ description: Layer Groups and Layers Control
 			>
 				<Popup options={{ content: 'Popup in Circle.' }} />
 			</Circle>
-			<CircleMarker latlng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
+			<CircleMarker latLng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
 				<Popup options={{ content: 'Popup in CircleMarker.' }} />
 			</CircleMarker>
 			<Polygon
-				latlngs={[
+				latLngs={[
 					[51.509, -0.08],
 					[51.503, -0.06],
 					[51.51, -0.047]
@@ -106,7 +106,7 @@ description: Layer Groups and Layers Control
 				<Popup options={{ content: 'Popup in Polygon.' }} />
 			</Polygon>
 			<Polyline
-				latlngs={[
+				latLngs={[
 					[51.512, -0.09],
 					[51.515, -0.1],
 					[51.52, -0.11]
