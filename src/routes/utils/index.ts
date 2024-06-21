@@ -40,7 +40,8 @@ export const fetchMarkdownPosts = async () => {
 		'markers-with-custom-icons',
 		'using-geojson-with-sveaflet',
 		'interactive-choropleth-map',
-		'layer-groups-and-layers-control'
+		'layer-groups-and-layers-control',
+		'zoom-levels'
 	];
 	const allExamples = await Promise.all(
 		iterableExampleFiles.sort(sortByList(exampleOrder)).map(async ([path, resolver]) => {
