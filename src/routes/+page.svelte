@@ -25,7 +25,7 @@
 			}}
 		>
 			<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-			<Marker latLng={[51.505, -0.09]}>
+			<Marker latlng={[51.505, -0.09]}>
 				<Popup
 					options={{
 						content: 'A pretty CSS popup.<br> Easily customizable.'

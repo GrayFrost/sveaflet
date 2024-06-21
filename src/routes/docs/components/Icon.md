@@ -29,7 +29,7 @@ Represents an icon to provide when creating a marker.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={[51.5, -0.09]}>
+		<Marker latlng={[51.5, -0.09]}>
 			<Icon
 				options={{
 					iconUrl: '/images/leaf-green.png'
@@ -51,7 +51,7 @@ Represents an icon to provide when creating a marker.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latLng={[51.5, -0.09]}>
+		<Marker latlng={[51.5, -0.09]}>
 			<Icon
 				options={{
 					iconUrl: '/images/leaf-green.png',

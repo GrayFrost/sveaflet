@@ -97,5 +97,5 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 
 | Prop name | Description  | Type                                                                    | Default |
 | --------- | ------------ | ----------------------------------------------------------------------- | ------- |
-| latLngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)[]                 |         |
+| latLngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[]                 |         |
 | options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |

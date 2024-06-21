@@ -6,7 +6,7 @@
 	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
-	export let latLng: LatLngExpression;
+	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };
 	export let instance: Circle | undefined = undefined;
 
@@ -16,20 +16,20 @@
 	let circleStore = writable<Circle | undefined>();
 
 	// data
-	let preLatLng = latLng;
+	let preLatLng = latlng;
 	let preOptions = options;
 
 	onMount(() => {
-		$circleStore = new Circle(latLng, options);
+		$circleStore = new Circle(latlng, options);
 		storeProps({
-			latLng,
+			latlng,
 			options
 		});
 	});
 
 	$: if ($mapStore) {
 		if ($circleStore) {
-			updatetLatLng($circleStore, preLatLng, latLng);
+			updatetLatLng($circleStore, preLatLng, latlng);
 
 			updateRadius($circleStore, preOptions, options);
 
@@ -41,7 +41,7 @@
 				$circleStore.addTo($mapStore);
 			}
 			storeProps({
-				latLng,
+				latlng,
 				options
 			});
 		}
@@ -49,9 +49,9 @@
 
 	$: instance = $circleStore;
 
-	function updatetLatLng(obj: Circle, preLatLng: LatLngExpression, latLng: LatLngExpression) {
-		if (latLng !== preLatLng && latLng !== undefined) {
-			obj.setLatLng(latLng);
+	function updatetLatLng(obj: Circle, preLatLng: LatLngExpression, latlng: LatLngExpression) {
+		if (latlng !== preLatLng && latlng !== undefined) {
+			obj.setLatLng(latlng);
 		}
 	}
 
@@ -88,9 +88,9 @@
 		obj.setStyle(styles);
 	}
 
-	function storeProps(props: { latLng: LatLngExpression; options: CircleOptions }) {
-		const { latLng, options } = props;
-		preLatLng = latLng;
+	function storeProps(props: { latlng: LatLngExpression; options: CircleOptions }) {
+		const { latlng, options } = props;
+		preLatLng = latlng;
 		preOptions = Object.create(options);
 	}
 

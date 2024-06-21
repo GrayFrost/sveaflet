@@ -11,7 +11,7 @@
 	} from '$lib/context';
 
 	// props
-	export let latLng: LatLngExpression;
+	export let latlng: LatLngExpression;
 	export let options: MarkerOptions = {
 		icon: new Icon.Default()
 	};
@@ -23,20 +23,20 @@
 	let markerStore = writable<Marker | undefined>();
 
 	// data
-	let preLatLng = latLng;
+	let preLatLng = latlng;
 	let preOptions = options;
 
 	onMount(() => {
-		$markerStore = new Marker(latLng, options);
+		$markerStore = new Marker(latlng, options);
 		storeProps({
-			latLng,
+			latlng,
 			options
 		});
 	});
 
 	$: if ($mapStore) {
 		if ($markerStore) {
-			updateLatLng($markerStore, preLatLng, latLng);
+			updateLatLng($markerStore, preLatLng, latlng);
 			updateZIndexOffset($markerStore, preOptions, options);
 			updateOpacity($markerStore, preOptions, options);
 			if ($layerGroupStore) {
@@ -45,7 +45,7 @@
 				$markerStore.addTo($mapStore);
 			}
 			storeProps({
-				latLng,
+				latlng,
 				options
 			});
 		}
@@ -53,9 +53,9 @@
 
 	$: instance = $markerStore;
 
-	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latLng: LatLngExpression) {
-		if (latLng !== preLatLng && latLng !== undefined) {
-			obj.setLatLng(latLng);
+	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
+		if (latlng !== preLatLng && latlng !== undefined) {
+			obj.setLatLng(latlng);
 		}
 	}
 
@@ -71,9 +71,9 @@
 		}
 	}
 
-	function storeProps(props: { latLng: LatLngExpression; options: MarkerOptions }) {
-		const { latLng, options } = props;
-		preLatLng = latLng;
+	function storeProps(props: { latlng: LatLngExpression; options: MarkerOptions }) {
+		const { latlng, options } = props;
+		preLatLng = latlng;
 		preOptions = Object.create(options);
 	}
 

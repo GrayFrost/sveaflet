@@ -100,5 +100,5 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 | Prop name | Description  | Type                                                                    | Default |
 | --------- | ------------ | ----------------------------------------------------------------------- | ------- |
-| latLngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latLng)[]                 |         |
+| latLngs   | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)[]                 |         |
 | options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |
