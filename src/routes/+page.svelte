@@ -5,13 +5,15 @@
 	import Marker from '$lib/SMarker.svelte';
 	import Popup from '$lib/SPopup.svelte';
 	import Footer from './utils/Footer.svelte';
+
+	let logo = '/images/sveaflet.png';
 </script>
 
 <main class="flex-auto min-w-0 lg:static lg:max-h-full lg:overflow-visible">
-	<div class="flex justify-center items-center mx-auto my-8 relative w-[256px] h-[256px]">
-		<div class="logo-bg w-[240px] h-[240px]"></div>
+	<div class="flex justify-center items-center mx-auto my-8 relative w-[240px] h-[200px]">
+		<img src={logo} alt="logo" class="w-full h-full" />
 	</div>
-	<p class="flex justify-center my-8">Svelte components for Leaflet maps</p>
+	<p class="flex justify-center my-8">Harness the power of Leaflet in Svelte</p>
 
 	<div class="flex justify-center my-8">
 		<Button href="/docs/pages/introduction">Get Started</Button>
