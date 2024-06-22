@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Polyline
 title: Polyline - Sveaflet
 component_title: Polyline
-dir: Components
+dir: components
 description: Vector Layers - Polyline
 ---
 

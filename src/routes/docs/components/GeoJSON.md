@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: GeoJSON
 title: GeoJSON - Sveaflet
 component_title: GeoJSON
-dir: Components
+dir: components
 description: Other Layers - GeoJSON
 ---
 

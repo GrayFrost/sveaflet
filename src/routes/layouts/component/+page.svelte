@@ -12,6 +12,7 @@
 
 <script>
 	import Footer from '../../utils/Footer.svelte';
+	import MetaTag from '../../utils/MetaTag.svelte';
 	import Toc from '../../utils/Toc.svelte';
 	import PageHeadSection from '../../utils/PageHeadSection.svelte';
 	import { extract } from './Anchor.svelte';
@@ -28,6 +29,8 @@
 	breadcrumb_title;
 	component_title;
 </script>
+
+<MetaTag {breadcrumb_title} {title} {dir} {description} />
 
 <div class="flex w-full">
 	<div

@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: ImageOverlay
 title: ImageOverlay - Sveaflet
 component_title: ImageOverlay
-dir: Components
+dir: components
 description: Raster Layers - ImageOverlay
 ---
 

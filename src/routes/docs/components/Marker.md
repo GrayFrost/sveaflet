@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Marker
 title: Marker - Sveaflet
 component_title: Marker
-dir: Components
+dir: components
 description: UI Layers - Marker
 ---
 

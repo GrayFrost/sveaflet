@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Map
 title: Map - Sveaflet
 component_title: Map
-dir: Components
+dir: components
 description: Sveaflet Map Container
 ---
 

@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: LayerGroup
 title: LayerGroup - Sveaflet
 component_title: LayerGroup
-dir: Components
+dir: components
 description: Other Layers - LayerGroup
 ---
 

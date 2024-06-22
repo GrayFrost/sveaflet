@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Tooltip
 title: Tooltip - Sveaflet
 component_title: Tooltip
-dir: Components
+dir: components
 description: UI Layers - Tooltip
 ---
 

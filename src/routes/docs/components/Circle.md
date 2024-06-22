@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Circle
 title: Circle - Sveaflet
 component_title: Circle
-dir: Components
+dir: components
 description: Vectors Layers - Circle
 ---
 

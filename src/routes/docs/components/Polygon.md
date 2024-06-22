@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Polygon
 title: Polygon - Sveaflet
 component_title: Polygon
-dir: Components
+dir: components
 description: Vector Layers - Polygon
 ---
 

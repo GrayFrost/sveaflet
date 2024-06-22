@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Popup
 title: Popup - Sveaflet
 component_title: Popup
-dir: Components
+dir: components
 description: UI Layers - Popup
 ---
 

@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Scale
 title: ControlScale - Sveaflet
 component_title: ControlScale
-dir: Components
+dir: components
 description: Controls - Scale
 ---
 

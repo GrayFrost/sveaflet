@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: VideoOverlay
 title: VideoOverlay - Sveaflet
 component_title: VideoOverlay
-dir: Components
+dir: components
 description: Raster Layers - VideoOverlay
 ---
 

@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: Zoom Levels
+breadcrumb_title: zoom-levels
 title: Zoom Levels
 component_title: Zoom Levels
-dir: Examples
+dir: examples
 description: Leaflet works with latitude, longitude and “zoom level”. Lower zoom levels means that the map shows entire continents, while higher zoom levels means that the map can show details of a city.
 ---
 

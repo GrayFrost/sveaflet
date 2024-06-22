@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: Interactive Choropleth Map
+breadcrumb_title: interactive-choropleth-map
 title: Interactive Choropleth Map
 component_title: Interactive Choropleth Map
-dir: Examples
+dir: examples
 description: This is a case study of creating a colorful interactive choropleth map of US States Population Density with the help of GeoJSON and some custom controls (that will hopefully convince all the remaining major news and government websites that do not use Leaflet yet to start doing so).
 ---
 

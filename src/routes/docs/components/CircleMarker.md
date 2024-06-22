@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: CircleMarker
 title: CircleMarker - Sveaflet
 component_title: CircleMarker
-dir: Components
+dir: components
 description: Vectors Layers - CircleMarker
 ---
 
