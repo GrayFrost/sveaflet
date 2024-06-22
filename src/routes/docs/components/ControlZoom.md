@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Zoom
 title: ControlZoom - Sveaflet
 component_title: ControlZoom
-dir: Components
+dir: components
 description: Controls - Zoom
 ---
 

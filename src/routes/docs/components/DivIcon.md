@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: DivIcon
 title: DivIcon - Sveaflet
 component_title: DivIcon
-dir: Components
+dir: components
 description: Basic Types - DivIcon
 ---
 

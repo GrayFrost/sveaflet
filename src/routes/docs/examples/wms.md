@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: WMS
+breadcrumb_title: wms
 title: WMS
 component_title: WMS
-dir: Examples
+dir: examples
 description: WMS, short for web map service, is a popular way of publishing maps by professional GIS software (and seldomly used by non-GISers). This format is similar to map tiles, but more generic and not so well optimized for use in web maps. A WMS image is defined by the coordinates of its corners - a calculation that Leaflet does under the hood.
 ---
 

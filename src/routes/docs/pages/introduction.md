@@ -1,8 +1,8 @@
 ---
-breadcrumb_title: Sveaflet
+breadcrumb_title: introduction
 title: Sveaflet
 component_title: Introduction
-dir: Pages
+dir: pages
 description: TODO TODO
 ---
 

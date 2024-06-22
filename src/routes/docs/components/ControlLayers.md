@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Layers
 title: ControlLayers - Sveaflet
 component_title: ControlLayers
-dir: Components
+dir: components
 description: Controls - Layers
 ---
 

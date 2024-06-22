@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Icon
 title: Icon - Sveaflet
 component_title: Icon
-dir: Components
+dir: components
 description: Basic Types - Icon
 ---
 

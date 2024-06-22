@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: Layer Groups and Layers Control
+breadcrumb_title: layer-groups-and-layers-control
 title: Layer Groups and Layers Control
 component_title: Layer Groups and Layers Control
-dir: Examples
+dir: examples
 description: This tutorial will show you how to group several layers into one, and how to use the layers control to allow users to easily switch different layers on your map.
 ---
 

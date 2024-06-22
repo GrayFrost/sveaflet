@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Rectangle
 title: Rectangle - Sveaflet
 component_title: Rectangle
-dir: Components
+dir: components
 description: Vector Layers - Rectangle
 ---
 

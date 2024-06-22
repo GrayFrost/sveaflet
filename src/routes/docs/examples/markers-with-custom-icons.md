@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: Markers With Custom Icons
+breadcrumb_title: markers-with-custom-icons
 title: Markers With Custom Icons
 component_title: Markers With Custom Icons
-dir: Examples
+dir: examples
 description: In this tutorial, you’ll learn how to easily define your own icons for use by the markers you put on the map.
 ---
 

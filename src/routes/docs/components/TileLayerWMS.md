@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: TileLayerWMS
 title: TileLayerWMS - Sveaflet
 component_title: TileLayerWMS
-dir: Components
+dir: components
 description: TileLayerWMS
 ---
 

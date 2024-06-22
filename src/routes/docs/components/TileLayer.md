@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: TileLayer
 title: TileLayer - Sveaflet
 component_title: TileLayer
-dir: Components
+dir: components
 description: Raster Layers - TileLayer
 ---
 

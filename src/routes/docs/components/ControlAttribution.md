@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: Attribution
 title: ControlAttribution - Sveaflet
 component_title: ControlAttribution
-dir: Components
+dir: components
 description: Controls - Attribution
 ---
 

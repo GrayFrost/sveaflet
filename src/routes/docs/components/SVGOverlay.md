@@ -3,7 +3,7 @@ layout: componentLayout
 breadcrumb_title: SVGOverlay
 title: SVGOverlay - Sveaflet
 component_title: SVGOverlay
-dir: Components
+dir: components
 description: Vector Layers - SVGOverlay
 ---
 

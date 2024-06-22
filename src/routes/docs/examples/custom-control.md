@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: Custom Control
+breadcrumb_title: custom-control
 title: Custom Control
 component_title: Custom Control
-dir: Examples
+dir: examples
 description: A custom control displaying a miniature map
 ---
 

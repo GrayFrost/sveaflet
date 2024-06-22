@@ -1,9 +1,9 @@
 ---
 layout: componentLayout
-breadcrumb_title: Non-geographical maps
+breadcrumb_title: non-geographical-maps
 title: Non-geographical maps
 component_title: Non-geographical maps
-dir: Examples
+dir: examples
 description: Sometimes, maps do not represent things on the surface of the earth and, as such, do not have a concept of geographical latitude and geographical longitude. Most times this refers to big scanned images, such as game maps.
 ---
 
