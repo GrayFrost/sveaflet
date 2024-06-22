@@ -16,8 +16,7 @@
 			'GitHub Issues': 'https://github.com/GrayFrost/sveaflet/issues'
 		},
 		Legal: {
-			License: 'todo',
-			'Brand usage': 'todo'
+			License: 'https://github.com/GrayFrost/sveaflet/blob/main/LICENSE'
 		}
 	};
 </script>
@@ -32,14 +31,16 @@
 			<div class="w-full max-w-sm">
 				<!-- <FooterBrand href="https://flowbite-svelte.com" src={logo} alt="Flowbite Svelte Logo" name="Flowbite Svelte" class="text-gray-900 dark:text-white" /> -->
 				<p class="max-w-sm mb-3 text-gray-600 dark:text-gray-400 mt-4">
-					Svelte Svelte Svelte Svelte Svelte Svelte Svelte Svelte Svelte Svelte Svelte Svelte
+					Sveaflet is an open-source Map component library built with Svelte components and Leaflet that can help you build your map page faster.
 				</p>
 				<p class="max-w-sm mb-3 text-gray-600 dark:text-gray-400">
 					Code licensed
-					<a href="todo" class="text-primary-600 hover:underline"> todo </a>
-					, docs
-					<a href="todo" class="text-primary-600 hover:underline"> todo</a>
-					.
+					<a
+						href="https://github.com/GrayFrost/sveaflet/blob/main/LICENSE"
+						class="text-primary-600 hover:underline"
+					>
+						MIT
+					</a>
 				</p>
 			</div>
 			<div

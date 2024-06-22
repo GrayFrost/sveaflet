@@ -41,7 +41,9 @@ export const fetchMarkdownPosts = async () => {
 		'using-geojson-with-sveaflet',
 		'interactive-choropleth-map',
 		'layer-groups-and-layers-control',
-		'zoom-levels'
+		'zoom-levels',
+		'non-geographical-maps',
+		'wms'
 	];
 	const allExamples = await Promise.all(
 		iterableExampleFiles.sort(sortByList(exampleOrder)).map(async ([path, resolver]) => {

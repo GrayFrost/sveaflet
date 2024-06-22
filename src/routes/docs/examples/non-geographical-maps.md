@@ -7,7 +7,7 @@ dir: Examples
 description: Sometimes, maps do not represent things on the surface of the earth and, as such, do not have a concept of geographical latitude and geographical longitude. Most times this refers to big scanned images, such as game maps.
 ---
 
-## Demo
+## Example
 
 ```svelte example csr
 <script>
