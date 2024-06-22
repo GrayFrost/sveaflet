@@ -38,12 +38,18 @@ A TileLayer is required. Options `{center, zoom}` are required.
 ```svelte example csr
 <script>
 	import { Map, TileLayer } from 'sveaflet';
+	import { Input, Label } from 'flowbite-svelte';
+
+	let zoom = 13;
 </script>
 
+<div class="flex items-center gap-4 mb-4">
+	<Label class="w-24">Zoom Level:</Label>
+	<Input type="number" bind:value={zoom} />
+</div>
+
 <div style="width: 100%;height:500px">
-	<Map
-		options={{ center: [51.505, -0.09], zoom: 13, zoomControl: false, attributionControl: false }}
-	>
+	<Map options={{ center: [51.505, -0.09], zoom, zoomControl: false, attributionControl: false }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 	</Map>
 </div>

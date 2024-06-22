@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import { writable } from 'svelte/store';
 	import { Map, Icon } from 'leaflet';
 	import type { MapOptions } from 'leaflet';
@@ -17,43 +17,66 @@
 		shadowUrl: markerShadow
 	});
 
+	// props
 	export let options: MapOptions = {};
 	export let instance: Map | undefined = undefined;
 
-	let dispatch = createEventDispatcher();
-
+	// store
 	let mapStore = writable<Map | undefined>();
 
+	// data
 	let mapContainer: HTMLElement;
-	
+	let preOptions = options;
+
 	onMount(() => {
 		if (!$mapStore) {
 			$mapStore = new Map(mapContainer, options);
+			storeProps({
+				options
+			});
 		}
-
-		// todo events
-		$mapStore.on('click', (e) => {
-			dispatch('click', e);
-		});
-		$mapStore.on('move', (e) => {
-			dispatch('move', e);
-		});
-		$mapStore.on('zoom', (e) => {
-			dispatch('zoom', e);
-		});
 	});
+
+	$: if ($mapStore) {
+		updateView($mapStore, preOptions, options);
+		updateZoom($mapStore, preOptions, options);
+		storeProps({
+			options
+		});
+	}
 
 	$: instance = $mapStore;
 
-	onDestroy(() => {
+	function updateView(obj: Map, preOpt: MapOptions, opt: MapOptions) {
+		if (opt.center !== preOpt.center && opt.center !== undefined) {
+			obj.setView(opt.center);
+		}
+	}
+
+	function updateZoom(obj: Map, preOpt: MapOptions, opt: MapOptions) {
+		if (opt.zoom !== preOpt.zoom && opt.zoom !== undefined) {
+			obj.setZoom(opt.zoom);
+		}
+	}
+
+	function storeProps(props: { options: MapOptions }) {
+		const { options } = props;
+		preOptions = Object.create(options);
+	}
+
+	function reset() {
 		$mapStore?.remove();
 		$mapStore = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
 	});
 
 	useProvideMap(mapStore);
 </script>
 
-<div id="sveaflet-map" style="width:100%;height:100%" bind:this={mapContainer}>
+<div style="width:100%;height:100%" bind:this={mapContainer}>
 	{#if $mapStore}
 		<slot />
 	{/if}
