@@ -81,4 +81,3 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 | latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)                           |                  |
 | options   | **Optional** | [CircleMarkerOptions](https://leafletjs.com/reference.html#circlemarker-option) | `{ radius: 10 }` |
 
-## Events

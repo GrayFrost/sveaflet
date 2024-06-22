@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from 'flowbite-svelte';
+	import type { Marker as MarkerType } from 'leaflet';
 	import Map from '$lib/SMap.svelte';
 	import TileLayer from '$lib/STileLayer.svelte';
 	import Marker from '$lib/SMarker.svelte';
@@ -7,6 +8,11 @@
 	import Footer from './utils/Footer.svelte';
 
 	let logo = '/images/sveaflet.png';
+	let marker: MarkerType;
+
+	$: if(marker) {
+		marker.openPopup();
+	}
 </script>
 
 <main class="flex-auto min-w-0 lg:static lg:max-h-full lg:overflow-visible">
@@ -19,7 +25,7 @@
 		<Button href="/docs/pages/introduction">Get Started</Button>
 	</div>
 
-	<div class="h-[320px] px-4 lg:h-[500px] lg:px-20 md:h-[320px] md:px-10 my-8">
+	<div class="h-[320px] px-4 lg:h-[500px] lg:px-20 md:h-[320px] md:px-10 my-8 mx-auto max-w-[90rem] py-8 ">
 		<Map
 			options={{
 				center: [51.505, -0.09],
@@ -27,11 +33,12 @@
 			}}
 		>
 			<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-			<Marker latlng={[51.505, -0.09]}>
+			<Marker latlng={[51.505, -0.09]} bind:instance={marker}>
 				<Popup
 					options={{
-						content: 'A pretty CSS popup.<br> Easily customizable.'
+						content: 'Hello Sveaflet.'
 					}}
+					
 				></Popup>
 			</Marker>
 		</Map>

@@ -99,4 +99,3 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 | latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)               |                   |
 | options   | **Optional** | [CircleOptions](https://leafletjs.com/reference.html#circle-option) | `{ radius: 100 }` |
 
-## Events
