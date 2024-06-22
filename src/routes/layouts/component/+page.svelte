@@ -15,6 +15,7 @@
 	import MetaTag from '../../utils/MetaTag.svelte';
 	import Toc from '../../utils/Toc.svelte';
 	import PageHeadSection from '../../utils/PageHeadSection.svelte';
+	import Paging from '../../utils/Paging.svelte';
 	import { extract } from './Anchor.svelte';
 
 	export let /** @type {string} */ title;
@@ -39,6 +40,7 @@
 		<PageHeadSection {dir} {title} {description} />
 		<div id="mainContent" class="py-8">
 			<slot />
+			<Paging />
 		</div>
 		<Footer />
 	</div>
