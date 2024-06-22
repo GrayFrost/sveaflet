@@ -16,8 +16,6 @@
 	let controlLayerStore = useConsumeControlLayer();
 	let layerGroupStore = writable<LayerGroup | undefined>();
 
-	// data todo
-
 	onMount(() => {
 		$layerGroupStore = new LayerGroup([], options);
 	});
