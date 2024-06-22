@@ -1,7 +1,7 @@
 ---
 layout: componentLayout
 breadcrumb_title: quick-start
-title: Sveaflet
+title: Quick Start
 component_title: Quick Start
 dir: pages
 description: TODO TODO

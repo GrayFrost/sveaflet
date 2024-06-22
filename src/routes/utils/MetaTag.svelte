@@ -10,7 +10,7 @@
 </script>
 
 <MetaTags
-  title={breadcrumb_title}
+  title={title}
   titleTemplate="%s - Sveaflet"
   {description}
 
