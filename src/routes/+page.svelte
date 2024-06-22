@@ -17,7 +17,7 @@
 		<Button href="/docs/pages/introduction">Get Started</Button>
 	</div>
 
-	<div class="h-[500px] my-8 lg:px-20">
+	<div class="h-[320px] px-4 lg:h-[500px] lg:px-20 md:h-[320px] md:px-10 my-8">
 		<Map
 			options={{
 				center: [51.505, -0.09],

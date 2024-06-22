@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { afterNavigate } from '$app/navigation';
+	import { getContext } from 'svelte';
+  import type { Writable } from 'svelte/store';
 	import {
 		Sidebar,
 		SidebarGroup,
@@ -13,6 +15,11 @@
 	export let data: any; // todo typescript
 
 	const posts: Record<string, any[]> = data.posts;
+	const drawerHidden: Writable<boolean> = getContext('drawer');
+
+	const closeDrawer = () => {
+		drawerHidden.set(true);
+	};
 
 	const names_mapping: Record<string, string> = {
 		pages: 'Getting Started'
@@ -25,7 +32,7 @@
 
 	afterNavigate((navigation) => {
 		document.getElementById('svelte')?.scrollTo({ top: 0 });
-		// closeDrawer();
+		closeDrawer();
 
 		activeMainSidebar = navigation.to?.url.pathname ?? '';
 
@@ -41,14 +48,15 @@
 		'relative flex items-center flex-wrap font-medium cursor-default text-primary-700 dark:text-primary-700';
 
 	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
-
 </script>
 
 <Sidebar
+	class={$drawerHidden && 'hidden'}
 	{nonActiveClass}
 	activeUrl={mainSidebarUrl}
-	asideClass="fixed inset-0 z-30 flex-none h-full w-64 lg:static lg:h-auto border-e border-gray-200 dark:border-gray-600 lg:overflow-y-visible lg:pt-0 lg:block"
+	asideClass="fixed inset-0 z-1001 flex-none h-full w-64 lg:static lg:h-auto border-e border-gray-200 dark:border-gray-600 lg:overflow-y-visible lg:pt-0 lg:block"
 >
+	<h4 id="sidebar-label" class="sr-only">Browse docs</h4>
 	<SidebarWrapper
 		divClass="overflow-y-auto px-4 pt-20 lg:pt-0 h-full bg-white scrolling-touch max-w-2xs lg:h-[calc(100vh-8rem)] lg:block dark:bg-gray-900 lg:me-0 lg:sticky top-20"
 	>
@@ -85,6 +93,14 @@
 		</nav>
 	</SidebarWrapper>
 </Sidebar>
+
+<div
+	hidden={$drawerHidden}
+	class="fixed inset-0 z-20 bg-gray-900/50 dark:bg-gray-900/60"
+	on:click={closeDrawer}
+	on:keydown={closeDrawer}
+	role="presentation"
+/>
 
 <main class="flex-auto w-full min-w-0 lg:static lg:max-h-full lg:overflow-visible">
 	<slot />
