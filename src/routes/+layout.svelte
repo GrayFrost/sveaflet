@@ -29,6 +29,7 @@
 	let divClass = 'w-full ms-auto lg:block lg:w-auto order-1 lg:order-none';
 	let ulClass =
 		'flex flex-col py-3 my-4 lg:flex-row lg:my-0 text-sm font-medium text-gray-900 dark:text-gray-300 gap-4';
+	let logo = '/images/sveaflet.png';
 
 	NProgress.configure({
 		minimum: 0.16,
@@ -65,7 +66,7 @@
 			<NavHamburger onClick={toggleDrawer} class="m-0 me-3 md:block lg:hidden" />
 		</span>
 		<NavBrand href="/">
-			<!-- <img src={logo} class="me-3 h-8" alt="Flowbite Svelte Logo" /> -->
+			<img src={logo} class="me-3 h-8" alt="Sveaflet Logo" />
 			<span
 				class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white sveaflet-text"
 			>
@@ -98,16 +99,17 @@
 			>
 				<GitHub />
 			</ToolbarButton>
-			<Tooltip class="dark:bg-gray-900" placement="bottom">View on Github</Tooltip>
 			<DarkMode size="lg" class="inline-block dark:hover:text-white hover:text-gray-900" />
-			<Tooltip class="dark:bg-gray-900" placement="bottom-end">Toggle dark mode</Tooltip>
 		</div>
 
 		<a href="todo" class="hidden sm:block">
-      <DocBadge large class="ms-2 xl:ms-6 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-800 dark:hover:text-white">
-        v{version}
-      </DocBadge>
-    </a>
+			<DocBadge
+				large
+				class="ms-2 xl:ms-6 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-800 dark:hover:text-white"
+			>
+				v{version}
+			</DocBadge>
+		</a>
 
 		<NavHamburger
 			on:click={toggle}
