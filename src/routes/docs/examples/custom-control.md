@@ -30,6 +30,7 @@ description: A custom control displaying a miniature map
 	}
 
 	$: if (parentMap) {
+		parentMap.on('move', onChangeParentMap).on('zoom', onChangeParentMap);
 		bounds = parentMap.getBounds();
 	}
 </script>
@@ -38,8 +39,6 @@ description: A custom control displaying a miniature map
 	<Map
 		options={{ center: [51.505, -0.09], zoom: 6, scrollWheelZoom: false }}
 		bind:instance={parentMap}
-		on:move={onChangeParentMap}
-		on:zoom={onChangeParentMap}
 	>
 		<TileLayer
 			options={{

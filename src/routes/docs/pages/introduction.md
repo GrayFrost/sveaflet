@@ -6,4 +6,8 @@ dir: Pages
 description: TODO TODO
 ---
 
-## introduction
+## Core concepts
+
+## Leaflet elements references
+
+## Limitations

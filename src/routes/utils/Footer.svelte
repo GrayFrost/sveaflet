@@ -22,7 +22,7 @@
 </script>
 
 <Footer class="bg-white dark:bg-gray-900">
-	<div class="flex flex-col py-6 lg:py-12 mx-auto max-w-8xl">
+	<div class="flex flex-col py-6 lg:py-12 mx-auto max-w-[90rem]">
 		<div
 			class="flex flex-col lg:flex-row items-start md:justify-between gap-8 {isHomePage
 				? 'px-4 lg:px-20'
