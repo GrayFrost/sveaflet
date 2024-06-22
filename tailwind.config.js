@@ -27,7 +27,8 @@ export default {
 				}
 			},
 			zIndex: {
-				1001: 1001
+				1002: 1002, // header
+				1001: 1001, // sidebar
 			}
 		}
 	}
