@@ -8,7 +8,7 @@ const sortByList = (order: string[]) => (a: [string, any], b: [string, any]) =>
 		.reduce((x, y) => (x < 0 ? 1 : y < 0 ? -1 : x - y));
 
 export const fetchMarkdownPosts = async () => {
-	const pageFiles = import.meta.glob<Mdsvex>('/src/routes/docs/pages/*.md'); // todo typescript
+	const pageFiles = import.meta.glob<Mdsvex>('/src/routes/docs/pages/*.md');
 	const componentFiles = import.meta.glob<Mdsvex>('/src/routes/docs/components/*.md');
 	const exampleFiles = import.meta.glob<Mdsvex>('/src/routes/docs/examples/*.md');
 
@@ -16,7 +16,7 @@ export const fetchMarkdownPosts = async () => {
 	const iterableComponentFiles = Object.entries(componentFiles);
 	const iterableExampleFiles = Object.entries(exampleFiles);
 
-	const pageOrder: string[] = ['introduction', 'quickstart']; // todo
+	const pageOrder: string[] = ['introduction', 'quick-start'];
 	const allPages = await Promise.all(
 		iterablePageFiles.sort(sortByList(pageOrder)).map(async ([path, resolver]) => {
 			const { metadata } = await resolver();
