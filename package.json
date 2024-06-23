@@ -89,8 +89,11 @@
 		"flowbite": "^2.3.0",
 		"flowbite-svelte": "^0.46.1",
 		"flowbite-svelte-icons": "^1.6.1",
+		"geojson": "^0.5.0",
 		"globals": "^15.0.0",
 		"mdsvex": "^0.11.0",
+		"mdsvexamples": "^0.4.1",
+		"nprogress": "^0.2.0",
 		"postcss": "^8.4.38",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
@@ -108,10 +111,5 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module",
-	"dependencies": {
-		"geojson": "^0.5.0",
-		"mdsvexamples": "^0.4.1",
-		"nprogress": "^0.2.0"
-	}
+	"type": "module"
 }
