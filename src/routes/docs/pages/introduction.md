@@ -88,3 +88,41 @@ Each Sveaflet component has its own `instance` property, through this property, 
 In this example, we open layer's popup through `marker` and `circle` instance, each component in Sveaflet has its own instance. If you encouter a problem that you can't solve only by suing Sveaflet components, just use `instance`. `instance` is same as object which is Instantiated by Leaflet component class.
 
 ## Limitations
+
+When you want to update a component through props, it will update when the props value can be `set` by leaflet object.
+For example:
+
+## Popup with slot content
+
+```svelte example csr
+<script>
+	import { Map, TileLayer, Popup } from 'sveaflet';
+	import { Radio, Label, Input } from 'flowbite-svelte';
+
+	let content = 'Popup content.';
+	let minWidth = 100;
+</script>
+
+<div class="flex items-center gap-4 mb-4">
+	<Label>Content:</Label>
+	<Input type="text" bind:value={content} maxlength={20} />
+</div>
+<div class="flex items-center gap-4 mb-4">
+	<Label>Min Width:</Label>
+	<Input type="number" bind:value={minWidth} min={100} max={200} step={10} />
+</div>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
+		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<Popup
+			latlng={[51.5, -0.09]}
+			options={{
+				content,
+				minWidth
+			}}
+		/>
+	</Map>
+</div>
+```
+You can update `options.content` but not `options.minWidth`, because popup object has `setContent()` function but doesn't have `setMinWidth()` function. Details [here](https://leafletjs.com/reference.html#divoverlay).
