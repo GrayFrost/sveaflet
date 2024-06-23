@@ -1,6 +1,14 @@
 {
 	"name": "sveaflet",
 	"version": "0.0.1",
+	"author": {
+		"name": "GrayFrost",
+		"email": "garyfrost4321@gmail.com",
+		"url": "https://github.com/GrayFrost"
+	},
+	"bugs": "https://github.com/GrayFrost/sveaflet/issues",
+	"homepage": "https://sveaflet.vercel.app/",
+	"license": "MIT",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run package",
@@ -11,14 +19,50 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"test": "vitest",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"package:publish": "npm publish"
 	},
+	"keywords": [
+		"svelte",
+		"sveltekit",
+		"leaflet",
+		"map",
+		"circle",
+		"circlemarker",
+		"control",
+		"attribution",
+		"layers",
+		"scale",
+		"zoom",
+		"divicon",
+		"geojson",
+		"icon",
+		"imageoverlay",
+		"layergroup",
+		"marker",
+		"polygon",
+		"polyline",
+		"popup",
+		"rectangle",
+		"svgoverlay",
+		"tilelayer",
+		"wms",
+		"tooltip",
+		"videooverlay"
+	],
+	"repository": {
+    "type": "git",
+    "url": "https://github.com/GrayFrost/sveaflet.git"
+  },
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		}
 	},
+	"engines": {
+    "node": ">=20.12.0"
+  },
 	"files": [
 		"dist",
 		"!dist/**/*.test.*",
