@@ -92,8 +92,6 @@ In this example, we open layer's popup through `marker` and `circle` instance, e
 When you want to update a component through props, it will update when the props value can be `set` by leaflet object.
 For example:
 
-## Popup with slot content
-
 ```svelte example csr
 <script>
 	import { Map, TileLayer, Popup } from 'sveaflet';
