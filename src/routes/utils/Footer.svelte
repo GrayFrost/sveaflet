@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { Footer, FooterLinkGroup, FooterLink } from 'flowbite-svelte';
+	import { Footer, FooterLinkGroup, FooterLink, FooterBrand } from 'flowbite-svelte';
 
+	let logo = '/images/favicon.svg';
 	let isHomePage: boolean;
 	$: isHomePage = $page.route.id === '/';
 
@@ -29,9 +30,16 @@
 				: ''}"
 		>
 			<div class="w-full max-w-sm">
-				<!-- <FooterBrand href="https://flowbite-svelte.com" src={logo} alt="Flowbite Svelte Logo" name="Flowbite Svelte" class="text-gray-900 dark:text-white" /> -->
+				<FooterBrand
+					href="https://sveaflet.vercel.app/"
+					src={logo}
+					alt="Sveaflet Logo"
+					name="Sveaflet"
+					class="text-gray-900 dark:text-white"
+				/>
 				<p class="max-w-sm mb-3 text-gray-600 dark:text-gray-400 mt-4">
-					Sveaflet is an open-source Map component library built with Svelte components and Leaflet that can help you build your map page faster.
+					Sveaflet is an open-source Map component library built with Svelte components and Leaflet
+					that can help you build your map page faster.
 				</p>
 				<p class="max-w-sm mb-3 text-gray-600 dark:text-gray-400">
 					Code licensed
