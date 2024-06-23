@@ -1,51 +1,46 @@
-# problem
-window is not defined
+# Sveaflet
 
-# WIP
+<div style="width:240px;height:200px;margin:32px auto 0;">
+<img src="https://sveaflet.vercel.app/images/sveaflet.png" alt="logo" />
+</div>
 
-## Base
+[Sveaflet](https://sveaflet.vercel.app/) is a library for the [Svelte](https://svelte.dev/) framework that wraps [Leaflet](https://leafletjs.com/) making it easy to crete reactive maps.
 
-- [x] Map
+## Installation
 
-## Basic Types
-- [x] Icon
-- [x] DivIcon
+Before install Sveaflet, you need to 
+```bash
+npm install sveaflet --save
+```
+For more detailed information you can follow the [Quick Start](https://sveaflet.vercel.app/docs/pages/quick-start).
 
-## UI Layers
+## Suportted Components
 
-- [x] Marker
-- [x] Popup
-- [x] Tooltip
+- Circle
+- CircleMarker
+- Control
+- ControlAttribution
+- ControlLayers
+- ControlScale
+- ControlZoom
+- DivIcon
+- GeoJSON
+- Icon
+- ImageOverlay
+- LayerGroup
+- Map
+- Marker
+- Polygon
+- Polyline
+- Popup
+- Rectangle
+- SVGOverlay
+- TileLayer
+- TileLayerWMS
+- Tooltip
+- VideoOverlay
 
-## Raster Layers
+More details abount [components](https://sveaflet.vercel.app/docs/components/Circle).
 
-- [x] TileLayer
-- [x] TileLayerWMS
-- [x] ImageOverlay
-- [x] VideoOverlay
-
-## Vector Layers
-
-- [x] Polyline
-- [x] Polygon
-- [x] Rectangle
-- [x] Circle
-- [x] CircleMarker
-- [x] SVGOverlay
-
-## Other Layers
-- [x] LayerGroup
-- [x] GeoJSON
-
-## Controls
-- [x] Control
-- [x] ControlAttribution
-- [x] ControlLayers
-- [x] ControlScale
-- [x] ControlZoom
-
-
-
-
-
-
+## License
+This project is licensed under the MIT License - see the [License](https://github.com/GrayFrost/sveaflet/blob/main/LICENSE) fle for details.
