@@ -105,6 +105,7 @@
 </script>
 
 {#if $$slots.default}
+  <!-- svelte-ignore a11y-media-has-caption -->
 	<video bind:this={htmlVideoElement} {...$$restProps}>
 		<slot />
 	</video>
