@@ -1,7 +1,5 @@
 # Sveaflet
 
-<img style="width:240px;height:200px;margin:32px auto 0;" src="https://sveaflet.vercel.app/images/sveaflet.png" alt="logo" />
-
 [Sveaflet](https://sveaflet.vercel.app/) is a library for the [Svelte](https://svelte.dev/) framework that wraps [Leaflet](https://leafletjs.com/) making it easy to crete reactive maps.
 
 ## Installation
