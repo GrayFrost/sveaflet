@@ -25,23 +25,37 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
+		"leaflet": "^1.9.4",
 		"svelte": "^4.0.0"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-vercel": "^5.3.2",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"@types/eslint": "^8.56.7",
+		"@types/leaflet": "^1.9.12",
+		"@types/node": "^20.14.1",
+		"@types/nprogress": "^0.2.3",
+		"autoprefixer": "^10.4.19",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
+		"flowbite": "^2.3.0",
+		"flowbite-svelte": "^0.46.1",
+		"flowbite-svelte-icons": "^1.6.1",
 		"globals": "^15.0.0",
+		"mdsvex": "^0.11.0",
+		"postcss": "^8.4.38",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"publint": "^0.1.9",
 		"svelte": "^4.2.7",
 		"svelte-check": "^3.6.0",
+		"svelte-meta-tags": "^3.1.2",
+		"tailwind-merge": "^2.3.0",
+		"tailwindcss": "^3.4.3",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0-alpha.20",
@@ -50,5 +64,10 @@
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"geojson": "^0.5.0",
+		"mdsvexamples": "^0.4.1",
+		"nprogress": "^0.2.0"
+	}
 }

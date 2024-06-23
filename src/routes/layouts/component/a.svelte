@@ -1,0 +1,1 @@
+<a class="text-primary-700" href="/" {...$$props}><slot /></a>

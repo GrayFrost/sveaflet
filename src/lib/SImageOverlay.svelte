@@ -1,0 +1,97 @@
+<script lang="ts">
+	import { onMount, onDestroy } from 'svelte';
+	import { ImageOverlay } from 'leaflet';
+	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
+	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
+
+	// props
+	export let imageUrl: string;
+	export let bounds: LatLngBounds;
+	export let options: ImageOverlayOptions = {};
+	export let instance: ImageOverlay | undefined = undefined;
+
+	// store
+	let mapStore = useConsumeMap();
+	let layerGroupStore = useConsumeLayerGroup();
+
+	// data
+	let imageOverlay: ImageOverlay | undefined;
+	let preImageUrl = imageUrl;
+	let preBounds = bounds;
+	let preOptions = options;
+
+	onMount(() => {
+		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
+		storeProps({
+			imageUrl,
+			bounds,
+			options
+		});
+	});
+
+	$: if ($mapStore) {
+		if (imageOverlay) {
+			updateUrl(imageOverlay, preImageUrl, imageUrl);
+			updateBounds(imageOverlay, preBounds, bounds);
+			updateZIndex(imageOverlay, preOptions, options);
+			updateOpacity(imageOverlay, preOptions, options);
+
+			if ($layerGroupStore) {
+				$layerGroupStore.addLayer(imageOverlay);
+			} else {
+				imageOverlay.addTo($mapStore);
+			}
+			storeProps({
+				imageUrl,
+				bounds,
+				options
+			});
+		}
+	}
+
+	$: instance = imageOverlay;
+
+	function updateUrl(obj: ImageOverlay, preImageUrl: string, imageUrl: string) {
+		if (imageUrl !== preImageUrl && imageUrl !== undefined) {
+			obj.setUrl(imageUrl);
+		}
+	}
+
+	function updateBounds(obj: ImageOverlay, preBounds: LatLngBounds, bounds: LatLngBounds) {
+		if (bounds !== preBounds && bounds !== undefined) {
+			obj.setBounds(bounds);
+		}
+	}
+
+	function updateZIndex(obj: ImageOverlay, preOpt: ImageOverlayOptions, opt: ImageOverlayOptions) {
+		if (opt.zIndex !== preOpt.zIndex && opt.zIndex !== undefined) {
+			obj.setZIndex(opt.zIndex);
+		}
+	}
+
+	function updateOpacity(obj: ImageOverlay, preOpt: ImageOverlayOptions, opt: ImageOverlayOptions) {
+		if (opt.opacity !== preOpt.opacity && opt.opacity !== undefined) {
+			obj.setOpacity(opt.opacity);
+		}
+	}
+
+	function storeProps(props: {
+		imageUrl: string;
+		bounds: LatLngBounds;
+		options: ImageOverlayOptions;
+	}) {
+		const { imageUrl, bounds, options } = props;
+		preImageUrl = imageUrl;
+		preBounds = bounds;
+		preOptions = options;
+	}
+
+	function reset() {
+		imageOverlay?.remove();
+		imageOverlay = undefined;
+	}
+
+	onDestroy(() => {
+		reset();
+	});
+</script>
