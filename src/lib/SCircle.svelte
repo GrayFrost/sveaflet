@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy, onMount, setContext, getContext } from 'svelte';
 	import { writable } from 'svelte/store';
-	import { Circle } from 'leaflet';
+	import { Circle, Map, Layer } from 'leaflet';
 	import type { LatLngExpression, CircleOptions, PathOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
@@ -11,34 +11,41 @@
 	export let instance: Circle | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
+	// let mapStore = useConsumeMap();
 	let layerGroupStore = useConsumeLayerGroup();
-	let circleStore = writable<Circle | undefined>();
+	// let circleStore = writable<Circle | undefined>();
+
+	let circle: Circle | undefined;
+	let parentContext: any = getContext(Map)();
+	console.log('zzh parentContext', parentContext);
 
 	// data
 	let preLatLng = latlng;
 	let preOptions = options;
 
+	let ready = false;
+
 	onMount(() => {
-		$circleStore = new Circle(latlng, options);
+		circle = new Circle(latlng, options);
 		storeProps({
 			latlng,
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($circleStore) {
-			updatetLatLng($circleStore, preLatLng, latlng);
+	$: if (parentContext.map) {
+		if (circle) {
+			updatetLatLng(circle, preLatLng, latlng);
 
-			updateRadius($circleStore, preOptions, options);
+			updateRadius(circle, preOptions, options);
 
-			updateStyle($circleStore, preOptions, options);
+			updateStyle(circle, preOptions, options);
 
 			if ($layerGroupStore) {
-				$layerGroupStore.addLayer($circleStore);
+				$layerGroupStore.addLayer(circle);
 			} else {
-				$circleStore.addTo($mapStore);
+				circle.addTo(parentContext.map);
 			}
 			storeProps({
 				latlng,
@@ -47,7 +54,7 @@
 		}
 	}
 
-	$: instance = $circleStore;
+	$: instance = circle;
 
 	function updatetLatLng(obj: Circle, preLatLng: LatLngExpression, latlng: LatLngExpression) {
 		if (latlng !== preLatLng && latlng !== undefined) {
@@ -95,15 +102,17 @@
 	}
 
 	function reset() {
-		$circleStore?.remove();
-		$circleStore = undefined;
+		circle?.remove();
+		circle = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(circleStore);
+	setContext(Map, () => Object.freeze({ ...parentContext, overlayContainer: () => circle }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

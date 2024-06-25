@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { Popup } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
@@ -10,8 +10,13 @@
 	export let instance: Popup | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerStore = useConsumeLayer();
+	// let mapStore = useConsumeMap();
+	let parentContext: any = getContext<any>(Map)() as any;
+	
+	const { map, overlayContainer } = parentContext;
+	console.log('zzh popup parent ceontext', parentContext, overlayContainer());
+	// let layerStore = useConsumeLayer();
+	const layer = overlayContainer();
 
 	// data
 	let popup: Popup | undefined;
@@ -29,23 +34,29 @@
 				content: htmlElement
 			};
 		}
-		popup = latlng ? new Popup(latlng, mergeOptions) : new Popup(mergeOptions);
+		if (!latlng && overlayContainer()) {
+			latlng = overlayContainer().getLatLng();
+		}
+		console.log('zzh popup', latlng, mergeOptions, overlayContainer());
+		popup = new Popup(latlng, mergeOptions);
 		storeProps({
 			latlng,
 			options: mergeOptions
 		});
 	});
 
-	$: if ($mapStore) {
+
+
+	$: if (map) {
 		if (popup) {
 			updateLatLng(popup, preLatLng, latlng);
 			updateContent(popup, preOptions, options);
 
-			if (!$layerStore) {
-				popup.openOn($mapStore);
+			if (!layer) {
+				popup.openOn(map);
 			} else {
 				let popupContent = popup.options.content || '';
-				$layerStore.bindPopup(popupContent);
+				layer.bindPopup(popupContent);
 			}
 		}
 		storeProps({

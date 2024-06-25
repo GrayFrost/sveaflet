@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { TileLayer } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
 	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
 
@@ -12,7 +12,8 @@
 	export let instance: TileLayer | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
+	let parentContext: any = getContext<any>(Map)() as any;
+	const { map, overlayContainer } = parentContext;
 	let controlLayerStore = useConsumeControlLayer();
 
 	// data
@@ -28,7 +29,7 @@
 		});
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (tileLayer) {
 			// TODO: how to update all options?
 			updateUrl(tileLayer, preUrlTemplate, urlTemplate);
@@ -44,13 +45,13 @@
 				}
 
 				if (checked) {
-					$mapStore.addLayer(tileLayer);
+					map.addLayer(tileLayer);
 				}
 
 				$controlLayerStore.addBaseLayer(tileLayer, layerName || 'Layer Name');
-				$controlLayerStore.addTo($mapStore);
+				$controlLayerStore.addTo(map);
 			} else {
-				tileLayer.addTo($mapStore);
+				tileLayer.addTo(map);
 			}
 
 			storeProps({
