@@ -25,7 +25,7 @@
 	{description}
 	openGraph={{
 		type: 'website',
-		url: `https://flowbite-svelte.com/`,
+		url: `https://sveaflet.vercel.app/`,
 		title: `${title}`,
 		description: `${description}`,
 		siteName: 'Sveaflet'

@@ -6,8 +6,9 @@
 	import th from './th.svelte';
 	import td from './td.svelte';
 	import a from './a.svelte';
+	import code from './code.svelte';
 
-	export { h2, h3, table, thead, th, td, a };
+	export { h2, h3, table, thead, th, td, a, code };
 </script>
 
 <script>

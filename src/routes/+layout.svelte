@@ -102,7 +102,7 @@
 			<DarkMode size="lg" class="inline-block dark:hover:text-white hover:text-gray-900" />
 		</div>
 
-		<a href="todo" class="hidden sm:block">
+		<a href="https://www.npmjs.com/package/sveaflet" class="hidden sm:block">
 			<DocBadge
 				large
 				class="ms-2 xl:ms-6 hover:bg-primary-600 hover:text-white dark:hover:bg-primary-800 dark:hover:text-white"
