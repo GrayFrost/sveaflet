@@ -54,6 +54,16 @@ video {
 		background-clip: text;
 		color: transparent;
 	}
+	.sveaflet-bg {
+		background-image: linear-gradient(to right top, #d43008, #ba5a00, #967600, #698a00, #199900);
+		filter: blur(25px);
+		width: 90px;
+		height: 32px;
+		position: absolute;
+		top: 50%;
+		right: 0;
+		transform: translateY(-50%);
+	}
 	/* .logo-bg {
 		position: absolute;
 		top: 50%;
@@ -61,6 +71,6 @@ video {
 		border-radius: 50%;
 		background-image: linear-gradient(to bottom, #d43008 50%, #199900 50%);
 		filter: blur(56px);
-		transform: translate(-50%, -50%);
+		
 	} */
 }

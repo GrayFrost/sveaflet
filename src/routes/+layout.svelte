@@ -65,13 +65,14 @@
 		<span hidden={$page.route.id === '/'}>
 			<NavHamburger onClick={toggleDrawer} class="m-0 me-3 md:block lg:hidden" />
 		</span>
-		<NavBrand href="/">
+		<NavBrand href="/" class="relative">
 			<img src={logo} class="me-3 h-8" alt="Sveaflet Logo" />
 			<span
 				class="self-center whitespace-nowrap text-2xl font-semibold dark:text-white sveaflet-text"
 			>
 				Sveaflet
 			</span>
+			<div class="dark:sveaflet-bg"></div>
 		</NavBrand>
 		<NavUl
 			{divClass}
