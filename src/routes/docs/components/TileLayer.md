@@ -60,7 +60,10 @@ sed to load and display tile layers on the map. Note that most tile servers requ
 
 ## Props
 
-| Prop name   | Description  | Type                                                                      | Default |
-| ----------- | ------------ | ------------------------------------------------------------------------- | ------- |
-| urlTemplate | **Required** | string                                                                    |         |
-| options     | **Optional** | [TileLayerOptions](https://leafletjs.com/reference.html#tilelayer-option) | `{}`    |
+| Prop name   | Description                                           | Type                                                                      | Default |
+| ----------- | ----------------------------------------------------- | ------------------------------------------------------------------------- | ------- |
+| urlTemplate | **Required**                                          | string                                                                    |         |
+| options     | **Optional**                                          | [TileLayerOptions](https://leafletjs.com/reference.html#tilelayer-option) | `{}`    |
+| name        | **Optional**. Layer name in ControlLayers             | string                                                                    |         |
+| checked     | **Optional**. Default selected layer in ControlLayers | boolean                                                                   |         |
+| layerType   | **Optional**. Layer type in ControlLayers             | 'base' \| 'overlay' \| undefined                                          |         |

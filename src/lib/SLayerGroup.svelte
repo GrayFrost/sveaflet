@@ -3,6 +3,7 @@
 	import { Map, LayerGroup } from 'leaflet';
 	import type { LayerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { setControlLayer } from './utils';
 
 	// props
 	export let options: LayerOptions = {};
@@ -32,21 +33,14 @@
 				if (!name) {
 					console.warn('Name is required in ControlLayers');
 				} else {
-					if (layerType === 'base') {
-						if (checked) {
-							map.addLayer(layerGroup);
-							controlLayers.addBaseLayer(layerGroup, name);
-						} else {
-							controlLayers.addBaseLayer(layerGroup, name);
-						}
-					} else if (layerType === 'overlay') {
-						if (checked) {
-							map.addLayer(layerGroup);
-							controlLayers.addOverlay(layerGroup, name);
-						} else {
-							controlLayers.addOverlay(layerGroup, name);
-						}
-					}
+					setControlLayer({
+						layer: layerGroup,
+						name,
+						controlLayers,
+						layerType,
+						map,
+						checked
+					});
 				}
 				controlLayers.addTo(map);
 			} else {

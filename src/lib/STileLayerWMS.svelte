@@ -3,6 +3,7 @@
 	import { Map, TileLayer } from 'leaflet';
 	import type { WMSOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { setControlLayer } from './utils';
 
 	// props
 	export let baseUrl: string;
@@ -41,20 +42,14 @@
 				if (!name) {
 					console.warn('Name is required in ControlLayers');
 				} else {
-					if (layerType === 'base') {
-						if (checked) {
-							map.addLayer(tileLayerWMS);
-							controlLayers.addBaseLayer(tileLayerWMS, name);
-						} else {
-							controlLayers.addBaseLayer(tileLayerWMS, name);
-						}
-					} else if (layerType === 'overlay') {
-						if (checked) {
-							map.addLayer(tileLayerWMS);
-						} else {
-							controlLayers.addOverlay(tileLayerWMS, name);
-						}
-					}
+					setControlLayer({
+						layer: tileLayerWMS,
+						name,
+						controlLayers,
+						layerType,
+						map,
+						checked
+					});
 				}
 
 				controlLayers.addTo(map);

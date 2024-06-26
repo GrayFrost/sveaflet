@@ -70,5 +70,6 @@ Used to display [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) services as
 | --------- | ----------------------------------- | ----------------------------------------------------------------------- | ------- |
 | baseUrl   | **Required**                        | string                                                                  |         |
 | options   | **Optional**                        | [WMSOptions](https://leafletjs.com/reference.html#tilelayer-wms-option) | `{}`    |
-| layerName | **Optional**. Used in ControlLayers | string                                                                  |         |
-| checked   | **Optional**. Used in ControlLayers | string                                                                  |         |
+| name        | **Optional**. Layer name in ControlLayers             | string                                                                    |         |
+| checked     | **Optional**. Default selected layer in ControlLayers | boolean                                                                   |         |
+| layerType   | **Optional**. Layer type in ControlLayers             | 'base' \| 'overlay' \| undefined                                          |         |                                                             |         |

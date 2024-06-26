@@ -119,8 +119,9 @@ Used to group several layers and handle them as one. If you add it to the map, a
 
 ## Props
 
-| Prop name   | Description                                              | Type   | Default |
-| ----------- | -------------------------------------------------------- | ------ | ------- |
-| overlayName | **Optional**. Overlay name in ControlLayers.             | String |         |
-| checked     | **Optional**. Default selected Overlay in ControlLayers. | String |         |
-| options     | **Optional**                                             | Object | `{}`    |
+| Prop name | Description                                              | Type                               | Default |
+| --------- | -------------------------------------------------------- | ---------------------------------- | ------- |
+| options   | **Optional**                                             | Object                             | `{}`    |
+| name      | **Optional**. Layer name in ControlLayers.               | String                             |         |
+| checked   | **Optional**. Default selected Overlay in ControlLayers. | String                             |         |
+| layerType | **Optional**. Layer type in ControlLayers.               | 'base' \| 'overlayer' \| undefined |         |

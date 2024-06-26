@@ -3,6 +3,7 @@
 	import { Map, TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { setControlLayer } from './utils';
 
 	// props
 	export let urlTemplate: string;
@@ -45,20 +46,14 @@
 				if (!name) {
 					console.warn('Name is required in ControlLayers');
 				} else {
-					if (layerType === 'base') {
-						if (checked) {
-							map.addLayer(tileLayer);
-							controlLayers.addBaseLayer(tileLayer, name);
-						} else {
-							controlLayers.addBaseLayer(tileLayer, name);
-						}
-					} else if (layerType === 'overlay') {
-						if (checked) {
-							map.addLayer(tileLayer);
-						} else {
-							controlLayers.addOverlay(tileLayer, name);
-						}
-					}
+					setControlLayer({
+						layer: tileLayer,
+						name,
+						controlLayers,
+						layerType,
+						map,
+						checked
+					});
 				}
 
 				controlLayers.addTo(map);
