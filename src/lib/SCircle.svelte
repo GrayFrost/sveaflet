@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onDestroy, onMount, setContext, getContext } from 'svelte';
-	import { Circle, Map, Layer } from 'leaflet';
+	import { Circle, Map } from 'leaflet';
 	import type { LatLngExpression, CircleOptions, PathOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 
