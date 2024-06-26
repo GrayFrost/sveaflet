@@ -42,20 +42,12 @@ Used to group several layers and handle them as one. If you add it to the map, a
 ```svelte example csr
 <script>
 	import { Map, TileLayer, LayerGroup, Marker } from 'sveaflet';
-	import { Label, Input } from 'flowbite-svelte';
-
-	let attribution = 'LayerGroup';
 </script>
-
-<div class="flex items-center gap-4 mb-4">
-	<Label>Attribution:</Label>
-	<Input type="text" maxlength={20} bind:value={attribution} />
-</div>
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
 		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<LayerGroup options={{ attribution }}>
+		<LayerGroup options={{ attribution: 'LayerGroup' }}>
 			<Marker latlng={[39.61, -105.02]} />
 			<Marker latlng={[39.74, -104.99]} />
 			<Marker latlng={[39.73, -104.8]} />

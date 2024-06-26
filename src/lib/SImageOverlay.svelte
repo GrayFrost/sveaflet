@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { ImageOverlay } from 'leaflet';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { Map, ImageOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let imageUrl: string;
@@ -11,14 +11,17 @@
 	export let instance: ImageOverlay | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let imageOverlay: ImageOverlay | undefined;
 	let preImageUrl = imageUrl;
 	let preBounds = bounds;
 	let preOptions = options;
+
+	$: map = getMap?.();
+	$: layer = getLayer?.();
 
 	onMount(() => {
 		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
@@ -29,17 +32,17 @@
 		});
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (imageOverlay) {
 			updateUrl(imageOverlay, preImageUrl, imageUrl);
 			updateBounds(imageOverlay, preBounds, bounds);
 			updateZIndex(imageOverlay, preOptions, options);
 			updateOpacity(imageOverlay, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer(imageOverlay);
+			if (layer) {
+				layer.addLayer(imageOverlay);
 			} else {
-				imageOverlay.addTo($mapStore);
+				map.addLayer(imageOverlay);
 			}
 			storeProps({
 				imageUrl,
@@ -94,4 +97,6 @@
 	onDestroy(() => {
 		reset();
 	});
+
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => imageOverlay }));
 </script>

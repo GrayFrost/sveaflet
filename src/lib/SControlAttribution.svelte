@@ -1,30 +1,33 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { control } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
-	import { useConsumeMap } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let options: Control.AttributionOptions = {};
 	export let instance: Control.Attribution | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let attribution: Control.Attribution | undefined;
 	let preOptions = options;
+
+	$: map = getMap?.();
 
 	onMount(() => {
 		attribution = control.attribution(options);
 		storeProps({ options });
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (attribution) {
 			updatePrefix(attribution, preOptions, options);
 			updatePosition(attribution, preOptions, options);
-			attribution.addTo($mapStore);
+			map.addControl(attribution);
 
 			storeProps({ options });
 		}

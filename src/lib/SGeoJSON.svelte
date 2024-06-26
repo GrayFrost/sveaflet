@@ -1,10 +1,8 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { GeoJSON } from 'leaflet';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { Map, GeoJSON } from 'leaflet';
 	import type { GeoJSONOptions } from 'leaflet';
 	import type { GeoJsonObject } from 'geojson';
-	import { useConsumeMap, useProvideLayer } from '$lib/context';
 
 	// props
 	export let json: GeoJsonObject | null = null;
@@ -12,29 +10,32 @@
 	export let instance: GeoJSON | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let geoJSONStore = writable<GeoJSON | undefined>();
+	let geoJSON: GeoJSON | undefined;
 
+	let parentContext: any = getContext(Map);
+	const { getMap } = parentContext;
 	onMount(() => {
-		$geoJSONStore = new GeoJSON(json, options);
+		geoJSON = new GeoJSON(json, options);
 	});
 
-	$: if ($mapStore) {
-		if ($geoJSONStore) {
-			$geoJSONStore.addTo($mapStore);
+	$: map = getMap?.();
+
+	$: if (map) {
+		if (geoJSON) {
+			map.addLayer(geoJSON);
 		}
 	}
 
-	$: instance = $geoJSONStore;
+	$: instance = geoJSON;
 
 	function reset() {
-		$geoJSONStore?.remove();
-		$geoJSONStore = undefined;
+		geoJSON?.remove();
+		geoJSON = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(geoJSONStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => geoJSON }));
 </script>

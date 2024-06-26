@@ -1,16 +1,15 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { Icon } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, Icon } from 'leaflet';
 	import type { IconOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeMarker } from '$lib/context';
 
 	// props
 	export let options: IconOptions = { iconUrl: '' };
 	export let instance: Icon | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let markerStore = useConsumeMarker();
+	let parentContext: any = getContext(Map);
+	const { getMap, getOverlay } = parentContext;
 
 	// data
 	let icon: Icon | undefined;
@@ -19,10 +18,13 @@
 		icon = new Icon(options);
 	});
 
-	$: if ($mapStore) {
+	$: map = getMap?.();
+	$: layer = getOverlay?.();
+
+	$: if (map) {
 		if (icon) {
-			if ($markerStore) {
-				$markerStore.setIcon(icon);
+			if (layer) {
+				layer.setIcon(icon);
 			} else {
 				console.warn('Icon should bind Marker.');
 			}

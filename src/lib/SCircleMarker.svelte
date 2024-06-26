@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { CircleMarker } from 'leaflet';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { CircleMarker, Map } from 'leaflet';
 	import type { LatLngExpression, CircleMarkerOptions, PathOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
 	export let latlng: LatLngExpression;
@@ -11,34 +9,40 @@
 	export let instance: CircleMarker | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
-	let circleMarkerStore = writable<CircleMarker | undefined>();
+	let parentContext: any = getContext(Map);
+	const { getMap, getLayer } = parentContext;
+	let circleMarker:CircleMarker | undefined;
 
 	// data
 	let preLatLng = latlng;
 	let preOptions = options;
 
+	let ready = false;
+
+	$:map = getMap?.();
+	$:layer = getLayer?.();
+
 	onMount(() => {
-		$circleMarkerStore = new CircleMarker(latlng, options);
+		circleMarker = new CircleMarker(latlng, options);
 		storeProps({
 			latlng,
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($circleMarkerStore) {
-			updatetLatLng($circleMarkerStore, preLatLng, latlng);
+	$: if (map) {
+		if (circleMarker) {
+			updatetLatLng(circleMarker, preLatLng, latlng);
 
-			updateRadius($circleMarkerStore, preOptions, options);
+			updateRadius(circleMarker, preOptions, options);
 
-			updateStyle($circleMarkerStore, preOptions, options);
+			updateStyle(circleMarker, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer($circleMarkerStore);
+			if (layer) {
+				layer.addLayer(circleMarker);
 			} else {
-				$circleMarkerStore.addTo($mapStore);
+				map.addLayer(circleMarker);
 			}
 			storeProps({
 				latlng,
@@ -47,7 +51,7 @@
 		}
 	}
 
-	$: instance = $circleMarkerStore;
+	$: instance = circleMarker;
 
 	function updatetLatLng(obj: CircleMarker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
 		if (latlng !== preLatLng && latlng !== undefined) {
@@ -95,15 +99,17 @@
 	}
 
 	function reset() {
-		$circleMarkerStore?.remove();
-		$circleMarkerStore = undefined;
+		circleMarker?.remove();
+		circleMarker = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(circleMarkerStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => circleMarker }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { Tooltip } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, Tooltip } from 'leaflet';
 	import type { LatLngExpression, TooltipOptions } from 'leaflet';
-	import { useConsumeLayer, useConsumeMap } from '$lib/context';
 
 	// props
 	export let latlng: LatLngExpression | undefined = undefined;
@@ -10,45 +9,54 @@
 	export let instance: Tooltip | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerStore = useConsumeLayer();
+	let parentContext: any = getContext(Map);
+
+	const { getMap, getOverlay } = parentContext;
+	$: map = getMap?.();
+	$: layer = getOverlay?.();
 
 	// data
 	let tooltip: Tooltip | undefined;
 	let htmlElement: HTMLElement | undefined;
 	let preLatLng = latlng;
 	let preOptions = options;
+	let ready = false;
 
 	onMount(() => {
 		let mergeOptions = {
 			...options
 		};
 
+		// todo slot content, popup also
 		if (htmlElement) {
 			mergeOptions = {
 				...mergeOptions,
 				content: htmlElement
 			};
 		}
-
-		tooltip = latlng ? new Tooltip(latlng, mergeOptions) : new Tooltip(mergeOptions);
+		if (!latlng && layer) {
+			tooltip = new Tooltip(mergeOptions, layer);
+		} else if (latlng) {
+			tooltip = new Tooltip(latlng, mergeOptions);
+		}
 		storeProps({
 			latlng,
 			options: mergeOptions
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (tooltip) {
 			updateLatLng(tooltip, preLatLng, latlng);
 			updateContent(tooltip, preOptions, options);
 			updateOpacity(tooltip, preOptions, options);
 
-			if (!$layerStore) {
-				tooltip.openOn($mapStore);
+			if (!layer) {
+				tooltip.openOn(map);
 			} else {
 				let tooltipContent = tooltip.options.content || '';
-				$layerStore.bindTooltip(tooltipContent);
+				layer.bindTooltip(tooltipContent);
 			}
 			storeProps({
 				latlng,
@@ -97,7 +105,7 @@
 	});
 </script>
 
-{#if $$slots.default}
+{#if ready && $$slots.default}
 	<div bind:this={htmlElement} {...$$restProps}>
 		<slot />
 	</div>

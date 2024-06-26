@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { LayerGroup } from 'leaflet';
+	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { Map, LayerGroup } from 'leaflet';
 	import type { LayerOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeControlLayer, useProvideLayerGroup } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let options: LayerOptions = {};
@@ -12,43 +11,50 @@
 	export let instance: LayerGroup | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let controlLayerStore = useConsumeControlLayer();
-	let layerGroupStore = writable<LayerGroup | undefined>();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getControl } = parentContext;
+	let layerGroup: LayerGroup | undefined;
+
+	let ready = false;
 
 	onMount(() => {
-		$layerGroupStore = new LayerGroup([], options);
+		layerGroup = new LayerGroup([], options);
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($layerGroupStore) {
-			if ($controlLayerStore) {
+	$: map = getMap?.();
+	$: controlLayers = getControl?.();
+
+	$: if (map) {
+		if (layerGroup) {
+			if (controlLayers) {
 				if (!overlayName) {
 					console.warn('Overlay Name is required in ControlLayers');
 				}
 				if (checked) {
-					$mapStore.addLayer($layerGroupStore);
+					map.addLayer(layerGroup);
 				}
-				$controlLayerStore.addOverlay($layerGroupStore, overlayName || 'Overlay Name');
-				$controlLayerStore.addTo($mapStore);
+				controlLayers.addOverlay(layerGroup, overlayName || 'Overlay Name');
+				// map.addLayer(controlLayers);
+				controlLayers.addTo(map);
 			} else {
-				$layerGroupStore.addTo($mapStore);
+				map.addLayer(layerGroup);
 			}
 		}
 	}
 
-	$: instance = $layerGroupStore;
+	$: instance = layerGroup;
 
 	function reset() {
-		$layerGroupStore?.remove();
-		$layerGroupStore = undefined;
+		layerGroup?.remove();
+		layerGroup = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayerGroup(layerGroupStore);
+	setContext(Map, Object.freeze({ ...parentContext, getLayer: () => layerGroup }));
 </script>
 
 <slot />

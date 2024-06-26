@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { TileLayer } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, TileLayer } from 'leaflet';
 	import type { WMSOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let baseUrl: string;
@@ -12,8 +12,8 @@
 	export let instance: TileLayer | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let controlLayerStore = useConsumeControlLayer();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getControl } = parentContext;
 
 	// data
 	let tileLayerWMS: TileLayer | undefined;
@@ -28,24 +28,27 @@
 		});
 	});
 
-	$: if ($mapStore) {
+	$: map = getMap?.();
+	$: controlLayers = getControl?.();
+
+	$: if (map) {
 		if (tileLayerWMS) {
 			updateUrl(tileLayerWMS, preBaseUrl, baseUrl);
 			updateOpacity(tileLayerWMS, preOptions, options);
 			updateZIndex(tileLayerWMS, preOptions, options);
 
-			if ($controlLayerStore) {
+			if (controlLayers) {
 				if (!layerName) {
 					console.warn('Layer Name is required in ControlLayers');
 				}
 
 				if (checked) {
-					$mapStore.addLayer(tileLayerWMS);
+					map.addLayer(tileLayerWMS);
 				}
-				$controlLayerStore.addBaseLayer(tileLayerWMS, layerName || 'Layer Name');
-				$controlLayerStore.addTo($mapStore);
+				controlLayers.addBaseLayer(tileLayerWMS, layerName || 'Layer Name');
+				controlLayers.addTo(map);
 			} else {
-				tileLayerWMS.addTo($mapStore);
+				map.addLayer(tileLayerWMS);
 			}
 
 			storeProps({

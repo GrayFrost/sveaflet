@@ -1,15 +1,18 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { control } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
-	import { useConsumeMap } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let options: Control.ScaleOptions = {};
 	export let instance: Control.Scale | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getLayer } = parentContext;
+
+	$: map = getMap?.();
 
 	// data
 	let scale: Control.Scale | undefined;
@@ -20,10 +23,10 @@
 		storeProps({ options });
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (scale) {
 			updatePosition(scale, preOptions, options);
-			scale.addTo($mapStore);
+			map.addControl(scale);
 			storeProps({ options });
 		}
 	}

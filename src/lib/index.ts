@@ -35,9 +35,6 @@ import ControlScale from './SControlScale.svelte';
 import ControlZoom from './SControlZoom.svelte';
 import ControlLayers from './SControlLayers.svelte';
 
-// Context
-import * as SveafletContext from './context';
-
 export {
 	Map,
 	Icon,
@@ -62,5 +59,4 @@ export {
 	ControlLayers,
 	ControlScale,
 	ControlZoom,
-	SveafletContext,
 };

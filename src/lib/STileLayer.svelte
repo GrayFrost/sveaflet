@@ -2,7 +2,7 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { Map, TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeControlLayer } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let urlTemplate: string;
@@ -12,9 +12,11 @@
 	export let instance: TileLayer | undefined = undefined;
 
 	// store
-	let parentContext: any = getContext<any>(Map)() as any;
-	const { map, overlayContainer } = parentContext;
-	let controlLayerStore = useConsumeControlLayer();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getControl } = parentContext;
+
+	$: map = getMap?.();
+	$: controlLayers = getControl?.();
 
 	// data
 	let tileLayer: TileLayer | undefined;
@@ -39,7 +41,7 @@
 				tileLayer.setUrl(urlTemplate);
 			}
 
-			if ($controlLayerStore) {
+			if (controlLayers) {
 				if (!layerName) {
 					console.warn('Layer Name is required in ControlLayers');
 				}
@@ -48,10 +50,10 @@
 					map.addLayer(tileLayer);
 				}
 
-				$controlLayerStore.addBaseLayer(tileLayer, layerName || 'Layer Name');
-				$controlLayerStore.addTo(map);
+				controlLayers.addBaseLayer(tileLayer, layerName || 'Layer Name');
+				controlLayers.addTo(map);
 			} else {
-				tileLayer.addTo(map);
+				map.addLayer(tileLayer);
 			}
 
 			storeProps({

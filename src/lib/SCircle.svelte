@@ -1,29 +1,26 @@
 <script lang="ts">
 	import { onDestroy, onMount, setContext, getContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { Circle, Map, Layer } from 'leaflet';
 	import type { LatLngExpression, CircleOptions, PathOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latlng: LatLngExpression;
 	export let options: CircleOptions = { radius: 100 };
 	export let instance: Circle | undefined = undefined;
 
-	// store
-	// let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
-	// let circleStore = writable<Circle | undefined>();
-
 	let circle: Circle | undefined;
-	let parentContext: any = getContext(Map)();
-	console.log('zzh parentContext', parentContext);
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let preLatLng = latlng;
 	let preOptions = options;
 
 	let ready = false;
+
+	$:map = getMap?.();
+	$: layer = getLayer?.();
 
 	onMount(() => {
 		circle = new Circle(latlng, options);
@@ -34,7 +31,7 @@
 		ready = true;
 	});
 
-	$: if (parentContext.map) {
+	$: if (map) {
 		if (circle) {
 			updatetLatLng(circle, preLatLng, latlng);
 
@@ -42,10 +39,10 @@
 
 			updateStyle(circle, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer(circle);
+			if (layer) {
+				layer.addLayer(circle);
 			} else {
-				circle.addTo(parentContext.map);
+				map.addLayer(circle);
 			}
 			storeProps({
 				latlng,
@@ -110,7 +107,7 @@
 		reset();
 	});
 
-	setContext(Map, () => Object.freeze({ ...parentContext, overlayContainer: () => circle }));
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => circle }));
 </script>
 
 {#if ready}

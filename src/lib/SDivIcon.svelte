@@ -1,20 +1,24 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { DivIcon } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { DivIcon, Map } from 'leaflet';
 	import type { DivIconOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeMarker } from '$lib/context';
 
 	// props
 	export let options: DivIconOptions = {};
 	export let instance: DivIcon | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let markerStore = useConsumeMarker();
+	let parentContext: any = getContext(Map);
+	const { getMap, getOverlay } = parentContext;
 
 	// data
 	let divIcon: DivIcon | undefined;
 	let htmlElement: HTMLElement | undefined;
+
+	$: map = getMap?.();
+	$: layer = getOverlay?.();
+
+	let ready = false;
 
 	onMount(() => {
 		let mergeOptions = {
@@ -27,12 +31,13 @@
 			};
 		}
 		divIcon = new DivIcon(mergeOptions);
+		ready = true;
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (divIcon) {
-			if ($markerStore) {
-				$markerStore.setIcon(divIcon);
+			if (layer) {
+				layer.setIcon(divIcon);
 			} else {
 				console.warn('DivIcon should bind Marker.');
 			}
@@ -51,7 +56,7 @@
 	});
 </script>
 
-{#if $$slots.default}
+{#if ready && $$slots.default}
 	<div bind:this={htmlElement} {...$$restProps}>
 		<slot />
 	</div>

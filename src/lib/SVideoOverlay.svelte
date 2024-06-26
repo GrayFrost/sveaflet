@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { VideoOverlay } from 'leaflet';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { Map, VideoOverlay } from 'leaflet';
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
 
 	// props
 	export let video: string | string[] = [];
@@ -11,8 +10,8 @@
 	export let instance: VideoOverlay | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
+	let parentContext: any = getContext(Map);
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let videoOverlay: VideoOverlay | undefined;
@@ -20,6 +19,11 @@
 	let preVideo = video;
 	let preBounds = bounds;
 	let preOptions = options;
+
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+
+	let ready = false;
 
 	onMount(() => {
 		let mergeVideo = htmlVideoElement || video;
@@ -30,19 +34,20 @@
 			bounds,
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (videoOverlay) {
 			updateUrl(videoOverlay, preVideo, video);
 			updateBounds(videoOverlay, preBounds, bounds);
 			updateZIndex(videoOverlay, preOptions, options);
 			updateOpacity(videoOverlay, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer(videoOverlay);
+			if (layer) {
+				layer.addLayer(videoOverlay);
 			} else {
-				videoOverlay.addTo($mapStore);
+				map.addLayer(videoOverlay);
 			}
 			storeProps({
 				video,
@@ -102,10 +107,12 @@
 	onDestroy(() => {
 		reset();
 	});
+
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => videoOverlay }));
 </script>
 
-{#if $$slots.default}
-  <!-- svelte-ignore a11y-media-has-caption -->
+{#if ready && $$slots.default}
+	<!-- svelte-ignore a11y-media-has-caption -->
 	<video bind:this={htmlVideoElement} {...$$restProps}>
 		<slot />
 	</video>

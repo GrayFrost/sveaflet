@@ -1,12 +1,14 @@
-import { type Writable } from 'svelte/store';
-import { Map, LayerGroup, Layer, Marker, Control } from 'leaflet';
+import { Map as LeafletMap, LayerGroup, Layer, Control } from 'leaflet';
 
-export type MapContext = Writable<Map | undefined>;
+export type ControlledLayer = {
+	addLayer(layer: Layer): void;
+	removeLayer(layer: Layer): void;
+};
 
-export type ControlLayersContext = Writable<Control.Layers | undefined>;
-
-export type LayerGroupContext = Writable<LayerGroup | undefined>;
-
-export type LayerContext = Writable<Layer | undefined>;
-
-export type MarkerContext = Writable<Marker | undefined>;
+export type LeafletContextInterface = Readonly<{
+	getMap: () => LeafletMap | undefined;
+	getLayer?: () => ControlledLayer | LayerGroup | undefined;
+	getControl?: () => Control.Layers | undefined;
+	getOverlay?: () => Layer | undefined;
+	// pane?: string;
+}>;

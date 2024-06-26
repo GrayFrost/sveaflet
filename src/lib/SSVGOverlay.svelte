@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import { SVGOverlay } from 'leaflet';
+	import { onDestroy, onMount, setContext, getContext } from 'svelte';
+	import { Map, SVGOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions, SVGOverlayStyleOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup } from '$lib/context';
 
 	// props
 	export let bounds: LatLngBounds;
@@ -10,14 +9,18 @@
 	export let instance: SVGOverlay | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
+
+	let parentContext: any = getContext(Map);
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let svgOverlay: SVGOverlay | undefined;
 	let svgElement: SVGElement | undefined;
 	let preBounds = bounds;
 	let preOptions = options;
+
+	$: map = getMap?.();
+	$: layer = getLayer?.();
 
 	onMount(() => {
 		if (svgElement) {
@@ -32,7 +35,7 @@
 		});
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (svgOverlay) {
 			// TODO: how to update all options?
 			updateBounds(svgOverlay, preBounds, bounds);
@@ -42,10 +45,10 @@
 				svgOverlay.setZIndex(options.zIndex);
 			}
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer(svgOverlay);
+			if (layer) {
+				layer.addLayer(svgOverlay);
 			} else {
-				svgOverlay.addTo($mapStore);
+				map.addLayer(svgOverlay);
 			}
 
 			storeProps({
@@ -97,6 +100,8 @@
 	onDestroy(() => {
 		reset();
 	});
+
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => svgOverlay }));
 </script>
 
 <svg bind:this={svgElement} xmlns="http://www.w3.org/2000/svg" {...$$restProps}>

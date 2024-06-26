@@ -1,29 +1,32 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { control } from 'leaflet';
+	import { onMount, onDestroy, getContext } from 'svelte';
+	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
-	import { useConsumeMap } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let options: Control.ZoomOptions = {};
 	export let instance: Control.Zoom | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let zoom: Control.Zoom | undefined;
 	let preOptions = options;
+
+	$: map = getMap?.();
 
 	onMount(() => {
 		zoom = control.zoom(options);
 		storeProps({ options });
 	});
 
-	$: if ($mapStore) {
+	$: if (map) {
 		if (zoom) {
 			updatePosition(zoom, preOptions, options);
-			zoom.addTo($mapStore);
+			map.addControl(zoom);
 			storeProps({ options });
 		}
 	}

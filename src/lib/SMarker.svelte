@@ -1,14 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { Marker, Icon } from 'leaflet';
+	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { Map, Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
-	import {
-		useConsumeMap,
-		useConsumeLayerGroup,
-		useProvideLayer,
-		useProvideMarker
-	} from '$lib/context';
 
 	// props
 	export let latlng: LatLngExpression;
@@ -18,31 +11,37 @@
 	export let instance: Marker | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
-	let markerStore = writable<Marker | undefined>();
+	let parentContext: any = getContext(Map);
+	const { getMap, getLayer } = parentContext;
+
+	let marker: Marker | undefined;
 
 	// data
 	let preLatLng = latlng;
 	let preOptions = options;
+	let ready = false;
 
 	onMount(() => {
-		$markerStore = new Marker(latlng, options);
+		marker = new Marker(latlng, options);
 		storeProps({
 			latlng,
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($markerStore) {
-			updateLatLng($markerStore, preLatLng, latlng);
-			updateZIndexOffset($markerStore, preOptions, options);
-			updateOpacity($markerStore, preOptions, options);
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer($markerStore);
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+
+	$: if (map) {
+		if (marker) {
+			updateLatLng(marker, preLatLng, latlng);
+			updateZIndexOffset(marker, preOptions, options);
+			updateOpacity(marker, preOptions, options);
+			if (layer) {
+				layer.addLayer(marker);
 			} else {
-				$markerStore.addTo($mapStore);
+				map.addLayer(marker);
 			}
 			storeProps({
 				latlng,
@@ -51,7 +50,7 @@
 		}
 	}
 
-	$: instance = $markerStore;
+	$: instance = marker;
 
 	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
 		if (latlng !== preLatLng && latlng !== undefined) {
@@ -78,16 +77,17 @@
 	}
 
 	function reset() {
-		$markerStore?.remove();
-		$markerStore = undefined;
+		marker?.remove();
+		marker = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(markerStore);
-	useProvideMarker(markerStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => marker }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

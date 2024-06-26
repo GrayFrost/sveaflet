@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { Rectangle } from 'leaflet';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { Rectangle, Map } from 'leaflet';
 	import type { LatLngBoundsExpression, PathOptions, PolylineOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
 	export let latLngBounds: LatLngBoundsExpression;
@@ -11,28 +9,33 @@
 	export let instance: Rectangle | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
-	let rectangleStore = writable<Rectangle | undefined>();
+	let parentContext: any = getContext(Map);
+	let rectangle: Rectangle | undefined;
+	let ready = false;
+	const { getMap, getLayer } = parentContext;
 
 	// data
 	let preLatLngBounds = latLngBounds;
 	let preOptions = options;
 
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+
 	onMount(() => {
-		$rectangleStore = new Rectangle(latLngBounds, options);
+		rectangle = new Rectangle(latLngBounds, options);
 		storeProps({ latLngBounds, options });
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($rectangleStore) {
-			updateBounds($rectangleStore, preLatLngBounds, latLngBounds);
-			updateStyle($rectangleStore, preOptions, options);
+	$: if (map) {
+		if (rectangle) {
+			updateBounds(rectangle, preLatLngBounds, latLngBounds);
+			updateStyle(rectangle, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer($rectangleStore);
+			if (layer) {
+				layer.addLayer(rectangle);
 			} else {
-				$rectangleStore.addTo($mapStore);
+				map.addLayer(rectangle);
 			}
 			storeProps({
 				latLngBounds,
@@ -41,7 +44,7 @@
 		}
 	}
 
-	$: instance = $rectangleStore;
+	$: instance = rectangle;
 
 	function updateBounds(
 		obj: Rectangle,
@@ -87,15 +90,17 @@
 	}
 
 	function reset() {
-		$rectangleStore?.remove();
-		$rectangleStore = undefined;
+		rectangle?.remove();
+		rectangle = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(rectangleStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => rectangle }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

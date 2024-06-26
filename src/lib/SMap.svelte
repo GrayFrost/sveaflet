@@ -1,13 +1,12 @@
 <script lang="ts">
 	import { onMount, onDestroy, setContext } from 'svelte';
-	import { writable } from 'svelte/store';
 	import { Map, Icon } from 'leaflet';
 	import type { MapOptions } from 'leaflet';
-	import { useProvideMap } from '$lib/context';
 	import 'leaflet/dist/leaflet.css';
 	import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 	import markerIcon from 'leaflet/dist/images/marker-icon.png';
 	import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+	import type { LeafletContextInterface } from './types';
 
 	// @ts-ignore
 	delete Icon.Default.prototype._getIconUrl;
@@ -70,8 +69,7 @@
 		reset();
 	});
 
-	// useProvideMap(mapStore);
-	setContext(Map, () => Object.freeze({map}));
+	setContext<LeafletContextInterface>(Map, Object.freeze({getMap: () => map}));
 </script>
 
 <div style="width:100%;height:100%" bind:this={mapContainer}>

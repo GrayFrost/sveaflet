@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { Polyline } from 'leaflet';
+	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { Polyline, Map } from 'leaflet';
 	import type { LatLngExpression, PathOptions, PolylineOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
 	export let latLngs: LatLngExpression[];
@@ -11,32 +9,37 @@
 	export let instance: Polyline | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
-	let polylineStore = writable<Polyline | undefined>();
+	let parentContext: any = getContext(Map);
+	const { getMap, getLayer } = parentContext;
+	let polyline: Polyline | undefined;
 
 	// data
 	let preLatLngs = latLngs;
 	let preOptions = options;
 
+	let ready = false;
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+
 	onMount(() => {
-		$polylineStore = new Polyline(latLngs, options);
+		polyline = new Polyline(latLngs, options);
 
 		storeProps({
 			latLngs,
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($polylineStore) {
-			updateLatLngs($polylineStore, preLatLngs, latLngs);
-			updateStyle($polylineStore, preOptions, options);
+	$: if (map) {
+		if (polyline) {
+			updateLatLngs(polyline, preLatLngs, latLngs);
+			updateStyle(polyline, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer($polylineStore);
+			if (layer) {
+				layer.addLayer(polyline);
 			} else {
-				$polylineStore.addTo($mapStore);
+				map.addLayer(polyline);
 			}
 			storeProps({
 				latLngs,
@@ -45,7 +48,7 @@
 		}
 	}
 
-	$: instance = $polylineStore;
+	$: instance = polyline;
 
 	function updateLatLngs(
 		obj: Polyline,
@@ -91,15 +94,17 @@
 	}
 
 	function reset() {
-		$polylineStore?.remove();
-		$polylineStore = undefined;
+		polyline?.remove();
+		polyline = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(polylineStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => polyline }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

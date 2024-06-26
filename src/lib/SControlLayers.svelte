@@ -1,39 +1,46 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { control } from 'leaflet';
+	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
-	import { useConsumeMap, useProvideControlLayer } from '$lib/context';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let options: Control.LayersOptions = {};
 	export let instance: Control.Layers | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layersStore = writable<Control.Layers | undefined>();
 
+	// todo base layer overlay layer
+	let controlLayers: Control.Layers | undefined;
+
+	let parentContext = getContext<LeafletContextInterface>(Map);
+	const { getMap, getLayer } = parentContext;
 	// data
 	let preOptions = options;
 
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+	let ready = false;
+
 	onMount(() => {
-		$layersStore = control.layers(undefined, undefined, options);
+		controlLayers = control.layers(undefined, undefined, options);
 		storeProps({
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($layersStore) {
-			updatePosition($layersStore, preOptions, options);
-			$layersStore.addTo($mapStore);
+	$: if (map) {
+		if (controlLayers) {
+			updatePosition(controlLayers, preOptions, options);
+			controlLayers.addTo(map);
 			storeProps({
 				options
 			});
 		}
 	}
 
-	$: instance = $layersStore;
+	$: instance = controlLayers;
 
 	function updatePosition(
 		obj: Control.Layers,
@@ -51,15 +58,17 @@
 	}
 
 	function reset() {
-		$layersStore?.remove();
-		$layersStore = undefined;
+		controlLayers?.remove();
+		controlLayers = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideControlLayer(layersStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => controlLayers }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

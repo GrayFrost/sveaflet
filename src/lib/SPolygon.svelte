@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
-	import { writable } from 'svelte/store';
-	import { Polygon } from 'leaflet';
+	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { Polygon, Map } from 'leaflet';
 	import type { LatLngExpression, PathOptions, PolylineOptions } from 'leaflet';
-	import { useConsumeMap, useConsumeLayerGroup, useProvideLayer } from '$lib/context';
 
 	// props
 	export let latLngs: LatLngExpression[];
@@ -11,31 +9,38 @@
 	export let instance: Polygon | undefined = undefined;
 
 	// store
-	let mapStore = useConsumeMap();
-	let layerGroupStore = useConsumeLayerGroup();
-	let polygonStore = writable<Polygon | undefined>();
+	let parentContext: any = getContext(Map);
+	const { getMap, getLayer } = parentContext;
+
+	let polygon: Polygon | undefined;
 
 	// data
 	let preLatLngs = latLngs;
 	let preOptions = options;
 
+	let ready = false;
+
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+
 	onMount(() => {
-		$polygonStore = new Polygon(latLngs, options);
+		polygon = new Polygon(latLngs, options);
 		storeProps({
 			latLngs,
 			options
 		});
+		ready = true;
 	});
 
-	$: if ($mapStore) {
-		if ($polygonStore) {
-			updateLatLngs($polygonStore, preLatLngs, latLngs);
-			updateStyle($polygonStore, preOptions, options);
+	$: if (map) {
+		if (polygon) {
+			updateLatLngs(polygon, preLatLngs, latLngs);
+			updateStyle(polygon, preOptions, options);
 
-			if ($layerGroupStore) {
-				$layerGroupStore.addLayer($polygonStore);
+			if (layer) {
+				layer.addLayer(polygon);
 			} else {
-				$polygonStore.addTo($mapStore);
+				map.addLayer(polygon);
 			}
 			storeProps({
 				latLngs,
@@ -44,7 +49,7 @@
 		}
 	}
 
-	$: instance = $polygonStore;
+	$: instance = polygon;
 
 	function updateLatLngs(
 		obj: Polygon,
@@ -90,15 +95,17 @@
 	}
 
 	function reset() {
-		$polygonStore?.remove();
-		$polygonStore = undefined;
+		polygon?.remove();
+		polygon = undefined;
 	}
 
 	onDestroy(() => {
 		reset();
 	});
 
-	useProvideLayer(polygonStore);
+	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => polygon }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}
