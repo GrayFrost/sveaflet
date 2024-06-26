@@ -22,6 +22,8 @@
 	$: map = getMap?.();
 	$: layer = getLayer?.();
 
+	let ready = false;
+
 	onMount(() => {
 		if (svgElement) {
 			svgOverlay = new SVGOverlay(svgElement, bounds, options);
@@ -33,6 +35,7 @@
 			bounds,
 			options
 		});
+		ready = true;
 	});
 
 	$: if (map) {
@@ -105,5 +108,7 @@
 </script>
 
 <svg bind:this={svgElement} xmlns="http://www.w3.org/2000/svg" {...$$restProps}>
-	<slot />
+	{#if ready}
+		<slot />
+	{/if}
 </svg>

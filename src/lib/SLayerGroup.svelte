@@ -6,9 +6,10 @@
 
 	// props
 	export let options: LayerOptions = {};
-	export let overlayName: string = '';
-	export let checked: boolean = false;
+	export let name: string = '';
+	export let checked: boolean = false; // todo update should removelayer?
 	export let instance: LayerGroup | undefined = undefined;
+	export let layerType: 'base' | 'overlay' | undefined = undefined;
 
 	// store
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -28,14 +29,25 @@
 	$: if (map) {
 		if (layerGroup) {
 			if (controlLayers) {
-				if (!overlayName) {
-					console.warn('Overlay Name is required in ControlLayers');
+				if (!name) {
+					console.warn('Name is required in ControlLayers');
+				} else {
+					if (layerType === 'base') {
+						if (checked) {
+							map.addLayer(layerGroup);
+							controlLayers.addBaseLayer(layerGroup, name);
+						} else {
+							controlLayers.addBaseLayer(layerGroup, name);
+						}
+					} else if (layerType === 'overlay') {
+						if (checked) {
+							map.addLayer(layerGroup);
+							controlLayers.addOverlay(layerGroup, name);
+						} else {
+							controlLayers.addOverlay(layerGroup, name);
+						}
+					}
 				}
-				if (checked) {
-					map.addLayer(layerGroup);
-				}
-				controlLayers.addOverlay(layerGroup, overlayName || 'Overlay Name');
-				// map.addLayer(controlLayers);
 				controlLayers.addTo(map);
 			} else {
 				map.addLayer(layerGroup);
@@ -57,4 +69,6 @@
 	setContext(Map, Object.freeze({ ...parentContext, getLayer: () => layerGroup }));
 </script>
 
-<slot />
+{#if ready}
+	<slot />
+{/if}

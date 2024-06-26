@@ -7,10 +7,10 @@
 	// props
 	export let urlTemplate: string;
 	export let options: TileLayerOptions = {};
-	export let layerName: string = '';
+	export let name: string = '';
 	export let checked: boolean = false;
 	export let instance: TileLayer | undefined = undefined;
-
+	export let layerType: 'base' | 'overlay' | undefined = undefined;
 	// store
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getControl } = parentContext;
@@ -42,15 +42,25 @@
 			}
 
 			if (controlLayers) {
-				if (!layerName) {
-					console.warn('Layer Name is required in ControlLayers');
+				if (!name) {
+					console.warn('Name is required in ControlLayers');
+				} else {
+					if (layerType === 'base') {
+						if (checked) {
+							map.addLayer(tileLayer);
+							controlLayers.addBaseLayer(tileLayer, name);
+						} else {
+							controlLayers.addBaseLayer(tileLayer, name);
+						}
+					} else if (layerType === 'overlay') {
+						if (checked) {
+							map.addLayer(tileLayer);
+						} else {
+							controlLayers.addOverlay(tileLayer, name);
+						}
+					}
 				}
 
-				if (checked) {
-					map.addLayer(tileLayer);
-				}
-
-				controlLayers.addBaseLayer(tileLayer, layerName || 'Layer Name');
 				controlLayers.addTo(map);
 			} else {
 				map.addLayer(tileLayer);

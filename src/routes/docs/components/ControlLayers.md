@@ -57,34 +57,37 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 	>
 		<ControlLayers>
 			<TileLayer
-				layerName="OpenStreetMap"
+				name="OpenStreetMap"
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution: '© OpenStreetMap'
 				}}
 				checked={true}
+				layerType="base"
 			/>
 			<TileLayer
-				layerName="OpenStreetMap.HOT"
+				name="OpenStreetMap.HOT"
 				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
 						'© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
 				}}
+				layerType="base"
 			/>
 			<TileLayer
-				layerName="OpenTopoMap"
+				name="OpenTopoMap"
 				urlTemplate={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
 						'Map data: © OpenStreetMap contributors, SRTM | Map style: © OpenTopoMap (CC-BY-SA)'
 				}}
+				layerType="base"
 			/>
 
-			<LayerGroup checked={true} overlayName="Cities">
+			<LayerGroup checked={true} name="Cities" layerType="overlay">
 				<Marker latlng={[39.61, -105.02]}>
 					<Popup options={{ content: 'This is Littleton, CO.' }} />
 				</Marker>
@@ -98,7 +101,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 					<Popup options={{ content: 'This is Golden, CO.' }} />
 				</Marker>
 			</LayerGroup>
-			<LayerGroup overlayName="Parks">
+			<LayerGroup name="Parks" layerType="overlay">
 				<Marker latlng={[39.75, -105.09]}>
 					<Popup options={{ content: 'This is Crown Hill Park.' }} />
 				</Marker>
@@ -136,24 +139,26 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			zoom: 10
 		}}
 	>
-		<ControlLayers options={{ position }}>
+		<ControlLayers options={{ position, collapsed: false }}>
 			<TileLayer
-				layerName="OpenStreetMap"
+				name="OpenStreetMap"
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution: '© OpenStreetMap'
 				}}
 				checked={true}
+				layerType="base"
 			/>
 			<TileLayer
-				layerName="OpenStreetMap.HOT"
+				name="OpenStreetMap.HOT"
 				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
 						'© OpenStreetMap contributors, Tiles style by Humanitarian OpenStreetMap Team hosted by OpenStreetMap France'
 				}}
+				layerType="base"
 			/>
 		</ControlLayers>
 	</Map>

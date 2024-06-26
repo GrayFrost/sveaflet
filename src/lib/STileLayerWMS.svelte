@@ -7,10 +7,10 @@
 	// props
 	export let baseUrl: string;
 	export let options: WMSOptions = {};
-	export let layerName: string = '';
+	export let name: string = '';
 	export let checked: boolean = false;
 	export let instance: TileLayer | undefined = undefined;
-
+	export let layerType: 'base' | 'overlay' | undefined = undefined;
 	// store
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getControl } = parentContext;
@@ -38,14 +38,25 @@
 			updateZIndex(tileLayerWMS, preOptions, options);
 
 			if (controlLayers) {
-				if (!layerName) {
-					console.warn('Layer Name is required in ControlLayers');
+				if (!name) {
+					console.warn('Name is required in ControlLayers');
+				} else {
+					if (layerType === 'base') {
+						if (checked) {
+							map.addLayer(tileLayerWMS);
+							controlLayers.addBaseLayer(tileLayerWMS, name);
+						} else {
+							controlLayers.addBaseLayer(tileLayerWMS, name);
+						}
+					} else if (layerType === 'overlay') {
+						if (checked) {
+							map.addLayer(tileLayerWMS);
+						} else {
+							controlLayers.addOverlay(tileLayerWMS, name);
+						}
+					}
 				}
 
-				if (checked) {
-					map.addLayer(tileLayerWMS);
-				}
-				controlLayers.addBaseLayer(tileLayerWMS, layerName || 'Layer Name');
 				controlLayers.addTo(map);
 			} else {
 				map.addLayer(tileLayerWMS);

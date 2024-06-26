@@ -111,9 +111,11 @@
 	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => videoOverlay }));
 </script>
 
-{#if ready && $$slots.default}
+{#if $$slots.default}
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video bind:this={htmlVideoElement} {...$$restProps}>
-		<slot />
+		{#if ready}
+			<slot />
+		{/if}
 	</video>
 {/if}

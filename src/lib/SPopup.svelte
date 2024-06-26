@@ -96,8 +96,10 @@
 	});
 </script>
 
-{#if ready && $$slots.default}
+{#if $$slots.default}
 	<div bind:this={htmlElement} {...$$restProps}>
-		<slot />
+		{#if ready}
+			<slot />
+		{/if}
 	</div>
 {/if}

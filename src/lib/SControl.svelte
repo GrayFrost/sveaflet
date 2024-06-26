@@ -4,7 +4,6 @@
 	import type { ControlOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 
-	// todo fix bugs
 	// props
 	export let options: ControlOptions = { position: 'topright' };
 	export let instance: Control | undefined = undefined;
@@ -19,12 +18,10 @@
 	let preOptions = options;
 	let ready = false;
 
-	// class
-	let CustomControl: { new (...args: any[]): { onAdd(): HTMLElement } } & typeof Control;
-
 	$: map = getMap?.();
 
 	onMount(() => {
+		let CustomControl: { new (...args: any[]): { onAdd(): HTMLElement } } & typeof Control;
 		// @ts-ignore
 		CustomControl = Control.extend({
 			onAdd() {
@@ -69,12 +66,8 @@
 	});
 </script>
 
-{#if ready}
-	<div
-		bind:this={htmlElement}
-		{...$$restProps}
-		class={`leaflet-control ${$$restProps.class ?? ''}`}
-	>
+<div bind:this={htmlElement} {...$$restProps} class={`leaflet-control ${$$restProps.class ?? ''}`}>
+	{#if ready}
 		<slot />
-	</div>
-{/if}
+	{/if}
+</div>

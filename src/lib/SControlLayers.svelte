@@ -66,7 +66,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => controlLayers }));
+	setContext(Map, Object.freeze({ ...parentContext, getControl: () => controlLayers }));
 </script>
 
 {#if ready}
