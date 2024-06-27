@@ -84,6 +84,7 @@ description: This tutorial will show you how to group several layers into one, a
 
 ```svelte example csr
 <script>
+	import { tick } from 'svelte';
 	import {
 		Map,
 		TileLayer,
@@ -105,9 +106,9 @@ description: This tutorial will show you how to group several layers into one, a
 	let index = 0;
 
 	$: if (layerGroup) {
-		layerGroup.eachLayer((layer) => {
-			layers.push(layer);
-		});
+		tick().then(() => {
+			layers = layerGroup.getLayers()
+		})
 	}
 
 	function openPopup() {
