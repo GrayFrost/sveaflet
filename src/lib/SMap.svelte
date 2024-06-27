@@ -20,11 +20,12 @@
 	export let options: MapOptions = {};
 	export let instance: Map | undefined = undefined;
 
-	let map: Map | undefined;
-
 	// data
+	let map: Map | undefined;
 	let mapContainer: HTMLElement;
 	let preOptions = options;
+
+	$: instance = map;
 
 	onMount(() => {
 		map = new Map(mapContainer, options);
@@ -40,8 +41,6 @@
 			options
 		});
 	}
-
-	$: instance = map;
 
 	function updateView(obj: Map, preOpt: MapOptions, opt: MapOptions) {
 		if (opt.center !== preOpt.center && opt.center !== undefined) {
@@ -69,7 +68,7 @@
 		reset();
 	});
 
-	setContext<LeafletContextInterface>(Map, Object.freeze({getMap: () => map}));
+	setContext<LeafletContextInterface>(Map, Object.freeze({ getMap: () => map }));
 </script>
 
 <div style="width:100%;height:100%" bind:this={mapContainer}>

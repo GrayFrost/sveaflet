@@ -12,17 +12,19 @@
 	export let checked: boolean = false;
 	export let instance: TileLayer | undefined = undefined;
 	export let layerType: 'base' | 'overlay' | undefined = undefined;
-	// store
+
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getControl } = parentContext;
-
-	$: map = getMap?.();
-	$: controlLayers = getControl?.();
 
 	// data
 	let tileLayer: TileLayer | undefined;
 	let preUrlTemplate = urlTemplate;
 	let preOptions = options;
+
+	$: map = getMap?.();
+	$: controlLayers = getControl?.();
+	$: instance = tileLayer;
 
 	onMount(() => {
 		tileLayer = new TileLayer(urlTemplate, options);
@@ -67,8 +69,6 @@
 			});
 		}
 	}
-
-	$: instance = tileLayer;
 
 	function updateUrl(obj: TileLayer, preBaseUrl: string, baseUrl: string) {
 		if (baseUrl !== preBaseUrl && baseUrl !== undefined) {

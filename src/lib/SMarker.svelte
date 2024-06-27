@@ -2,6 +2,7 @@
 	import { onMount, onDestroy, setContext, getContext } from 'svelte';
 	import { Map, Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latlng: LatLngExpression;
@@ -10,16 +11,19 @@
 	};
 	export let instance: Marker | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
-	let marker: Marker | undefined;
-
 	// data
+	let marker: Marker | undefined;
 	let preLatLng = latlng;
 	let preOptions = options;
 	let ready = false;
+
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+	$: instance = marker;
 
 	onMount(() => {
 		marker = new Marker(latlng, options);
@@ -29,9 +33,6 @@
 		});
 		ready = true;
 	});
-
-	$: map = getMap?.();
-	$: layer = getLayer?.();
 
 	$: if (map) {
 		if (marker) {
@@ -49,8 +50,6 @@
 			});
 		}
 	}
-
-	$: instance = marker;
 
 	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
 		if (latlng !== preLatLng && latlng !== undefined) {

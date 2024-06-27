@@ -8,11 +8,12 @@
 	export let options: Control.ScaleOptions = {};
 	export let instance: Control.Scale | undefined = undefined;
 
-	// store
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
-	const { getMap, getLayer } = parentContext;
+	const { getMap } = parentContext;
 
 	$: map = getMap?.();
+	$: instance = scale;
 
 	// data
 	let scale: Control.Scale | undefined;
@@ -30,8 +31,6 @@
 			storeProps({ options });
 		}
 	}
-
-	$: instance = scale;
 
 	function updatePosition(
 		obj: Control.Scale,

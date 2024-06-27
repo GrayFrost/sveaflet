@@ -2,26 +2,26 @@
 	import { onMount, onDestroy, setContext, getContext } from 'svelte';
 	import { Polygon, Map } from 'leaflet';
 	import type { LatLngExpression, PathOptions, PolylineOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latLngs: LatLngExpression[];
 	export let options: PolylineOptions = {};
 	export let instance: Polygon | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
-	let polygon: Polygon | undefined;
-
 	// data
+	let polygon: Polygon | undefined;
 	let preLatLngs = latLngs;
 	let preOptions = options;
-
 	let ready = false;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
+	$: instance = polygon;
 
 	onMount(() => {
 		polygon = new Polygon(latLngs, options);
@@ -48,8 +48,6 @@
 			});
 		}
 	}
-
-	$: instance = polygon;
 
 	function updateLatLngs(
 		obj: Polygon,

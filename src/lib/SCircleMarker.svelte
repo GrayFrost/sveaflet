@@ -2,25 +2,26 @@
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { CircleMarker, Map } from 'leaflet';
 	import type { LatLngExpression, CircleMarkerOptions, PathOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latlng: LatLngExpression;
 	export let options: CircleMarkerOptions = { radius: 10 };
 	export let instance: CircleMarker | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
-	let circleMarker:CircleMarker | undefined;
 
 	// data
+	let circleMarker: CircleMarker | undefined;
 	let preLatLng = latlng;
 	let preOptions = options;
-
 	let ready = false;
 
-	$:map = getMap?.();
-	$:layer = getLayer?.();
+	$: map = getMap?.();
+	$: layer = getLayer?.();
+	$: instance = circleMarker;
 
 	onMount(() => {
 		circleMarker = new CircleMarker(latlng, options);
@@ -50,8 +51,6 @@
 			});
 		}
 	}
-
-	$: instance = circleMarker;
 
 	function updatetLatLng(obj: CircleMarker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
 		if (latlng !== preLatLng && latlng !== undefined) {

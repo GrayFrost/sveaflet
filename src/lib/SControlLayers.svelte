@@ -8,19 +8,17 @@
 	export let options: Control.LayersOptions = {};
 	export let instance: Control.Layers | undefined = undefined;
 
-	// store
-
-	// todo base layer overlay layer
-	let controlLayers: Control.Layers | undefined;
-
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
-	const { getMap, getLayer } = parentContext;
+	const { getMap } = parentContext;
+
 	// data
+	let controlLayers: Control.Layers | undefined;
 	let preOptions = options;
+	let ready = false;
 
 	$: map = getMap?.();
-	$: layer = getLayer?.();
-	let ready = false;
+	$: instance = controlLayers;
 
 	onMount(() => {
 		controlLayers = control.layers(undefined, undefined, options);
@@ -39,8 +37,6 @@
 			});
 		}
 	}
-
-	$: instance = controlLayers;
 
 	function updatePosition(
 		obj: Control.Layers,

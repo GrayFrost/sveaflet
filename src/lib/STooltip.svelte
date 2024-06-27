@@ -2,18 +2,16 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { Map, Tooltip } from 'leaflet';
 	import type { LatLngExpression, TooltipOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: TooltipOptions = {};
 	export let instance: Tooltip | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
-
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
-	$: map = getMap?.();
-	$: layer = getOverlay?.();
 
 	// data
 	let tooltip: Tooltip | undefined;
@@ -21,6 +19,10 @@
 	let preLatLng = latlng;
 	let preOptions = options;
 	let ready = false;
+
+	$: map = getMap?.();
+	$: layer = getOverlay?.();
+	$: instance = tooltip;
 
 	onMount(() => {
 		let mergeOptions = {
@@ -64,8 +66,6 @@
 			});
 		}
 	}
-
-	$: instance = tooltip;
 
 	function updateLatLng(
 		obj: Tooltip,

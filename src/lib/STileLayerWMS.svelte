@@ -12,7 +12,8 @@
 	export let checked: boolean = false;
 	export let instance: TileLayer | undefined = undefined;
 	export let layerType: 'base' | 'overlay' | undefined = undefined;
-	// store
+
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getControl } = parentContext;
 
@@ -21,6 +22,10 @@
 	let preBaseUrl = baseUrl;
 	let preOptions = options;
 
+	$: map = getMap?.();
+	$: controlLayers = getControl?.();
+	$: instance = tileLayerWMS;
+
 	onMount(() => {
 		tileLayerWMS = new TileLayer.WMS(baseUrl, options);
 		storeProps({
@@ -28,9 +33,6 @@
 			options
 		});
 	});
-
-	$: map = getMap?.();
-	$: controlLayers = getControl?.();
 
 	$: if (map) {
 		if (tileLayerWMS) {
@@ -63,8 +65,6 @@
 			});
 		}
 	}
-
-	$: instance = tileLayerWMS;
 
 	function updateUrl(obj: TileLayer, preBaseUrl: string, baseUrl: string) {
 		if (baseUrl !== preBaseUrl && baseUrl !== undefined) {

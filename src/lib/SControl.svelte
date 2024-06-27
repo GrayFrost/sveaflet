@@ -8,9 +8,9 @@
 	export let options: ControlOptions = { position: 'topright' };
 	export let instance: Control | undefined = undefined;
 
-	// store
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
-	const { getMap, getLayer } = parentContext;
+	const { getMap } = parentContext;
 
 	// data
 	let control: Control | undefined;
@@ -19,6 +19,7 @@
 	let ready = false;
 
 	$: map = getMap?.();
+	$: instance = control;
 
 	onMount(() => {
 		let CustomControl: { new (...args: any[]): { onAdd(): HTMLElement } } & typeof Control;
@@ -42,8 +43,6 @@
 			storeProps({ options });
 		}
 	}
-
-	$: instance = control;
 
 	function updatePosition(obj: Control, preOpt: ControlOptions, opt: ControlOptions) {
 		if (opt.position !== preOpt.position && opt.position !== undefined) {

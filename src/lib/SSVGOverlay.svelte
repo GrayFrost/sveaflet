@@ -2,15 +2,15 @@
 	import { onDestroy, onMount, setContext, getContext } from 'svelte';
 	import { Map, SVGOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions, SVGOverlayStyleOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let bounds: LatLngBounds;
 	export let options: ImageOverlayOptions = {};
 	export let instance: SVGOverlay | undefined = undefined;
 
-	// store
-
-	let parentContext: any = getContext(Map);
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
@@ -18,11 +18,11 @@
 	let svgElement: SVGElement | undefined;
 	let preBounds = bounds;
 	let preOptions = options;
+	let ready = false;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
-
-	let ready = false;
+	$: instance = svgOverlay;
 
 	onMount(() => {
 		if (svgElement) {
@@ -60,8 +60,6 @@
 			});
 		}
 	}
-
-	$: instance = svgOverlay;
 
 	function updateBounds(obj: SVGOverlay, preBounds: LatLngBounds, bounds: LatLngBounds) {
 		if (bounds !== preBounds && bounds !== undefined) {

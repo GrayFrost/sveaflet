@@ -2,6 +2,7 @@
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { Map, VideoOverlay } from 'leaflet';
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let video: string | string[] = [];
@@ -9,8 +10,8 @@
 	export let options: VideoOverlayOptions = {};
 	export let instance: VideoOverlay | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
@@ -19,11 +20,11 @@
 	let preVideo = video;
 	let preBounds = bounds;
 	let preOptions = options;
+	let ready = false;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
-
-	let ready = false;
+	$: instance = videoOverlay;
 
 	onMount(() => {
 		let mergeVideo = htmlVideoElement || video;
@@ -56,8 +57,6 @@
 			});
 		}
 	}
-
-	$: instance = videoOverlay;
 
 	function updateUrl(obj: VideoOverlay, preVideo: string | string[], video: string | string[]) {
 		if (video !== preVideo && video !== undefined) {

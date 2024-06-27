@@ -8,15 +8,16 @@
 	export let options: Control.ZoomOptions = {};
 	export let instance: Control.Zoom | undefined = undefined;
 
-	// store
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
-	const { getMap, getLayer } = parentContext;
+	const { getMap } = parentContext;
 
 	// data
 	let zoom: Control.Zoom | undefined;
 	let preOptions = options;
 
 	$: map = getMap?.();
+	$: instance = zoom;
 
 	onMount(() => {
 		zoom = control.zoom(options);
@@ -30,8 +31,6 @@
 			storeProps({ options });
 		}
 	}
-
-	$: instance = zoom;
 
 	function updatePosition(
 		obj: Control.Zoom,

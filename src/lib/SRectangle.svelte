@@ -2,24 +2,26 @@
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { Rectangle, Map } from 'leaflet';
 	import type { LatLngBoundsExpression, PathOptions, PolylineOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latLngBounds: LatLngBoundsExpression;
 	export let options: PolylineOptions = {};
 	export let instance: Rectangle | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
-	let rectangle: Rectangle | undefined;
-	let ready = false;
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
+	let rectangle: Rectangle | undefined;
 	let preLatLngBounds = latLngBounds;
 	let preOptions = options;
+	let ready = false;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
+	$: instance = rectangle;
 
 	onMount(() => {
 		rectangle = new Rectangle(latLngBounds, options);
@@ -43,8 +45,6 @@
 			});
 		}
 	}
-
-	$: instance = rectangle;
 
 	function updateBounds(
 		obj: Rectangle,

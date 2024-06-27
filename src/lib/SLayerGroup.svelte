@@ -12,11 +12,12 @@
 	export let instance: LayerGroup | undefined = undefined;
 	export let layerType: 'base' | 'overlay' | undefined = undefined;
 
-	// store
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getControl } = parentContext;
-	let layerGroup: LayerGroup | undefined;
 
+	// data
+	let layerGroup: LayerGroup | undefined;
 	let ready = false;
 
 	onMount(() => {
@@ -26,6 +27,7 @@
 
 	$: map = getMap?.();
 	$: controlLayers = getControl?.();
+	$: instance = layerGroup;
 
 	$: if (map) {
 		if (layerGroup) {
@@ -48,8 +50,6 @@
 			}
 		}
 	}
-
-	$: instance = layerGroup;
 
 	function reset() {
 		layerGroup?.remove();

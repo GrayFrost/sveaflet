@@ -9,18 +9,19 @@
 	export let options: CircleOptions = { radius: 100 };
 	export let instance: Circle | undefined = undefined;
 
-	let circle: Circle | undefined;
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
+	let circle: Circle | undefined;
 	let preLatLng = latlng;
 	let preOptions = options;
-
 	let ready = false;
 
-	$:map = getMap?.();
+	$: map = getMap?.();
 	$: layer = getLayer?.();
+	$: instance = circle;
 
 	onMount(() => {
 		circle = new Circle(latlng, options);
@@ -50,8 +51,6 @@
 			});
 		}
 	}
-
-	$: instance = circle;
 
 	function updatetLatLng(obj: Circle, preLatLng: LatLngExpression, latlng: LatLngExpression) {
 		if (latlng !== preLatLng && latlng !== undefined) {

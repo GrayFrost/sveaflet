@@ -10,7 +10,7 @@
 	export let options: ImageOverlayOptions = {};
 	export let instance: ImageOverlay | undefined = undefined;
 
-	// store
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
@@ -22,6 +22,7 @@
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
+	$: instance = imageOverlay;
 
 	onMount(() => {
 		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
@@ -51,8 +52,6 @@
 			});
 		}
 	}
-
-	$: instance = imageOverlay;
 
 	function updateUrl(obj: ImageOverlay, preImageUrl: string, imageUrl: string) {
 		if (imageUrl !== preImageUrl && imageUrl !== undefined) {

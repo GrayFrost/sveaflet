@@ -8,15 +8,16 @@
 	export let options: Control.AttributionOptions = {};
 	export let instance: Control.Attribution | undefined = undefined;
 
-	// store
+	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
-	const { getMap, getLayer } = parentContext;
+	const { getMap } = parentContext;
 
 	// data
 	let attribution: Control.Attribution | undefined;
 	let preOptions = options;
 
 	$: map = getMap?.();
+	$: instance = attribution;
 
 	onMount(() => {
 		attribution = control.attribution(options);
@@ -32,8 +33,6 @@
 			storeProps({ options });
 		}
 	}
-
-	$: instance = attribution;
 
 	function updatePosition(
 		obj: Control.Attribution,

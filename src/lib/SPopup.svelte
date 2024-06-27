@@ -2,18 +2,16 @@
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { Map, Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
+	import type { LeafletContextInterface } from './types';
 
 	// props
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {};
 	export let instance: Popup | undefined = undefined;
 
-	// store
-	let parentContext: any = getContext(Map);
-
+	// context
+	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
-	$: map = getMap?.();
-	$: layer = getOverlay?.();
 
 	// data
 	let popup: Popup | undefined;
@@ -21,6 +19,10 @@
 	let preLatLng = latlng;
 	let preOptions = options;
 	let ready = false;
+
+	$: map = getMap?.();
+	$: layer = getOverlay?.();
+	$: instance = popup;
 
 	onMount(() => {
 		let mergeOptions = {
@@ -61,8 +63,6 @@
 			options
 		});
 	}
-
-	$: instance = popup;
 
 	function updateLatLng(
 		obj: Popup,
