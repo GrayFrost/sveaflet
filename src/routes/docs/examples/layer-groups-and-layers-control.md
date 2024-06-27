@@ -23,7 +23,8 @@ description: This tutorial will show you how to group several layers into one, a
 	>
 		<ControlLayers>
 			<TileLayer
-				layerName="OpenStreetMap"
+				layerType="base"
+				name="OpenStreetMap"
 				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
@@ -32,7 +33,8 @@ description: This tutorial will show you how to group several layers into one, a
 				checked={true}
 			/>
 			<TileLayer
-				layerName="OpenStreetMap.HOT"
+				layerType="base"
+				name="OpenStreetMap.HOT"
 				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
@@ -41,7 +43,8 @@ description: This tutorial will show you how to group several layers into one, a
 				}}
 			/>
 			<TileLayer
-				layerName="OpenTopoMap"
+				layerType="base"
+				name="OpenTopoMap"
 				urlTemplate={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
@@ -50,7 +53,7 @@ description: This tutorial will show you how to group several layers into one, a
 				}}
 			/>
 
-			<LayerGroup checked={true} overlayName="Cities">
+			<LayerGroup checked={true} name="Cities" layerType="overlay">
 				<Marker latlng={[39.61, -105.02]}>
 					<Popup options={{ content: 'This is Littleton, CO.' }} />
 				</Marker>
@@ -64,7 +67,7 @@ description: This tutorial will show you how to group several layers into one, a
 					<Popup options={{ content: 'This is Golden, CO.' }} />
 				</Marker>
 			</LayerGroup>
-			<LayerGroup overlayName="Parks">
+			<LayerGroup name="Parks" layerType="overlay">
 				<Marker latlng={[39.75, -105.09]}>
 					<Popup options={{ content: 'This is Crown Hill Park.' }} />
 				</Marker>
