@@ -20,31 +20,35 @@ description: WMS, short for web map service, is a popular way of publishing maps
 			<TileLayerWMS
 				checked={true}
 				baseUrl={'http://ows.mundialis.de/services/service?'}
-				layerName="Topography"
+				name="Topography"
 				options={{
 					layers: 'TOPO-WMS'
 				}}
+				layerType="base"
 			/>
 			<TileLayerWMS
 				baseUrl={'http://ows.mundialis.de/services/service?'}
-				layerName="Places"
+				name="Places"
 				options={{
 					layers: 'OSM-Overlay-WMS'
 				}}
+				layerType="base"
 			/>
 			<TileLayerWMS
 				baseUrl={'http://ows.mundialis.de/services/service?'}
-				layerName="Topography, then places"
+				name="Topography, then places"
 				options={{
 					layers: 'TOPO-WMS,OSM-Overlay-WMS'
 				}}
+				layerType="base"
 			/>
 			<TileLayerWMS
 				baseUrl={'http://ows.mundialis.de/services/service?'}
-				layerName="Places, then topography"
+				name="Places, then topography"
 				options={{
 					layers: 'OSM-Overlay-WMS,TOPO-WMS'
 				}}
+				layerType="base"
 			/>
 		</ControlLayers>
 	</Map>

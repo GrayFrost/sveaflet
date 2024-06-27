@@ -88,6 +88,9 @@
 			<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/sveaflet-quick-start-guide"
 				>Examples</NavLi
 			>
+			<NavLi class="lg:px-2 lg:mb-0" href="/docs/extra/plugins"
+				>Extra</NavLi
+			>
 		</NavUl>
 		<div class="flex items-center ms-auto">
 			<ToolbarButton
