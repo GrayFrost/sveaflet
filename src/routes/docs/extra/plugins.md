@@ -8,3 +8,5 @@ description: Plugin extends Leaflet plugin
 ---
 
 Comming Soon ! 🚗
+
+- [sveaflet-heat](https://sveaflet-heat.vercel.app/)
