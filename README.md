@@ -1,5 +1,14 @@
 # Sveaflet
 
+<a href="https://www.npmjs.com/package/sveaflet">
+<img src="https://img.shields.io/npm/dt/sveaflet.svg" alt="Downloads">
+</a>
+<a href="https://www.npmjs.com/package/sveaflet">
+<img src="https://img.shields.io/npm/v/sveaflet.svg" alt="Version">
+</a>
+<a href="https://www.npmjs.com/package/sveaflet">
+<img src="https://img.shields.io/npm/l/sveaflet.svg" alt="License">
+
 [Sveaflet](https://sveaflet.vercel.app/) is a library for the [Svelte](https://svelte.dev/) framework that wraps [Leaflet](https://leafletjs.com/) making it easy to crete reactive maps.
 
 ## Installation
