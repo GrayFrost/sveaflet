@@ -26,7 +26,7 @@ A simple scale control that shows the scale of the current center of screen in m
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlScale />
 	</Map>
 </div>
@@ -52,7 +52,7 @@ A simple scale control that shows the scale of the current center of screen in m
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlScale options={{ position }} />
 	</Map>
 </div>

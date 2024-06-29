@@ -26,9 +26,9 @@ Used to load and display a single image over specific bounds of the map. Extends
 
 <div style="width: 100%; height: 500px;">
 	<Map options={{ center: [40.799311, -74.33], zoom: 10 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ImageOverlay
-			imageUrl="https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+			url="https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
 			bounds={[
 				[40.799311, -74.118464],
 				[40.68202047785919, -74.33]
@@ -55,9 +55,9 @@ Used to load and display a single image over specific bounds of the map. Extends
 
 <div style="width: 100%; height: 500px;">
 	<Map options={{ center: [40.799311, -74.33], zoom: 10 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ImageOverlay
-			imageUrl="https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
+			url="https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg"
 			bounds={[
 				[40.799311, -74.118464],
 				[40.68202047785919, -74.33]
@@ -72,6 +72,6 @@ Used to load and display a single image over specific bounds of the map. Extends
 
 | Prop name | Description  | Type                                                                            | Default |
 | --------- | ------------ | ------------------------------------------------------------------------------- | ------- |
-| imageUrl  | **Required** | String                                                                          |         |
+| url       | **Required** | String                                                                          |         |
 | bounds    | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)               |         |
 | options   | **Optional** | [ImageOverlayOptions](https://leafletjs.com/reference.html#imageoverlay-option) | `{}`    |

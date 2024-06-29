@@ -29,7 +29,7 @@ description: Sometimes, maps do not represent things on the surface of the earth
 
 <div style="width: 600px; height: 400px; ">
 	<Map options={{ crs: L.CRS.Simple, minZoom: -3, center: [70, 120], zoom: 1 }}>
-		<ImageOverlay {imageUrl} {bounds} />
+		<ImageOverlay url={imageUrl} {bounds} />
 		<Marker latlng={sol}><Popup options={{ content: 'Sol' }} /></Marker>
 		<Marker latlng={mizar}><Popup options={{ content: 'Mizar' }} /></Marker>
 		<Marker latlng={kruegerZ}><Popup options={{ content: 'Krueger-Z' }} /></Marker>

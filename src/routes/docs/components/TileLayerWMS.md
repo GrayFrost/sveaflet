@@ -27,7 +27,7 @@ Used to display [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) services as
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayerWMS
-			baseUrl="http://ows.mundialis.de/services/service?"
+			url="http://ows.mundialis.de/services/service?"
 			options={{
 				layers: 'TOPO-OSM-WMS'
 			}}
@@ -54,7 +54,7 @@ Used to display [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) services as
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayerWMS
-			baseUrl="http://ows.mundialis.de/services/service?"
+			url="http://ows.mundialis.de/services/service?"
 			options={{
 				layers: 'TOPO-OSM-WMS',
 				opacity: enableOpacity ? 0.5 : 1
@@ -66,10 +66,10 @@ Used to display [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) services as
 
 ## Props
 
-| Prop name | Description                         | Type                                                                    | Default |
-| --------- | ----------------------------------- | ----------------------------------------------------------------------- | ------- |
-| baseUrl   | **Required**                        | string                                                                  |         |
-| options   | **Optional**                        | [WMSOptions](https://leafletjs.com/reference.html#tilelayer-wms-option) | `{}`    |
-| name        | **Optional**. Layer name in ControlLayers             | string                                                                    |         |
-| checked     | **Optional**. Default selected layer in ControlLayers | boolean                                                                   |         |
-| layerType   | **Optional**. Layer type in ControlLayers             | 'base' \| 'overlay' \| undefined                                          |         |                                                             |         |
+| Prop name | Description                                           | Type                                                                    | Default |
+| --------- | ----------------------------------------------------- | ----------------------------------------------------------------------- | ------- |
+| url       | **Required**                                          | string                                                                  |         |
+| options   | **Optional**                                          | [WMSOptions](https://leafletjs.com/reference.html#tilelayer-wms-option) | `{}`    |
+| name      | **Optional**. Layer name in ControlLayers             | string                                                                  |         |
+| checked   | **Optional**. Default selected layer in ControlLayers | boolean                                                                 |         |
+| layerType | **Optional**. Layer type in ControlLayers             | 'base' \| 'overlay' \| undefined                                        |         |     |     |

@@ -26,7 +26,7 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<GeoJSON />
 	</Map>
 </div>
@@ -34,7 +34,6 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 ## GeoJSON with Options
 
-// todo optios
 ```svelte example csr
 <script>
 	import { Map, TileLayer, GeoJSON } from 'sveaflet';
@@ -55,8 +54,8 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<GeoJSON json={geojsonFeature} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<GeoJSON json={geojsonFeature} options={{ attribution: 'GeoJSON' }} />
 	</Map>
 </div>
 ```

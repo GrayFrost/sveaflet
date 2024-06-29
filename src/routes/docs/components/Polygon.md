@@ -28,7 +28,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
 			latLngs={[
 				[51.509, -0.08],
@@ -58,7 +58,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
 			latLngs={[
 				[51.509, -0.08],
@@ -82,7 +82,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.503, -0.06], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polygon
 			latLngs={[
 				[51.509, -0.08],

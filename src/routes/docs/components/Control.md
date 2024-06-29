@@ -33,7 +33,7 @@ L.Control is a base class for implementing map controls. Handles positioning. Al
 			attributionControl: false
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Control>
 			<div style="border:2px solid black;background:white;padding:8px;">Control content</div>
 		</Control>
@@ -67,7 +67,7 @@ L.Control is a base class for implementing map controls. Handles positioning. Al
 			attributionControl: false
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Control options={{ position }}>
 			<div style="border:2px solid black;background:white;padding:8px;">Control content</div>
 		</Control>

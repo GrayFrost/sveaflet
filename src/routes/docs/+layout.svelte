@@ -12,9 +12,9 @@
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
-	export let data: any; // todo typescript
+	export let data: AllPage;
 
-	const posts: Record<string, any[]> = data.posts;
+	const posts: Record<string, PageData[]> = data.posts;
 	const drawerHidden: Writable<boolean> = getContext('drawer');
 
 	const closeDrawer = () => {

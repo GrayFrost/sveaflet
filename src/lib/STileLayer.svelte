@@ -6,7 +6,7 @@
 	import { setControlLayer } from './utils';
 
 	// props
-	export let urlTemplate: string;
+	export let url: string;
 	export let options: TileLayerOptions = {};
 	export let name: string = '';
 	export let checked: boolean = false;
@@ -19,7 +19,7 @@
 
 	// data
 	let tileLayer: TileLayer | undefined;
-	let preUrlTemplate = urlTemplate;
+	let preUrl = url;
 	let preOptions = options;
 
 	$: map = getMap?.();
@@ -27,9 +27,9 @@
 	$: instance = tileLayer;
 
 	onMount(() => {
-		tileLayer = new TileLayer(urlTemplate, options);
+		tileLayer = new TileLayer(url, options);
 		storeProps({
-			urlTemplate,
+			url,
 			options
 		});
 	});
@@ -37,12 +37,9 @@
 	$: if (map) {
 		if (tileLayer) {
 			// TODO: how to update all options?
-			updateUrl(tileLayer, preUrlTemplate, urlTemplate);
+			updateUrl(tileLayer, preUrl, url);
 			updateOpacity(tileLayer, preOptions, options);
 			updateZIndex(tileLayer, preOptions, options);
-			if (urlTemplate !== preUrlTemplate && urlTemplate !== undefined) {
-				tileLayer.setUrl(urlTemplate);
-			}
 
 			if (controlLayers) {
 				if (!name) {
@@ -64,15 +61,15 @@
 			}
 
 			storeProps({
-				urlTemplate,
+				url,
 				options
 			});
 		}
 	}
 
-	function updateUrl(obj: TileLayer, preBaseUrl: string, baseUrl: string) {
-		if (baseUrl !== preBaseUrl && baseUrl !== undefined) {
-			obj.setUrl(baseUrl);
+	function updateUrl(obj: TileLayer, preUrl: string, url: string) {
+		if (url !== preUrl && url !== undefined) {
+			obj.setUrl(url);
 		}
 	}
 
@@ -88,9 +85,9 @@
 		}
 	}
 
-	function storeProps(props: { urlTemplate: string; options: TileLayerOptions }) {
-		const { urlTemplate, options } = props;
-		preUrlTemplate = urlTemplate;
+	function storeProps(props: { url: string; options: TileLayerOptions }) {
+		const { url, options } = props;
+		preUrl = url;
 		preOptions = Object.create(options);
 	}
 

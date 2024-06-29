@@ -26,7 +26,7 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<CircleMarker latlng={[51.508, -0.11]} />
 	</Map>
 </div>
@@ -51,7 +51,7 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<CircleMarker latlng={[51.508, -0.11]} options={{ radius: 20, color }} />
 	</Map>
 </div>
@@ -66,7 +66,7 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<CircleMarker latlng={[51.508, -0.11]} options={{ radius: 20 }}>
 			<Popup options={{ content: 'Popup in CircleMarker.' }} />
 		</CircleMarker>

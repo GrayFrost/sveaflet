@@ -60,7 +60,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getLayer: () => layerGroup }));
+	setContext(Map, { ...parentContext, getLayer: () => layerGroup });
 </script>
 
 {#if ready}

@@ -28,7 +28,7 @@ A TileLayer is required. Options `{center, zoom}` are required.
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 	</Map>
 </div>
 ```
@@ -50,7 +50,7 @@ A TileLayer is required. Options `{center, zoom}` are required.
 
 <div style="width: 100%;height:500px">
 	<Map options={{ center: [51.505, -0.09], zoom, zoomControl: false, attributionControl: false }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 	</Map>
 </div>
 ```

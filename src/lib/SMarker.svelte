@@ -84,7 +84,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => marker }));
+	setContext(Map, { ...parentContext, getOverlay: () => marker });
 </script>
 
 {#if ready}

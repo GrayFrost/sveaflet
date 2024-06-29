@@ -26,7 +26,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Rectangle
 			latLngBounds={[
 				[54.559322, -5.767822],
@@ -55,7 +55,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Rectangle
 			latLngBounds={[
 				[54.559322, -5.767822],
@@ -76,7 +76,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Rectangle
 			latLngBounds={[
 				[54.559322, -5.767822],

@@ -51,7 +51,7 @@
 				zoom: 13
 			}}
 		>
-			<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+			<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 			<Marker latlng={[51.505, -0.09]} bind:instance={marker}>
 				<Popup
 					options={{

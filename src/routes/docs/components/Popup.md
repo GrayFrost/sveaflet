@@ -26,7 +26,7 @@ Used to open popups in certain places of the map.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup
 			latlng={[51.5, -0.09]}
 			options={{
@@ -46,7 +46,7 @@ Used to open popups in certain places of the map.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup latlng={[51.5, -0.09]}>
 			<div style="color:red;">Popup Content.</div>
 		</Popup>
@@ -71,7 +71,7 @@ Used to open popups in certain places of the map.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup
 			latlng={[51.5, -0.09]}
 			options={{
@@ -101,7 +101,7 @@ Used to open popups in certain places of the map.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<Popup options={{ content: 'Popup in Marker.' }} />
 		</Marker>

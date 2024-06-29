@@ -6,7 +6,7 @@
 	import { setControlLayer } from './utils';
 
 	// props
-	export let baseUrl: string;
+	export let url: string;
 	export let options: WMSOptions = {};
 	export let name: string = '';
 	export let checked: boolean = false;
@@ -19,7 +19,7 @@
 
 	// data
 	let tileLayerWMS: TileLayer | undefined;
-	let preBaseUrl = baseUrl;
+	let preUrl = url;
 	let preOptions = options;
 
 	$: map = getMap?.();
@@ -27,16 +27,16 @@
 	$: instance = tileLayerWMS;
 
 	onMount(() => {
-		tileLayerWMS = new TileLayer.WMS(baseUrl, options);
+		tileLayerWMS = new TileLayer.WMS(url, options);
 		storeProps({
-			baseUrl,
+			url,
 			options
 		});
 	});
 
 	$: if (map) {
 		if (tileLayerWMS) {
-			updateUrl(tileLayerWMS, preBaseUrl, baseUrl);
+			updateUrl(tileLayerWMS, preUrl, url);
 			updateOpacity(tileLayerWMS, preOptions, options);
 			updateZIndex(tileLayerWMS, preOptions, options);
 
@@ -60,15 +60,15 @@
 			}
 
 			storeProps({
-				baseUrl,
+				url,
 				options
 			});
 		}
 	}
 
-	function updateUrl(obj: TileLayer, preBaseUrl: string, baseUrl: string) {
-		if (baseUrl !== preBaseUrl && baseUrl !== undefined) {
-			obj.setUrl(baseUrl);
+	function updateUrl(obj: TileLayer, preUrl: string, url: string) {
+		if (url !== preUrl && url !== undefined) {
+			obj.setUrl(url);
 		}
 	}
 
@@ -84,9 +84,9 @@
 		}
 	}
 
-	function storeProps(props: { baseUrl: string; options: WMSOptions }) {
-		const { baseUrl, options } = props;
-		preBaseUrl = baseUrl;
+	function storeProps(props: { url: string; options: WMSOptions }) {
+		const { url, options } = props;
+		preUrl = url;
 		preOptions = Object.create(options);
 	}
 

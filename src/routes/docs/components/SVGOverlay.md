@@ -28,7 +28,7 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 
 <div style="width: 100%; height: 500px; ">
 	<Map options={{ center: [32, -130], zoom: 4 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<SVGOverlay
 			bounds={[
 				[32, -130],
@@ -60,7 +60,7 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 
 <div style="width: 100%; height: 500px; ">
 	<Map options={{ center: [32, -130], zoom: 4 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<SVGOverlay
 			bounds={[
 				[32, -130],

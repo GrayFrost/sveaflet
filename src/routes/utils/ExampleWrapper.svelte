@@ -26,7 +26,6 @@
 	}
 
 	let node: HTMLElement;
-	// todo
 
 	const copyToClipboard = async (e: MouseEvent) => {
 		const REG_HEX = /&#x([a-fA-F0-9]+);/g;

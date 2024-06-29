@@ -3,13 +3,15 @@
     Inspired by 'svelte-toc'
     Simplified version of Table of Contents.
     */
+	 import type { LinkType } from 'flowbite-svelte';
+
   const aClass = "inline-block border-s border-white duration-200 hover:text-gray-900 transition-none dark:hover:text-white hover:border-gray-300 after:content-['#'] after:text-primary-700 dark:after:text-primary-700 dark:border-gray-900 dark:hover:border-gray-700 after:ms-2 after:opacity-0 hover:after:opacity-100 after:transition-opacity after:duration-100";
 
-  export let extract: (x: HTMLElement) => any = (x: HTMLElement) => ({ name: x.textContent ?? '' }); // todo type
+  export let extract: (x: HTMLElement) => LinkType = (x: HTMLElement) => ({ name: x.textContent ?? '' });
 
   export let headingSelector: string;
 
-  let headings: any[] = [];
+  let headings: LinkType[] = [];
 
   function init(_: any) {
     const observer: MutationObserver = new MutationObserver(toc);

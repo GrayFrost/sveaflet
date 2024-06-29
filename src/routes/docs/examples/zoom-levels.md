@@ -50,7 +50,7 @@ description: Leaflet works with latitude, longitude and “zoom level”. Lower 
 		}}
 	>
 		<TileLayer
-			urlTemplate={'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'}
+			url={'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'}
 			options={{
 				attribution: cartodbAttribution
 			}}

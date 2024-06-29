@@ -34,7 +34,7 @@ description: This step-by-step guide will quickly get you started on Leaflet bas
 <div style="width: 100%;height:500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }} bind:instance={map}>
 		<TileLayer
-			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
 				maxZoom: 19,
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

@@ -21,7 +21,7 @@ description: Sveaflet provides Svelte components for Leaflet mapping components 
 			zoom: 13
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]} />
 	</Map>
 </div>
@@ -61,7 +61,7 @@ Each Sveaflet component has its own `instance` property, through this property, 
 			zoom: 13
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]} bind:instance={marker}>
 			<Popup
 				options={{
@@ -112,7 +112,7 @@ For example:
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup
 			latlng={[51.5, -0.09]}
 			options={{

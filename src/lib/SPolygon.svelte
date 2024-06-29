@@ -101,7 +101,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => polygon }));
+	setContext(Map, { ...parentContext, getOverlay: () => polygon });
 </script>
 
 {#if ready}

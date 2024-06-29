@@ -106,7 +106,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => circleMarker }));
+	setContext(Map, { ...parentContext, getOverlay: () => circleMarker });
 </script>
 
 {#if ready}
