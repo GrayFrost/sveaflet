@@ -25,7 +25,7 @@ description: This tutorial will show you how to group several layers into one, a
 			<TileLayer
 				layerType="base"
 				name="OpenStreetMap"
-				url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+        url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -35,7 +35,7 @@ description: This tutorial will show you how to group several layers into one, a
 			<TileLayer
 				layerType="base"
 				name="OpenStreetMap.HOT"
-				url={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
+        url={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
@@ -45,7 +45,7 @@ description: This tutorial will show you how to group several layers into one, a
 			<TileLayer
 				layerType="base"
 				name="OpenTopoMap"
-				url={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
+        url={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:

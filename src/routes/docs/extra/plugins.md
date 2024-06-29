@@ -54,4 +54,3 @@ export type LeafletContextInterface = Readonly<{
 	getOverlay?: () => Layer | Marker | undefined;
 }>;
 ```
-
