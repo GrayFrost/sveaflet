@@ -49,7 +49,6 @@
 	function checkOverflow(el: HTMLElement) {
 		const isOverflowingY = el.clientHeight < el.scrollHeight;
 		showExpandButton = isOverflowingY;
-		el.firstElementChild?.classList.add('-mb-8');
 	}
 </script>
 

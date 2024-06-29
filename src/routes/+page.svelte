@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { MetaTags } from 'svelte-meta-tags';
-	import { Button } from 'flowbite-svelte';
+	import { Button, P } from 'flowbite-svelte';
+	import { ArrowRightOutline } from 'flowbite-svelte-icons';
 	import type { Marker as MarkerType } from 'leaflet';
 	import Map from '$lib/SMap.svelte';
 	import TileLayer from '$lib/STileLayer.svelte';
@@ -36,10 +37,14 @@
 	<div class="flex justify-center items-center mx-auto my-8 relative w-[240px] h-[200px]">
 		<img src={logo} alt="logo" class="w-full h-full" />
 	</div>
-	<p class="flex justify-center my-8">Harness the power of Leaflet in Svelte</p>
+	<P class="flex justify-center my-8 text-lg lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
+		>Harness the power of Leaflet in Svelte</P
+	>
 
 	<div class="flex justify-center my-8">
-		<Button href="/docs/pages/introduction">Get Started</Button>
+		<Button href="/docs/pages/introduction"
+			>Get Started<ArrowRightOutline class="w-6 h-6 ms-2" /></Button
+		>
 	</div>
 
 	<div
