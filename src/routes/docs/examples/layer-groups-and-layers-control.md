@@ -25,7 +25,7 @@ description: This tutorial will show you how to group several layers into one, a
 			<TileLayer
 				layerType="base"
 				name="OpenStreetMap"
-				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+        url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -35,7 +35,7 @@ description: This tutorial will show you how to group several layers into one, a
 			<TileLayer
 				layerType="base"
 				name="OpenStreetMap.HOT"
-				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
+        url={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
@@ -45,7 +45,7 @@ description: This tutorial will show you how to group several layers into one, a
 			<TileLayer
 				layerType="base"
 				name="OpenTopoMap"
-				urlTemplate={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
+        url={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
@@ -126,7 +126,7 @@ description: This tutorial will show you how to group several layers into one, a
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup bind:instance={layerGroup}>
 			<Marker latlng={[51.5, -0.09]}>
 				<Popup options={{ content: 'Popup in Marker.' }} />

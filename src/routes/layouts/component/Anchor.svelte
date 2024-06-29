@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
-  // import type { LinkType } from '$lib/types';
+  import type { LinkType } from 'flowbite-svelte';
 
-  export function extract(x: HTMLElement): any { // todo type
+  export function extract(x: HTMLElement): LinkType {
     if (x.firstElementChild) return { rel: x.tagName, href: '#' + x.firstElementChild?.id, name: x?.firstChild?.nodeValue ?? '' };
     return { name: '' };
   }

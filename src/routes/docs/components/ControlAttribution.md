@@ -31,7 +31,7 @@ The attribution control allows you to display attribution data in a small text b
 			zoom: 13
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution />
 	</Map>
 </div>
@@ -61,7 +61,7 @@ The attribution control allows you to display attribution data in a small text b
 			zoom: 13
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
 				prefix
@@ -86,7 +86,7 @@ The attribution control allows you to display attribution data in a small text b
 			attributionControl: false
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlAttribution
 			options={{
 				prefix: 'sveaflet'

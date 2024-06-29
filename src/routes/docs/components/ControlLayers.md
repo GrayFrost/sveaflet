@@ -31,7 +31,7 @@ The layers control gives users the ability to switch between different base laye
 			zoom: 10
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<ControlLayers />
 	</Map>
 </div>
@@ -58,7 +58,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 		<ControlLayers>
 			<TileLayer
 				name="OpenStreetMap"
-				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+				url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution: '© OpenStreetMap'
@@ -68,7 +68,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			/>
 			<TileLayer
 				name="OpenStreetMap.HOT"
-				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
+				url={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
@@ -78,7 +78,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			/>
 			<TileLayer
 				name="OpenTopoMap"
-				urlTemplate={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
+				url={'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:
@@ -142,7 +142,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 		<ControlLayers options={{ position, collapsed: false }}>
 			<TileLayer
 				name="OpenStreetMap"
-				urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+				url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution: '© OpenStreetMap'
@@ -152,7 +152,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			/>
 			<TileLayer
 				name="OpenStreetMap.HOT"
-				urlTemplate={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
+				url={'https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'}
 				options={{
 					maxZoom: 19,
 					attribution:

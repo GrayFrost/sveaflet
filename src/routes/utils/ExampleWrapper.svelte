@@ -26,7 +26,6 @@
 	}
 
 	let node: HTMLElement;
-	// todo
 
 	const copyToClipboard = async (e: MouseEvent) => {
 		const REG_HEX = /&#x([a-fA-F0-9]+);/g;
@@ -50,7 +49,6 @@
 	function checkOverflow(el: HTMLElement) {
 		const isOverflowingY = el.clientHeight < el.scrollHeight;
 		showExpandButton = isOverflowingY;
-		el.firstElementChild?.classList.add('-mb-8');
 	}
 </script>
 

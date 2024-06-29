@@ -26,7 +26,7 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon />
 		</Marker>
@@ -45,7 +45,7 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon
 				options={{
@@ -74,7 +74,7 @@ Represents a lightweight icon for markers that uses a simple `<div>` element ins
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<DivIcon>
 				<div style="font-size:20px;font-weight:bold;color: red;">DivIcon</div>

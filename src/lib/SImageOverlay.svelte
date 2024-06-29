@@ -5,7 +5,7 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let imageUrl: string;
+	export let url: string;
 	export let bounds: LatLngBounds;
 	export let options: ImageOverlayOptions = {};
 	export let instance: ImageOverlay | undefined = undefined;
@@ -16,7 +16,7 @@
 
 	// data
 	let imageOverlay: ImageOverlay | undefined;
-	let preImageUrl = imageUrl;
+	let preUrl = url;
 	let preBounds = bounds;
 	let preOptions = options;
 
@@ -25,9 +25,9 @@
 	$: instance = imageOverlay;
 
 	onMount(() => {
-		imageOverlay = new ImageOverlay(imageUrl, bounds, options);
+		imageOverlay = new ImageOverlay(url, bounds, options);
 		storeProps({
-			imageUrl,
+			url,
 			bounds,
 			options
 		});
@@ -35,7 +35,7 @@
 
 	$: if (map) {
 		if (imageOverlay) {
-			updateUrl(imageOverlay, preImageUrl, imageUrl);
+			updateUrl(imageOverlay, preUrl, url);
 			updateBounds(imageOverlay, preBounds, bounds);
 			updateZIndex(imageOverlay, preOptions, options);
 			updateOpacity(imageOverlay, preOptions, options);
@@ -46,16 +46,16 @@
 				map.addLayer(imageOverlay);
 			}
 			storeProps({
-				imageUrl,
+				url,
 				bounds,
 				options
 			});
 		}
 	}
 
-	function updateUrl(obj: ImageOverlay, preImageUrl: string, imageUrl: string) {
-		if (imageUrl !== preImageUrl && imageUrl !== undefined) {
-			obj.setUrl(imageUrl);
+	function updateUrl(obj: ImageOverlay, preUrl: string, url: string) {
+		if (url !== preUrl && url !== undefined) {
+			obj.setUrl(url);
 		}
 	}
 
@@ -78,12 +78,12 @@
 	}
 
 	function storeProps(props: {
-		imageUrl: string;
+		url: string;
 		bounds: LatLngBounds;
 		options: ImageOverlayOptions;
 	}) {
-		const { imageUrl, bounds, options } = props;
-		preImageUrl = imageUrl;
+		const { url, bounds, options } = props;
+		preUrl = url;
 		preBounds = bounds;
 		preOptions = options;
 	}
@@ -97,5 +97,5 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => imageOverlay }));
+	setContext(Map, { ...parentContext, getOverlay: () => imageOverlay });
 </script>

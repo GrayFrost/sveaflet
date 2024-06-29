@@ -98,7 +98,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => rectangle }));
+	setContext(Map, { ...parentContext, getOverlay: () => rectangle });
 </script>
 
 {#if ready}

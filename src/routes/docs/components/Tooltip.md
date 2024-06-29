@@ -26,7 +26,7 @@ Used to display small texts on top of map layers.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+    <TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Tooltip latlng={[51.505, -0.09]} options={{ content: 'Tooltip Content.' }} />
 	</Map>
 </div>
@@ -41,7 +41,7 @@ Used to display small texts on top of map layers.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Tooltip latlng={[51.505, -0.09]}>
 			<div style="color:red;">Tooltip Content.</div>
 		</Tooltip>
@@ -66,7 +66,7 @@ Used to display small texts on top of map layers.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Tooltip latlng={[51.508, -0.11]} options={{ content }} />
 	</Map>
 </div>
@@ -91,7 +91,7 @@ Used to display small texts on top of map layers.
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.5, -0.09]}>
 			<Tooltip options={{ content: 'Tooltip in Marker.' }} />
 		</Marker>

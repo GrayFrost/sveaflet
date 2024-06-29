@@ -68,7 +68,7 @@
 		reset();
 	});
 
-	setContext<LeafletContextInterface>(Map, Object.freeze({ getMap: () => map }));
+	setContext<LeafletContextInterface>(Map, { getMap: () => map });
 </script>
 
 <div style="width:100%;height:100%" bind:this={mapContainer}>

@@ -36,7 +36,7 @@ description: GeoJSON is a very popular data format among many GIS technologies a
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
 		<TileLayer
-			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
 				maxZoom: 19,
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

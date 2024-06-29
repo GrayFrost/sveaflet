@@ -102,7 +102,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => svgOverlay }));
+	setContext(Map, { ...parentContext, getOverlay: () => svgOverlay });
 </script>
 
 <svg bind:this={svgElement} xmlns="http://www.w3.org/2000/svg" {...$$restProps}>

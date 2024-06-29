@@ -26,7 +26,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
 			latLngs={[
 				[45.51, -122.68],
@@ -56,7 +56,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
 			latLngs={[
 				[45.51, -122.68],
@@ -78,7 +78,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.77, -122.43], zoom: 4 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Polyline
 			latLngs={[
 				[45.51, -122.68],

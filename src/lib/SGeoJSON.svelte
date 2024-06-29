@@ -39,5 +39,5 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => geoJSON }));
+	setContext(Map, { ...parentContext, getOverlay: () => geoJSON });
 </script>

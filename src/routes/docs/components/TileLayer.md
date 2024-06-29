@@ -26,7 +26,7 @@ sed to load and display tile layers on the map. Note that most tile servers requ
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 	</Map>
 </div>
 ```
@@ -49,7 +49,7 @@ sed to load and display tile layers on the map. Note that most tile servers requ
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer
-			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
 				opacity: enableOpacity ? 0.5 : 1
 			}}
@@ -62,7 +62,7 @@ sed to load and display tile layers on the map. Note that most tile servers requ
 
 | Prop name   | Description                                           | Type                                                                      | Default |
 | ----------- | ----------------------------------------------------- | ------------------------------------------------------------------------- | ------- |
-| urlTemplate | **Required**                                          | string                                                                    |         |
+| url         | **Required**                                          | string                                                                    |         |
 | options     | **Optional**                                          | [TileLayerOptions](https://leafletjs.com/reference.html#tilelayer-option) | `{}`    |
 | name        | **Optional**. Layer name in ControlLayers             | string                                                                    |         |
 | checked     | **Optional**. Default selected layer in ControlLayers | boolean                                                                   |         |

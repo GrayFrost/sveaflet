@@ -93,7 +93,7 @@ The tutorial was inspired by the Texas Tribune US Senate Runoff Results map (als
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [37.8, -96], zoom: 4 }} bind:instance={map}>
 		<TileLayer
-			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
 				maxZoom: 19,
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

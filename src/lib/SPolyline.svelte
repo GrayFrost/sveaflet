@@ -102,7 +102,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => polyline }));
+	setContext(Map, { ...parentContext, getOverlay: () => polyline });
 </script>
 
 {#if ready}

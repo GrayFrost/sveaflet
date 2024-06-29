@@ -60,3 +60,6 @@ export {
 	ControlScale,
 	ControlZoom,
 };
+
+// types
+export * from "./types";

@@ -29,7 +29,6 @@
 			...options
 		};
 
-		// todo slot content, popup also
 		if (htmlElement) {
 			mergeOptions = {
 				...mergeOptions,

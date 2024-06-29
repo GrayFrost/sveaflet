@@ -62,7 +62,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getControl: () => controlLayers }));
+	setContext(Map, { ...parentContext, getControl: () => controlLayers });
 </script>
 
 {#if ready}

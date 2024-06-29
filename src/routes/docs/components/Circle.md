@@ -28,7 +28,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Circle latlng={[51.508, -0.11]} />
 	</Map>
 </div>
@@ -53,7 +53,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Circle
 			latlng={[51.508, -0.11]}
 			options={{
@@ -76,7 +76,7 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Circle
 			latlng={[51.508, -0.11]}
 			options={{

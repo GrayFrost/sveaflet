@@ -45,7 +45,7 @@ description: A custom control displaying a miniature map
 				attribution:
 					'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			}}
-			urlTemplate={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			url={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'}
 		/>
 		<Control options={{ position: 'topright' }} class="leaflet-bar">
 			<div style="width:80px;height:80px;">
@@ -61,7 +61,7 @@ description: A custom control displaying a miniature map
 						zoomControl: false
 					}}
 				>
-					<TileLayer urlTemplate={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+					<TileLayer url={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 					<Rectangle latLngBounds={bounds} options={{ weight: 1 }} />
 				</Map>
 			</div>

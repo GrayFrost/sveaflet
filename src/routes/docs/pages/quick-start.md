@@ -31,7 +31,7 @@ Sveaflet provides 20+ components for you to build you map page fastly, more deta
 			zoom: 13
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]} />
 	</Map>
 </div>
@@ -58,7 +58,7 @@ Sveaflet also supports Typescript.
 			zoom: 13
 		}}
 	>
-		<TileLayer urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Marker latlng={[51.505, -0.09]} bind:instance={marker}>
 			<Popup
 				options={{
@@ -99,7 +99,7 @@ In current version, Sveaflet does not customize a new event type, you can just a
 <div style="width: 100%;height:500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }} bind:instance={map}>
 		<TileLayer
-			urlTemplate={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
 				maxZoom: 19,
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'

@@ -5,7 +5,7 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let video: string | string[] = [];
+	export let url: string = '';
 	export let bounds: LatLngBounds;
 	export let options: VideoOverlayOptions = {};
 	export let instance: VideoOverlay | undefined = undefined;
@@ -17,7 +17,7 @@
 	// data
 	let videoOverlay: VideoOverlay | undefined;
 	let htmlVideoElement: HTMLVideoElement | undefined;
-	let preVideo = video;
+	let preUrl = url;
 	let preBounds = bounds;
 	let preOptions = options;
 	let ready = false;
@@ -27,11 +27,11 @@
 	$: instance = videoOverlay;
 
 	onMount(() => {
-		let mergeVideo = htmlVideoElement || video;
+		let mergeVideo = htmlVideoElement || url;
 		videoOverlay = new VideoOverlay(mergeVideo, bounds, options);
 
 		storeProps({
-			video,
+			url,
 			bounds,
 			options
 		});
@@ -40,7 +40,7 @@
 
 	$: if (map) {
 		if (videoOverlay) {
-			updateUrl(videoOverlay, preVideo, video);
+			updateUrl(videoOverlay, preUrl, url);
 			updateBounds(videoOverlay, preBounds, bounds);
 			updateZIndex(videoOverlay, preOptions, options);
 			updateOpacity(videoOverlay, preOptions, options);
@@ -51,21 +51,16 @@
 				map.addLayer(videoOverlay);
 			}
 			storeProps({
-				video,
+				url,
 				bounds,
 				options
 			});
 		}
 	}
 
-	function updateUrl(obj: VideoOverlay, preVideo: string | string[], video: string | string[]) {
-		if (video !== preVideo && video !== undefined) {
-			if (Array.isArray(video) && video.length) {
-				obj.setUrl(video[0]);
-			}
-			if (typeof video === 'string') {
-				obj.setUrl(video);
-			}
+	function updateUrl(obj: VideoOverlay, preUrl: string, url: string) {
+		if (url !== preUrl && url !== undefined) {
+			obj.setUrl(url);
 		}
 	}
 
@@ -88,12 +83,12 @@
 	}
 
 	function storeProps(props: {
-		video: string | string[];
+		url: string;
 		bounds: LatLngBounds;
 		options: VideoOverlayOptions;
 	}) {
-		const { video, bounds, options } = props;
-		preVideo = video;
+		const { url, bounds, options } = props;
+		preUrl = url;
 		preBounds = bounds;
 		preOptions = options;
 	}
@@ -107,7 +102,7 @@
 		reset();
 	});
 
-	setContext(Map, Object.freeze({ ...parentContext, getOverlay: () => videoOverlay }));
+	setContext(Map, { ...parentContext, getOverlay: () => videoOverlay });
 </script>
 
 {#if $$slots.default}
