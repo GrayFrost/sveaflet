@@ -105,9 +105,11 @@
 </script>
 
 {#if $$slots.default}
-	<div bind:this={htmlElement} {...$$restProps}>
-		{#if ready}
-			<slot />
-		{/if}
+	<div style="display: none">
+		<div bind:this={htmlElement} {...$$restProps}>
+			{#if ready}
+				<slot />
+			{/if}
+		</div>
 	</div>
 {/if}

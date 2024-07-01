@@ -55,8 +55,12 @@
 	});
 </script>
 
-{#if ready && $$slots.default}
-	<div bind:this={htmlElement} {...$$restProps}>
-		<slot />
+{#if $$slots.default}
+	<div style="display: none">
+		<div bind:this={htmlElement} {...$$restProps}>
+			{#if ready}
+				<slot />
+			{/if}
+		</div>
 	</div>
 {/if}
