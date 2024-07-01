@@ -4,6 +4,7 @@
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 
+	// FIXME: extra htmlelement when popup with slot content in other layers
 	// props
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {};
