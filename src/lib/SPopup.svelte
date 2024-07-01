@@ -4,7 +4,6 @@
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 
-	// FIXME: extra htmlelement when popup with slot content in other layers
 	// props
 	export let latlng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {};
@@ -98,9 +97,11 @@
 </script>
 
 {#if $$slots.default}
-	<div bind:this={htmlElement} {...$$restProps}>
-		{#if ready}
-			<slot />
-		{/if}
+	<div style="display: none">
+		<div bind:this={htmlElement} {...$$restProps}>
+			{#if ready}
+				<slot />
+			{/if}
+		</div>
 	</div>
 {/if}
