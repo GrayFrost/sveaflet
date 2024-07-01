@@ -10,6 +10,7 @@ description: Plugin extends Leaflet plugin
 ## Plugin list
 
 - [sveaflet-heat](https://sveaflet-heat.vercel.app/)
+- [sveaflet-markercluster](https://sveaflet-markercluster.vercel.app/)
 
 ## Build plugin component
 
