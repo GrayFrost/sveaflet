@@ -32,7 +32,7 @@ Sveaflet provides 20+ components for you to build you map page fastly, more deta
 		}}
 	>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} />
+		<Marker latLng={[51.505, -0.09]} />
 	</Map>
 </div>
 ```
@@ -59,7 +59,7 @@ Sveaflet also supports Typescript.
 		}}
 	>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} bind:instance={marker}>
+		<Marker latLng={[51.505, -0.09]} bind:instance={marker}>
 			<Popup
 				options={{
 					content: 'Hello Sveaflet.'
@@ -105,7 +105,7 @@ In current version, Sveaflet does not customize a new event type, you can just a
 				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 			}}
 		/>
-		<Popup latlng={popupLatLng} options={{ content: popupContent }} />
+		<Popup latLng={popupLatLng} options={{ content: popupContent }} />
 	</Map>
 </div>
 ```

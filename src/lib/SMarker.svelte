@@ -5,7 +5,7 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let latlng: LatLngExpression;
+	export let latLng: LatLngExpression;
 	export let options: MarkerOptions = {
 		icon: new Icon.Default()
 	};
@@ -17,7 +17,7 @@
 
 	// data
 	let marker: Marker | undefined;
-	let preLatLng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 	let ready = false;
 
@@ -26,9 +26,9 @@
 	$: instance = marker;
 
 	onMount(() => {
-		marker = new Marker(latlng, options);
+		marker = new Marker(latLng, options);
 		storeProps({
-			latlng,
+			latLng,
 			options
 		});
 		ready = true;
@@ -36,7 +36,7 @@
 
 	$: if (map) {
 		if (marker) {
-			updateLatLng(marker, preLatLng, latlng);
+			updateLatLng(marker, preLatLng, latLng);
 			updateZIndexOffset(marker, preOptions, options);
 			updateOpacity(marker, preOptions, options);
 			if (layer) {
@@ -45,15 +45,15 @@
 				map.addLayer(marker);
 			}
 			storeProps({
-				latlng,
+				latLng,
 				options
 			});
 		}
 	}
 
-	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
-		if (latlng !== preLatLng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latLng: LatLngExpression) {
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -69,9 +69,9 @@
 		}
 	}
 
-	function storeProps(props: { latlng: LatLngExpression; options: MarkerOptions }) {
-		const { latlng, options } = props;
-		preLatLng = latlng;
+	function storeProps(props: { latLng: LatLngExpression; options: MarkerOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 

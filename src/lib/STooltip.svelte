@@ -5,7 +5,7 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let latlng: LatLngExpression | undefined = undefined;
+	export let latLng: LatLngExpression | undefined = undefined;
 	export let options: TooltipOptions = {};
 	export let instance: Tooltip | undefined = undefined;
 
@@ -16,7 +16,7 @@
 	// data
 	let tooltip: Tooltip | undefined;
 	let htmlElement: HTMLElement | undefined;
-	let preLatLng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 	let ready = false;
 
@@ -35,13 +35,13 @@
 				content: htmlElement
 			};
 		}
-		if (!latlng && layer) {
+		if (!latLng && layer) {
 			tooltip = new Tooltip(mergeOptions, layer);
-		} else if (latlng) {
-			tooltip = new Tooltip(latlng, mergeOptions);
+		} else if (latLng) {
+			tooltip = new Tooltip(latLng, mergeOptions);
 		}
 		storeProps({
-			latlng,
+			latLng,
 			options: mergeOptions
 		});
 		ready = true;
@@ -49,7 +49,7 @@
 
 	$: if (map) {
 		if (tooltip) {
-			updateLatLng(tooltip, preLatLng, latlng);
+			updateLatLng(tooltip, preLatLng, latLng);
 			updateContent(tooltip, preOptions, options);
 			updateOpacity(tooltip, preOptions, options);
 
@@ -60,7 +60,7 @@
 				layer.bindTooltip(tooltipContent);
 			}
 			storeProps({
-				latlng,
+				latLng,
 				options
 			});
 		}
@@ -69,10 +69,10 @@
 	function updateLatLng(
 		obj: Tooltip,
 		preLatLng: LatLngExpression | undefined,
-		latlng: LatLngExpression | undefined
+		latLng: LatLngExpression | undefined
 	) {
-		if (latlng !== preLatLng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -88,9 +88,9 @@
 		}
 	}
 
-	function storeProps(props: { latlng: LatLngExpression | undefined; options: TooltipOptions }) {
-		const { latlng, options } = props;
-		preLatLng = latlng;
+	function storeProps(props: { latLng: LatLngExpression | undefined; options: TooltipOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 
