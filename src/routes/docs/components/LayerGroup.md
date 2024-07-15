@@ -28,10 +28,10 @@ Used to group several layers and handle them as one. If you add it to the map, a
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup>
-			<Marker latlng={[39.61, -105.02]} />
-			<Marker latlng={[39.74, -104.99]} />
-			<Marker latlng={[39.73, -104.8]} />
-			<Marker latlng={[39.77, -105.23]} />
+			<Marker latLng={[39.61, -105.02]} />
+			<Marker latLng={[39.74, -104.99]} />
+			<Marker latLng={[39.73, -104.8]} />
+			<Marker latLng={[39.77, -105.23]} />
 		</LayerGroup>
 	</Map>
 </div>
@@ -48,10 +48,10 @@ Used to group several layers and handle them as one. If you add it to the map, a
 	<Map options={{ center: [39.7, -104.9], zoom: 9 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup options={{ attribution: 'LayerGroup' }}>
-			<Marker latlng={[39.61, -105.02]} />
-			<Marker latlng={[39.74, -104.99]} />
-			<Marker latlng={[39.73, -104.8]} />
-			<Marker latlng={[39.77, -105.23]} />
+			<Marker latLng={[39.61, -105.02]} />
+			<Marker latLng={[39.74, -104.99]} />
+			<Marker latLng={[39.73, -104.8]} />
+			<Marker latLng={[39.77, -105.23]} />
 		</LayerGroup>
 	</Map>
 </div>
@@ -78,9 +78,9 @@ Used to group several layers and handle them as one. If you add it to the map, a
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<LayerGroup>
-			<Marker latlng={[51.5, -0.09]} />
+			<Marker latLng={[51.5, -0.09]} />
 			<Circle
-				latlng={[51.508, -0.11]}
+				latLng={[51.508, -0.11]}
 				options={{
 					color: 'red',
 					fillColor: '#f03',
@@ -88,7 +88,7 @@ Used to group several layers and handle them as one. If you add it to the map, a
 					radius: 500
 				}}
 			/>
-			<CircleMarker latlng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }} />
+			<CircleMarker latLng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }} />
 
 			<Polygon
 				latLngs={[

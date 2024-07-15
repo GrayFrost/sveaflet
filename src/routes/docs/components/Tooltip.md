@@ -27,7 +27,7 @@ Used to display small texts on top of map layers.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
     <TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Tooltip latlng={[51.505, -0.09]} options={{ content: 'Tooltip Content.' }} />
+		<Tooltip latLng={[51.505, -0.09]} options={{ content: 'Tooltip Content.' }} />
 	</Map>
 </div>
 ```
@@ -42,7 +42,7 @@ Used to display small texts on top of map layers.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Tooltip latlng={[51.505, -0.09]}>
+		<Tooltip latLng={[51.505, -0.09]}>
 			<div style="color:red;">Tooltip Content.</div>
 		</Tooltip>
 	</Map>
@@ -67,7 +67,7 @@ Used to display small texts on top of map layers.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Tooltip latlng={[51.508, -0.11]} options={{ content }} />
+		<Tooltip latlLng={[51.508, -0.11]} options={{ content }} />
 	</Map>
 </div>
 ```
@@ -92,11 +92,11 @@ Used to display small texts on top of map layers.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.5, -0.09]}>
+		<Marker latLng={[51.5, -0.09]}>
 			<Tooltip options={{ content: 'Tooltip in Marker.' }} />
 		</Marker>
 		<Circle
-			latlng={[51.508, -0.11]}
+			latLng={[51.508, -0.11]}
 			options={{
 				color: 'red',
 				fillColor: '#f03',
@@ -104,9 +104,9 @@ Used to display small texts on top of map layers.
 				radius: 500
 			}}
 		>
-			<Tooltip latlng={[51.508, -0.11]} options={{ content: 'Tooltip in Circle.' }} />
+			<Tooltip latLng={[51.508, -0.11]} options={{ content: 'Tooltip in Circle.' }} />
 		</Circle>
-		<CircleMarker latlng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
+		<CircleMarker latLng={[51.51, -0.13]} options={{ radius: 30, color: 'orange' }}>
 			<Tooltip options={{ content: 'Tooltip in CircleMarker.' }} />
 		</CircleMarker>
 		<Polygon
@@ -143,5 +143,5 @@ Used to display small texts on top of map layers.
 
 | Prop name | Description  | Type                                                                  | Default |
 | --------- | ------------ | --------------------------------------------------------------------- | ------- |
-| latlng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)                 |         |
+| latLng    | **Required** | [LatLng](https://leafletjs.com/reference.html#latlng)                 |         |
 | options   | **Optional** | [TooltipOptions](https://leafletjs.com/reference.html#tooltip-option) | `{}`    |

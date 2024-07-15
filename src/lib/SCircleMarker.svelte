@@ -5,7 +5,7 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let latlng: LatLngExpression;
+	export let latLng: LatLngExpression;
 	export let options: CircleMarkerOptions = { radius: 10 };
 	export let instance: CircleMarker | undefined = undefined;
 
@@ -15,7 +15,7 @@
 
 	// data
 	let circleMarker: CircleMarker | undefined;
-	let preLatLng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 	let ready = false;
 
@@ -24,9 +24,9 @@
 	$: instance = circleMarker;
 
 	onMount(() => {
-		circleMarker = new CircleMarker(latlng, options);
+		circleMarker = new CircleMarker(latLng, options);
 		storeProps({
-			latlng,
+			latLng,
 			options
 		});
 		ready = true;
@@ -34,7 +34,7 @@
 
 	$: if (map) {
 		if (circleMarker) {
-			updatetLatLng(circleMarker, preLatLng, latlng);
+			updatetLatLng(circleMarker, preLatLng, latLng);
 
 			updateRadius(circleMarker, preOptions, options);
 
@@ -46,15 +46,15 @@
 				map.addLayer(circleMarker);
 			}
 			storeProps({
-				latlng,
+				latLng,
 				options
 			});
 		}
 	}
 
-	function updatetLatLng(obj: CircleMarker, preLatLng: LatLngExpression, latlng: LatLngExpression) {
-		if (latlng !== preLatLng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+	function updatetLatLng(obj: CircleMarker, preLatLng: LatLngExpression, latLng: LatLngExpression) {
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -91,9 +91,9 @@
 		obj.setStyle(styles);
 	}
 
-	function storeProps(props: { latlng: LatLngExpression; options: CircleMarkerOptions }) {
-		const { latlng, options } = props;
-		preLatLng = latlng;
+	function storeProps(props: { latLng: LatLngExpression; options: CircleMarkerOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 

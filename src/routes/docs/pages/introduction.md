@@ -22,7 +22,7 @@ description: Sveaflet provides Svelte components for Leaflet mapping components 
 		}}
 	>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} />
+		<Marker latLng={[51.505, -0.09]} />
 	</Map>
 </div>
 ```
@@ -62,7 +62,7 @@ Each Sveaflet component has its own `instance` property, through this property, 
 		}}
 	>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Marker latlng={[51.505, -0.09]} bind:instance={marker}>
+		<Marker latLng={[51.505, -0.09]} bind:instance={marker}>
 			<Popup
 				options={{
 					content: 'Hello Sveaflet.'
@@ -70,7 +70,7 @@ Each Sveaflet component has its own `instance` property, through this property, 
 			></Popup>
 		</Marker>
 		<Circle
-			latlng={[51.508, -0.11]}
+			latLng={[51.508, -0.11]}
 			options={{
 				color: 'red',
 				fillColor: '#f03',
@@ -114,7 +114,7 @@ For example:
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Popup
-			latlng={[51.5, -0.09]}
+			latLng={[51.5, -0.09]}
 			options={{
 				content,
 				minWidth
