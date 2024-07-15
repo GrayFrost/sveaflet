@@ -5,7 +5,7 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let latlng: LatLngExpression | undefined = undefined;
+	export let latLng: LatLngExpression | undefined = undefined;
 	export let options: PopupOptions = {};
 	export let instance: Popup | undefined = undefined;
 
@@ -16,7 +16,7 @@
 	// data
 	let popup: Popup | undefined;
 	let htmlElement: HTMLElement | undefined;
-	let preLatLng = latlng;
+	let preLatLng = latLng;
 	let preOptions = options;
 	let ready = false;
 
@@ -34,13 +34,13 @@
 				content: htmlElement
 			};
 		}
-		if (!latlng && layer) {
+		if (!latLng && layer) {
 			popup = new Popup(mergeOptions, layer);
-		} else if (latlng) {
-			popup = new Popup(latlng, mergeOptions);
+		} else if (latLng) {
+			popup = new Popup(latLng, mergeOptions);
 		}
 		storeProps({
-			latlng,
+			latLng,
 			options: mergeOptions
 		});
 		ready = true;
@@ -48,7 +48,7 @@
 
 	$: if (map) {
 		if (popup) {
-			updateLatLng(popup, preLatLng, latlng);
+			updateLatLng(popup, preLatLng, latLng);
 			updateContent(popup, preOptions, options);
 
 			if (!layer) {
@@ -59,7 +59,7 @@
 			}
 		}
 		storeProps({
-			latlng,
+			latLng,
 			options
 		});
 	}
@@ -67,10 +67,10 @@
 	function updateLatLng(
 		obj: Popup,
 		preLatLng: LatLngExpression | undefined,
-		latlng: LatLngExpression | undefined
+		latLng: LatLngExpression | undefined
 	) {
-		if (latlng !== preLatLng && latlng !== undefined) {
-			obj.setLatLng(latlng);
+		if (latLng !== preLatLng && latLng !== undefined) {
+			obj.setLatLng(latLng);
 		}
 	}
 
@@ -80,9 +80,9 @@
 		}
 	}
 
-	function storeProps(props: { latlng: LatLngExpression | undefined; options: PopupOptions }) {
-		const { latlng, options } = props;
-		preLatLng = latlng;
+	function storeProps(props: { latLng: LatLngExpression | undefined; options: PopupOptions }) {
+		const { latLng, options } = props;
+		preLatLng = latLng;
 		preOptions = Object.create(options);
 	}
 

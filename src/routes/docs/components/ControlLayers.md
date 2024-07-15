@@ -88,24 +88,24 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 			/>
 
 			<LayerGroup checked={true} name="Cities" layerType="overlay">
-				<Marker latlng={[39.61, -105.02]}>
+				<Marker latLng={[39.61, -105.02]}>
 					<Popup options={{ content: 'This is Littleton, CO.' }} />
 				</Marker>
-				<Marker latlng={[39.74, -104.99]}>
+				<Marker latLng={[39.74, -104.99]}>
 					<Popup options={{ content: 'This is Denver, CO.' }} />
 				</Marker>
-				<Marker latlng={[39.73, -104.8]}>
+				<Marker latLng={[39.73, -104.8]}>
 					<Popup options={{ content: 'This is Aurora, CO.' }} />
 				</Marker>
-				<Marker latlng={[39.77, -105.23]}>
+				<Marker latLng={[39.77, -105.23]}>
 					<Popup options={{ content: 'This is Golden, CO.' }} />
 				</Marker>
 			</LayerGroup>
 			<LayerGroup name="Parks" layerType="overlay">
-				<Marker latlng={[39.75, -105.09]}>
+				<Marker latLng={[39.75, -105.09]}>
 					<Popup options={{ content: 'This is Crown Hill Park.' }} />
 				</Marker>
-				<Marker latlng={[39.68, -105.0]}>
+				<Marker latLng={[39.68, -105.0]}>
 					<Popup options={{ content: 'This is Ruby Hill Park.' }} />
 				</Marker>
 			</LayerGroup>
