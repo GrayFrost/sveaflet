@@ -164,7 +164,7 @@ description: This tutorial will show you how to group several layers into one, a
 				><Popup options={{ content: 'Popup in Polyline.' }} /></Polyline
 			>
 			<Rectangle
-				latLngBounds={[
+				bounds={[
 					[51.49, -0.08],
 					[51.5, -0.06]
 				]}

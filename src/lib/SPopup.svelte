@@ -3,6 +3,7 @@
 	import { Map, Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils';
 
 	// props
 	export let latLng: LatLngExpression | undefined = undefined;
@@ -16,9 +17,8 @@
 	// data
 	let popup: Popup | undefined;
 	let htmlElement: HTMLElement | undefined;
-	let preLatLng = latLng;
-	let preOptions = options;
 	let ready = false;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: layer = getOverlay?.();
@@ -38,18 +38,16 @@
 			popup = new Popup(mergeOptions, layer);
 		} else if (latLng) {
 			popup = new Popup(latLng, mergeOptions);
+		} else {
+			throw new Error('latLng prop is required.');
 		}
-		storeProps({
-			latLng,
-			options: mergeOptions
-		});
+		compare = new Compare(popup, {...$$props, options: mergeOptions});
 		ready = true;
 	});
 
 	$: if (map) {
 		if (popup) {
-			updateLatLng(popup, preLatLng, latLng);
-			updateContent(popup, preOptions, options);
+			compare.updateProps($$props);
 
 			if (!layer) {
 				popup.openOn(map);
@@ -57,33 +55,9 @@
 				let popupContent = popup.options.content || '';
 				layer.bindPopup(popupContent);
 			}
-		}
-		storeProps({
-			latLng,
-			options
-		});
-	}
 
-	function updateLatLng(
-		obj: Popup,
-		preLatLng: LatLngExpression | undefined,
-		latLng: LatLngExpression | undefined
-	) {
-		if (latLng !== preLatLng && latLng !== undefined) {
-			obj.setLatLng(latLng);
+			compare.storeProps($$props);
 		}
-	}
-
-	function updateContent(obj: Popup, preOpt: PopupOptions, opt: PopupOptions) {
-		if (opt.content !== preOpt.content && opt.content !== undefined) {
-			obj.setContent(opt.content);
-		}
-	}
-
-	function storeProps(props: { latLng: LatLngExpression | undefined; options: PopupOptions }) {
-		const { latLng, options } = props;
-		preLatLng = latLng;
-		preOptions = Object.create(options);
 	}
 
 	function reset() {

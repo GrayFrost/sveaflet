@@ -3,6 +3,7 @@
 	import { Map, SVGOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions, SVGOverlayStyleOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils';
 
 	// props
 	export let bounds: LatLngBounds;
@@ -16,9 +17,8 @@
 	// data
 	let svgOverlay: SVGOverlay | undefined;
 	let svgElement: SVGElement | undefined;
-	let preBounds = bounds;
-	let preOptions = options;
 	let ready = false;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
@@ -28,25 +28,15 @@
 		if (svgElement) {
 			svgOverlay = new SVGOverlay(svgElement, bounds, options);
 		} else {
-			console.warn('SVG Element Required!');
+			throw new Error('SVG Element Required!');
 		}
-		preOptions = Object.create(options);
-		storeProps({
-			bounds,
-			options
-		});
+		compare = new Compare(svgOverlay, options);
 		ready = true;
 	});
 
 	$: if (map) {
 		if (svgOverlay) {
-			// TODO: how to update all options?
-			updateBounds(svgOverlay, preBounds, bounds);
-			updateOpacity(svgOverlay, preOptions, options);
-			updateZIndex(svgOverlay, preOptions, options);
-			if (options.zIndex !== preOptions.zIndex && options.zIndex !== undefined) {
-				svgOverlay.setZIndex(options.zIndex);
-			}
+			compare.updateProps($$props);
 
 			if (layer) {
 				layer.addLayer(svgOverlay);
@@ -54,43 +44,8 @@
 				map.addLayer(svgOverlay);
 			}
 
-			storeProps({
-				bounds,
-				options
-			});
+			compare.storeProps($$props);
 		}
-	}
-
-	function updateBounds(obj: SVGOverlay, preBounds: LatLngBounds, bounds: LatLngBounds) {
-		if (bounds !== preBounds && bounds !== undefined) {
-			obj.setBounds(bounds);
-		}
-	}
-
-	function updateOpacity(
-		obj: SVGOverlay,
-		preOpt: SVGOverlayStyleOptions,
-		opt: SVGOverlayStyleOptions
-	) {
-		if (opt.opacity !== preOpt.opacity && opt.opacity !== undefined) {
-			obj.setOpacity(opt.opacity);
-		}
-	}
-
-	function updateZIndex(
-		obj: SVGOverlay,
-		preOpt: SVGOverlayStyleOptions,
-		opt: SVGOverlayStyleOptions
-	) {
-		if (opt.zIndex !== preOpt.zIndex && opt.zIndex !== undefined) {
-			obj.setZIndex(opt.zIndex);
-		}
-	}
-
-	function storeProps(props: { bounds: LatLngBounds; options: ImageOverlayOptions }) {
-		const { bounds, options } = props;
-		preBounds = bounds;
-		preOptions = Object.create(options);
 	}
 
 	function reset() {

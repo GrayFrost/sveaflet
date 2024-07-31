@@ -3,6 +3,7 @@
 	import { Map, Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils';
 
 	// props
 	export let latLng: LatLngExpression;
@@ -17,9 +18,8 @@
 
 	// data
 	let marker: Marker | undefined;
-	let preLatLng = latLng;
-	let preOptions = options;
 	let ready = false;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
@@ -27,53 +27,24 @@
 
 	onMount(() => {
 		marker = new Marker(latLng, options);
-		storeProps({
-			latLng,
-			options
-		});
+		compare = new Compare(marker, $$props);
 		ready = true;
 	});
 
 	$: if (map) {
 		if (marker) {
-			updateLatLng(marker, preLatLng, latLng);
-			updateZIndexOffset(marker, preOptions, options);
-			updateOpacity(marker, preOptions, options);
+			compare.updateProps($$props);
+
 			if (layer) {
 				layer.addLayer(marker);
 			} else {
 				map.addLayer(marker);
 			}
-			storeProps({
-				latLng,
-				options
-			});
+			
+			compare.storeProps($$props)
 		}
 	}
 
-	function updateLatLng(obj: Marker, preLatLng: LatLngExpression, latLng: LatLngExpression) {
-		if (latLng !== preLatLng && latLng !== undefined) {
-			obj.setLatLng(latLng);
-		}
-	}
-
-	function updateZIndexOffset(obj: Marker, preOpt: MarkerOptions, opt: MarkerOptions) {
-		if (opt.zIndexOffset !== preOpt.zIndexOffset && opt.zIndexOffset !== undefined) {
-			obj.setZIndexOffset(opt.zIndexOffset);
-		}
-	}
-
-	function updateOpacity(obj: Marker, preOpt: MarkerOptions, opt: MarkerOptions) {
-		if (opt.opacity !== preOpt.opacity && opt.opacity !== undefined) {
-			obj.setOpacity(opt.opacity);
-		}
-	}
-
-	function storeProps(props: { latLng: LatLngExpression; options: MarkerOptions }) {
-		const { latLng, options } = props;
-		preLatLng = latLng;
-		preOptions = Object.create(options);
-	}
 
 	function reset() {
 		marker?.remove();

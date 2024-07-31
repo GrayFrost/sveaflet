@@ -3,6 +3,7 @@
 	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils';
 
 	// props
 	export let options: Control.AttributionOptions = {};
@@ -14,49 +15,22 @@
 
 	// data
 	let attribution: Control.Attribution | undefined;
-	let preOptions = options;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: instance = attribution;
 
 	onMount(() => {
 		attribution = control.attribution(options);
-		storeProps({ options });
+		compare = new Compare(attribution, $$props);
 	});
 
 	$: if (map) {
 		if (attribution) {
-			updatePrefix(attribution, preOptions, options);
-			updatePosition(attribution, preOptions, options);
+			compare.updateProps($$props);
 			map.addControl(attribution);
-
-			storeProps({ options });
+			compare.storeProps($$props);
 		}
-	}
-
-	function updatePosition(
-		obj: Control.Attribution,
-		preOpt: Control.AttributionOptions,
-		opt: Control.AttributionOptions
-	) {
-		if (opt.position !== preOpt.position && opt.position !== undefined) {
-			obj.setPosition(opt.position);
-		}
-	}
-
-	function updatePrefix(
-		obj: Control.Attribution,
-		preOpt: Control.AttributionOptions,
-		opt: Control.AttributionOptions
-	) {
-		if (opt.prefix !== preOpt.prefix && opt.prefix !== undefined) {
-			obj.setPrefix(opt.prefix as string | false);
-		}
-	}
-
-	function storeProps(props: { options: Control.AttributionOptions }) {
-		const { options } = props;
-		preOptions = Object.create(options);
 	}
 
 	function reset() {

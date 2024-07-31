@@ -128,7 +128,7 @@ Used to display small texts on top of map layers.
 			><Tooltip options={{ content: 'Tooltip in Polyline.' }} /></Polyline
 		>
 		<Rectangle
-			latLngBounds={[
+			bounds={[
 				[51.49, -0.08],
 				[51.5, -0.06]
 			]}

@@ -62,7 +62,7 @@ description: A custom control displaying a miniature map
 					}}
 				>
 					<TileLayer url={'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-					<Rectangle latLngBounds={bounds} options={{ weight: 1 }} />
+					<Rectangle bounds={bounds} options={{ weight: 1 }} />
 				</Map>
 			</div>
 		</Control>
