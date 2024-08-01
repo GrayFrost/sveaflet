@@ -117,6 +117,8 @@
   "types": "./dist/index.d.ts",
   "type": "module",
   "dependencies": {
+    "@docsearch/css": "^3.6.1",
+    "@docsearch/js": "^3.6.1",
     "geojson": "^0.5.0",
     "mdsvexamples": "^0.4.1",
     "nprogress": "^0.2.0"
