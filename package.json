@@ -20,7 +20,10 @@
 		"test": "vitest",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"package:publish": "standard-version && git push --follow-tags origin main && npm publish"
+		"package:publish": "git push --follow-tags origin main && npm publish",
+		"release-major": "standard-version --release-as major",
+		"release-minor": "standard-version --release-as minor",
+		"release-patch": "standard-version --release-as patch"
 	},
 	"keywords": [
 		"svelte",
