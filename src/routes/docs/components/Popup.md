@@ -137,7 +137,7 @@ Used to open popups in certain places of the map.
 			options={{ color: 'purple' }}><Popup options={{ content: 'Popup in Polyline.' }} /></Polyline
 		>
 		<Rectangle
-			latLngBounds={[
+			bounds={[
 				[51.49, -0.08],
 				[51.5, -0.06]
 			]}

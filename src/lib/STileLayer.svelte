@@ -3,7 +3,7 @@
 	import { Map, TileLayer } from 'leaflet';
 	import type { TileLayerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { setControlLayer } from './utils';
+	import { setControlLayer, Compare } from './utils/index';
 
 	// props
 	export let url: string;
@@ -19,8 +19,7 @@
 
 	// data
 	let tileLayer: TileLayer | undefined;
-	let preUrl = url;
-	let preOptions = options;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: controlLayers = getControl?.();
@@ -28,18 +27,12 @@
 
 	onMount(() => {
 		tileLayer = new TileLayer(url, options);
-		storeProps({
-			url,
-			options
-		});
+		compare = new Compare(tileLayer, $$props);
 	});
 
 	$: if (map) {
 		if (tileLayer) {
-			// TODO: how to update all options?
-			updateUrl(tileLayer, preUrl, url);
-			updateOpacity(tileLayer, preOptions, options);
-			updateZIndex(tileLayer, preOptions, options);
+			compare.updateProps($$props);
 
 			if (controlLayers) {
 				if (!name) {
@@ -60,35 +53,8 @@
 				map.addLayer(tileLayer);
 			}
 
-			storeProps({
-				url,
-				options
-			});
+			compare.storeProps($$props);
 		}
-	}
-
-	function updateUrl(obj: TileLayer, preUrl: string, url: string) {
-		if (url !== preUrl && url !== undefined) {
-			obj.setUrl(url);
-		}
-	}
-
-	function updateOpacity(obj: TileLayer, preOpt: TileLayerOptions, opt: TileLayerOptions) {
-		if (opt.opacity !== preOpt.opacity && opt.opacity !== undefined) {
-			obj.setOpacity(opt.opacity);
-		}
-	}
-
-	function updateZIndex(obj: TileLayer, preOpt: TileLayerOptions, opt: TileLayerOptions) {
-		if (opt.zIndex !== preOpt.zIndex && opt.zIndex !== undefined) {
-			obj.setZIndex(opt.zIndex);
-		}
-	}
-
-	function storeProps(props: { url: string; options: TileLayerOptions }) {
-		const { url, options } = props;
-		preUrl = url;
-		preOptions = Object.create(options);
 	}
 
 	function reset() {

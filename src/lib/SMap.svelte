@@ -7,6 +7,7 @@
 	import markerIcon from 'leaflet/dist/images/marker-icon.png';
 	import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils/index';
 
 	// @ts-ignore
 	delete Icon.Default.prototype._getIconUrl;
@@ -23,40 +24,18 @@
 	// data
 	let map: Map | undefined;
 	let mapContainer: HTMLElement;
-	let preOptions = options;
+	let compare: Compare;
 
 	$: instance = map;
 
 	onMount(() => {
 		map = new Map(mapContainer, options);
-		storeProps({
-			options
-		});
+		compare = new Compare(map, $$props);
 	});
 
 	$: if (map) {
-		updateView(map, preOptions, options);
-		updateZoom(map, preOptions, options);
-		storeProps({
-			options
-		});
-	}
-
-	function updateView(obj: Map, preOpt: MapOptions, opt: MapOptions) {
-		if (opt.center !== preOpt.center && opt.center !== undefined) {
-			obj.setView(opt.center);
-		}
-	}
-
-	function updateZoom(obj: Map, preOpt: MapOptions, opt: MapOptions) {
-		if (opt.zoom !== preOpt.zoom && opt.zoom !== undefined) {
-			obj.setZoom(opt.zoom);
-		}
-	}
-
-	function storeProps(props: { options: MapOptions }) {
-		const { options } = props;
-		preOptions = Object.create(options);
+		compare.updateProps($$props);
+		compare.storeProps($$props)
 	}
 
 	function reset() {

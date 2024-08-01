@@ -3,6 +3,7 @@
 	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils/index';
 
 	// props
 	export let options: Control.ScaleOptions = {};
@@ -17,34 +18,19 @@
 
 	// data
 	let scale: Control.Scale | undefined;
-	let preOptions = options;
+	let compare: Compare;
 
 	onMount(() => {
 		scale = control.scale(options);
-		storeProps({ options });
+		compare = new Compare(scale, $$props)
 	});
 
 	$: if (map) {
 		if (scale) {
-			updatePosition(scale, preOptions, options);
+			compare.updateProps($$props);
 			map.addControl(scale);
-			storeProps({ options });
+			compare.storeProps($$props);
 		}
-	}
-
-	function updatePosition(
-		obj: Control.Scale,
-		preOpt: Control.ScaleOptions,
-		opt: Control.ScaleOptions
-	) {
-		if (opt.position !== preOpt.position && opt.position !== undefined) {
-			obj.setPosition(opt.position);
-		}
-	}
-
-	function storeProps(props: { options: Control.ScaleOptions }) {
-		const { options } = props;
-		preOptions = Object.create(options);
 	}
 
 	function reset() {

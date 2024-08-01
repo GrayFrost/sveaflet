@@ -1,4 +1,4 @@
-import type { Map, Control, Layer } from 'leaflet';
+import type { Map, Layer, Control } from 'leaflet';
 
 export const setControlLayer = (params: {
 	layerType: 'base' | 'overlay' | undefined;

@@ -3,7 +3,7 @@
 	import { Map, LayerGroup } from 'leaflet';
 	import type { LayerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { setControlLayer } from './utils';
+	import { setControlLayer } from './utils/index';
 
 	// props
 	export let options: LayerOptions = {};

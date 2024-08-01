@@ -28,7 +28,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Rectangle
-			latLngBounds={[
+			bounds={[
 				[54.559322, -5.767822],
 				[56.1210604, -3.02124]
 			]}
@@ -57,7 +57,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Rectangle
-			latLngBounds={[
+			bounds={[
 				[54.559322, -5.767822],
 				[56.1210604, -3.02124]
 			]}
@@ -78,7 +78,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 	<Map options={{ center: [55, -4.5], zoom: 6 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
 		<Rectangle
-			latLngBounds={[
+			bounds={[
 				[54.559322, -5.767822],
 				[56.1210604, -3.02124]
 			]}
@@ -92,7 +92,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 
 ## Props
 
-| Prop name    | Description  | Type                                                                    | Default |
-| ------------ | ------------ | ----------------------------------------------------------------------- | ------- |
-| latLngBounds | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)       |         |
-| options      | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |
+| Prop name | Description  | Type                                                                    | Default |
+| --------- | ------------ | ----------------------------------------------------------------------- | ------- |
+| bounds    | **Required** | [LatLngBounds](https://leafletjs.com/reference.html#latLngbounds)       |         |
+| options   | **Optional** | [PolylineOptions](https://leafletjs.com/reference.html#polyline-option) | `{}`    |

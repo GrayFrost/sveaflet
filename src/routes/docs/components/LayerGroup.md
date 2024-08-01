@@ -106,7 +106,7 @@ Used to group several layers and handle them as one. If you add it to the map, a
 				options={{ color: 'purple' }}
 			/>
 			<Rectangle
-				latLngBounds={[
+				bounds={[
 					[51.49, -0.08],
 					[51.5, -0.06]
 				]}

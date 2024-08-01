@@ -3,6 +3,7 @@
 	import { Map, VideoOverlay } from 'leaflet';
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils/index';
 
 	// props
 	export let url: string = '';
@@ -17,10 +18,8 @@
 	// data
 	let videoOverlay: VideoOverlay | undefined;
 	let htmlVideoElement: HTMLVideoElement | undefined;
-	let preUrl = url;
-	let preBounds = bounds;
-	let preOptions = options;
 	let ready = false;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
@@ -29,68 +28,22 @@
 	onMount(() => {
 		let mergeVideo = htmlVideoElement || url;
 		videoOverlay = new VideoOverlay(mergeVideo, bounds, options);
-
-		storeProps({
-			url,
-			bounds,
-			options
-		});
+		compare = new Compare(videoOverlay, $$props);
 		ready = true;
 	});
 
 	$: if (map) {
 		if (videoOverlay) {
-			updateUrl(videoOverlay, preUrl, url);
-			updateBounds(videoOverlay, preBounds, bounds);
-			updateZIndex(videoOverlay, preOptions, options);
-			updateOpacity(videoOverlay, preOptions, options);
+			compare.updateProps($$props);
 
 			if (layer) {
 				layer.addLayer(videoOverlay);
 			} else {
 				map.addLayer(videoOverlay);
 			}
-			storeProps({
-				url,
-				bounds,
-				options
-			});
-		}
-	}
 
-	function updateUrl(obj: VideoOverlay, preUrl: string, url: string) {
-		if (url !== preUrl && url !== undefined) {
-			obj.setUrl(url);
+			compare.storeProps($$props);
 		}
-	}
-
-	function updateBounds(obj: VideoOverlay, preBounds: LatLngBounds, bounds: LatLngBounds) {
-		if (bounds !== preBounds && bounds !== undefined) {
-			obj.setBounds(bounds);
-		}
-	}
-
-	function updateZIndex(obj: VideoOverlay, preOpt: VideoOverlayOptions, opt: VideoOverlayOptions) {
-		if (opt.zIndex !== preOpt.zIndex && opt.zIndex !== undefined) {
-			obj.setZIndex(opt.zIndex);
-		}
-	}
-
-	function updateOpacity(obj: VideoOverlay, preOpt: VideoOverlayOptions, opt: VideoOverlayOptions) {
-		if (opt.opacity !== preOpt.opacity && opt.opacity) {
-			obj.setOpacity(opt.opacity);
-		}
-	}
-
-	function storeProps(props: {
-		url: string;
-		bounds: LatLngBounds;
-		options: VideoOverlayOptions;
-	}) {
-		const { url, bounds, options } = props;
-		preUrl = url;
-		preBounds = bounds;
-		preOptions = options;
 	}
 
 	function reset() {

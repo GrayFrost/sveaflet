@@ -67,7 +67,7 @@ Used to display small texts on top of map layers.
 <div style="width: 100%;height: 500px;">
 	<Map options={{ center: [51.505, -0.09], zoom: 13 }}>
 		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
-		<Tooltip latlLng={[51.508, -0.11]} options={{ content }} />
+		<Tooltip latLng={[51.508, -0.11]} options={{ content }} />
 	</Map>
 </div>
 ```
@@ -128,7 +128,7 @@ Used to display small texts on top of map layers.
 			><Tooltip options={{ content: 'Tooltip in Polyline.' }} /></Polyline
 		>
 		<Rectangle
-			latLngBounds={[
+			bounds={[
 				[51.49, -0.08],
 				[51.5, -0.06]
 			]}

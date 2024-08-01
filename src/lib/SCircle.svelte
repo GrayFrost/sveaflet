@@ -3,6 +3,7 @@
 	import { Circle, Map } from 'leaflet';
 	import type { LatLngExpression, CircleOptions, PathOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { Compare } from './utils/index';
 
 	// props
 	export let latLng: LatLngExpression;
@@ -15,9 +16,8 @@
 
 	// data
 	let circle: Circle | undefined;
-	let preLatLng = latLng;
-	let preOptions = options;
 	let ready = false;
+	let compare: Compare;
 
 	$: map = getMap?.();
 	$: layer = getLayer?.();
@@ -25,76 +25,22 @@
 
 	onMount(() => {
 		circle = new Circle(latLng, options);
-		storeProps({
-			latLng,
-			options
-		});
+		compare = new Compare(circle, $$props);
 		ready = true;
 	});
 
 	$: if (map) {
 		if (circle) {
-			updatetLatLng(circle, preLatLng, latLng);
-
-			updateRadius(circle, preOptions, options);
-
-			updateStyle(circle, preOptions, options);
+			compare.updateProps($$props);
 
 			if (layer) {
 				layer.addLayer(circle);
 			} else {
 				map.addLayer(circle);
 			}
-			storeProps({
-				latLng,
-				options
-			});
+			
+			compare.storeProps($$props);
 		}
-	}
-
-	function updatetLatLng(obj: Circle, preLatLng: LatLngExpression, latLng: LatLngExpression) {
-		if (latLng !== preLatLng && latLng !== undefined) {
-			obj.setLatLng(latLng);
-		}
-	}
-
-	function updateRadius(obj: Circle, preOpt: CircleOptions, opt: CircleOptions) {
-		if (opt.radius !== preOpt.radius && opt.radius !== undefined) {
-			obj.setRadius(opt.radius);
-		}
-	}
-
-	function updateStyle(obj: Circle, preOpt: CircleOptions, opt: CircleOptions) {
-		const keys: Array<keyof PathOptions> = [
-			'stroke',
-			'color',
-			'weight',
-			'opacity',
-			'lineCap',
-			'lineJoin',
-			'dashArray',
-			'dashOffset',
-			'fill',
-			'fillColor',
-			'fillOpacity',
-			'fillRule',
-			'renderer',
-			'className'
-		];
-
-		const styles: Partial<Record<keyof PathOptions, any>> = {};
-		keys.forEach((key) => {
-			if (opt[key] !== preOpt[key] && opt[key] !== undefined) {
-				styles[key] = opt[key];
-			}
-		});
-		obj.setStyle(styles);
-	}
-
-	function storeProps(props: { latLng: LatLngExpression; options: CircleOptions }) {
-		const { latLng, options } = props;
-		preLatLng = latLng;
-		preOptions = Object.create(options);
 	}
 
 	function reset() {
