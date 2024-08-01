@@ -3,7 +3,7 @@
 	import { Map, SVGOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions, SVGOverlayStyleOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let bounds: LatLngBounds;

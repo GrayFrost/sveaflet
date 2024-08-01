@@ -3,7 +3,7 @@
 	import { Map, control } from 'leaflet';
 	import type { Control } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let options: Control.ScaleOptions = {};

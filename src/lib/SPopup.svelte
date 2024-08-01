@@ -3,7 +3,7 @@
 	import { Map, Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let latLng: LatLngExpression | undefined = undefined;
@@ -34,14 +34,15 @@
 				content: htmlElement
 			};
 		}
+
 		if (!latLng && layer) {
 			popup = new Popup(mergeOptions, layer);
 		} else if (latLng) {
 			popup = new Popup(latLng, mergeOptions);
 		} else {
-			throw new Error('latLng prop is required.');
+			throw new Error('Prop latLng is required.');
 		}
-		compare = new Compare(popup, {...$$props, options: mergeOptions});
+		compare = new Compare(popup, { ...$$props, options: mergeOptions });
 		ready = true;
 	});
 

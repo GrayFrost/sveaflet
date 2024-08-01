@@ -3,7 +3,7 @@
 	import { Map, ImageOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let url: string;

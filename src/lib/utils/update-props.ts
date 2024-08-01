@@ -1,60 +1,6 @@
-import type {
-	Map,
-	Layer,
-	Marker,
-	Circle,
-	PathOptions,
-	CircleMarker,
-	Control,
-	ImageOverlay,
-	Polygon,
-	Polyline,
-	Popup,
-	Rectangle,
-	SVGOverlay,
-	TileLayer,
-} from 'leaflet';
-
-type MapInstance =
-	| Circle
-	| CircleMarker
-	| Control
-	| ImageOverlay
-	| Map
-	| Marker
-	| Polygon
-	| Polyline
-	| Popup
-	| Rectangle
-	| SVGOverlay
-	| TileLayer;
-
-export const setControlLayer = (params: {
-	layerType: 'base' | 'overlay' | undefined;
-	checked: boolean;
-	map: Map;
-	controlLayers: Control.Layers;
-	name: string;
-	layer: Layer;
-}) => {
-	const { layerType, checked, map, controlLayers, name, layer } = params;
-
-	if (layerType === 'base') {
-		if (checked) {
-			map.addLayer(layer);
-			controlLayers.addBaseLayer(layer, name);
-		} else {
-			controlLayers.addBaseLayer(layer, name);
-		}
-	} else if (layerType === 'overlay') {
-		if (checked) {
-			map.addLayer(layer);
-			controlLayers.addOverlay(layer, name);
-		} else {
-			controlLayers.addOverlay(layer, name);
-		}
-	}
-};
+import type { PathOptions } from 'leaflet';
+import type { MapInstance } from '../types';
+import { isArrayEqual, isObjectEqual, isPrimitiveEqual, isNil, isObject } from './equal';
 
 export class Compare {
 	instance: MapInstance;
@@ -86,7 +32,6 @@ export class Compare {
 		this.prevProps = props;
 	}
 	updateProps(curProps: SvelteAllProps) {
-		// TODO: array value compare
 		Object.keys(curProps).forEach((key) => {
 			const curVal = curProps[key];
 			const prevVal = this.prevProps[key];
@@ -101,17 +46,19 @@ export class Compare {
 					// @ts-expect-error key is string
 					if (this.styleKeys.includes(optionKey)) {
 						// collect changed style
-						if (curOptionVal !== prevOptionVal && curOptionVal !== undefined) {
+						if (this.shouldUpdate(prevOptionVal, curOptionVal)) {
 							styles[optionKey] = curOptionVal;
 						}
-						return;
+						// return;
 					}
-					if (curOptionVal !== prevOptionVal && curOptionVal !== undefined) {
+					// e.g. TileLyaer opacity directly use setOpacity
+					if (this.shouldUpdate(prevOptionVal, curOptionVal)) {
 						const funcName =
 							optionKey === 'center' ? 'setView' : `set${this.firstLetterUpper(optionKey)}`;
 						this.executeUpdate(funcName, curOptionVal);
 					}
 				});
+
 				if (Object.keys(styles).length) {
 					const funcName: string = 'setStyle';
 					this.executeUpdate(funcName, styles);
@@ -119,14 +66,23 @@ export class Compare {
 				}
 				return;
 			}
-			if (curVal !== prevVal && curVal !== undefined) {
+			if (this.shouldUpdate(prevVal, curVal)) {
 				const funcName = `set${this.firstLetterUpper(key)}`;
 				this.executeUpdate(funcName, curVal);
 			}
 		});
 	}
+	shouldUpdate(prevVal: unknown, curVal: unknown) {
+		if (Array.isArray(prevVal) && Array.isArray(curVal)) {
+			return !isArrayEqual(prevVal, curVal);
+		}
+		if (isObject(prevVal) && isObject(curVal)) {
+			return !isObjectEqual(prevVal as Record<string, unknown>, curVal as Record<string, unknown>);
+		}
+		return !isPrimitiveEqual(prevVal, curVal) && !isNil(curVal);
+	}
 	executeUpdate(funcName: string, value: unknown) {
-		// @ts-expect-error map instance function
+		// @ts-expect-error map instance update functions
 		this.instance[funcName]?.(value);
 	}
 }

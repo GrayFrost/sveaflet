@@ -3,7 +3,7 @@
 	import { Map, TileLayer } from 'leaflet';
 	import type { WMSOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { setControlLayer, Compare } from './utils';
+	import { setControlLayer, Compare } from './utils/index';
 
 	// props
 	export let url: string;

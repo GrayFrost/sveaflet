@@ -3,7 +3,7 @@
 	import { Map, Control } from 'leaflet';
 	import type { ControlOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let options: ControlOptions = { position: 'topright' };

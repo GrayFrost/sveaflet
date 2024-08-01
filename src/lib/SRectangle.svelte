@@ -3,7 +3,7 @@
 	import { Rectangle, Map } from 'leaflet';
 	import type { LatLngBoundsExpression, PathOptions, PolylineOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let bounds: LatLngBoundsExpression;

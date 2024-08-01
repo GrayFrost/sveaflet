@@ -3,7 +3,7 @@
 	import { CircleMarker, Map } from 'leaflet';
 	import type { LatLngExpression, CircleMarkerOptions, PathOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils';
+	import { Compare } from './utils/index';
 
 	// props
 	export let latLng: LatLngExpression;
