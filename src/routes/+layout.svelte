@@ -13,14 +13,17 @@
 		ToolbarButton,
 		Tooltip
 	} from 'flowbite-svelte';
-	import { onMount, setContext } from 'svelte';
+	import { setContext } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import GitHub from './utils/icons/GitHub.svelte';
 	import DocBadge from './utils/DocBadge.svelte';
+	import AlgoliaSearch from './utils/AlgoliaSearch.svelte';
 	import NProgress from 'nprogress';
 	import { navigating } from '$app/stores';
 	import 'nprogress/nprogress.css';
 	import '../app.css';
+
+	export let data: { appId: string; apiKey: string };
 
 	let isHomePage: boolean;
 	$: isHomePage = $page.route.id === '/';
@@ -74,6 +77,7 @@
 			</span>
 			<div class="dark:sveaflet-bg"></div>
 		</NavBrand>
+		<AlgoliaSearch apiKey={data.apiKey} appId={data.appId} />
 		<NavUl
 			{divClass}
 			{ulClass}
@@ -88,9 +92,7 @@
 			<NavLi class="lg:px-2 lg:mb-0" href="/docs/examples/sveaflet-quick-start-guide"
 				>Examples</NavLi
 			>
-			<NavLi class="lg:px-2 lg:mb-0" href="/docs/extra/plugins"
-				>Extra</NavLi
-			>
+			<NavLi class="lg:px-2 lg:mb-0" href="/docs/extra/plugins">Extra</NavLi>
 		</NavUl>
 		<div class="flex items-center ms-auto">
 			<ToolbarButton

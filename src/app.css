@@ -74,3 +74,7 @@ video {
 		
 	} */
 }
+
+.DocSearch-Container {
+	z-index: 1004;
+}
