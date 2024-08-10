@@ -12,6 +12,10 @@
 		"sourceMap": true,
 		"strict": true,
 		"allowImportingTsExtensions": true,
-		"noEmit": true
-	}
+		"noEmit": true,
+		"types": ["@testing-library/jest-dom"],
+	},
+	"exclude": [
+		"src/tests"
+	]
 }

@@ -30,7 +30,7 @@ export function isObjectEqual(
 	}
 
 	for (const key in curObjKeys) {
-		if (curObjKeys[key] !== prevObjKeys[key]) {
+		if (curObj[key] !== prevObj[key]) {
 			return false;
 		}
 	}
