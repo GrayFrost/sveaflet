@@ -7,7 +7,7 @@ import {
 	isPrimitiveEqual
 } from '../../lib/utils/equal';
 
-describe('units/equal', () => {
+describe('utils/equal', () => {
 	describe('isNil', () => {
 		test("'' is true", () => {
 			expect(isNil('')).toBeTruthy();
