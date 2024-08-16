@@ -11,14 +11,16 @@ describe('utils/update-props', () => {
 	});
 
 	describe('Map update', () => {
+		
+		let center = [51.505, -0.09];
+		let zoom = 13;
+		const options = {
+			center,
+			zoom
+		};
+
 		test('setView will call when update center from [51.505, -0.09] to [51.505, -0.08]', async () => {
 			const instanceStore = writable();
-			let center = [51.505, -0.09];
-			let zoom = 13;
-			const options = {
-				center,
-				zoom
-			};
 			const { rerender } = render(MapTest, { instanceStore, options });
 			const instance = get(instanceStore);
 			let newCenter = [51.505, -0.08];
@@ -27,9 +29,20 @@ describe('utils/update-props', () => {
 				zoom
 			};
 			const setViewFn = vi.spyOn(instance, 'setView');
-			const setZoomFn = vi.spyOn(instance, 'setZoom');
-			await rerender({ options: newOptions })
+			await rerender({ options: newOptions });
 			expect(setViewFn).toBeCalled();
+		});
+		test('setZoom will call when update center from 13 to 12', async () => {
+			const instanceStore = writable();
+			const { rerender } = render(MapTest, { instanceStore, options });
+			const instance = get(instanceStore);
+			let newZoom = 12;
+			const newOptions = {
+				center,
+				zoom: newZoom
+			};
+			const setZoomFn = vi.spyOn(instance, 'setZoom');
+			await rerender({ options: newOptions });
 			expect(setZoomFn).toBeCalled();
 		});
 	});
