@@ -1,4 +1,22 @@
 Change Log | 变更日志
+### [0.0.11](https://github.com/GrayFrost/sveaflet/compare/v0.0.10...v0.0.11) (2024-11-21)
+
+
+### ✅ Tests | 测试
+
+* unit test - equal function ([95106c8](https://github.com/GrayFrost/sveaflet/commit/95106c8bfd5eaa047677fabf483e170b4d1cbe53))
+
+
+### 🚀 update | 构建/工程依赖/工具升级
+
+* package-lock ([e853b35](https://github.com/GrayFrost/sveaflet/commit/e853b35e9286cc0c63a901b0c3a0f5ec76d1100e))
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* object compare ([d378104](https://github.com/GrayFrost/sveaflet/commit/d378104a076d0ae51ce284891a09f17c83dfab93))
+* README  content ([57b258f](https://github.com/GrayFrost/sveaflet/commit/57b258f895a0d13548cf33e90e3bf591d39d1172))
+
 ### [0.0.10](https://github.com/GrayFrost/sveaflet/compare/v0.0.9...v0.0.10) (2024-08-10)
 
 
