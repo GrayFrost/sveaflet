@@ -38,7 +38,7 @@ For more detailed information you can follow the [Quick Start](https://sveaflet.
 - Tooltip
 - VideoOverlay
 
-More details abount [components](https://sveaflet.vercel.app/docs/components/Circle).
+More details about [components](https://sveaflet.vercel.app/docs/components/Circle).
 
 ## License
 
