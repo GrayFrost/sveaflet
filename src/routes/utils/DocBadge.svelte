@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { Badge } from 'flowbite-svelte';
+	import type { Snippet } from 'svelte';
 	interface Props {
-		children?: import('svelte').Snippet;
+		children?: Snippet;
 		[key: string]: any
 	}
 

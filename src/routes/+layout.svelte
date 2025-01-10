@@ -1,10 +1,7 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	/**
 	 * Inspired by Svelte, Leaflet, Flowbite-Svelte
 	 */
-	import { page } from '$app/stores';
 	import {
 		DarkMode,
 		Navbar,
@@ -13,29 +10,28 @@
 		NavLi,
 		NavUl,
 		ToolbarButton,
-		Tooltip
 	} from 'flowbite-svelte';
-	import { setContext } from 'svelte';
+	import { setContext, type Snippet } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 	import GitHub from './utils/icons/GitHub.svelte';
 	import DocBadge from './utils/DocBadge.svelte';
 	import AlgoliaSearch from './utils/AlgoliaSearch.svelte';
 	import NProgress from 'nprogress';
-	import { navigating } from '$app/stores';
+	import { navigating, page } from '$app/state';
 	import 'nprogress/nprogress.css';
 	import '../app.css';
 
 	interface Props {
 		data: { appId: string; apiKey: string };
-		children?: import('svelte').Snippet;
+		children?: Snippet;
 	}
 
 	let { data, children }: Props = $props();
 
-	let isHomePage: boolean = $derived($page.route.id === '/');
+	let isHomePage: boolean = $derived(page.route.id === '/');
 	
 	const version = __VERSION__;
-	let activeUrl = $derived($page.url.pathname);
+	let activeUrl = $derived(page.url.pathname);
 	let divClass = 'w-full ms-auto lg:block lg:w-auto order-1 lg:order-none';
 	let ulClass =
 		'flex flex-col py-3 my-4 lg:flex-row lg:my-0 text-sm font-medium text-gray-900 dark:text-gray-300 gap-4';
@@ -46,11 +42,10 @@
 		showSpinner: false
 	});
 
-	run(() => {
-		if ($navigating) {
+	$effect(() => {
+		if (navigating.to) {
 			NProgress.start();
-		}
-		if (!$navigating) {
+		} else {
 			NProgress.done();
 		}
 	});
@@ -73,7 +68,7 @@
 		
 	>
 		{#snippet children({ toggle })}
-				<span hidden={$page.route.id === '/'}>
+				<span hidden={page.route.id === '/'}>
 				<NavHamburger onClick={toggleDrawer} class="m-0 me-3 md:block lg:hidden" />
 			</span>
 			<NavBrand href="/" class="relative">

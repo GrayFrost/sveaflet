@@ -11,7 +11,7 @@
 
   let { appId, apiKey }: Props = $props();
 
-  let searchContainer: HTMLElement = $state();
+  let searchContainer: HTMLElement | string = $state('');
 
   onMount(() => {
     if (browser) {

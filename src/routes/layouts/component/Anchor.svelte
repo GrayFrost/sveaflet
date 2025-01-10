@@ -18,7 +18,8 @@
 
   let { ...props }: Props = $props();
 
-  let content: string = $state(), slug: string = $state();
+  let content: string | undefined = $state();
+	let slug: string | undefined = $state();
 
   function init(node: HTMLElement) {
     content = node.firstChild?.nodeValue ?? '';

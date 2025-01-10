@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import { page } from '$app/state';
 	import { PaginationItem } from 'flowbite-svelte';
 	import ArrowLeft from './icons/ArrowLeft.svelte';
 	import ArrowRight from './icons/ArrowRight.svelte';
+	import type { Snippet } from 'svelte';
 	interface Props {
-		children?: import('svelte').Snippet;
+		children?: Snippet;
 	}
 
 	let { children }: Props = $props();
@@ -15,7 +16,7 @@
 		data,
 		url,
 		params: { slug }
-	} = $page;
+	} = page;
 
 	const components = Object.values(data.posts)
 		.flatMap(identity)
