@@ -1,25 +1,36 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { DivIcon, Map, Marker } from 'leaflet';
 	import type { DivIconOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 
-	// props
-	export let options: DivIconOptions = {};
-	export let instance: DivIcon | undefined = undefined;
+	
+	interface Props {
+		// props
+		options?: DivIconOptions;
+		instance?: DivIcon | undefined;
+		children?: import('svelte').Snippet;
+		[key: string]: any
+	}
+
+	let { options = {}, instance = $bindable(undefined), children, ...rest }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
 
 	// data
-	let divIcon: DivIcon | undefined;
-	let htmlElement: HTMLElement | undefined;
-	let ready = false;
+	let divIcon: DivIcon | undefined = $state();
+	let htmlElement: HTMLElement | undefined = $state();
+	let ready = $state(false);
 
-	$: map = getMap?.();
-	$: layer = getOverlay?.();
-	$: instance = divIcon;
+	let map = $derived(getMap?.());
+	let layer = $derived(getOverlay?.());
+	run(() => {
+		instance = divIcon;
+	});
 
 	onMount(() => {
 		let mergeOptions = {
@@ -35,15 +46,17 @@
 		ready = true;
 	});
 
-	$: if (map) {
-		if (divIcon) {
-			if (layer && layer instanceof Marker) {
-				layer.setIcon(divIcon);
-			} else {
-				console.warn('DivIcon should bind Marker.');
+	run(() => {
+		if (map) {
+			if (divIcon) {
+				if (layer && layer instanceof Marker) {
+					layer.setIcon(divIcon);
+				} else {
+					console.warn('DivIcon should bind Marker.');
+				}
 			}
 		}
-	}
+	});
 
 	function reset() {
 		divIcon?.remove?.();
@@ -55,11 +68,11 @@
 	});
 </script>
 
-{#if $$slots.default}
+{#if children}
 	<div style="display: none">
-		<div bind:this={htmlElement} {...$$restProps}>
+		<div bind:this={htmlElement} {...rest}>
 			{#if ready}
-				<slot />
+				{@render children?.()}
 			{/if}
 		</div>
 	</div>

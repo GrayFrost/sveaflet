@@ -1,3 +1,4 @@
+<!-- @migration-task Error while migrating Svelte code: This migration would change the name of a slot making the component unusable -->
 <script lang="ts">
 	import { twMerge } from 'tailwind-merge';
 	import { Tooltip } from 'flowbite-svelte';

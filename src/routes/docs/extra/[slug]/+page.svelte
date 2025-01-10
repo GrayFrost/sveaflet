@@ -1,5 +1,9 @@
 <script lang="ts">
-  export let data: DocData;
+  interface Props {
+    data: DocData;
+  }
+
+  let { data }: Props = $props();
 </script>
 
-<svelte:component this={data.content} />
+<data.content />

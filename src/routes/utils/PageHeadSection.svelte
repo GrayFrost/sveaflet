@@ -2,9 +2,13 @@
   import { Heading } from 'flowbite-svelte';
   import CompoDescription from './CompoDescription.svelte';
 
-  export let dir: string;
-  export let title: string;
-  export let description: string;
+  interface Props {
+    dir: string;
+    title: string;
+    description: string;
+  }
+
+  let { dir, title, description }: Props = $props();
 
   dir;
 </script>

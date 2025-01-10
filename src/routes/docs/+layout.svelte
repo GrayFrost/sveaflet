@@ -12,7 +12,12 @@
 	} from 'flowbite-svelte';
 	import { ChevronDownOutline, ChevronUpOutline } from 'flowbite-svelte-icons';
 
-	export let data: AllPage;
+	interface Props {
+		data: AllPage;
+		children?: import('svelte').Snippet;
+	}
+
+	let { data, children }: Props = $props();
 
 	const posts: Record<string, PageData[]> = data.posts;
 	const drawerHidden: Writable<boolean> = getContext('drawer');
@@ -27,8 +32,8 @@
 
 	const fileDir = (path: string) => path.split('/').slice(0, -1).pop() ?? '';
 
-	$: mainSidebarUrl = $page.url.pathname;
-	let activeMainSidebar: string;
+	let mainSidebarUrl = $derived($page.url.pathname);
+	let activeMainSidebar: string = $state();
 
 	afterNavigate((navigation) => {
 		document.getElementById('svelte')?.scrollTo({ top: 0 });
@@ -47,7 +52,7 @@
 	let activeClass =
 		'relative flex items-center flex-wrap font-medium cursor-default text-primary-700 dark:text-primary-700';
 
-	let dropdowns = Object.fromEntries(Object.keys(posts).map((x) => [x, false]));
+	let dropdowns = $state(Object.fromEntries(Object.keys(posts).map((x) => [x, false])));
 </script>
 
 <Sidebar
@@ -73,8 +78,12 @@
 							? 'text-primary-700 dark:text-primary-700'
 							: 'text-gray-900 dark:text-white'}
 					>
-						<ChevronDownOutline slot="arrowdown" class="w-6 h-6 text-gray-800 dark:text-white" />
-						<ChevronUpOutline slot="arrowup" class="w-6 h-6 text-gray-800 dark:text-white" />
+						{#snippet arrowdown()}
+												<ChevronDownOutline  class="w-6 h-6 text-gray-800 dark:text-white" />
+											{/snippet}
+						{#snippet arrowup()}
+												<ChevronUpOutline  class="w-6 h-6 text-gray-800 dark:text-white" />
+											{/snippet}
 						{#each values as { meta, path }}
 							{@const href = `/docs/${key}${path}`}
 							{#if meta}
@@ -97,11 +106,11 @@
 <div
 	hidden={$drawerHidden}
 	class="fixed inset-0 z-20 bg-gray-900/50 dark:bg-gray-900/60"
-	on:click={closeDrawer}
-	on:keydown={closeDrawer}
+	onclick={closeDrawer}
+	onkeydown={closeDrawer}
 	role="presentation"
-/>
+></div>
 
 <main class="flex-auto w-full min-w-0 lg:static lg:max-h-full lg:overflow-visible">
-	<slot />
+	{@render children?.()}
 </main>

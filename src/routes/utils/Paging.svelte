@@ -3,6 +3,11 @@
 	import { PaginationItem } from 'flowbite-svelte';
 	import ArrowLeft from './icons/ArrowLeft.svelte';
 	import ArrowRight from './icons/ArrowRight.svelte';
+	interface Props {
+		children?: import('svelte').Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const identity = (x: any) => x;
 
@@ -42,10 +47,10 @@
 					{name}
 				</PaginationItem>
 			{:else}
-				<div />
+				<div></div>
 			{/if}
 			<div class="hidden sm:block">
-				<slot />
+				{@render children?.()}
 			</div>
 			{#if index < components.length - 1}
 				{@const { name, href } = sibling(true)}
@@ -57,11 +62,11 @@
 					<ArrowRight />
 				</PaginationItem>
 			{:else}
-				<div />
+				<div></div>
 			{/if}
 		</div>
 	{/if}
 	<div class="sm:hidden">
-		<slot />
+		{@render children?.()}
 	</div>
 </div>

@@ -1,4 +1,4 @@
-<script context="module">
+<script module>
 	import h2 from './h2.svelte';
 	import h3 from './h3.svelte';
 	import table from './table.svelte';
@@ -19,12 +19,27 @@
 	import Paging from '../../utils/Paging.svelte';
 	import { extract } from './Anchor.svelte';
 
-	export let /** @type {string} */ title;
-	export let /** @type {string} */ breadcrumb_title;
-	export let /** @type {string} */ component_title = '';
-	export let /** @type {string} */ dir;
-	export let /** @type {string} */ description;
-	export let /** @type {string} */ layout = '';
+	/**
+	 * @typedef {Object} Props
+	 * @property {any} title
+	 * @property {any} breadcrumb_title
+	 * @property {string} [component_title]
+	 * @property {any} dir
+	 * @property {any} description
+	 * @property {string} [layout]
+	 * @property {import('svelte').Snippet} [children]
+	 */
+
+	/** @type {Props} */
+	let {
+		title,
+		breadcrumb_title,
+		component_title = '',
+		dir,
+		description,
+		layout = '',
+		children
+	} = $props();
 
 	// calm down `unused export property` warrning
 	layout;
@@ -40,7 +55,7 @@
 	>
 		<PageHeadSection {dir} {title} {description} />
 		<div id="mainContent" class="py-8">
-			<slot />
+			{@render children?.()}
 			<Paging />
 		</div>
 		<Footer />

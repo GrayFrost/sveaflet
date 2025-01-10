@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { run } from 'svelte/legacy';
+
 	import { MetaTags } from 'svelte-meta-tags';
 	import { Button, P } from 'flowbite-svelte';
 	import { ArrowRightOutline } from 'flowbite-svelte-icons';
@@ -10,11 +12,13 @@
 	import Footer from './utils/Footer.svelte';
 
 	let logo = '/images/sveaflet.png';
-	let marker: MarkerType;
+	let marker: MarkerType = $state();
 
-	$: if (marker) {
-		marker.openPopup();
-	}
+	run(() => {
+		if (marker) {
+			marker.openPopup();
+		}
+	});
 
 	let title = 'Sveaflet - Leaflet Component Library';
 	let description =

@@ -3,8 +3,8 @@
 	import { Footer, FooterLinkGroup, FooterLink, FooterBrand } from 'flowbite-svelte';
 
 	let logo = '/images/favicon.svg';
-	let isHomePage: boolean;
-	$: isHomePage = $page.route.id === '/';
+	let isHomePage: boolean = $derived($page.route.id === '/');
+	
 
 	const footer_links = {
 		Resources: {

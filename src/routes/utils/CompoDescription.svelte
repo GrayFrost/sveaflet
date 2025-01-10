@@ -1,7 +1,12 @@
 <script lang="ts">
-  export let pClass: string = 'text-lg text-gray-600 dark:text-gray-400';
+  interface Props {
+    pClass?: string;
+    children?: import('svelte').Snippet;
+  }
+
+  let { pClass = 'text-lg text-gray-600 dark:text-gray-400', children }: Props = $props();
 </script>
 
 <p class={pClass}>
-  <slot />
+  {@render children?.()}
 </p>

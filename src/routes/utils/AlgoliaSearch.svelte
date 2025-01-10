@@ -4,10 +4,14 @@
   import docsearch from '@docsearch/js';
   import '@docsearch/css';
 
-	export let appId: string;
-	export let apiKey: string;
+  interface Props {
+    appId: string;
+    apiKey: string;
+  }
 
-  let searchContainer: HTMLElement;
+  let { appId, apiKey }: Props = $props();
+
+  let searchContainer: HTMLElement = $state();
 
   onMount(() => {
     if (browser) {
@@ -23,4 +27,4 @@
   });
 </script>
 
-<div bind:this={searchContainer} id="docsearch" class="ms-3 xl:ps-4" />
+<div bind:this={searchContainer} id="docsearch" class="ms-3 xl:ps-4"></div>
