@@ -27,7 +27,7 @@
 	let compare: Compare | undefined = $state.raw();
 
 	// refs
-	let htmlElement: HTMLElement | undefined;
+	let htmlElement: HTMLElement | undefined = $state();
 
 	$effect(() => {
 		map = getMap?.();

@@ -33,7 +33,7 @@
 	const fileDir = (path: string) => path.split('/').slice(0, -1).pop() ?? '';
 
 	let mainSidebarUrl = $derived($page.url.pathname);
-	let activeMainSidebar: string = $state();
+	let activeMainSidebar: string | undefined = $state();
 
 	afterNavigate((navigation) => {
 		document.getElementById('svelte')?.scrollTo({ top: 0 });
