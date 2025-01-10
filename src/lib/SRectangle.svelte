@@ -21,12 +21,10 @@
 
 	// data
 	let ready = $state(false);
-
-	// object
-	let rectangle: Rectangle | undefined;
-	let compare: Compare;
-	let map: Map | undefined;
-	let layer: LayerGroup | undefined;
+	let rectangle: Rectangle | undefined = $state();
+	let map: Map | undefined = $state();
+	let layer: LayerGroup | undefined = $state();
+	let compare: Compare | undefined = $state();
 
 	$effect(() => {
 		map = getMap?.();
@@ -57,7 +55,7 @@
 					bounds,
 					options
 				};
-				compare.updateProps(props);
+				compare?.updateProps(props);
 
 				if (layer) {
 					layer.addLayer(rectangle);
@@ -65,7 +63,7 @@
 					map.addLayer(rectangle);
 				}
 
-				compare.storeProps(props);
+				compare?.storeProps(props);
 			}
 		}
 	});

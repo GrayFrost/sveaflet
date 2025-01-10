@@ -26,18 +26,13 @@
 
 	// data
 	let ready = $state(false);
-
-	// object
-	let circleMarker: CircleMarker | undefined;
-	let compare: Compare;
-	let map: Map | undefined;
-	let layer: LayerGroup | undefined;
+	let circleMarker: CircleMarker | undefined = $state();
+	let map: Map | undefined = $state();
+	let layer: LayerGroup | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
 	$effect(() => {
 		map = getMap?.();
-	});
-
-	$effect(() => {
 		layer = getLayer?.();
 	});
 
@@ -62,7 +57,7 @@
 					latLng,
 					options
 				};
-				compare.updateProps(props);
+				compare?.updateProps(props);
 
 				if (layer) {
 					layer.addLayer(circleMarker);
@@ -70,7 +65,7 @@
 					map.addLayer(circleMarker);
 				}
 
-				compare.storeProps(props);
+				compare?.storeProps(props);
 			}
 		}
 	});

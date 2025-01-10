@@ -21,18 +21,13 @@
 
 	// data
 	let ready = $state(false);
-
-	// object
-	let polygon: Polygon | undefined;
-	let compare: Compare;
-	let map: Map | undefined;
-	let layer: LayerGroup | undefined;
+	let polygon: Polygon | undefined = $state();
+	let map: Map | undefined = $state();
+	let layer: LayerGroup | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
 	$effect(() => {
 		map = getMap?.();
-	});
-
-	$effect(() => {
 		layer = getLayer?.();
 	});
 
@@ -57,7 +52,7 @@
 					latLngs,
 					options
 				};
-				compare.updateProps(props);
+				compare?.updateProps(props);
 
 				if (layer) {
 					layer.addLayer(polygon);
@@ -65,7 +60,7 @@
 					map.addLayer(polygon);
 				}
 
-				compare.storeProps(props);
+				compare?.storeProps(props);
 			}
 		}
 	});

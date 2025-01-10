@@ -1,6 +1,5 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
-	import { onMount, onDestroy, setContext } from 'svelte';
+	import { onMount, onDestroy, setContext, type Snippet } from 'svelte';
 	import { Map, Icon } from 'leaflet';
 	import type { MapOptions } from 'leaflet';
 	import 'leaflet/dist/leaflet.css';
@@ -19,25 +18,42 @@
 	});
 
 	// props
-	export let options: MapOptions = {};
-	export let instance: Map | undefined = undefined;
+	type Props = {
+		options: MapOptions;
+		instance: Map | undefined;
+		children: Snippet;
+	};
 
-	// data
-	let map: Map | undefined;
+	let { options = {}, instance = $bindable(), children }: Props = $props();
+
+	// state
+	let map: Map | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
+
+	// refs
 	let mapContainer: HTMLElement;
-	let compare: Compare;
-
-	$: instance = map;
-
-	onMount(() => {
-		map = new Map(mapContainer, options);
-		compare = new Compare(map, $$props);
+	
+	$effect(() => {
+		instance = map;
 	});
 
-	$: if (map) {
-		compare.updateProps($$props);
-		compare.storeProps($$props)
-	}
+	onMount(() => {
+		const props = {
+			options
+		};
+		map = new Map(mapContainer, options);
+		compare = new Compare(map, props);
+	});
+
+	$effect(() => {
+		if (map) {
+			const props = {
+				options
+			};
+			compare?.updateProps(props);
+			compare?.storeProps(props);
+		}
+	});
 
 	function reset() {
 		map?.remove();
@@ -53,6 +69,6 @@
 
 <div style="width:100%;height:100%" bind:this={mapContainer}>
 	{#if map}
-		<slot />
+		{@render children?.()}
 	{/if}
 </div>
