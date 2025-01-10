@@ -38,11 +38,10 @@ It's an approximation and starts to diverge from a real circle closer to poles (
 
 ```svelte example csr
 <script>
-	import { onMount } from 'svelte';
 	import { Map, TileLayer, Circle } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let color = 'red';
+	let color = $state('red');
 </script>
 
 <div class="flex items-center gap-4 mb-4">
