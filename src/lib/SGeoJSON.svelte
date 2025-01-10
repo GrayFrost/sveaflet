@@ -1,21 +1,18 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { Map, GeoJSON } from 'leaflet';
 	import type { GeoJSONOptions } from 'leaflet';
 	import type { GeoJsonObject } from 'geojson';
 	import type { LeafletContextInterface } from './types';
 
-	
+	// props
 	interface Props {
-		// props
 		json?: GeoJsonObject | null;
 		options?: GeoJSONOptions | null;
-		instance?: GeoJSON | undefined;
+		instance?: GeoJSON;
 	}
 
-	let { json = null, options = null, instance = $bindable(undefined) }: Props = $props();
+	let { json = null, options = null, instance = $bindable() }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -23,17 +20,17 @@
 
 	// data
 	let geoJSON: GeoJSON | undefined = $state();
+	let map = $derived(getMap?.());
 
 	onMount(() => {
 		geoJSON = new GeoJSON(json, options);
 	});
 
-	let map = $derived(getMap?.());
-	run(() => {
+	$effect(() => {
 		instance = geoJSON;
 	});
 
-	run(() => {
+	$effect(() => {
 		if (map) {
 			if (geoJSON) {
 				map.addLayer(geoJSON);
