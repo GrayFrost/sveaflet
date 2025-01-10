@@ -1,48 +1,74 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
-	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { onMount, onDestroy, setContext, getContext, type Snippet } from 'svelte';
 	import { Polygon, Map } from 'leaflet';
-	import type { LatLngExpression, PolylineOptions } from 'leaflet';
+	import type { LatLngExpression, PolylineOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 	import { Compare } from './utils/index';
 
 	// props
-	export let latLngs: LatLngExpression[];
-	export let options: PolylineOptions = {};
-	export let instance: Polygon | undefined = undefined;
+	type Props = {
+		latLngs: LatLngExpression[];
+		options: PolylineOptions;
+		instance: Polygon | undefined;
+		children: Snippet;
+	};
+
+	let { latLngs, options = {}, instance = $bindable(undefined), children }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let polygon: Polygon | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = polygon;
+	// object
+	let polygon: Polygon | undefined;
+	let compare: Compare;
+	let map: Map | undefined;
+	let layer: LayerGroup | undefined;
+
+	$effect(() => {
+		map = getMap?.();
+	});
+
+	$effect(() => {
+		layer = getLayer?.();
+	});
+
+	$effect(() => {
+		instance = polygon;
+	});
 
 	onMount(() => {
+		const props = {
+			latLngs,
+			options
+		};
 		polygon = new Polygon(latLngs, options);
-		compare = new Compare(polygon, $$props);
+		compare = new Compare(polygon, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (polygon) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (polygon) {
+				const props = {
+					latLngs,
+					options
+				};
+				compare.updateProps(props);
 
-			if (layer) {
-				layer.addLayer(polygon);
-			} else {
-				map.addLayer(polygon);
+				if (layer) {
+					layer.addLayer(polygon);
+				} else {
+					map.addLayer(polygon);
+				}
+
+				compare.storeProps(props);
 			}
-
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		polygon?.remove();
@@ -57,5 +83,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}
