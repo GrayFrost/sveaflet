@@ -47,7 +47,7 @@ A video overlay uses the [`<video>`](https://developer.mozilla.org/docs/Web/HTML
 	import { Map, TileLayer, VideoOverlay } from 'sveaflet';
 	import { Label, Toggle } from 'flowbite-svelte';
 
-	let enableOpacity = true;
+	let enableOpacity = $state(true);
 </script>
 
 <div class="flex items-center gap-4 mb-4">
