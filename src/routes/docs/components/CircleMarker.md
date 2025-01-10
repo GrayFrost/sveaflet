@@ -40,7 +40,7 @@ A circle of a fixed size with radius specified in pixels. Extends [Path](https:/
 	import { Map, TileLayer, CircleMarker } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let color = 'red';
+	let color = $state('red');
 </script>
 
 <div class="flex items-center gap-4 mb-4">
