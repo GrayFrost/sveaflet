@@ -1,48 +1,74 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
-	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { onMount, onDestroy, setContext, getContext, type Snippet } from 'svelte';
 	import { Polyline, Map } from 'leaflet';
-	import type { LatLngExpression, PolylineOptions } from 'leaflet';
+	import type { LatLngExpression, PolylineOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 	import { Compare } from './utils/index';
 
 	// props
-	export let latLngs: LatLngExpression[];
-	export let options: PolylineOptions = {};
-	export let instance: Polyline | undefined = undefined;
+	type Props = {
+		latLngs: LatLngExpression[];
+		options: PolylineOptions;
+		instance: Polyline | undefined;
+		children: Snippet;
+	};
+
+	let { latLngs, options = {}, instance = $bindable(undefined), children }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let polyline: Polyline | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = polyline;
+	// object
+	let polyline: Polyline | undefined;
+	let compare: Compare;
+	let map: Map | undefined;
+	let layer: LayerGroup | undefined;
+
+	$effect(() => {
+		map = getMap?.();
+	});
+
+	$effect(() => {
+		layer = getLayer?.();
+	});
+
+	$effect(() => {
+		instance = polyline;
+	});
 
 	onMount(() => {
+		const props = {
+			latLngs,
+			options
+		};
 		polyline = new Polyline(latLngs, options);
-		compare = new Compare(polyline, $$props);
+		compare = new Compare(polyline, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (polyline) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (polyline) {
+				const props = {
+					latLngs,
+					options
+				};
+				compare.updateProps(props);
 
-			if (layer) {
-				layer.addLayer(polyline);
-			} else {
-				map.addLayer(polyline);
+				if (layer) {
+					layer.addLayer(polyline);
+				} else {
+					map.addLayer(polyline);
+				}
+
+				compare.storeProps(props);
 			}
-			
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		polyline?.remove();
@@ -57,5 +83,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}
