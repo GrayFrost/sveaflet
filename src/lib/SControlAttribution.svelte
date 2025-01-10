@@ -1,4 +1,3 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { Map, control } from 'leaflet';
@@ -7,32 +6,50 @@
 	import { Compare } from './utils/index';
 
 	// props
-	export let options: Control.AttributionOptions = {};
-	export let instance: Control.Attribution | undefined = undefined;
+	type Props = {
+		options: Control.AttributionOptions;
+		instance: Control.Attribution | undefined;
+	};
+
+	let { options = {}, instance = $bindable() }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
 	// data
-	let attribution: Control.Attribution | undefined;
-	let compare: Compare;
+	let attribution: Control.Attribution | undefined = $state();
+	let map: Map | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: instance = attribution;
-
-	onMount(() => {
-		attribution = control.attribution(options);
-		compare = new Compare(attribution, $$props);
+	$effect(() => {
+		map = getMap?.();
 	});
 
-	$: if (map) {
-		if (attribution) {
-			compare.updateProps($$props);
-			map.addControl(attribution);
-			compare.storeProps($$props);
+	$effect(() => {
+		instance = attribution;
+	});
+
+	onMount(() => {
+		const props = {
+			options
+		};
+		attribution = control.attribution(options);
+		compare = new Compare(attribution, props);
+	});
+
+	$effect(() => {
+		if (map) {
+			if (attribution) {
+				const props = {
+					options
+				};
+				compare?.updateProps(props);
+				map.addControl(attribution);
+				compare?.storeProps(props);
+			}
 		}
-	}
+	});
 
 	function reset() {
 		attribution?.remove();
