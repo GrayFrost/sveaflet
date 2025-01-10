@@ -1,19 +1,16 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { Map, Icon, Marker } from 'leaflet';
 	import type { IconOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 
-	
+	// props
 	interface Props {
-		// props
 		options?: IconOptions;
-		instance?: Icon | undefined;
+		instance?: Icon;
 	}
 
-	let { options = { iconUrl: '' }, instance = $bindable(undefined) }: Props = $props();
+	let { options = { iconUrl: '' }, instance = $bindable() }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -28,11 +25,12 @@
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getOverlay?.());
-	run(() => {
+
+	$effect(() => {
 		instance = icon;
 	});
 
-	run(() => {
+	$effect(() => {
 		if (map) {
 			if (icon) {
 				if (layer && layer instanceof Marker) {

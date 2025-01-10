@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount, onDestroy, getContext } from 'svelte';
+	import { onMount, onDestroy, getContext, type Snippet } from 'svelte';
 	import { DivIcon, Map, Marker } from 'leaflet';
 	import type { DivIconOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
@@ -8,11 +8,11 @@
 	// props
 	type Props = {
 		options?: DivIconOptions;
-		instance?: DivIcon | undefined;
-		children?: import('svelte').Snippet;
+		instance?: DivIcon;
+		children?: Snippet;
 	} & HTMLAttributes<HTMLDivElement>;
 
-	let { options = {}, instance = $bindable(undefined), children, ...restProps }: Props = $props();
+	let { options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
