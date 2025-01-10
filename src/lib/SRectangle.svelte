@@ -1,48 +1,74 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
-	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { onMount, onDestroy, getContext, setContext, type Snippet } from 'svelte';
 	import { Rectangle, Map } from 'leaflet';
-	import type { LatLngBoundsExpression, PathOptions, PolylineOptions } from 'leaflet';
+	import type { LatLngBoundsExpression, PolylineOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 	import { Compare } from './utils/index';
 
 	// props
-	export let bounds: LatLngBoundsExpression;
-	export let options: PolylineOptions = {};
-	export let instance: Rectangle | undefined = undefined;
+	type Props = {
+		bounds: LatLngBoundsExpression;
+		options: PolylineOptions;
+		instance: Rectangle | undefined;
+		children: Snippet;
+	};
+
+	let { bounds, options = {}, instance = $bindable(undefined), children }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let rectangle: Rectangle | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = rectangle;
+	// object
+	let rectangle: Rectangle | undefined;
+	let compare: Compare;
+	let map: Map | undefined;
+	let layer: LayerGroup | undefined;
+
+	$effect(() => {
+		map = getMap?.();
+	});
+
+	$effect(() => {
+		layer = getLayer?.();
+	});
+
+	$effect(() => {
+		instance = rectangle;
+	});
 
 	onMount(() => {
+		const props = {
+			bounds,
+			options
+		};
 		rectangle = new Rectangle(bounds, options);
-		compare = new Compare(rectangle, $$props);
+		compare = new Compare(rectangle, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (rectangle) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (rectangle) {
+				const props = {
+					bounds,
+					options
+				};
+				compare.updateProps(props);
 
-			if (layer) {
-				layer.addLayer(rectangle);
-			} else {
-				map.addLayer(rectangle);
+				if (layer) {
+					layer.addLayer(rectangle);
+				} else {
+					map.addLayer(rectangle);
+				}
+
+				compare.storeProps(props);
 			}
-
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		rectangle?.remove();
@@ -57,5 +83,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}
