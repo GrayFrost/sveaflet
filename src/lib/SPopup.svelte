@@ -1,29 +1,42 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
-	import { onMount, onDestroy, getContext } from 'svelte';
-	import { Map, Popup } from 'leaflet';
-	import type { LatLngExpression, PopupOptions } from 'leaflet';
+	import { onMount, onDestroy, getContext, type Snippet } from 'svelte';
+	import { bind, Map, Popup } from 'leaflet';
+	import type { LatLngExpression, PopupOptions, Layer, Marker } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
 	import { Compare } from './utils/index';
 
 	// props
-	export let latLng: LatLngExpression | undefined = undefined;
-	export let options: PopupOptions = {};
-	export let instance: Popup | undefined = undefined;
+	type Props = {
+		latLng: LatLngExpression | undefined;
+		options: PopupOptions;
+		instance: Popup | undefined;
+		children: Snippet;
+	};
+
+	let { latLng, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
 
 	// data
-	let popup: Popup | undefined;
-	let htmlElement: HTMLElement | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
+	let popup: Popup | undefined = $state();
+	let map: Map | undefined = $state();
+	let layer: Layer | Marker | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getOverlay?.();
-	$: instance = popup;
+	// refs
+	let htmlElement: HTMLElement | undefined;
+
+	$effect(() => {
+		map = getMap?.();
+		layer = getOverlay?.();
+	});
+
+	$effect(() => {
+		instance = popup;
+	});
 
 	onMount(() => {
 		let mergeOptions = {
@@ -43,24 +56,36 @@
 		} else {
 			throw new Error('Prop latLng is required.');
 		}
-		compare = new Compare(popup, { ...$$props, options: mergeOptions });
+
+		const props = {
+			latLng,
+			options
+		};
+
+		compare = new Compare(popup, { ...props, options: mergeOptions });
 		ready = true;
 	});
 
-	$: if (map) {
-		if (popup) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (popup) {
+				const props = {
+					latLng,
+					options
+				};
+				compare?.updateProps(props);
 
-			if (!layer) {
-				popup.openOn(map);
-			} else {
-				let popupContent = popup.options.content || '';
-				layer.bindPopup(popupContent);
+				if (!layer) {
+					popup.openOn(map);
+				} else {
+					let popupContent = popup.options.content || '';
+					layer.bindPopup(popupContent);
+				}
+
+				compare?.storeProps(props);
 			}
-
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		popup?.remove();
@@ -72,11 +97,11 @@
 	});
 </script>
 
-{#if $$slots.default}
+{#if children}
 	<div style="display: none">
-		<div bind:this={htmlElement} {...$$restProps}>
+		<div bind:this={htmlElement} {...restProps}>
 			{#if ready}
-				<slot />
+				{@render children()}
 			{/if}
 		</div>
 	</div>
