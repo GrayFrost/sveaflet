@@ -56,7 +56,7 @@ Used to display small texts on top of map layers.
 	import { Map, TileLayer, Circle, Tooltip } from 'sveaflet';
 	import { Radio, Label, Input } from 'flowbite-svelte';
 
-	let content = 'Tooltip content.';
+	let content = $state('Tooltip content.');
 </script>
 
 <div class="flex items-center gap-4 mb-4">
