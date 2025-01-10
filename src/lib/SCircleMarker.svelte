@@ -8,17 +8,12 @@
 	// props
 	type Props = {
 		latLng: LatLngExpression;
-		options: CircleMarkerOptions;
-		instance: CircleMarker | undefined;
-		children: Snippet;
+		options?: CircleMarkerOptions;
+		instance?: CircleMarker;
+		children?: Snippet;
 	};
 
-	let {
-		latLng,
-		options = { radius: 10 },
-		instance = $bindable(undefined),
-		children
-	}: Props = $props();
+	let { latLng, options = { radius: 10 }, instance = $bindable(), children }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);

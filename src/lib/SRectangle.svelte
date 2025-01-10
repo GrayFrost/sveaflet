@@ -8,12 +8,12 @@
 	// props
 	type Props = {
 		bounds: LatLngBoundsExpression;
-		options: PolylineOptions;
-		instance: Rectangle | undefined;
-		children: Snippet;
+		options?: PolylineOptions;
+		instance?: Rectangle;
+		children?: Snippet;
 	};
 
-	let { bounds, options = {}, instance = $bindable(undefined), children }: Props = $props();
+	let { bounds, options = {}, instance = $bindable(), children }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);

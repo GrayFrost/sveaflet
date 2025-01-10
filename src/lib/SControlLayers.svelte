@@ -7,9 +7,9 @@
 
 	// props
 	type Props = {
-		options: Control.LayersOptions;
-		instance: Control.Layers | undefined;
-		children: Snippet;
+		options?: Control.LayersOptions;
+		instance?: Control.Layers;
+		children?: Snippet;
 	};
 
 	let { options = {}, instance = $bindable(), children }: Props = $props();

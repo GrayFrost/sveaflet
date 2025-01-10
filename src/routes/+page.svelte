@@ -12,7 +12,7 @@
 	import Footer from './utils/Footer.svelte';
 
 	let logo = '/images/sveaflet.png';
-	let marker: MarkerType = $state();
+	let marker: MarkerType | undefined = $state();
 
 	run(() => {
 		if (marker) {

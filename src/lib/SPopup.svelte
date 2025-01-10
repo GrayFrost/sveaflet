@@ -7,10 +7,10 @@
 
 	// props
 	type Props = {
-		latLng: LatLngExpression | undefined;
-		options: PopupOptions;
-		instance: Popup | undefined;
-		children: Snippet;
+		latLng?: LatLngExpression;
+		options?: PopupOptions;
+		instance?: Popup;
+		children?: Snippet;
 	};
 
 	let { latLng, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();

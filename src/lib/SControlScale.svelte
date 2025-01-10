@@ -7,32 +7,50 @@
 	import { Compare } from './utils/index';
 
 	// props
-	export let options: Control.ScaleOptions = {};
-	export let instance: Control.Scale | undefined = undefined;
+	type Props = {
+		options?: Control.ScaleOptions;
+		instance?: Control.Scale;
+	};
+
+	let { options = {}, instance = $bindable() }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
-	$: map = getMap?.();
-	$: instance = scale;
-
 	// data
-	let scale: Control.Scale | undefined;
-	let compare: Compare;
+	let scale: Control.Scale | undefined = $state();
+	let map: Map | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	onMount(() => {
-		scale = control.scale(options);
-		compare = new Compare(scale, $$props)
+	$effect(() => {
+		map = getMap?.();
 	});
 
-	$: if (map) {
-		if (scale) {
-			compare.updateProps($$props);
-			map.addControl(scale);
-			compare.storeProps($$props);
+	$effect(() => {
+		instance = scale;
+	});
+
+	onMount(() => {
+		const props = {
+			options
+		};
+		scale = control.scale(options);
+		compare = new Compare(scale, props);
+	});
+
+	$effect(() => {
+		if (map) {
+			if (scale) {
+				const props = {
+					options
+				};
+				compare?.updateProps(props);
+				map.addControl(scale);
+				compare?.storeProps(props);
+			}
 		}
-	}
+	});
 
 	function reset() {
 		scale?.remove();

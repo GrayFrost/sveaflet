@@ -9,8 +9,8 @@
 	// props
 	type Props = {
 		options: ControlOptions;
-		instance: Control | undefined;
-		children: Snippet;
+		instance?: Control;
+		children?: Snippet;
 	} & HTMLAttributes<HTMLDivElement>;
 
 	let {

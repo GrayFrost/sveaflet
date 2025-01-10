@@ -7,8 +7,8 @@
 
 	// props
 	type Props = {
-		options: Control.AttributionOptions;
-		instance: Control.Attribution | undefined;
+		options?: Control.AttributionOptions;
+		instance?: Control.Attribution;
 	};
 
 	let { options = {}, instance = $bindable() }: Props = $props();

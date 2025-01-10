@@ -7,10 +7,10 @@
 
 	// props
 	type Props = {
-		latLng: LatLngExpression | undefined;
-		options: TooltipOptions;
-		instance: Tooltip | undefined;
-		children: Snippet;
+		latLng?: LatLngExpression;
+		options?: TooltipOptions;
+		instance?: Tooltip;
+		children?: Snippet;
 	};
 
 	let { latLng, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();

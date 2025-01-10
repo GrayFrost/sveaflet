@@ -8,11 +8,11 @@
 	// props
 	type Props = {
 		url: string;
-		options: WMSOptions;
-		name: string;
-		checked: boolean;
-		instance: TileLayer | undefined;
-		layerType: 'base' | 'overlay' | undefined;
+		options?: WMSOptions;
+		name?: string;
+		checked?: boolean;
+		instance?: TileLayer;
+		layerType?: 'base' | 'overlay';
 	};
 
 	let {

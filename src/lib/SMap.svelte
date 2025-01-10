@@ -20,8 +20,8 @@
 	// props
 	type Props = {
 		options: MapOptions;
-		instance: Map | undefined;
-		children: Snippet;
+		instance?: Map;
+		children?: Snippet;
 	};
 
 	let { options = {}, instance = $bindable(), children }: Props = $props();
@@ -32,7 +32,7 @@
 
 	// refs
 	let mapContainer: HTMLElement;
-	
+
 	$effect(() => {
 		instance = map;
 	});
