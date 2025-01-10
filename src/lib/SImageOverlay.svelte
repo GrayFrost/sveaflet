@@ -1,4 +1,3 @@
-<!-- @migration-task Error while migrating Svelte code: $$props is used together with named props in a way that cannot be automatically migrated. -->
 <script lang="ts">
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { Map, ImageOverlay } from 'leaflet';
@@ -7,41 +6,59 @@
 	import { Compare } from './utils/index';
 
 	// props
-	export let url: string;
-	export let bounds: LatLngBounds;
-	export let options: ImageOverlayOptions = {};
-	export let instance: ImageOverlay | undefined = undefined;
+	interface Props {
+		url: string;
+		bounds: LatLngBounds;
+		options?: ImageOverlayOptions;
+		instance?: ImageOverlay;
+	}
+
+	let { url, bounds, options = {}, instance = $bindable() }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let imageOverlay: ImageOverlay | undefined;
-	let compare: Compare;
+	let imageOverlay: ImageOverlay | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
+	let map = $derived(getMap?.());
+	let layer = $derived(getLayer?.());
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = imageOverlay;
-
-	onMount(() => {
-		imageOverlay = new ImageOverlay(url, bounds, options);
-		compare = new Compare(imageOverlay, $$props);
+	$effect(() => {
+		instance = imageOverlay;
 	});
 
-	$: if (map) {
-		if (imageOverlay) {
-			compare.updateProps($$props);
+	onMount(() => {
+		const props = {
+			url,
+			bounds,
+			options
+		};
+		imageOverlay = new ImageOverlay(url, bounds, options);
+		compare = new Compare(imageOverlay, props);
+	});
 
-			if (layer) {
-				layer.addLayer(imageOverlay);
-			} else {
-				map.addLayer(imageOverlay);
+	$effect(() => {
+		if (map) {
+			if (imageOverlay) {
+				const props = {
+					url,
+					bounds,
+					options
+				};
+				compare?.updateProps(props);
+
+				if (layer) {
+					layer.addLayer(imageOverlay);
+				} else {
+					map.addLayer(imageOverlay);
+				}
+
+				compare?.storeProps(props);
 			}
-			
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		imageOverlay?.remove();
