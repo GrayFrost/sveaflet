@@ -1,34 +1,33 @@
 <script lang="ts">
-	import { run } from 'svelte/legacy';
-
 	import { onMount, onDestroy, getContext } from 'svelte';
 	import { DivIcon, Map, Marker } from 'leaflet';
 	import type { DivIconOptions } from 'leaflet';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
 
-	
-	interface Props {
-		// props
+	// props
+	type Props = {
 		options?: DivIconOptions;
 		instance?: DivIcon | undefined;
 		children?: import('svelte').Snippet;
-		[key: string]: any
-	}
+	} & HTMLAttributes<HTMLDivElement>;
 
-	let { options = {}, instance = $bindable(undefined), children, ...rest }: Props = $props();
+	let { options = {}, instance = $bindable(undefined), children, ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
 
 	// data
-	let divIcon: DivIcon | undefined = $state();
-	let htmlElement: HTMLElement | undefined = $state();
 	let ready = $state(false);
-
+	let divIcon: DivIcon | undefined = $state();
 	let map = $derived(getMap?.());
 	let layer = $derived(getOverlay?.());
-	run(() => {
+
+	// refs
+	let htmlElement: HTMLElement | undefined = $state();
+
+	$effect(() => {
 		instance = divIcon;
 	});
 
@@ -46,7 +45,7 @@
 		ready = true;
 	});
 
-	run(() => {
+	$effect(() => {
 		if (map) {
 			if (divIcon) {
 				if (layer && layer instanceof Marker) {
@@ -70,7 +69,7 @@
 
 {#if children}
 	<div style="display: none">
-		<div bind:this={htmlElement} {...rest}>
+		<div bind:this={htmlElement} {...restProps}>
 			{#if ready}
 				{@render children?.()}
 			{/if}
