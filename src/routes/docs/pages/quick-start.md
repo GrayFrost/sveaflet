@@ -42,7 +42,6 @@ Sveaflet also supports Typescript.
 ```svelte example csr hideOutput
 <script lang="ts">
 	import { Map, TileLayer, Marker, Popup } from 'sveaflet';
-	import type { Marker } from 'leaflet';
 
 	let marker: Marker;
 
