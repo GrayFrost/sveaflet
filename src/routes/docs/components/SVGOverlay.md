@@ -50,7 +50,7 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 	import { Map, TileLayer, SVGOverlay } from 'sveaflet';
 	import { Label, Toggle } from 'flowbite-svelte';
 
-	let enableOpacity = true;
+	let enableOpacity = $state(true);
 </script>
 
 <div class="flex items-center gap-4 mb-4">
