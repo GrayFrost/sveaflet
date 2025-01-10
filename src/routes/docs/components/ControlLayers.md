@@ -122,7 +122,7 @@ Any TileLayers would be added to base layer, and LayerGroup would be added to ov
 	import { Map, ControlLayers, TileLayer, LayerGroup, Marker, Popup } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let position = 'topright';
+	let position = $state('topright');
 </script>
 
 <div class="flex items-center gap-4 mb-4">
