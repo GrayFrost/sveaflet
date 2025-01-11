@@ -24,6 +24,7 @@
 	let ready = $state(false);
 	let svgOverlay: SVGOverlay | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
+
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
 
@@ -49,7 +50,8 @@
 			if (svgOverlay) {
 				const props = {
 					bounds,
-					options
+					options,
+					...restProps
 				};
 				compare?.updateProps(props);
 

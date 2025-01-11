@@ -21,7 +21,8 @@
 		name = '',
 		checked = false,
 		instance = $bindable(),
-		layerType
+		layerType,
+		...restProps
 	}: Props = $props();
 
 	// context
@@ -30,14 +31,10 @@
 
 	// data
 	let tileLayerWMS: TileLayer | undefined = $state();
-	let map: Map | undefined = $state();
-	let controlLayers: Control.Layers | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
 
-	$effect(() => {
-		map = getMap?.();
-		controlLayers = getControl?.();
-	});
+	let map: Map | undefined = $derived(getMap?.());
+	let controlLayers: Control.Layers | undefined = $derived(getControl?.());
 
 	$effect(() => {
 		instance = tileLayerWMS;
@@ -49,7 +46,8 @@
 			options,
 			name,
 			checked,
-			layerType
+			layerType,
+			...restProps
 		};
 		tileLayerWMS = new TileLayer.WMS(url, options);
 		compare = new Compare(tileLayerWMS, props);
@@ -63,7 +61,8 @@
 					options,
 					name,
 					checked,
-					layerType
+					layerType,
+					...restProps
 				};
 				compare?.updateProps(props);
 

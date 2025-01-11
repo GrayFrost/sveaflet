@@ -13,7 +13,7 @@
 		children?: Snippet;
 	};
 
-	let { latLngs, options = {}, instance = $bindable(), children }: Props = $props();
+	let { latLngs, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -22,14 +22,10 @@
 	// data
 	let ready = $state(false);
 	let polyline: Polyline | undefined = $state();
-	let map: Map | undefined = $state();
-	let layer: LayerGroup | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
 
-	$effect(() => {
-		map = getMap?.();
-		layer = getLayer?.();
-	});
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: LayerGroup | undefined = $derived(getLayer?.());
 
 	$effect(() => {
 		instance = polyline;
@@ -38,7 +34,8 @@
 	onMount(() => {
 		const props = {
 			latLngs,
-			options
+			options,
+			...restProps,
 		};
 		polyline = new Polyline(latLngs, options);
 		compare = new Compare(polyline, props);
@@ -50,8 +47,10 @@
 			if (polyline) {
 				const props = {
 					latLngs,
-					options
+					options,
+					...restProps
 				};
+				
 				compare?.updateProps(props);
 
 				if (layer) {

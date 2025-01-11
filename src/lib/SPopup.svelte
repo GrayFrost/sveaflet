@@ -22,17 +22,13 @@
 	// data
 	let ready = $state(false);
 	let popup: Popup | undefined = $state();
-	let map: Map | undefined = $state();
-	let layer: Layer | Marker | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
+
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: Layer | Marker | undefined = $derived(getOverlay?.());
 
 	// refs
 	let htmlElement: HTMLElement | undefined = $state();
-
-	$effect(() => {
-		map = getMap?.();
-		layer = getOverlay?.();
-	});
 
 	$effect(() => {
 		instance = popup;
@@ -59,7 +55,8 @@
 
 		const props = {
 			latLng,
-			options
+			options,
+			...restProps
 		};
 
 		compare = new Compare(popup, { ...props, options: mergeOptions });
@@ -71,7 +68,8 @@
 			if (popup) {
 				const props = {
 					latLng,
-					options
+					options,
+					...restProps
 				};
 				compare?.updateProps(props);
 

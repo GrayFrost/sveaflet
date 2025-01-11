@@ -21,6 +21,7 @@
 	// data
 	let ready = $state(false);
 	let divIcon: DivIcon | undefined = $state();
+
 	let map = $derived(getMap?.());
 	let layer = $derived(getOverlay?.());
 
@@ -33,7 +34,8 @@
 
 	onMount(() => {
 		let mergeOptions = {
-			...options
+			...options,
+			...restProps,
 		};
 		if (htmlElement) {
 			mergeOptions = {

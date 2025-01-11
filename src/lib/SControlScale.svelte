@@ -11,7 +11,7 @@
 		instance?: Control.Scale;
 	};
 
-	let { options = {}, instance = $bindable() }: Props = $props();
+	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -19,12 +19,9 @@
 
 	// data
 	let scale: Control.Scale | undefined = $state();
-	let map: Map | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
 
-	$effect(() => {
-		map = getMap?.();
-	});
+	let map: Map | undefined = $derived(getMap?.());
 
 	$effect(() => {
 		instance = scale;
@@ -32,7 +29,8 @@
 
 	onMount(() => {
 		const props = {
-			options
+			options,
+			...restProps
 		};
 		scale = control.scale(options);
 		compare = new Compare(scale, props);
@@ -42,8 +40,10 @@
 		if (map) {
 			if (scale) {
 				const props = {
-					options
+					options,
+					...restProps
 				};
+				
 				compare?.updateProps(props);
 				map.addControl(scale);
 				compare?.storeProps(props);

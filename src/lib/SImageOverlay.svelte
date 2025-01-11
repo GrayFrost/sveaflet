@@ -13,7 +13,7 @@
 		instance?: ImageOverlay;
 	}
 
-	let { url, bounds, options = {}, instance = $bindable() }: Props = $props();
+	let { url, bounds, options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -22,6 +22,7 @@
 	// data
 	let imageOverlay: ImageOverlay | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
+
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
 
@@ -33,7 +34,8 @@
 		const props = {
 			url,
 			bounds,
-			options
+			options,
+			...restProps
 		};
 		imageOverlay = new ImageOverlay(url, bounds, options);
 		compare = new Compare(imageOverlay, props);
@@ -45,7 +47,8 @@
 				const props = {
 					url,
 					bounds,
-					options
+					options,
+					...restProps
 				};
 				compare?.updateProps(props);
 

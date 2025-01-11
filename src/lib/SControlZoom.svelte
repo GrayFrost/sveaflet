@@ -11,7 +11,7 @@
 		instance?: Control.Zoom;
 	};
 
-	let { options = {}, instance = $bindable() }: Props = $props();
+	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -19,12 +19,9 @@
 
 	// data
 	let zoom: Control.Zoom | undefined = $state();
-	let map: Map | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
 
-	$effect(() => {
-		map = getMap?.();
-	});
+	let map: Map | undefined = $derived(getMap?.());
 
 	$effect(() => {
 		instance = zoom;
@@ -32,7 +29,8 @@
 
 	onMount(() => {
 		const props = {
-			options
+			options,
+			...restProps
 		};
 
 		zoom = control.zoom(options);
@@ -43,8 +41,10 @@
 		if (map) {
 			if (zoom) {
 				const props = {
-					options
+					options,
+					...restProps
 				};
+
 				compare?.updateProps(props);
 				map.addControl(zoom);
 				compare?.storeProps(props);

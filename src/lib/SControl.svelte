@@ -27,15 +27,12 @@
 	// data
 	let ready = $state(false);
 	let control: Control | undefined = $state();
-	let map: Map | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
+
+	let map: Map | undefined = $derived(getMap?.());
 
 	// refs
 	let htmlElement: HTMLElement;
-
-	$effect(() => {
-		map = getMap?.();
-	});
 
 	$effect(() => {
 		instance = control;
@@ -51,7 +48,8 @@
 		});
 
 		const props = {
-			options
+			options,
+			...restProps
 		};
 
 		control = new CustomControl(options);
@@ -63,8 +61,10 @@
 		if (map) {
 			if (control) {
 				const props = {
-					options
+					options,
+					...restProps
 				};
+
 				compare?.updateProps(props);
 				map.addControl(control);
 				compare?.storeProps(props);

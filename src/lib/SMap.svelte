@@ -24,7 +24,7 @@
 		children?: Snippet;
 	};
 
-	let { options = {}, instance = $bindable(), children }: Props = $props();
+	let { options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
 	// state
 	let map: Map | undefined = $state();
@@ -39,7 +39,8 @@
 
 	onMount(() => {
 		const props = {
-			options
+			options,
+			...restProps
 		};
 		map = new Map(mapContainer, options);
 		compare = new Compare(map, props);
@@ -48,8 +49,10 @@
 	$effect(() => {
 		if (map) {
 			const props = {
-				options
+				options,
+				...restProps
 			};
+
 			compare?.updateProps(props);
 			compare?.storeProps(props);
 		}

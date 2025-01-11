@@ -19,7 +19,8 @@
 			icon: new Icon.Default()
 		},
 		instance = $bindable(),
-		children
+		children,
+		...restProps
 	}: Props = $props();
 
 	// context
@@ -41,7 +42,8 @@
 	onMount(() => {
 		const props = {
 			latLng,
-			options
+			options,
+			...restProps
 		};
 		marker = new Marker(latLng, options);
 		compare = new Compare(marker, props);
@@ -53,7 +55,8 @@
 			if (marker) {
 				const props = {
 					latLng,
-					options
+					options,
+					...restProps
 				};
 
 				compare?.updateProps(props);

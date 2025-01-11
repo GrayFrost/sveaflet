@@ -22,17 +22,13 @@
 	// data
 	let ready = $state(false);
 	let tooltip: Tooltip | undefined = $state();
-	let map: Map | undefined = $state();
-	let layer: Layer | Marker | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
+
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: Layer | Marker | undefined = $derived(getOverlay?.());
 
 	// refs
 	let htmlElement: HTMLElement | undefined = $state();
-
-	$effect(() => {
-		map = getMap?.();
-		layer = getOverlay?.();
-	});
 
 	$effect(() => {
 		instance = tooltip;
@@ -60,7 +56,8 @@
 
 		const props = {
 			latLng,
-			options
+			options,
+			...restProps
 		};
 
 		compare = new Compare(tooltip, { ...props, options: mergeOptions });
@@ -72,8 +69,10 @@
 			if (tooltip) {
 				const props = {
 					latLng,
-					options
+					options,
+					...restProps
 				};
+
 				compare?.updateProps(props);
 
 				if (!layer) {

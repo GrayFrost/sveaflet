@@ -21,7 +21,7 @@
 		checked = false,
 		instance = $bindable(),
 		layerType,
-		children
+		children,
 	}: Props = $props();
 
 	// context
@@ -31,6 +31,7 @@
 	// data
 	let ready = $state(false);
 	let layerGroup: LayerGroup | undefined = $state();
+
 	let map = $derived(getMap?.());
 	let controlLayers = $derived(getControl?.());
 

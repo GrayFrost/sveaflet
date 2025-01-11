@@ -32,10 +32,13 @@
 	// data
 	let ready = $state(false);
 	let videoOverlay: VideoOverlay | undefined = $state();
-	let htmlVideoElement: HTMLVideoElement | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
+
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
-	let compare: Compare | undefined = $state.raw();
+
+	// refs
+	let htmlVideoElement: HTMLVideoElement | undefined = $state();
 
 	$effect(() => {
 		instance = videoOverlay;
@@ -45,7 +48,8 @@
 		const props = {
 			url,
 			bounds,
-			options
+			options,
+			...restProps,
 		};
 		let mergeVideo = htmlVideoElement || url;
 		videoOverlay = new VideoOverlay(mergeVideo, bounds, options);
@@ -59,7 +63,8 @@
 				const props = {
 					url,
 					bounds,
-					options
+					options,
+					...restProps,
 				};
 				compare?.updateProps(props);
 

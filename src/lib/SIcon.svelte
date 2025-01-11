@@ -19,15 +19,15 @@
 	// data
 	let icon: Icon | undefined = $state();
 
-	onMount(() => {
-		icon = new Icon(options);
-	});
-
 	let map = $derived(getMap?.());
 	let layer = $derived(getOverlay?.());
 
 	$effect(() => {
 		instance = icon;
+	});
+
+	onMount(() => {
+		icon = new Icon(options);
 	});
 
 	$effect(() => {

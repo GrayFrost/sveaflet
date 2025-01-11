@@ -20,14 +20,15 @@
 
 	// data
 	let geoJSON: GeoJSON | undefined = $state();
-	let map = $derived(getMap?.());
 
-	onMount(() => {
-		geoJSON = new GeoJSON(json, options);
-	});
+	let map = $derived(getMap?.());
 
 	$effect(() => {
 		instance = geoJSON;
+	});
+
+	onMount(() => {
+		geoJSON = new GeoJSON(json, options);
 	});
 
 	$effect(() => {

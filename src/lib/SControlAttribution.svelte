@@ -11,7 +11,7 @@
 		instance?: Control.Attribution;
 	};
 
-	let { options = {}, instance = $bindable() }: Props = $props();
+	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -19,12 +19,9 @@
 
 	// data
 	let attribution: Control.Attribution | undefined = $state();
-	let map: Map | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
 
-	$effect(() => {
-		map = getMap?.();
-	});
+	let map: Map | undefined = $derived(getMap?.());
 
 	$effect(() => {
 		instance = attribution;
@@ -32,7 +29,8 @@
 
 	onMount(() => {
 		const props = {
-			options
+			options,
+			...restProps
 		};
 		attribution = control.attribution(options);
 		compare = new Compare(attribution, props);
@@ -42,7 +40,8 @@
 		if (map) {
 			if (attribution) {
 				const props = {
-					options
+					options,
+					...restProps
 				};
 				compare?.updateProps(props);
 				map.addControl(attribution);

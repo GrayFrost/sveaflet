@@ -13,7 +13,13 @@
 		children?: Snippet;
 	};
 
-	let { latLng, options = { radius: 10 }, instance = $bindable(), children }: Props = $props();
+	let {
+		latLng,
+		options = { radius: 10 },
+		instance = $bindable(),
+		children,
+		...restProps
+	}: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -22,14 +28,10 @@
 	// data
 	let ready = $state(false);
 	let circleMarker: CircleMarker | undefined = $state();
-	let map: Map | undefined = $state();
-	let layer: LayerGroup | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
 
-	$effect(() => {
-		map = getMap?.();
-		layer = getLayer?.();
-	});
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: LayerGroup | undefined = $derived(getLayer?.());
 
 	$effect(() => {
 		instance = circleMarker;
@@ -38,7 +40,8 @@
 	onMount(() => {
 		const props = {
 			latLng,
-			options
+			options,
+			...restProps
 		};
 		circleMarker = new CircleMarker(latLng, options);
 		compare = new Compare(circleMarker, props);
@@ -50,8 +53,10 @@
 			if (circleMarker) {
 				const props = {
 					latLng,
-					options
+					options,
+					...restProps
 				};
+				
 				compare?.updateProps(props);
 
 				if (layer) {
