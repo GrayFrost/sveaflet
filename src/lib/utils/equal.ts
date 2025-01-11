@@ -45,3 +45,9 @@ export function isPrimitiveEqual(prevVal: unknown, curVal: unknown) {
 		return prevVal === curVal;
 	}
 }
+
+export function isFunction(func: unknown) {
+	return (
+		typeof func === 'function' && typeof func.constructor === 'function' && func instanceof Function
+	);
+}

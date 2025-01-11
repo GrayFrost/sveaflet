@@ -3,7 +3,7 @@
 	import { Circle, Map } from 'leaflet';
 	import type { LatLngExpression, CircleOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -44,6 +44,7 @@
 			...restProps
 		};
 		circle = new Circle(latLng, options);
+		bindEvents(circle, restProps);
 		compare = new Compare(circle, props);
 		ready = true;
 	});

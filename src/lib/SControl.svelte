@@ -4,7 +4,7 @@
 	import type { ControlOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -53,6 +53,7 @@
 		};
 
 		control = new CustomControl(options);
+		bindEvents(control, restProps);
 		compare = new Compare(control, props);
 		ready = true;
 	});

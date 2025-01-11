@@ -3,7 +3,7 @@
 	import { Map, Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -46,6 +46,7 @@
 			...restProps
 		};
 		marker = new Marker(latLng, options);
+		bindEvents(marker, restProps);
 		compare = new Compare(marker, props);
 		ready = true;
 	});

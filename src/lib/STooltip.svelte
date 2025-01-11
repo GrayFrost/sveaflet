@@ -3,7 +3,7 @@
 	import { Map, Tooltip } from 'leaflet';
 	import type { LatLngExpression, TooltipOptions, Layer, Marker } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -53,6 +53,8 @@
 		} else {
 			throw new Error('Prop latLng is required.');
 		}
+
+		bindEvents(tooltip, restProps);
 
 		const props = {
 			latLng,

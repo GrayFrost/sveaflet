@@ -4,6 +4,7 @@
 	import type { DivIconOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
+	import { bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -44,6 +45,7 @@
 			};
 		}
 		divIcon = new DivIcon(mergeOptions);
+		bindEvents(divIcon, restProps);
 		ready = true;
 	});
 

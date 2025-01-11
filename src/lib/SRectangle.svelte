@@ -3,7 +3,7 @@
 	import { Rectangle, Map } from 'leaflet';
 	import type { LatLngBoundsExpression, PolylineOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -38,6 +38,7 @@
 			...restProps
 		};
 		rectangle = new Rectangle(bounds, options);
+		bindEvents(rectangle, restProps);
 		compare = new Compare(rectangle, props);
 		ready = true;
 	});

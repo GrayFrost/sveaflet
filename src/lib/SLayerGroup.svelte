@@ -3,7 +3,7 @@
 	import { Map, LayerGroup } from 'leaflet';
 	import type { LayerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { setControlLayer } from './utils/index';
+	import { setControlLayer, bindEvents } from './utils/index';
 
 	// props
 	interface Props {
@@ -22,6 +22,7 @@
 		instance = $bindable(),
 		layerType,
 		children,
+		...restProps
 	}: Props = $props();
 
 	// context
@@ -37,6 +38,7 @@
 
 	onMount(() => {
 		layerGroup = new LayerGroup([], options);
+		bindEvents(layerGroup, restProps);
 		ready = true;
 	});
 

@@ -71,7 +71,7 @@ Sveaflet also supports Typescript.
 
 ## Events
 
-In current version, Sveaflet does not customize a new event type, you can just add an event listener to Leaflet objects to complete your works. If you want to get Leaflet object, use [`bind:instane`](https://sveaflet.vercel.app/docs/pages/introduction#Leaflet_elements_references)
+The **version 0.0.x** of Sveaflet does not customize a new event type, you can just add an event listener to Leaflet objects to complete your works. If you want to get Leaflet object, use [`bind:instane`](https://sveaflet.vercel.app/docs/pages/introduction#Leaflet_elements_references)
 
 ```svelte example csr
 <script>
@@ -109,3 +109,38 @@ In current version, Sveaflet does not customize a new event type, you can just a
 </div>
 ```
 In this example, we use `map.on('click', () => {})` to listen map's click function.
+
+
+And starting from the **version 0.1.0**, Sveaflet supports directly eventlistener props like `onXXX`.
+
+```svelte example csr
+<script>
+	import { Map, TileLayer, Marker, Popup } from 'sveaflet';
+
+	let map;
+	let popup;
+	let popupLatLng = $state([51.513, -0.09]);
+	let popupContent = $state('I am a standalone popup.');
+
+	function onMapClick(e) {
+		popupLatLng = e.latlng;
+		popupContent = 'You clicked the map at ' + e.latlng.toString();
+		if (popup) {
+			popup.openOn(map);
+		}
+	}
+</script>
+
+<div style="width: 100%;height:500px;">
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }} onclick={onMapClick}>
+		<TileLayer
+			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
+			options={{
+				maxZoom: 19,
+				attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+			}}
+		/>
+		<Popup latLng={popupLatLng} options={{ content: popupContent }} />
+	</Map>
+</div>
+```

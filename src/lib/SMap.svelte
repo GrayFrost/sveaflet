@@ -7,7 +7,7 @@
 	import markerIcon from 'leaflet/dist/images/marker-icon.png';
 	import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// @ts-ignore
 	delete Icon.Default.prototype._getIconUrl;
@@ -43,6 +43,7 @@
 			...restProps
 		};
 		map = new Map(mapContainer, options);
+		bindEvents(map, restProps);
 		compare = new Compare(map, props);
 	});
 

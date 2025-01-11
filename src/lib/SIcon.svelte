@@ -10,7 +10,7 @@
 		instance?: Icon;
 	}
 
-	let { options = { iconUrl: '' }, instance = $bindable() }: Props = $props();
+	let { options = { iconUrl: '' }, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);

@@ -3,7 +3,7 @@
 	import { bind, Map, Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions, Layer, Marker } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
 	type Props = {
@@ -52,6 +52,7 @@
 		} else {
 			throw new Error('Prop latLng is required.');
 		}
+		bindEvents(popup, restProps);
 
 		const props = {
 			latLng,
