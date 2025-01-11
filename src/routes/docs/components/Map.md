@@ -40,7 +40,7 @@ A TileLayer is required. Options `{center, zoom}` are required.
 	import { Map, TileLayer } from 'sveaflet';
 	import { Input, Label } from 'flowbite-svelte';
 
-	let zoom = 13;
+	let zoom = $state(13);
 </script>
 
 <div class="flex items-center gap-4 mb-4">

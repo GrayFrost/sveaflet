@@ -38,7 +38,7 @@ sed to load and display tile layers on the map. Note that most tile servers requ
 	import { Map, TileLayer } from 'sveaflet';
 	import { Label, Toggle } from 'flowbite-svelte';
 
-	let enableOpacity = true;
+	let enableOpacity = $state(true);
 </script>
 
 <div class="flex items-center gap-4 mb-4">

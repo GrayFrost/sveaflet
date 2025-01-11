@@ -1,47 +1,76 @@
 <script lang="ts">
-	import { onMount, onDestroy, getContext, setContext } from 'svelte';
+	import { onMount, onDestroy, getContext, setContext, type Snippet } from 'svelte';
 	import { CircleMarker, Map } from 'leaflet';
-	import type { LatLngExpression, CircleMarkerOptions, PathOptions } from 'leaflet';
+	import type { LatLngExpression, CircleMarkerOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
-	export let latLng: LatLngExpression;
-	export let options: CircleMarkerOptions = { radius: 10 };
-	export let instance: CircleMarker | undefined = undefined;
+	type Props = {
+		latLng: LatLngExpression;
+		options?: CircleMarkerOptions;
+		instance?: CircleMarker;
+		children?: Snippet;
+	} & { [key: string]: unknown };
+
+	let {
+		latLng,
+		options = { radius: 10 },
+		instance = $bindable(),
+		children,
+		...restProps
+	}: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let circleMarker: CircleMarker | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
+	let circleMarker: CircleMarker | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = circleMarker;
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: LayerGroup | undefined = $derived(getLayer?.());
+
+	$effect(() => {
+		instance = circleMarker;
+	});
 
 	onMount(() => {
+		const props = {
+			latLng,
+			options,
+			...restProps
+		};
+
 		circleMarker = new CircleMarker(latLng, options);
-		compare = new Compare(circleMarker, $$props);
+		bindEvents(circleMarker, restProps);
+		compare = new Compare(circleMarker, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (circleMarker) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (circleMarker) {
+				const props = {
+					latLng,
+					options,
+					...restProps
+				};
+				
+				compare?.updateProps(props);
 
-			if (layer) {
-				layer.addLayer(circleMarker);
-			} else {
-				map.addLayer(circleMarker);
+				if (layer) {
+					layer.addLayer(circleMarker);
+				} else {
+					map.addLayer(circleMarker);
+				}
+
+				compare?.storeProps(props);
 			}
-			
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		circleMarker?.remove();
@@ -56,5 +85,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}

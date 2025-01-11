@@ -43,7 +43,7 @@ Used to display [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) services as
 	import { Map, TileLayerWMS } from 'sveaflet';
 	import { Label, Toggle } from 'flowbite-svelte';
 
-	let enableOpacity = true;
+	let enableOpacity = $state(true);
 </script>
 
 <div class="flex items-center gap-4 mb-4">

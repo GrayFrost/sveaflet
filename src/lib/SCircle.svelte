@@ -1,47 +1,75 @@
 <script lang="ts">
-	import { onDestroy, onMount, setContext, getContext } from 'svelte';
+	import { onDestroy, onMount, setContext, getContext, type Snippet } from 'svelte';
 	import { Circle, Map } from 'leaflet';
-	import type { LatLngExpression, CircleOptions, PathOptions } from 'leaflet';
+	import type { LatLngExpression, CircleOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
-	export let latLng: LatLngExpression;
-	export let options: CircleOptions = { radius: 100 };
-	export let instance: Circle | undefined = undefined;
+	type Props = {
+		latLng: LatLngExpression;
+		options?: CircleOptions;
+		instance?: Circle;
+		children?: Snippet;
+	} & { [key: string]: unknown };
+
+	let {
+		latLng,
+		options = { radius: 100 },
+		instance = $bindable(),
+		children,
+		...restProps
+	}: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let circle: Circle | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
+	let circle: Circle | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = circle;
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: LayerGroup | undefined = $derived(getLayer?.());
+
+	$effect(() => {
+		instance = circle;
+	});
 
 	onMount(() => {
+		const props = {
+			latLng,
+			options,
+			...restProps
+		};
 		circle = new Circle(latLng, options);
-		compare = new Compare(circle, $$props);
+		bindEvents(circle, restProps);
+		compare = new Compare(circle, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (circle) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (circle) {
+				const props = {
+					latLng,
+					options,
+					...restProps
+				};
 
-			if (layer) {
-				layer.addLayer(circle);
-			} else {
-				map.addLayer(circle);
+				compare?.updateProps(props);
+
+				if (layer) {
+					layer.addLayer(circle);
+				} else {
+					map.addLayer(circle);
+				}
+
+				compare?.storeProps(props);
 			}
-			
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		circle?.remove();
@@ -56,5 +84,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}

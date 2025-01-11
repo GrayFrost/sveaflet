@@ -6,29 +6,38 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let json: GeoJsonObject | null = null;
-	export let options: GeoJSONOptions | null = null;
-	export let instance: GeoJSON | undefined = undefined;
+	type Props = {
+		json?: GeoJsonObject | null;
+		options?: GeoJSONOptions | null;
+		instance?: GeoJSON;
+	} & { [key: string]: unknown };
+
+	let { json = null, options = null, instance = $bindable() }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
 	// data
-	let geoJSON: GeoJSON | undefined;
+	let geoJSON: GeoJSON | undefined = $state();
+
+	let map = $derived(getMap?.());
+
+	$effect(() => {
+		instance = geoJSON;
+	});
 
 	onMount(() => {
 		geoJSON = new GeoJSON(json, options);
 	});
 
-	$: map = getMap?.();
-	$: instance = geoJSON;
-
-	$: if (map) {
-		if (geoJSON) {
-			map.addLayer(geoJSON);
+	$effect(() => {
+		if (map) {
+			if (geoJSON) {
+				map.addLayer(geoJSON);
+			}
 		}
-	}
+	});
 
 	function reset() {
 		geoJSON?.remove();

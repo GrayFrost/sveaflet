@@ -45,7 +45,7 @@ A component for drawing polyline overlays on a map. Extends [Path](https://leafl
 	import { Map, TileLayer, Polyline } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let color = 'red';
+	let color = $state('red');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

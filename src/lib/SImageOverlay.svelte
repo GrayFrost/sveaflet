@@ -6,41 +6,62 @@
 	import { Compare } from './utils/index';
 
 	// props
-	export let url: string;
-	export let bounds: LatLngBounds;
-	export let options: ImageOverlayOptions = {};
-	export let instance: ImageOverlay | undefined = undefined;
+	type Props = {
+		url: string;
+		bounds: LatLngBounds;
+		options?: ImageOverlayOptions;
+		instance?: ImageOverlay;
+	} & { [key: string]: unknown };
+
+	let { url, bounds, options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let imageOverlay: ImageOverlay | undefined;
-	let compare: Compare;
+	let imageOverlay: ImageOverlay | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = imageOverlay;
+	let map = $derived(getMap?.());
+	let layer = $derived(getLayer?.());
 
-	onMount(() => {
-		imageOverlay = new ImageOverlay(url, bounds, options);
-		compare = new Compare(imageOverlay, $$props);
+	$effect(() => {
+		instance = imageOverlay;
 	});
 
-	$: if (map) {
-		if (imageOverlay) {
-			compare.updateProps($$props);
+	onMount(() => {
+		const props = {
+			url,
+			bounds,
+			options,
+			...restProps
+		};
+		imageOverlay = new ImageOverlay(url, bounds, options);
+		compare = new Compare(imageOverlay, props);
+	});
 
-			if (layer) {
-				layer.addLayer(imageOverlay);
-			} else {
-				map.addLayer(imageOverlay);
+	$effect(() => {
+		if (map) {
+			if (imageOverlay) {
+				const props = {
+					url,
+					bounds,
+					options,
+					...restProps
+				};
+				compare?.updateProps(props);
+
+				if (layer) {
+					layer.addLayer(imageOverlay);
+				} else {
+					map.addLayer(imageOverlay);
+				}
+
+				compare?.storeProps(props);
 			}
-			
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		imageOverlay?.remove();

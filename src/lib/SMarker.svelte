@@ -1,50 +1,77 @@
 <script lang="ts">
-	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { onMount, onDestroy, setContext, getContext, type Snippet } from 'svelte';
 	import { Map, Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
-	export let latLng: LatLngExpression;
-	export let options: MarkerOptions = {
-		icon: new Icon.Default()
-	};
-	export let instance: Marker | undefined = undefined;
+	type Props = {
+		latLng: LatLngExpression;
+		options?: MarkerOptions;
+		instance?: Marker;
+		children?: Snippet;
+	} & { [key: string]: unknown };
+
+	let {
+		latLng,
+		options = {
+			icon: new Icon.Default()
+		},
+		instance = $bindable(),
+		children,
+		...restProps
+	}: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let marker: Marker | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
+	let marker: Marker | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = marker;
+	let map = $derived(getMap?.());
+	let layer = $derived(getLayer?.());
+
+	$effect(() => {
+		instance = marker;
+	});
 
 	onMount(() => {
+		const props = {
+			latLng,
+			options,
+			...restProps
+		};
 		marker = new Marker(latLng, options);
-		compare = new Compare(marker, $$props);
+		bindEvents(marker, restProps);
+		compare = new Compare(marker, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (marker) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (marker) {
+				const props = {
+					latLng,
+					options,
+					...restProps
+				};
 
-			if (layer) {
-				layer.addLayer(marker);
-			} else {
-				map.addLayer(marker);
+				compare?.updateProps(props);
+
+				if (layer) {
+					layer.addLayer(marker);
+				} else {
+					map.addLayer(marker);
+				}
+
+				compare?.storeProps(props);
 			}
-			
-			compare.storeProps($$props)
 		}
-	}
-
+	});
 
 	function reset() {
 		marker?.remove();
@@ -59,5 +86,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}

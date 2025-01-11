@@ -6,32 +6,49 @@
 	import { Compare } from './utils/index';
 
 	// props
-	export let options: Control.AttributionOptions = {};
-	export let instance: Control.Attribution | undefined = undefined;
+	type Props = {
+		options?: Control.AttributionOptions;
+		instance?: Control.Attribution;
+	} & { [key: string]: unknown };
+
+	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
 	// data
-	let attribution: Control.Attribution | undefined;
-	let compare: Compare;
+	let attribution: Control.Attribution | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: instance = attribution;
+	let map: Map | undefined = $derived(getMap?.());
 
-	onMount(() => {
-		attribution = control.attribution(options);
-		compare = new Compare(attribution, $$props);
+	$effect(() => {
+		instance = attribution;
 	});
 
-	$: if (map) {
-		if (attribution) {
-			compare.updateProps($$props);
-			map.addControl(attribution);
-			compare.storeProps($$props);
+	onMount(() => {
+		const props = {
+			options,
+			...restProps
+		};
+		attribution = control.attribution(options);
+		compare = new Compare(attribution, props);
+	});
+
+	$effect(() => {
+		if (map) {
+			if (attribution) {
+				const props = {
+					options,
+					...restProps
+				};
+				compare?.updateProps(props);
+				map.addControl(attribution);
+				compare?.storeProps(props);
+			}
 		}
-	}
+	});
 
 	function reset() {
 		attribution?.remove();

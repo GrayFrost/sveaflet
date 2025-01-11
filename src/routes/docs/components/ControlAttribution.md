@@ -45,7 +45,7 @@ The attribution control allows you to display attribution data in a small text b
 	import { Map, TileLayer, ControlAttribution } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let prefix = 'Sveaflet';
+	let prefix = $state('Sveaflet');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

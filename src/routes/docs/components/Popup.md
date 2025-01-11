@@ -61,7 +61,7 @@ Used to open popups in certain places of the map.
 	import { Map, TileLayer, Popup } from 'sveaflet';
 	import { Radio, Label, Input } from 'flowbite-svelte';
 
-	let content = 'Popup content.';
+	let content = $state('Popup content.');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

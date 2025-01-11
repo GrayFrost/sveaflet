@@ -1,47 +1,69 @@
 <script lang="ts">
-	import { onMount, onDestroy, setContext, getContext } from 'svelte';
+	import { onMount, onDestroy, setContext, getContext, type Snippet } from 'svelte';
 	import { Polyline, Map } from 'leaflet';
-	import type { LatLngExpression, PolylineOptions } from 'leaflet';
+	import type { LatLngExpression, PolylineOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, bindEvents } from './utils/index';
 
 	// props
-	export let latLngs: LatLngExpression[];
-	export let options: PolylineOptions = {};
-	export let instance: Polyline | undefined = undefined;
+	type Props = {
+		latLngs: LatLngExpression[];
+		options?: PolylineOptions;
+		instance?: Polyline;
+		children?: Snippet;
+	} & { [key: string]: unknown };
+
+	let { latLngs, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let polyline: Polyline | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
+	let polyline: Polyline | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = polyline;
+	let map: Map | undefined = $derived(getMap?.());
+	let layer: LayerGroup | undefined = $derived(getLayer?.());
+
+	$effect(() => {
+		instance = polyline;
+	});
 
 	onMount(() => {
+		const props = {
+			latLngs,
+			options,
+			...restProps,
+		};
 		polyline = new Polyline(latLngs, options);
-		compare = new Compare(polyline, $$props);
+		bindEvents(polyline, restProps);
+		compare = new Compare(polyline, props);
 		ready = true;
 	});
 
-	$: if (map) {
-		if (polyline) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (polyline) {
+				const props = {
+					latLngs,
+					options,
+					...restProps
+				};
+				
+				compare?.updateProps(props);
 
-			if (layer) {
-				layer.addLayer(polyline);
-			} else {
-				map.addLayer(polyline);
+				if (layer) {
+					layer.addLayer(polyline);
+				} else {
+					map.addLayer(polyline);
+				}
+
+				compare?.storeProps(props);
 			}
-			
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		polyline?.remove();
@@ -56,5 +78,5 @@
 </script>
 
 {#if ready}
-	<slot />
+	{@render children?.()}
 {/if}

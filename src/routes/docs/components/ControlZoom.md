@@ -40,7 +40,7 @@ A basic zoom control with two buttons (zoom in and zoom out). It is put on the m
 	import { Map, TileLayer, ControlZoom } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let position = 'topright';
+	let position = $state('topright');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

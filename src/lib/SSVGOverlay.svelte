@@ -1,28 +1,39 @@
 <script lang="ts">
-	import { onDestroy, onMount, setContext, getContext } from 'svelte';
+	import { onDestroy, onMount, setContext, getContext, type Snippet } from 'svelte';
 	import { Map, SVGOverlay } from 'leaflet';
-	import type { LatLngBounds, ImageOverlayOptions, SVGOverlayStyleOptions } from 'leaflet';
+	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
+	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
 	import { Compare } from './utils/index';
 
 	// props
-	export let bounds: LatLngBounds;
-	export let options: ImageOverlayOptions = {};
-	export let instance: SVGOverlay | undefined = undefined;
+	type Props = {
+		bounds: LatLngBounds;
+		options?: ImageOverlayOptions;
+		instance?: SVGOverlay;
+		children?: Snippet;
+	} & HTMLAttributes<SVGElement> & { [key: string]: unknown };
+
+	let { bounds, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
-	let svgOverlay: SVGOverlay | undefined;
-	let svgElement: SVGElement | undefined;
-	let ready = false;
-	let compare: Compare;
+	let ready = $state(false);
+	let svgOverlay: SVGOverlay | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: layer = getLayer?.();
-	$: instance = svgOverlay;
+	let map = $derived(getMap?.());
+	let layer = $derived(getLayer?.());
+
+	// refs
+	let svgElement: SVGElement | undefined = $state();
+
+	$effect(() => {
+		instance = svgOverlay;
+	});
 
 	onMount(() => {
 		if (svgElement) {
@@ -34,19 +45,26 @@
 		ready = true;
 	});
 
-	$: if (map) {
-		if (svgOverlay) {
-			compare.updateProps($$props);
+	$effect(() => {
+		if (map) {
+			if (svgOverlay) {
+				const props = {
+					bounds,
+					options,
+					...restProps
+				};
+				compare?.updateProps(props);
 
-			if (layer) {
-				layer.addLayer(svgOverlay);
-			} else {
-				map.addLayer(svgOverlay);
+				if (layer) {
+					layer.addLayer(svgOverlay);
+				} else {
+					map.addLayer(svgOverlay);
+				}
+
+				compare?.storeProps(props);
 			}
-
-			compare.storeProps($$props);
 		}
-	}
+	});
 
 	function reset() {
 		svgOverlay?.remove();
@@ -60,8 +78,8 @@
 	setContext(Map, { ...parentContext, getOverlay: () => svgOverlay });
 </script>
 
-<svg bind:this={svgElement} xmlns="http://www.w3.org/2000/svg" {...$$restProps}>
+<svg bind:this={svgElement} xmlns="http://www.w3.org/2000/svg" {...restProps}>
 	{#if ready}
-		<slot />
+		{@render children?.()}
 	{/if}
 </svg>

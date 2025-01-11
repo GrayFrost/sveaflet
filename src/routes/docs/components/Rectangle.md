@@ -44,7 +44,7 @@ A component for drawing rectangle overlays on a map. Extends [Polygon](https://l
 	import { Map, TileLayer, Rectangle } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let color = 'red';
+	let color = $state('red');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

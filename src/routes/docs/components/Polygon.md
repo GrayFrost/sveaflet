@@ -47,7 +47,7 @@ Note that points you pass when creating a polygon shouldn't have an additional l
 	import { Map, TileLayer, Polygon } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let color = 'red';
+	let color = $state('red');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

@@ -45,7 +45,7 @@ Used to load and display a single image over specific bounds of the map. Extends
 	import { Map, TileLayer, ImageOverlay } from 'sveaflet';
 	import { Label, Toggle } from 'flowbite-svelte';
 
-	let enableOpacity = true;
+	let enableOpacity = $state(true);
 </script>
 
 <div class="flex items-center gap-4 mb-4">

@@ -48,7 +48,7 @@ L.Control is a base class for implementing map controls. Handles positioning. Al
 	import { Map, TileLayer, Control } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let position = 'topright';
+	let position = $state('topright');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

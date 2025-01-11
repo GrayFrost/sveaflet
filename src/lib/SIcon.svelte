@@ -5,33 +5,42 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	export let options: IconOptions = { iconUrl: '' };
-	export let instance: Icon | undefined = undefined;
+	type Props = {
+		options?: IconOptions;
+		instance?: Icon;
+	} & { [key: string]: unknown };
+
+	let { options = { iconUrl: '' }, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
 
 	// data
-	let icon: Icon | undefined;
+	let icon: Icon | undefined = $state();
+
+	let map = $derived(getMap?.());
+	let layer = $derived(getOverlay?.());
+
+	$effect(() => {
+		instance = icon;
+	});
 
 	onMount(() => {
 		icon = new Icon(options);
 	});
 
-	$: map = getMap?.();
-	$: layer = getOverlay?.();
-	$: instance = icon;
-
-	$: if (map) {
-		if (icon) {
-			if (layer && layer instanceof Marker) {
-				layer.setIcon(icon);
-			} else {
-				console.warn('Icon should bind Marker.');
+	$effect(() => {
+		if (map) {
+			if (icon) {
+				if (layer && layer instanceof Marker) {
+					layer.setIcon(icon);
+				} else {
+					console.warn('Icon should bind Marker.');
+				}
 			}
 		}
-	}
+	});
 
 	function reset() {
 		icon?.remove?.();

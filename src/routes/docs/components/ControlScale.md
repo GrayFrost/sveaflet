@@ -40,7 +40,7 @@ A simple scale control that shows the scale of the current center of screen in m
 	import { Map, TileLayer, ControlScale } from 'sveaflet';
 	import { Radio } from 'flowbite-svelte';
 
-	let position = 'topright';
+	let position = $state('topright');
 </script>
 
 <div class="flex items-center gap-4 mb-4">

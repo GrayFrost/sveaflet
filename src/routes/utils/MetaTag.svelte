@@ -1,10 +1,19 @@
 <script lang="ts">
   import { MetaTags } from 'svelte-meta-tags';
-  export let breadcrumb_title: string = '';
-  export let description: string = '';
-  export let title: string = '';
  
-  export let dir: string = '';
+  interface Props {
+    breadcrumb_title?: string;
+    description?: string;
+    title?: string;
+    dir?: string;
+  }
+
+  let {
+    breadcrumb_title = '',
+    description = '',
+    title = '',
+    dir = ''
+  }: Props = $props();
   let dirstring = dir.toLowerCase();
   let breadcrumb = breadcrumb_title.toLowerCase().replaceAll(' ', '-');
 </script>

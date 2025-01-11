@@ -10,11 +10,13 @@
 	import Footer from './utils/Footer.svelte';
 
 	let logo = '/images/sveaflet.png';
-	let marker: MarkerType;
+	let marker: MarkerType | undefined = $state();
 
-	$: if (marker) {
-		marker.openPopup();
-	}
+	$effect(() => {
+		if (marker) {
+			marker.openPopup();
+		}
+	});
 
 	let title = 'Sveaflet - Leaflet Component Library';
 	let description =

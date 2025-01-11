@@ -6,32 +6,51 @@
 	import { Compare } from './utils/index';
 
 	// props
-	export let options: Control.ZoomOptions = {};
-	export let instance: Control.Zoom | undefined = undefined;
+	type Props = {
+		options?: Control.ZoomOptions;
+		instance?: Control.Zoom;
+	} & { [key: string]: unknown };
+
+	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
 	// data
-	let zoom: Control.Zoom | undefined;
-	let compare: Compare;
+	let zoom: Control.Zoom | undefined = $state();
+	let compare: Compare | undefined = $state.raw();
 
-	$: map = getMap?.();
-	$: instance = zoom;
+	let map: Map | undefined = $derived(getMap?.());
 
-	onMount(() => {
-		zoom = control.zoom(options);
-		compare = new Compare(zoom, $$props);
+	$effect(() => {
+		instance = zoom;
 	});
 
-	$: if (map) {
-		if (zoom) {
-			compare.updateProps($$props);
-			map.addControl(zoom);
-			compare.storeProps($$props);
+	onMount(() => {
+		const props = {
+			options,
+			...restProps
+		};
+
+		zoom = control.zoom(options);
+		compare = new Compare(zoom, props);
+	});
+
+	$effect(() => {
+		if (map) {
+			if (zoom) {
+				const props = {
+					options,
+					...restProps
+				};
+
+				compare?.updateProps(props);
+				map.addControl(zoom);
+				compare?.storeProps(props);
+			}
 		}
-	}
+	});
 
 	function reset() {
 		zoom?.remove();
