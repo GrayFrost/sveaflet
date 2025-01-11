@@ -129,6 +129,6 @@
     "geojson": "^0.5.0",
     "mdsvexamples": "^0.5.0",
     "nprogress": "^0.2.0",
-    "svelte-meta-tags": "^3.1.2"
+    "svelte-meta-tags": "^4.1.0"
   }
 }
