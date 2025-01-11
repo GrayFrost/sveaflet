@@ -11,7 +11,7 @@
 		options: ControlOptions;
 		instance?: Control;
 		children?: Snippet;
-	} & HTMLAttributes<HTMLDivElement>;
+	} & HTMLAttributes<HTMLDivElement> & { [key: string]: unknown };
 
 	let {
 		options = { position: 'topright' },

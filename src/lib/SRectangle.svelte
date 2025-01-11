@@ -11,7 +11,7 @@
 		options?: PolylineOptions;
 		instance?: Rectangle;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let { bounds, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 

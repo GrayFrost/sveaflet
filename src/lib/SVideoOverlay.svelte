@@ -14,7 +14,7 @@
 		options?: VideoOverlayOptions;
 		instance?: VideoOverlay;
 		children?: Snippet;
-	} & HTMLAttributes<HTMLVideoElement>;
+	} & HTMLAttributes<HTMLVideoElement> & { [key: string]: unknown };
 
 	let {
 		url = '',

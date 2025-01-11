@@ -11,7 +11,7 @@
 		options?: CircleMarkerOptions;
 		instance?: CircleMarker;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let {
 		latLng,

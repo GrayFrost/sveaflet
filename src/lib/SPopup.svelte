@@ -11,7 +11,7 @@
 		options?: PopupOptions;
 		instance?: Popup;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let { latLng, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 

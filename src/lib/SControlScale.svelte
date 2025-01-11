@@ -9,7 +9,7 @@
 	type Props = {
 		options?: Control.ScaleOptions;
 		instance?: Control.Scale;
-	};
+	} & { [key: string]: unknown };
 
 	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 

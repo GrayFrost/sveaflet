@@ -13,7 +13,7 @@
 		checked?: boolean;
 		instance?: TileLayer;
 		layerType?: 'base' | 'overlay';
-	};
+	} & { [key: string]: unknown };
 
 	let {
 		url,

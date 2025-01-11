@@ -11,7 +11,7 @@
 		options?: MarkerOptions;
 		instance?: Marker;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let {
 		latLng,

@@ -11,7 +11,7 @@
 		options?: CircleOptions;
 		instance?: Circle;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let {
 		latLng,

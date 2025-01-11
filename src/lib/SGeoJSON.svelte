@@ -6,11 +6,11 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	interface Props {
+	type Props = {
 		json?: GeoJsonObject | null;
 		options?: GeoJSONOptions | null;
 		instance?: GeoJSON;
-	}
+	} & { [key: string]: unknown };
 
 	let { json = null, options = null, instance = $bindable() }: Props = $props();
 

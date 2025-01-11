@@ -6,14 +6,14 @@
 	import { setControlLayer, bindEvents } from './utils/index';
 
 	// props
-	interface Props {
+	type Props = {
 		options?: LayerOptions;
 		name?: string;
 		checked?: boolean; // todo update should removelayer?
 		instance?: LayerGroup;
 		layerType?: 'base' | 'overlay';
 		children?: Snippet;
-	}
+	} & { [key: string]: unknown };
 
 	let {
 		options = {},

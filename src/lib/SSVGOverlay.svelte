@@ -12,7 +12,7 @@
 		options?: ImageOverlayOptions;
 		instance?: SVGOverlay;
 		children?: Snippet;
-	} & HTMLAttributes<SVGElement>;
+	} & HTMLAttributes<SVGElement> & { [key: string]: unknown };
 
 	let { bounds, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 

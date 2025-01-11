@@ -10,7 +10,7 @@
 		options?: Control.LayersOptions;
 		instance?: Control.Layers;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let { options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 

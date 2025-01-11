@@ -6,12 +6,12 @@
 	import { Compare } from './utils/index';
 
 	// props
-	interface Props {
+	type Props = {
 		url: string;
 		bounds: LatLngBounds;
 		options?: ImageOverlayOptions;
 		instance?: ImageOverlay;
-	}
+	} & { [key: string]: unknown };
 
 	let { url, bounds, options = {}, instance = $bindable(), ...restProps }: Props = $props();
 

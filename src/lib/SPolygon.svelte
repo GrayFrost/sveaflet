@@ -11,7 +11,7 @@
 		options?: PolylineOptions;
 		instance?: Polygon;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let { latLngs, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 

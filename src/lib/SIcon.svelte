@@ -5,10 +5,10 @@
 	import type { LeafletContextInterface } from './types';
 
 	// props
-	interface Props {
+	type Props = {
 		options?: IconOptions;
 		instance?: Icon;
-	}
+	} & { [key: string]: unknown };
 
 	let { options = { iconUrl: '' }, instance = $bindable(), ...restProps }: Props = $props();
 

@@ -11,7 +11,7 @@
 		options?: DivIconOptions;
 		instance?: DivIcon;
 		children?: Snippet;
-	} & HTMLAttributes<HTMLDivElement>;
+	} & HTMLAttributes<HTMLDivElement> & { [key: string]: unknown };
 
 	let { options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 

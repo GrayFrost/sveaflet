@@ -22,7 +22,7 @@
 		options: MapOptions;
 		instance?: Map;
 		children?: Snippet;
-	};
+	} & { [key: string]: unknown };
 
 	let { options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
