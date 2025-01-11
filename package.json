@@ -103,7 +103,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^24.1.1",
     "mdsvex": "^0.11.0",
-    "mdsvexamples": "^0.4.1",
     "nprogress": "^0.2.0",
     "postcss": "^8.4.38",
     "prettier": "^3.1.1",
@@ -129,7 +128,7 @@
     "@docsearch/css": "^3.6.1",
     "@docsearch/js": "^3.6.1",
     "geojson": "^0.5.0",
-    "mdsvexamples": "^0.4.1",
+    "mdsvexamples": "^0.5.0",
     "nprogress": "^0.2.0"
   }
 }
