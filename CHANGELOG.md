@@ -1,4 +1,6 @@
 Change Log | 变更日志
+### [0.1.1](https://github.com/GrayFrost/sveaflet/compare/v0.1.0...v0.1.1) (2025-01-13)
+
 ## [0.1.0](https://github.com/GrayFrost/sveaflet/compare/v0.0.11...v0.1.0) (2025-01-11)
 
 
