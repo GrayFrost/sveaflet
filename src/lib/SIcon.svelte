@@ -3,6 +3,7 @@
 	import { Map, Icon, Marker } from 'leaflet';
 	import type { IconOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
+	import { EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -18,6 +19,7 @@
 
 	// data
 	let icon: Icon | undefined = $state();
+	let eventBridge: EventBridge<Icon> | undefined;
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getOverlay?.());
@@ -28,6 +30,8 @@
 
 	onMount(() => {
 		icon = new Icon(options);
+		eventBridge = new EventBridge(icon);
+		eventBridge.addEvents(restProps);
 	});
 
 	$effect(() => {
@@ -43,6 +47,7 @@
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		icon?.remove?.();
 		icon = undefined;
 	}

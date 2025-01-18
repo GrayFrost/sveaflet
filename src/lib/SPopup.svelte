@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onMount, onDestroy, getContext, type Snippet } from 'svelte';
-	import { bind, Map, Popup } from 'leaflet';
+	import { Map, Popup } from 'leaflet';
 	import type { LatLngExpression, PopupOptions, Layer, Marker } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare, bindEvents } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -15,6 +15,12 @@
 
 	let { latLng, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		latLng,
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getOverlay } = parentContext;
@@ -22,7 +28,8 @@
 	// data
 	let ready = $state(false);
 	let popup: Popup | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<Popup> | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 	let layer: Layer | Marker | undefined = $derived(getOverlay?.());
@@ -52,27 +59,17 @@
 		} else {
 			throw new Error('Prop latLng is required.');
 		}
-		bindEvents(popup, restProps);
 
-		const props = {
-			latLng,
-			options,
-			...restProps
-		};
-
-		compare = new Compare(popup, { ...props, options: mergeOptions });
+		eventBridge = new EventBridge(popup);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(popup, { ...latestProps, options: mergeOptions });
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (popup) {
-				const props = {
-					latLng,
-					options,
-					...restProps
-				};
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (!layer) {
 					popup.openOn(map);
@@ -81,12 +78,13 @@
 					layer.bindPopup(popupContent);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		popup?.remove();
 		popup = undefined;
 	}

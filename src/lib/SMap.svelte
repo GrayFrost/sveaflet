@@ -7,7 +7,7 @@
 	import markerIcon from 'leaflet/dist/images/marker-icon.png';
 	import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 	import type { LeafletContextInterface } from './types';
-	import { Compare, bindEvents } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// @ts-ignore
 	delete Icon.Default.prototype._getIconUrl;
@@ -28,7 +28,8 @@
 
 	// state
 	let map: Map | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<Map> | undefined
 
 	// refs
 	let mapContainer: HTMLElement;
@@ -37,29 +38,27 @@
 		instance = map;
 	});
 
+	let latestProps = $derived.by(() => ({
+		options,
+		...restProps
+	}))
+
 	onMount(() => {
-		const props = {
-			options,
-			...restProps
-		};
 		map = new Map(mapContainer, options);
-		bindEvents(map, restProps);
-		compare = new Compare(map, props);
+		eventBridge = new EventBridge(map);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(map, latestProps);
 	});
 
 	$effect(() => {
 		if (map) {
-			const props = {
-				options,
-				...restProps
-			};
-
-			compare?.updateProps(props);
-			compare?.storeProps(props);
+			compare?.updateProps(latestProps);
+			compare?.storeProps(latestProps);
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		map?.remove();
 		map = undefined;
 	}

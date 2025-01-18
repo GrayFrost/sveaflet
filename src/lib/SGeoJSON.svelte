@@ -4,6 +4,7 @@
 	import type { GeoJSONOptions } from 'leaflet';
 	import type { GeoJsonObject } from 'geojson';
 	import type { LeafletContextInterface } from './types';
+	import { EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -12,7 +13,7 @@
 		instance?: GeoJSON;
 	} & { [key: string]: unknown };
 
-	let { json = null, options = null, instance = $bindable() }: Props = $props();
+	let { json = null, options = null, instance = $bindable(), ...restProps }: Props = $props();
 
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
@@ -20,6 +21,7 @@
 
 	// data
 	let geoJSON: GeoJSON | undefined = $state();
+	let eventBridge: EventBridge<GeoJSON> | undefined;
 
 	let map = $derived(getMap?.());
 
@@ -29,6 +31,8 @@
 
 	onMount(() => {
 		geoJSON = new GeoJSON(json, options);
+		eventBridge = new EventBridge(geoJSON);
+		eventBridge.addEvents(restProps);
 	});
 
 	$effect(() => {
@@ -40,6 +44,7 @@
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		geoJSON?.remove();
 		geoJSON = undefined;
 	}

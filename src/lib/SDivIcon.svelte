@@ -4,7 +4,7 @@
 	import type { DivIconOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
-	import { bindEvents } from './utils/index';
+	import { EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -22,6 +22,7 @@
 	// data
 	let ready = $state(false);
 	let divIcon: DivIcon | undefined = $state();
+	let eventBridge: EventBridge<DivIcon> | undefined;
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getOverlay?.());
@@ -45,7 +46,8 @@
 			};
 		}
 		divIcon = new DivIcon(mergeOptions);
-		bindEvents(divIcon, restProps);
+		eventBridge = new EventBridge(divIcon);
+		eventBridge.addEvents(restProps);
 		ready = true;
 	});
 
@@ -62,6 +64,7 @@
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		divIcon?.remove?.();
 		divIcon = undefined;
 	}

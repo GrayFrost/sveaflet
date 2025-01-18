@@ -3,7 +3,7 @@
 	import { Map, LayerGroup } from 'leaflet';
 	import type { LayerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { setControlLayer, bindEvents } from './utils/index';
+	import { setControlLayer, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -32,13 +32,15 @@
 	// data
 	let ready = $state(false);
 	let layerGroup: LayerGroup | undefined = $state();
+	let eventBridge: EventBridge<LayerGroup> | undefined;
 
 	let map = $derived(getMap?.());
 	let controlLayers = $derived(getControl?.());
 
 	onMount(() => {
 		layerGroup = new LayerGroup([], options);
-		bindEvents(layerGroup, restProps);
+		eventBridge = new EventBridge(layerGroup);
+		eventBridge.addEvents(restProps);
 		ready = true;
 	});
 
@@ -71,6 +73,7 @@
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		layerGroup?.remove();
 		layerGroup = undefined;
 	}

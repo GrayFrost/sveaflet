@@ -4,7 +4,7 @@
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -16,6 +16,12 @@
 
 	let { bounds, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		bounds,
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
@@ -24,6 +30,7 @@
 	let ready = $state(false);
 	let svgOverlay: SVGOverlay | undefined = $state();
 	let compare: Compare | undefined = $state.raw();
+	let eventBridge: EventBridge<SVGOverlay> | undefined;
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
@@ -41,19 +48,16 @@
 		} else {
 			throw new Error('SVG Element Required!');
 		}
-		compare = new Compare(svgOverlay, options);
+		eventBridge = new EventBridge(svgOverlay);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(svgOverlay, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (svgOverlay) {
-				const props = {
-					bounds,
-					options,
-					...restProps
-				};
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (layer) {
 					layer.addLayer(svgOverlay);
@@ -61,12 +65,13 @@
 					map.addLayer(svgOverlay);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		svgOverlay?.remove();
 		svgOverlay = undefined;
 	}

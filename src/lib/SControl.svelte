@@ -4,7 +4,7 @@
 	import type { ControlOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
-	import { Compare, bindEvents } from './utils/index';
+	import { Compare } from './utils/index';
 
 	// props
 	type Props = {
@@ -20,6 +20,11 @@
 		...restProps
 	}: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
@@ -27,7 +32,7 @@
 	// data
 	let ready = $state(false);
 	let control: Control | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 
@@ -53,22 +58,17 @@
 		};
 
 		control = new CustomControl(options);
-		bindEvents(control, restProps);
-		compare = new Compare(control, props);
+
+		compare = new Compare(control, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (control) {
-				const props = {
-					options,
-					...restProps
-				};
-
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 				map.addControl(control);
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});

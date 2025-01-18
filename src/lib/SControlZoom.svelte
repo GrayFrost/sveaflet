@@ -13,13 +13,18 @@
 
 	let { options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
 
 	// data
 	let zoom: Control.Zoom | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 
@@ -28,26 +33,16 @@
 	});
 
 	onMount(() => {
-		const props = {
-			options,
-			...restProps
-		};
-
 		zoom = control.zoom(options);
-		compare = new Compare(zoom, props);
+		compare = new Compare(zoom, latestProps);
 	});
 
 	$effect(() => {
 		if (map) {
 			if (zoom) {
-				const props = {
-					options,
-					...restProps
-				};
-
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 				map.addControl(zoom);
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});

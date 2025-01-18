@@ -4,7 +4,7 @@
 	import type { LatLngBounds, VideoOverlayOptions } from 'leaflet';
 	import type { HTMLAttributes } from 'svelte/elements';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -24,6 +24,13 @@
 		...restProps
 	}: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		url,
+		bounds,
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
@@ -31,7 +38,8 @@
 	// data
 	let ready = $state(false);
 	let videoOverlay: VideoOverlay | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<VideoOverlay> | undefined;
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
@@ -44,28 +52,18 @@
 	});
 
 	onMount(() => {
-		const props = {
-			url,
-			bounds,
-			options,
-			...restProps,
-		};
 		let mergeVideo = htmlVideoElement || url;
 		videoOverlay = new VideoOverlay(mergeVideo, bounds, options);
-		compare = new Compare(videoOverlay, props);
+		eventBridge = new EventBridge(videoOverlay);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(videoOverlay, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (videoOverlay) {
-				const props = {
-					url,
-					bounds,
-					options,
-					...restProps,
-				};
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (layer) {
 					layer.addLayer(videoOverlay);
@@ -73,12 +71,13 @@
 					map.addLayer(videoOverlay);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		videoOverlay?.remove();
 		videoOverlay = undefined;
 	}

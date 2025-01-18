@@ -3,7 +3,7 @@
 	import { Map, ImageOverlay } from 'leaflet';
 	import type { LatLngBounds, ImageOverlayOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -15,13 +15,21 @@
 
 	let { url, bounds, options = {}, instance = $bindable(), ...restProps }: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		url,
+		bounds,
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
 
 	// data
 	let imageOverlay: ImageOverlay | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<ImageOverlay> | undefined;
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
@@ -31,26 +39,16 @@
 	});
 
 	onMount(() => {
-		const props = {
-			url,
-			bounds,
-			options,
-			...restProps
-		};
 		imageOverlay = new ImageOverlay(url, bounds, options);
-		compare = new Compare(imageOverlay, props);
+		eventBridge = new EventBridge(imageOverlay);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(imageOverlay, latestProps);
 	});
 
 	$effect(() => {
 		if (map) {
 			if (imageOverlay) {
-				const props = {
-					url,
-					bounds,
-					options,
-					...restProps
-				};
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (layer) {
 					layer.addLayer(imageOverlay);
@@ -58,12 +56,13 @@
 					map.addLayer(imageOverlay);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		imageOverlay?.remove();
 		imageOverlay = undefined;
 	}
