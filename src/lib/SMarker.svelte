@@ -3,7 +3,7 @@
 	import { Map, Marker, Icon } from 'leaflet';
 	import type { LatLngExpression, MarkerOptions } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare, bindEvents } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -30,37 +30,34 @@
 	// data
 	let ready = $state(false);
 	let marker: Marker | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<Marker> | undefined;
 
 	let map = $derived(getMap?.());
 	let layer = $derived(getLayer?.());
+
+	let latestProps = $derived.by(() => ({
+		latLng,
+		options,
+		...restProps
+	}));
 
 	$effect(() => {
 		instance = marker;
 	});
 
 	onMount(() => {
-		const props = {
-			latLng,
-			options,
-			...restProps
-		};
 		marker = new Marker(latLng, options);
-		bindEvents(marker, restProps);
-		compare = new Compare(marker, props);
+		eventBridge = new EventBridge(marker);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(marker, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (marker) {
-				const props = {
-					latLng,
-					options,
-					...restProps
-				};
-
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (layer) {
 					layer.addLayer(marker);
@@ -68,12 +65,13 @@
 					map.addLayer(marker);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		marker?.remove();
 		marker = undefined;
 	}

@@ -3,7 +3,7 @@
 	import { CircleMarker, Map } from 'leaflet';
 	import type { LatLngExpression, CircleMarkerOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare, bindEvents } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -21,6 +21,12 @@
 		...restProps
 	}: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		latLng,
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
@@ -28,7 +34,8 @@
 	// data
 	let ready = $state(false);
 	let circleMarker: CircleMarker | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<CircleMarker> | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 	let layer: LayerGroup | undefined = $derived(getLayer?.());
@@ -38,28 +45,17 @@
 	});
 
 	onMount(() => {
-		const props = {
-			latLng,
-			options,
-			...restProps
-		};
-
 		circleMarker = new CircleMarker(latLng, options);
-		bindEvents(circleMarker, restProps);
-		compare = new Compare(circleMarker, props);
+		eventBridge = new EventBridge(circleMarker);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(circleMarker, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (circleMarker) {
-				const props = {
-					latLng,
-					options,
-					...restProps
-				};
-				
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (layer) {
 					layer.addLayer(circleMarker);
@@ -67,12 +63,13 @@
 					map.addLayer(circleMarker);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		circleMarker?.remove();
 		circleMarker = undefined;
 	}

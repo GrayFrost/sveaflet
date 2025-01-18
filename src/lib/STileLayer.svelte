@@ -3,7 +3,7 @@
 	import { Map, TileLayer } from 'leaflet';
 	import type { TileLayerOptions, Control } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { setControlLayer, Compare } from './utils/index';
+	import { setControlLayer, Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -25,13 +25,23 @@
 		...restProps
 	}: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		url,
+		options,
+		name,
+		checked,
+		layerType,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getControl } = parentContext;
 
 	// data
 	let tileLayer: TileLayer | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<TileLayer> | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 	let controlLayers: Control.Layers | undefined = $derived(getControl?.());
@@ -41,31 +51,16 @@
 	});
 
 	onMount(() => {
-		const props = {
-			url,
-			options,
-			name,
-			checked,
-			layerType,
-			...restProps
-		};
 		tileLayer = new TileLayer(url, options);
-		compare = new Compare(tileLayer, props);
+		eventBridge = new EventBridge(tileLayer);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(tileLayer, latestProps);
 	});
 
 	$effect(() => {
 		if (map) {
 			if (tileLayer) {
-				const props = {
-					url,
-					options,
-					name,
-					checked,
-					layerType,
-					...restProps
-				};
-
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (controlLayers) {
 					if (!name) {
@@ -86,12 +81,13 @@
 					map.addLayer(tileLayer);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		tileLayer?.remove();
 		tileLayer = undefined;
 	}

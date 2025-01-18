@@ -14,6 +14,11 @@
 
 	let { options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap } = parentContext;
@@ -21,7 +26,7 @@
 	// data
 	let ready = $state(false);
 	let controlLayers: Control.Layers | undefined = $state();
-	let compare: Compare | undefined = $state.raw();
+	let compare: Compare | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 
@@ -30,25 +35,17 @@
 	});
 
 	onMount(() => {
-		const props = {
-			options,
-			...restProps
-		};
 		controlLayers = control.layers(undefined, undefined, options);
-		compare = new Compare(controlLayers, props);
+		compare = new Compare(controlLayers, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (controlLayers) {
-				const props = {
-					options,
-					...restProps
-				};
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 				controlLayers.addTo(map);
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});

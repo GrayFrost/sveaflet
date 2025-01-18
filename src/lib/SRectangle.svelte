@@ -3,7 +3,7 @@
 	import { Rectangle, Map } from 'leaflet';
 	import type { LatLngBoundsExpression, PolylineOptions, LayerGroup } from 'leaflet';
 	import type { LeafletContextInterface } from './types';
-	import { Compare, bindEvents } from './utils/index';
+	import { Compare, EventBridge } from './utils/index';
 
 	// props
 	type Props = {
@@ -15,6 +15,12 @@
 
 	let { bounds, options = {}, instance = $bindable(), children, ...restProps }: Props = $props();
 
+	let latestProps = $derived.by(() => ({
+		bounds,
+		options,
+		...restProps
+	}));
+
 	// context
 	let parentContext = getContext<LeafletContextInterface>(Map);
 	const { getMap, getLayer } = parentContext;
@@ -22,7 +28,8 @@
 	// data
 	let ready = $state(false);
 	let rectangle: Rectangle | undefined = $state();
-	let compare: Compare | undefined = $state();
+	let compare: Compare | undefined;
+	let eventBridge: EventBridge<Rectangle> | undefined;
 
 	let map: Map | undefined = $derived(getMap?.());
 	let layer: LayerGroup | undefined = $derived(getLayer?.());
@@ -32,26 +39,17 @@
 	});
 
 	onMount(() => {
-		const props = {
-			bounds,
-			options,
-			...restProps
-		};
 		rectangle = new Rectangle(bounds, options);
-		bindEvents(rectangle, restProps);
-		compare = new Compare(rectangle, props);
+		eventBridge = new EventBridge(rectangle);
+		eventBridge.addEvents(restProps);
+		compare = new Compare(rectangle, latestProps);
 		ready = true;
 	});
 
 	$effect(() => {
 		if (map) {
 			if (rectangle) {
-				const props = {
-					bounds,
-					options,
-					...restProps
-				};
-				compare?.updateProps(props);
+				compare?.updateProps(latestProps);
 
 				if (layer) {
 					layer.addLayer(rectangle);
@@ -59,12 +57,13 @@
 					map.addLayer(rectangle);
 				}
 
-				compare?.storeProps(props);
+				compare?.storeProps(latestProps);
 			}
 		}
 	});
 
 	function reset() {
+		eventBridge?.removeEvents();
 		rectangle?.remove();
 		rectangle = undefined;
 	}
