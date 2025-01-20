@@ -1,4 +1,11 @@
 Change Log | 变更日志
+### [0.1.3](https://github.com/GrayFrost/sveaflet/compare/v0.1.2...v0.1.3) (2025-01-20)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* object update error [#25](https://github.com/GrayFrost/sveaflet/issues/25) ([c25e325](https://github.com/GrayFrost/sveaflet/commit/c25e3253538d784456a462f6590ae1167af6e658))
+
 ### [0.1.2](https://github.com/GrayFrost/sveaflet/compare/v0.1.1...v0.1.2) (2025-01-18)
 
 
