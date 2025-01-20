@@ -61,6 +61,9 @@ describe('utils/equal', () => {
 		test('{a: 1, b: 2} equals {b: 2, a: 1}', () => {
 			expect(isObjectEqual({ a: 1, b: 2 }, { b: 2, a: 1 })).toBeTruthy();
 		});
+		test('{lat: 50.01, lng: 12} not equals { lat: 50, lng: 12 }', () => {
+			expect(isObjectEqual({ lat: 50.01, lng: 12 }, { lat: 50, lng: 12 })).toBeFalsy();
+		});
 		// cursive object compare?
 	});
 

@@ -18,23 +18,32 @@ export function isArrayEqual<T>(prevArr: T[], curArr: T[]): boolean {
 	return curArr.every((element) => prevArr.includes(element));
 }
 
-export function isObjectEqual(
-	prevObj: Record<string, unknown>,
-	curObj: Record<string, unknown>
-): boolean {
-	const prevObjKeys = Object.keys(prevObj);
-	const curObjKeys = Object.keys(curObj);
-
-	if (prevObjKeys.length !== curObjKeys.length) {
+export function isObjectEqual(prevObj: any, curObj: any): boolean {
+	if (prevObj === curObj) {
+		return true;
+	}
+	// 检查两个对象是否为对象，并且不为 null
+	if (
+		typeof prevObj !== 'object' ||
+		prevObj === null ||
+		typeof curObj !== 'object' ||
+		curObj === null
+	) {
 		return false;
 	}
-
-	for (const key in curObjKeys) {
-		if (curObj[key] !== prevObj[key]) {
+	// 获取对象的键列表
+	const prevKeys = Object.keys(prevObj);
+	const curKeys = Object.keys(curObj);
+	// 检查键的数量是否相同
+	if (prevKeys.length !== curKeys.length) {
+		return false;
+	}
+	// 遍历键列表，比较键和键值是否相等
+	for (const key of prevKeys) {
+		if (!curKeys.includes(key) || !isObjectEqual(prevObj[key], curObj[key])) {
 			return false;
 		}
 	}
-
 	return true;
 }
 
