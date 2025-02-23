@@ -16,14 +16,14 @@ export class EventBridge<T extends Layer | Map> {
 				}
 			});
 
-			this.instance?.on(this.eventMap);
+			this.instance?.on?.(this.eventMap);
 		} catch (e) {
 			console.error('Bind event error:', e);
 		}
 	}
 	removeEvents() {
 		if (Object.keys(this.eventMap).length !== 0) {
-			this.instance?.off(this.eventMap);
+			this.instance?.off?.(this.eventMap);
 			this.eventMap = {};
 		}
 	}

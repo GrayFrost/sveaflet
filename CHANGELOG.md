@@ -1,4 +1,11 @@
 Change Log | 变更日志
+### [0.1.4](https://github.com/GrayFrost/sveaflet/compare/v0.1.3...v0.1.4) (2025-02-23)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* Fix bug, Icon bind event error [#30](https://github.com/GrayFrost/sveaflet/issues/30) ([eab7986](https://github.com/GrayFrost/sveaflet/commit/eab798658969ef17355e85eccc808f4481667cef))
+
 ### [0.1.3](https://github.com/GrayFrost/sveaflet/compare/v0.1.2...v0.1.3) (2025-01-20)
 
 
