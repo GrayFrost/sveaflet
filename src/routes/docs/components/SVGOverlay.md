@@ -34,6 +34,7 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 				[32, -130],
 				[13, -100]
 			]}
+			viewBox="0 0 200 200"
 		>
 			<rect width="200" height="200" />
 			<rect x="75" y="23" width="50" height="50" style="fill:red" />
@@ -66,6 +67,7 @@ An SVG overlay uses the [`<svg>`](https://developer.mozilla.org/docs/Web/SVG/Ele
 				[32, -130],
 				[13, -100]
 			]}
+			viewBox="0 0 200 200"
 			options={{
 				opacity: enableOpacity ? 0.5 : 1
 			}}
