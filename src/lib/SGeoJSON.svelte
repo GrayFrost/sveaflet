@@ -2,13 +2,14 @@
 	import { onMount, onDestroy, getContext, setContext } from 'svelte';
 	import { Map, GeoJSON } from 'leaflet';
 	import type { GeoJSONOptions } from 'leaflet';
-	import type { GeoJsonObject } from 'geojson';
 	import type { LeafletContextInterface } from './types';
 	import { EventBridge } from './utils/index';
 
+	type GeoJSONData = ConstructorParameters<typeof GeoJSON>[0];
+
 	// props
 	type Props = {
-		json?: GeoJsonObject | null;
+		json?: GeoJSONData;
 		options?: GeoJSONOptions | null;
 		instance?: GeoJSON;
 	} & { [key: string]: unknown };

@@ -1,4 +1,14 @@
 Change Log | 变更日志
+### [0.1.5](https://github.com/GrayFrost/sveaflet/compare/v0.1.4...v0.1.5) (2026-07-05)
+
+
+### 🐛 Bug Fixes | Bug 修复
+
+* move docs-only packages to dev dependencies ([327f242](https://github.com/GrayFrost/sveaflet/commit/327f2423bc4bf957c23bb60f7e9cae97389b7e4c)), closes [#37](https://github.com/GrayFrost/sveaflet/issues/37)
+* normalize event handler prop names ([87a5ed5](https://github.com/GrayFrost/sveaflet/commit/87a5ed55115cd06745b5f36e7e9d61b51bce4272)), closes [#38](https://github.com/GrayFrost/sveaflet/issues/38)
+* preserve Leaflet instances when updating props ([f7f138c](https://github.com/GrayFrost/sveaflet/commit/f7f138cad6cf825985f4beb2e598347159879cf2)), closes [#35](https://github.com/GrayFrost/sveaflet/issues/35)
+* SvgOverlay example issue[#33](https://github.com/GrayFrost/sveaflet/issues/33) ([46a345c](https://github.com/GrayFrost/sveaflet/commit/46a345ce3578b6d2d71552ad382bcb1706f1fb85))
+
 ### [0.1.4](https://github.com/GrayFrost/sveaflet/compare/v0.1.3...v0.1.4) (2025-02-23)
 
 
