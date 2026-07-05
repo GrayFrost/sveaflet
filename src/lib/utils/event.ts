@@ -1,18 +1,23 @@
 import type { DomEvent, Layer, Map } from 'leaflet';
 import { isFunction } from './equal';
 
+type EventProps = Record<string, unknown>;
+
 export class EventBridge<T extends Layer | Map> {
 	instance: T | undefined;
 	eventMap: { [eventName: string]: DomEvent.EventHandlerFn } = {};
 	constructor(instance: T) {
 		this.instance = instance;
 	}
-	addEvents(events: Record<string, any> = {}) {
+	getListenerType(propName: string) {
+		return propName.slice(2).toLowerCase();
+	}
+	addEvents(events: EventProps = {}) {
 		try {
 			Object.entries(events).forEach(([key, value]) => {
 				if (key.startsWith('on') && key.length > 2 && isFunction(value)) {
-					const listenerType = key.slice(2);
-					this.eventMap[listenerType] = value;
+					const listenerType = this.getListenerType(key);
+					this.eventMap[listenerType] = value as DomEvent.EventHandlerFn;
 				}
 			});
 

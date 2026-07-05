@@ -60,6 +60,34 @@ Represents a GeoJSON object or an array of GeoJSON objects. Allows you to parse 
 </div>
 ```
 
+## GeoJSON with Events
+
+```svelte example csr
+<script>
+	import { Map, TileLayer, GeoJSON } from 'sveaflet';
+
+	const sayHello = () => alert('Hello GeoJSON!');
+
+	let geojsonFeature = {
+		type: 'Feature',
+		properties: {
+			name: 'Coors Field'
+		},
+		geometry: {
+			type: 'Point',
+			coordinates: [-104.99404, 39.75621]
+		}
+	};
+</script>
+
+<div style="width: 100%;height: 500px;">
+	<Map options={{ center: [39.74739, -105], zoom: 13 }}>
+		<TileLayer url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'} />
+		<GeoJSON json={geojsonFeature} onClick={sayHello} />
+	</Map>
+</div>
+```
+
 ## Props
 
 | Prop name | Description                                                                                 | Type                                                                  | Default |

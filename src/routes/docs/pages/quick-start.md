@@ -108,10 +108,11 @@ The **version 0.0.x** of Sveaflet does not customize a new event type, you can j
 	</Map>
 </div>
 ```
+
 In this example, we use `map.on('click', () => {})` to listen map's click function.
 
-
-And starting from the **version 0.1.0**, Sveaflet supports directly eventlistener props like `onXXX`.
+And starting from the **version 0.1.0**, Sveaflet supports event listener props like `onXXX`.
+Event prop names are mapped to Leaflet event names, so both `onclick` and `onClick` listen for Leaflet's `click` event.
 
 ```svelte example csr
 <script>
@@ -132,7 +133,7 @@ And starting from the **version 0.1.0**, Sveaflet supports directly eventlistene
 </script>
 
 <div style="width: 100%;height:500px;">
-	<Map options={{ center: [51.505, -0.09], zoom: 13 }} onclick={onMapClick}>
+	<Map options={{ center: [51.505, -0.09], zoom: 13 }} onClick={onMapClick}>
 		<TileLayer
 			url={'https://tile.openstreetmap.org/{z}/{x}/{y}.png'}
 			options={{
